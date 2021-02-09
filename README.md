@@ -1,1 +1,1 @@
-**** Репозиторий проекта BankAssistanceSystem
+# Репозиторий проекта BankAssistanceSystem
