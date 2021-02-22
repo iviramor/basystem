@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <link rel="shortcut icon" href="img/bank (1).png" type="image/x-icon">
+    <title>BankAssistanceSystem</title>
 </head>
 <body>
 
@@ -19,7 +20,7 @@
             <div class="header-logo">
                 <span class="head-logo navbar-brand">
                     <img src="img/bank (1).png" alt="" srcset="">
-                    <a href="/">Система банковского учета "BankAssistanceSystem"</a>
+                    <a href="#">Система банковского учета "BankAssistanceSystem"</a>
                 </span>
                 <div class="btn-head-nav-right">
                     <a href="" class="btn-head-nav btn-head-nav-a d-lg-none" data-toggle="collapse" data-target="#navbar-e-collapse"> 
@@ -51,12 +52,19 @@
                             </span>
                         </a>
                     </li>
+                    <li class="nav-item">     
+                        <a class="nav-link" href="#">
+                            <div >Третья страница</div>
+                            <span class="touch-nav">
+                            
+                            </span>
+                        </a>
+                    </li>
                 </ul>
                 </div>
             </nav>
 
             <!--END navigation-->
-
 
         </div>
     </header>
@@ -67,7 +75,22 @@
 
     <div class="container-fluid content-block">
 
-        <div class="content-info-main-block container">
+        <div class="container content-nav">
+            <div class="nav">
+                Содержание
+                <span> &#62;</span>
+                <li><a href="#oper-main"> Банк </a></li>
+                <span> &#62;</span>
+                <li><a href="#bank-uch"> Банковский учет </a></li>
+                <span> &#62;</span>
+                <li><a href="#bank-pasv"> Пассивы банка </a></li>
+                <span> &#62;</span>
+                <li><a href="#bank-activ"> Активы банка </a></li>
+            </div>
+        </div>
+
+
+        <div id="oper-main" class="content-info-main-block container">
             <div class="row">
                 <div class="col-lg-6 info-img">
                     <img src="img/10390146.jpg" alt="">
@@ -80,7 +103,7 @@
             </div>
         </div>
 
-        <div class="content-autom-block">
+        <div id="bank-uch" class="content-autom-block">
             <div class="content-info-autom-block container">
                 <div class="row">
                     <div class="info-text">
@@ -102,7 +125,7 @@
         </div>
 
         <div class="content-info-pa-block container">
-            <div class="row">
+            <div id="bank-pasv" class="row">
                 <div class="col-lg-6 info-img">
                     <img src="img/kopilka_sber.png" alt="">
                 </div>
@@ -118,7 +141,7 @@
                     <li>Дебиторская задолженность.</li>
                 </div>
             </div>
-            <div class="row">
+            <div id="bank-activ" class="row">
                 <div class="col-lg-6 info-text">
                     <h2>Активы</h2>
                     <p>К активам банка относится:</p>
@@ -134,15 +157,21 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="content-info-pa-block container">
-            <h2>Автоматизация</h2>
-
-        </div>
-
     </div>
 
+    <footer class="footer">
+        <div class="container">
+            <span>Выполнил Станкевич Даниил Дмитриевич ИС-31</span>
+            <img src="img/Picture1.png" alt="" srcset="">
+            
+        </div>
+    </footer>
+
+    <div class="upper">
+        <a href="#">
+            <img src="img/up-arrow.png" alt="">
+        </a>
+    </div>
     <!--END block-content-->
 
 
