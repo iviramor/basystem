@@ -9,7 +9,8 @@ namespace bas.website.Controllers
     public class HomeController : Controller
     {
         [Route("")]
-        public IActionResult Index()
+        [Route("/subject-area")]
+        public IActionResult SubjectArea()
         {
             return View();
         }

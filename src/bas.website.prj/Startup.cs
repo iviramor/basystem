@@ -36,10 +36,13 @@ namespace bas.website
                     name: "CreditCalc",
                     pattern: "{controller=Home}/{action=CreditCalc}/{id?}");
 
+                endpoints.MapControllerRoute(
+                    name: "SubjectArea",
+                    pattern: "{controller=Home}/{action=SubjectArea}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=SubjectArea}/{id?}");
 
             });
         }
