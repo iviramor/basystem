@@ -14,16 +14,10 @@ namespace bas.website.Controllers
             return View();
         }
 
-        [Route("twoPage")]
-        public IActionResult AboutUs()
+        [Route("/credit/calculator")]
+        public IActionResult CreditCalc()
         {
-            
-            return View();
-        }
 
-        [Route("threePage")]
-        public IActionResult Shop()
-        {
             return View();
         }
 

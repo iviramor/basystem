@@ -1,1 +1,0 @@
-bas.website\net5.0\bas.website.exe

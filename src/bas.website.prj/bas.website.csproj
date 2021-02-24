@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <ApplicationIcon>bank.ico</ApplicationIcon>
+    <UserSecretsId>d1a2b340-5a6c-4136-9af1-7ef1587f5fc5</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -10,12 +11,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>D:\basystem\BankAssistanceSystem\builds\bas.website</OutputPath>
+    <OutputPath></OutputPath>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="static\" />
     <Folder Include="wwwroot\*" />
   </ItemGroup>
 

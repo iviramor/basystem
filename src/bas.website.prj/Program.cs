@@ -13,7 +13,11 @@ namespace bas.website
     {
         public static void Main(string[] args)
         {
+
             CreateHostBuilder(args).Build().Run();
+
+                
+            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -21,7 +25,6 @@ namespace bas.website
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    //webBuilder.UseContentRoot("static");
                 });
     }
 }
