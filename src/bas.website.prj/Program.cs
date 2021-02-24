@@ -21,6 +21,7 @@ namespace bas.website
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    //webBuilder.UseContentRoot("static");
                 });
     }
 }
