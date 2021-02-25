@@ -1,0 +1,91 @@
+.calc-block{
+    margin: 25px 0;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px 30px;
+}
+
+.calc-to-block{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.calc-to-block>*{
+    margin: 0 15px;
+}
+
+.content-info-main-block>h1{
+    font-size: xx-large;
+}
+
+.calc-input,
+.currency-button,
+.def-button,
+.calc-select{
+    border-radius: 50px;
+}
+
+.calc-input{
+    border-radius: 50px;
+    border: #fff;
+    background-color: #F2F2F2;
+    padding: 3px 25px;
+    font-size: x-large;
+
+
+}
+.calc-input:focusn{
+    border: #fff;
+    border-radius: 50px;
+
+}
+.calc-input:active, .calc-input:hover, .calc-input:focus, 
+.currency-button:active, .currency-button:hover, .currency-button:focus,
+.def-button:active, .def-button:hover, .def-button:focus,
+.calc-select:active, .calc-select:hover, .calc-select:focus
+{
+    outline: 0;
+    outline-offset: 0;
+}
+
+.currency-button{
+    background-color: #F2F2F2;
+    border: none;
+    height: 50px;
+    width: 50px;
+    font-size: 17pt;
+
+}
+.calc-percent>input{
+    width: 150px;
+}
+
+
+.currency-active, .def-button{
+    background-color: #F2DA63;
+}
+.calc-input-active{
+    color: blueviolet;
+    font-weight: 500;
+}
+
+
+.calc-select{
+    position: relative;
+    background-color: #F2F2F2;
+    padding: 10px 25px;
+    border: none;
+    -webkit-appearance: none;
+}
+.calc-select::before{
+
+    content: '';
+    position: absolute;
+}
+
+.def-button{
+    border: none;
+    font-size: 15pt;
+    padding: 10px 25px;
+}

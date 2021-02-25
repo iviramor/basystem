@@ -1,8 +1,14 @@
-﻿
-@{
-    Layout = "_Layout";
-    ViewBag.Title = "Кредитный калькулятор";
-}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/calc-style.css">
+    <link rel="shortcut icon" href="img/bank (1).png" type="image/x-icon">
+    <title>BankAssistanceSystem</title>
+</head>
+
 
 
 <div class="container-fluid content-block">
@@ -35,13 +41,16 @@
                 </div>
                 <div class="calc-to-block calc-percent">
                     <h4>Процентная ставка</h4>
-                    <input value="11.4" type="number" class="calc-input" type="text">
+                    <input value="11.4" type="number"  class="calc-input" type="text">
                     <h4>%</h4>
                     <button type="button" class="indiv-percent def-button">Индивидуальная</button>
                 </div>
-
+                
             </form>
         </div>
     </div>
 
 </div>
+
+<script src="vendor/jquery/dist/jquery.min.js"></script>
+<script src="js/site.js"></script>
