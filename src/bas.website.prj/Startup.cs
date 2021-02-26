@@ -31,14 +31,17 @@ namespace bas.website
             app.UseEndpoints(endpoints =>
             {
 
+                endpoints.MapControllerRoute(
+                    name: "CreditCalcOut",
+                    pattern: "{controller=Home}/{action=CreditCalcOut}");
 
                 endpoints.MapControllerRoute(
                     name: "CreditCalc",
-                    pattern: "{controller=Home}/{action=CreditCalc}/{id?}");
+                    pattern: "{controller=Home}/{action=CreditCalc}");
 
                 endpoints.MapControllerRoute(
                     name: "SubjectArea",
-                    pattern: "{controller=Home}/{action=SubjectArea}/{id?}");
+                    pattern: "{controller=Home}/{action=SubjectArea}");
 
                 endpoints.MapControllerRoute(
                     name: "default",

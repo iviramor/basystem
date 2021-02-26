@@ -1,4 +1,8 @@
-﻿body{
+﻿::selection{
+    background-color: #F2DA63;
+}
+
+body{
     background-color: #F2F2F2;
     color: #212121;
 }

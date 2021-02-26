@@ -1,0 +1,41 @@
+﻿<div class="container-fluid content-block">
+
+    <div id="oper-main" class="content-info-main-block container">
+
+        <h1>Вывод данных</h1>
+
+        <p>Сумма кредита @ViewBag.Sum</p>
+
+        @{
+            if (ViewBag.Cur == "rub")
+            {
+                <p>Рубли</p>
+            }
+            else if (ViewBag.Cur == "eur")
+            {
+                <p>Евро</p>
+            }
+            else if (ViewBag.Cur == "dol")
+            {
+                <p>Доллар</p>
+            }
+
+        }
+
+        <p>Срок займа в годах или месяцах</p>
+
+        @{
+            if (ViewBag.Tdl == "year")
+            {
+                <p>Года</p>
+            }
+            else if (ViewBag.Tdl == "month")
+            {
+                <p>Месяца</p>
+            }
+
+        }
+
+
+    </div>
+</div>

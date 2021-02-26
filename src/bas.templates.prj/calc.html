@@ -11,6 +11,8 @@
 
 
 
+
+
 <div class="container-fluid content-block">
 
     <div id="oper-main" class="content-info-main-block container">
@@ -22,18 +24,18 @@
                 <div class="calc-to-block">
                     <h4>Сумма займа</h4>
                     <div>
-                        <input value="3000" type="number" class="calc-input" type="text">
+                        <input id="sum" value="3000" type="number" class="calc-input">
                     </div>
                 </div>
-                <div class="calc-to-block">
+                <div id="cur" class="calc-to-block">
                     <h4>Валюта</h4>
                     <button type="button" data-currency="rub" data-currency-active="true" class="currency-button">&#8381;</button>
-                    <button type="button" data-currency="eur" data-currency-active="false" class="currency-button currency-active">&#36;</button>
-                    <button type="button" data-currency="dol" data-currency-active="false" class="currency-button">&#8364;</button>
+                    <button type="button" data-currency="dol" data-currency-active="false" class="currency-button currency-active">&#36;</button>
+                    <button type="button" data-currency="eur" data-currency-active="false" class="currency-button">&#8364;</button>
                 </div>
                 <div class="calc-to-block">
                     <h4>Информация о целях кредита</h4>
-                    <select class="calc-select">
+                    <select id='pur' class="calc-select">
                         <option value="3" title="-3% от ставки">Для учебы</option>
                         <option value="0" title="-0% от ставки">Для развлечения</option>
                         <option value="4.2" title="-4.2% от ставки">Для лечения</option>
@@ -41,16 +43,49 @@
                 </div>
                 <div class="calc-to-block calc-percent">
                     <h4>Процентная ставка</h4>
-                    <input value="11.4" type="number"  class="calc-input" type="text">
+                    <input id="rate" value="11.4" type="number"  class="calc-input" >
                     <h4>%</h4>
                     <button type="button" class="indiv-percent def-button">Индивидуальная</button>
                 </div>
-                
+                <div id="tdl" class="calc-to-block">
+                    <h4>Срок займа </h4>
+                    <input id="ddl" value="1" type="number" class="calc-input">
+                    <button type="button" data-deadline="year" data-deadline-active="true" class="deadline-button">Год</button>
+                    <button type="button" data-deadline="month" data-deadline-active="false" class="deadline-button currency-active">Месяц</button>
+                </div>
+                <div class="calc-to-block">
+                    <h4>Дата выдачи</h4>
+                    <input id="sdate" value="2012-12-12" type="date" class="calc-input">
+                </div>
+                <div class="calc-to-block">
+                    <h4>Порядок погашения</h4>
+                    <select id="tpay" class="calc-select">
+                        <option value="a" >Аннуитетный</option>
+                        <option value="d" >Дифференцированный</option>
+                    </select>
+                </div>
+                <div class="calc-to-block">
+                    <h4>Периодичность погашения</h4>
+                    <select id="perpay" class="calc-select">
+                        <option value="m" >Eжемесячно</option>
+                        <option value="kv" >Квартал</option>
+                        <option value="y" >Ежегодно</option>
+                    </select>
+                </div>
+                <div id="fdate" class="calc-to-block">
+                    <h4>Сроки досрочного погашения</h4>
+                    <input value="2012-12-12" type="date" class="calc-input calc-input-hide">
+                    <button type="button" data-new-deadline="yes" data-new-deadline-active="true" class="new-deadline-button">Да</button>
+                    <button type="button" data-new-deadline="no" data-new-deadline-active="false" class="new-deadline-button currency-active">Нет</button>
+                </div>
             </form>
         </div>
+        <button id='get-value-block' type="button" class="get-button get-value-block">
+            Получить результат
+        </button>
     </div>
-
 </div>
 
 <script src="vendor/jquery/dist/jquery.min.js"></script>
 <script src="js/site.js"></script>
+
