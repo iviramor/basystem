@@ -1,25 +1,48 @@
-﻿<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/calc-style.css">
-    <link rel="shortcut icon" href="img/bank (1).png" type="image/x-icon">
-    <title>BankAssistanceSystem</title>
-</head>
-
-
-
-
-
-<div class="container-fluid content-block">
+﻿<div class="container-fluid content-block">
 
     <div id="oper-main" class="content-info-main-block container">
 
         <h1>Модуль - Кредитный калькулятор</h1>
 
-        <div id='id' class="calc-block">
+        <div id="sign-in" class="sign-in-block row">
+
+            <div class="sign-in-text-block">
+                <p>
+                    Для "персонального" процента для подсчета пользовательского кредита, необходима авторизация
+                </p>
+            </div>
+            <div class="sign-in-form-block">
+                <div>
+                    <H3>Авторизация</H3>
+                    <div>
+                        <div class="calc-to-block">
+                            <h4>Логин</h4>
+                            <input value="user" class="calc-input">
+                        </div>
+                        <div class="calc-to-block">
+                            <h4>Пароль</h4>
+                            <input value="user" class="calc-input">
+                        </div>
+                    </div>
+
+                </div>
+                <button type="button" class="get-button get-value-block">
+                    Войти
+                </button>
+            </div>
+        </div>
+
+        <div id="acc" class="acc-block hide-block">
+            <div class="acc-data-user">
+                <img src="~/img/success.png" alt="">
+                <span>Добро пожаловать, USER.</span>
+                <span>Ваша персональная ставка составляет - <b> 9.3 </b></span>
+            </div>
+            <button type="button" class="def-button">Выйти</button>
+        </div>
+
+
+        <div class="calc-block">
             <form name="test" method="post" action="">
                 <div class="calc-to-block">
                     <h4>Сумма займа</h4>
@@ -45,7 +68,7 @@
                     <h4>Процентная ставка</h4>
                     <input id="rate" value="11.4" type="number" class="calc-input">
                     <h4>%</h4>
-                    <button type="button" class="indiv-percent def-button">Индивидуальная</button>
+                    <button type="button" disabled="disabled" class="indiv-percent def-button">Индивидуальная</button>
                 </div>
                 <div id="tdl" class="calc-to-block">
                     <h4>Срок займа </h4>
@@ -85,7 +108,3 @@
         </button>
     </div>
 </div>
-
-<script src="vendor/jquery/dist/jquery.min.js"></script>
-<script src="js/site.js"></script>
-

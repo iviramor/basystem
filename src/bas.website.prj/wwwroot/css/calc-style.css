@@ -125,3 +125,74 @@
     font-size: 15pt;
     padding: 10px 25px;
 }
+
+
+
+/* Авторизация */
+
+
+.hide-block{
+    display: none!important;
+}
+
+.sign-in-block{
+    margin: 0 15px;
+}
+.sign-in-text-block{
+    padding: 30px;
+    width: 50%;
+    font-size: x-large;
+}
+
+.sign-in-form-block{
+
+    background-color: #fff;
+    width: 50%;
+    border-radius: 10px;
+    
+}
+.sign-in-form-block>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+.sign-in-form-block>div>h3{
+    margin-bottom: 40px;
+}
+.sign-in-form-block>div>div>.calc-to-block>h4{
+    width: 125px;
+}
+.sign-in-form-block>div>div>.calc-to-block>.calc-input{
+    width: 100%;
+}
+
+
+
+/* Аккаунт */
+
+.acc-block{
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px;
+    padding: 15px 35px;
+}
+.acc-block>.acc-data-user{
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+.acc-block>.acc-data-user> *{
+    margin-right: 15px;
+}
+.acc-block>.acc-data-user>img{
+    height: 50px;
+    margin-right: 20px;
+}
+
+.acc-block>.def-button{
+    float: right;
+}
