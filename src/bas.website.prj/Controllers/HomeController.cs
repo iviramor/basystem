@@ -3,24 +3,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using bas.website.Service;
+using System.ComponentModel;
 
 namespace bas.website.Controllers
 {
     public class HomeController : Controller
     {
 
+
+
         /// <summary>
         /// Предметная область
         /// </summary>
         /// <returns></returns>
-        [Route("")]
+        [Route("/")]
         [Route("/subject-area")]
         public IActionResult SubjectArea()
         {
             return View();
         }
-
-
 
 
         /// <summary>

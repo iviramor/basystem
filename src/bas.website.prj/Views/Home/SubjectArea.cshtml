@@ -1,9 +1,13 @@
-﻿
+﻿@using bas.website.Service
+
+
 @{
     Layout = "_Layout";
-    ViewBag.NavActive = "main";
-    ViewBag.Title = "Предметная область";
+    ViewBag.NavActive = SubjectAreaConfig.NavActive;
+    ViewBag.Title = SubjectAreaConfig.Title;
+    ViewBag.IconPage = SubjectAreaConfig.IconPage;
 }
+
 
 <div class="container-fluid content-block">
 

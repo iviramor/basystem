@@ -1,7 +1,9 @@
+using bas.website.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -13,10 +15,23 @@ namespace bas.website
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
+
+        public Startup(IConfiguration Configuration)
+        {
+            this.Configuration = Configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+            Configuration.Bind("SubjectArea", new SubjectAreaConfig());
+            Configuration.Bind("CreditCalc", new CreditCalcConfig());
+            Configuration.Bind("CreditCalcOut", new CreditCalcOutConfig());
+
             services.AddControllersWithViews().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }
 
@@ -27,6 +42,7 @@ namespace bas.website
 
             app.UseRouting();
             app.UseStaticFiles();
+
 
             app.UseEndpoints(endpoints =>
             {
