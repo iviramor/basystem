@@ -67,10 +67,12 @@ $('#get-value-block').on('click', function(e){
     var pur = $('#pur').val();
     // Процентная ставка
     var rate = $('#rate').val();
-    // Срок займа
-    var ddl = $('#ddl').val();
-    // Срок займа в годах или месяцах
-    var tdl = $('#tdl').children('.currency-active').attr('data-deadline');
+    // Срок займа в месяцах
+    
+    var ddly = Number($('#ddly').val());
+    console.log(ddly)
+    var ddlm = Number($('#ddlm').val()) + (ddly * 12);
+    console.log(ddlm)
     // Дата выдачи
     var sdate = $('#sdate').val();
     // Порядок погашения
@@ -80,7 +82,7 @@ $('#get-value-block').on('click', function(e){
     // Сроки досрочного погашения
     var ft = $('#fdate');
     // Подготовка URL
-    var url = window.location.href  + `/out/?sum=${sum}&cur=${cur}&pur=${-pur}&rate=${rate}&ddl=${ddl}&tdl=${tdl}&sdate=${sdate}&tpay=${tpay}&perpay=${perpay}`;
+    var url = window.location.href  + `/out/?sum=${sum}&cur=${cur}&pur=${-pur}&rate=${rate}&ddlm=${ddlm}&sdate=${sdate}&tpay=${tpay}&perpay=${perpay}`;
     // Подготовка U
     if (ft.children('.currency-active').attr('data-new-deadline-active') == 'true'){
         var fdate = ft.children('.calc-input').val();

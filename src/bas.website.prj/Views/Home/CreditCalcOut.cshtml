@@ -5,6 +5,34 @@
     ViewBag.IconPage = CreditCalcOutConfig.IconPage;
 }
 
+@{
+    if (ViewBag.Cur == "rub")
+    {
+        ViewBag.CorOut = "Рублей";
+    }
+    else if (ViewBag.Cur == "eur")
+    {
+        ViewBag.CorOut = "Евро";
+    }
+    else if (ViewBag.Cur == "dol")
+    {
+        ViewBag.CorOut = "Доллар";
+    }
+
+}
+
+@{
+    if (ViewBag.Tdl == "year")
+    {
+        ViewBag.Tdl = "Года";
+    }
+    else if (ViewBag.Tdl == "month")
+    {
+        ViewBag.Tdl = "Месяца";
+    }
+
+}
+
 
 
 <div class="container-fluid content-block">
@@ -13,38 +41,39 @@
 
         <h1>Вывод данных</h1>
 
-        <p>Сумма кредита @ViewBag.Sum</p>
+        <h1>Вывод</h1>
 
-        @{
-            if (ViewBag.Cur == "rub")
-            {
-                <p>Рубли</p>
-            }
-            else if (ViewBag.Cur == "eur")
-            {
-                <p>Евро</p>
-            }
-            else if (ViewBag.Cur == "dol")
-            {
-                <p>Доллар</p>
-            }
 
-        }
+        <div class="calc-info-block">
+            <h4>Информация о кредите</h4>
 
-        <p>Срок займа в годах или месяцах</p>
+            <div class="calc-info">
+                <li>Сумма кредита: <span>@ViewBag.Sum </span> Валюта: <span>@ViewBag.CorOut</span> </li>
+                <li>Срок платежа: <span>@ViewBag.Ddl</span> Месяцев</li>
+                <li>Старт кредита: <span>@ViewBag.Sdate</span> Конец кредита: <span>@ViewBag.Fdate</span> </li>
+                <li>Текущая ставка: <span>@ViewBag.Rate %</span></li>
+            </div>
 
-        @{
-            if (ViewBag.Tdl == "year")
-            {
-                <p>Года</p>
-            }
-            else if (ViewBag.Tdl == "month")
-            {
-                <p>Месяца</p>
-            }
+        </div>
 
-        }
+        <table class="table">
+            <tr>
+                <th>Дата</th>
+                <th>Платеж</th>
+                <th>Процент</th>
+                <th>Остаток</th>
+                <th>Погашено</th>
+            </tr>
 
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+        </table>
 
     </div>
 </div>

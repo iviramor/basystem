@@ -35,7 +35,7 @@
     background-color: #F2F2F2;
     padding: 3px 25px;
     font-size: x-large;
-
+    width: 240px;
 
 }
 .calc-input:focusn{
@@ -195,4 +195,24 @@
 
 .acc-block>.def-button{
     float: right;
+}
+
+
+
+/* Вывод данных страница */
+
+
+.calc-info-block{
+    padding:  25px;
+}
+.calc-info{
+    margin-left: 10px;
+}
+.calc-info>li{
+    margin-bottom: 10px;
+    list-style-type: none;
+}
+.calc-info>li>span{
+    font-weight: 700;
+    font-size: 15pt;
 }
