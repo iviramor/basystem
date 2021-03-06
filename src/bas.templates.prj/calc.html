@@ -21,29 +21,30 @@
 
         <div id="sign-in" class="sign-in-block row">
 
-            <div class="sign-in-text-block">
+            <div class="sign-in-text-block col-6">
                 <p>
                     Для "персонального" процента для подсчета пользовательского кредита, необходима авторизация
                 </p>
             </div>
-            <div class="sign-in-form-block">
-                <div>
-                    <H3>Авторизация</H3>
-                    <div>
-                        <div class="calc-to-block">
-                            <h4>Логин</h4>
-                            <input value="user"  class="calc-input">
+            <div class="sign-in-form-block col-6">
+                    <form  asp-controller="Home" asp-action="CreditCalc" method="post">
+                        <div>
+                            <H3>Авторизация</H3>
+
+                            <div class="calc-to-block">
+                                <h4>Логин</h4>
+                                <input asp-for="UserName" value="user" class="calc-input" required>
+                            </div>
+                            <div class="calc-to-block">
+                                <h4>Пароль</h4>
+                                <input asp-for="Password" value="user" class="calc-input" required>
+                            </div>
+
                         </div>
-                        <div class="calc-to-block">
-                            <h4>Пароль</h4>
-                            <input value="user"  class="calc-input">
-                        </div>
-                    </div>
-                    
-                </div>
-                <button type="button" class="get-button get-value-block">
-                    Войти
-                </button>
+                        <button type="submit" class="get-button get-value-block">
+                            Войти
+                        </button>
+                    </form>
             </div>
         </div>
 

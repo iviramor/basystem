@@ -6,10 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore.SqlServer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using bas.website.Models.Data;
 
 namespace bas.website
 {
@@ -27,6 +30,22 @@ namespace bas.website
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+
+
+            services.AddDbContext<BankDbContext>(config =>
+            {
+                config.UseSqlServer(Configuration.
+                    GetConnectionString(@"Data Source = (localdb)\MSSQLLocalDB; Database = BANK; Persist Security Info = False; MultipleActiveResultSets = True; Trusted_Connection = True;"));
+            });
+
+            services.AddAuthentication("Cookie")
+                .AddCookie("Cookie", config => {
+                    config.LoginPath = "/credit/calculator";
+                });
+
+
+            services.AddAuthorization();
+
             services.AddMvc();
             Configuration.Bind("SubjectArea", new SubjectAreaConfig());
             Configuration.Bind("CreditCalc", new CreditCalcConfig());
@@ -43,27 +62,11 @@ namespace bas.website
             app.UseRouting();
             app.UseStaticFiles();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
-            {
+            app.UseEndpoints(endpoints => endpoints.MapDefaultControllerRoute());
 
-                endpoints.MapControllerRoute(
-                    name: "CreditCalcOut",
-                    pattern: "{controller=Home}/{action=CreditCalcOut}");
-
-                endpoints.MapControllerRoute(
-                    name: "CreditCalc",
-                    pattern: "{controller=Home}/{action=CreditCalc}");
-
-                endpoints.MapControllerRoute(
-                    name: "SubjectArea",
-                    pattern: "{controller=Home}/{action=SubjectArea}");
-
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=SubjectArea}/{id?}");
-
-            });
         }
     }
 }

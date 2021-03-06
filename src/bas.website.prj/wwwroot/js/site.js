@@ -98,14 +98,29 @@ $('#get-value-block').on('click', function(e){
 //  Авторизация 
 
 
-$("#sign-in button").on('click', function(e){
-    $("#sign-in").addClass("hide-block");
-    $("#acc").removeClass("hide-block");
-    $('.indiv-percent').removeAttr("disabled")
-});
+//$("#sign-in button").on('click', function(e){
+//    $("#sign-in").addClass("hide-block");
+//    $("#acc").removeClass("hide-block");
+//    $('.indiv-percent').removeAttr("disabled")
+//});
 
-$("#acc button").on('click', function(e){
-    $("#acc").addClass("hide-block");
-    $("#sign-in").removeClass("hide-block");
-    $('.indiv-percent').attr("disabled", "disabled")
-});
+//$("#acc button").on('click', function(e){
+//    $("#acc").addClass("hide-block");
+//    $("#sign-in").removeClass("hide-block");
+//    $('.indiv-percent').attr("disabled", "disabled")
+//});
+
+
+
+//$(document).ready(function () {
+
+//    console.log("yes");
+
+//    console.log($.cookie('.AspNetCore.Cookie'));
+
+//    //if ($.cookie('.AspNetCore.Cookie') == null) {
+//    //    $("#sign-in").addClass("hide-block");
+//    //    $("#acc").removeClass("hide-block");
+//    //    $('.indiv-percent').removeAttr("disabled")
+//    //}
+//}); 

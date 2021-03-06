@@ -1,6 +1,4 @@
-﻿@using bas.website.Service
-
-@{
+﻿@{
     ViewBag.Title = CreditCalcOutConfig.Title;
     ViewBag.IconPage = CreditCalcOutConfig.IconPage;
 }
@@ -41,9 +39,6 @@
 
         <h1>Вывод данных</h1>
 
-        <h1>Вывод</h1>
-
-
         <div class="calc-info-block">
             <h4>Информация о кредите</h4>
 
@@ -66,7 +61,17 @@
             </tr>
 
             <tr>
-                <td></td>
+                @{
+                    if (ViewBag.Arr.Length != 0)
+                    {
+                        foreach (var i in ViewBag.Arr)
+                        {
+                                <td>@i</td>
+                        }
+
+                    }
+                }
+
                 <td></td>
                 <td></td>
                 <td></td>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<bas.website.Models.Data.Bank_client>
+
+@{
+    ViewData["Title"] = "Test";
+}
+
+<h1>Test</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_surname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_patronymic)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_login)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_password)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_surname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_patronymic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_login)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_password)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

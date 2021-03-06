@@ -138,33 +138,34 @@
 .sign-in-block{
     margin: 0 15px;
 }
+
 .sign-in-text-block{
     padding: 30px;
-    width: 50%;
+    /* width: 50%; */
     font-size: x-large;
 }
 
-.sign-in-form-block{
+.sign-in-form-block>form{
 
     background-color: #fff;
-    width: 50%;
+    /* width: 50%; */
     border-radius: 10px;
     
 }
-.sign-in-form-block>div{
+.sign-in-form-block>form>div{
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 30px;
 }
 
-.sign-in-form-block>div>h3{
+.sign-in-form-block>form>div>h3{
     margin-bottom: 40px;
 }
-.sign-in-form-block>div>div>.calc-to-block>h4{
+.sign-in-form-block>form>div>.calc-to-block>h4{
     width: 125px;
 }
-.sign-in-form-block>div>div>.calc-to-block>.calc-input{
+.sign-in-form-block>form>div>.calc-to-block>.calc-input{
     width: 100%;
 }
 
