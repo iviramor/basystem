@@ -1,0 +1,89 @@
+﻿@model IEnumerable<bas.website.Models.Data.Bank_client_history>
+
+@{
+    ViewData["Title"] = "Test2";
+}
+
+<h1>Test2</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_numb)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_client)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_percent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_all_sum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_start_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_ddl_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_paid_off)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_paid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Clihis_status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_numb)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bank_client.Client_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_percent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_all_sum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_start_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_ddl_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_paid_off)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_paid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Clihis_status)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

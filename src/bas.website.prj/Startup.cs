@@ -30,12 +30,16 @@ namespace bas.website
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-
+            Configuration.Bind("ProjectConfig", new ProjectConfig());
+            Configuration.Bind("SubjectArea", new SubjectAreaConfig());
+            Configuration.Bind("CreditCalc", new CreditCalcConfig());
+            Configuration.Bind("CreditCalcOut", new CreditCalcOutConfig());
+            
 
             services.AddDbContext<BankDbContext>(config =>
             {
                 config.UseSqlServer(Configuration.
-                    GetConnectionString(@"Data Source = (localdb)\MSSQLLocalDB; Database = BANK; Persist Security Info = False; MultipleActiveResultSets = True; Trusted_Connection = True;"));
+                    GetConnectionString(ProjectConfig.Connection));
             });
 
             services.AddAuthentication("Cookie")
@@ -47,9 +51,6 @@ namespace bas.website
             services.AddAuthorization();
 
             services.AddMvc();
-            Configuration.Bind("SubjectArea", new SubjectAreaConfig());
-            Configuration.Bind("CreditCalc", new CreditCalcConfig());
-            Configuration.Bind("CreditCalcOut", new CreditCalcOutConfig());
 
             services.AddControllersWithViews().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
         }

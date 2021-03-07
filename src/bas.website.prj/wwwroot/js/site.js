@@ -10,13 +10,18 @@ $('.currency-button').on('click', function(e){
 
 $('.indiv-percent').on('click', function(e){
 
-    var sel;
-    sel = parseInt($('.calc-select').val())
 
-    console.log(typeof sel)
+    var sel = parseFloat($('.calc-select').val());
 
-    $(this).parent('.calc-to-block').children('.calc-input').val((9.3 - sel).toFixed(1));
+    var percent = $.cookie('UserPercent');
+
+    console.log(sel)
+    console.log(percent)
+
+    $(this).parent('.calc-to-block').children('.calc-input').val((sel + parseFloat(percent)).toFixed(1));
+
     $(this).parent('.calc-to-block').children('.calc-input').addClass('calc-input-active');
+
 });
 
 $('.calc-input').on('click', function(e){
@@ -34,8 +39,6 @@ $('.deadline-button').on('click', function(e){
 
 $('.new-deadline-button').on('click', function(e){
 
-
-    // console.log($(this).parent('.calc-to-block').children('.calc-input'))
     if ($(this).data('new-deadline') == 'yes') {
         $(this).parent('.calc-to-block').children('.calc-input').removeClass('calc-input-hide');
     }
@@ -49,7 +52,8 @@ $('.new-deadline-button').on('click', function(e){
 
 });
 
-function GetFdate(){
+function GetFdate() {
+
     var ft = $('#fdate');
     if (ft.children('.currency-active').attr('data-new-deadline-active') == 'true'){
         return ft.children('.calc-input').val();
@@ -97,30 +101,3 @@ $('#get-value-block').on('click', function(e){
 
 //  Авторизация 
 
-
-//$("#sign-in button").on('click', function(e){
-//    $("#sign-in").addClass("hide-block");
-//    $("#acc").removeClass("hide-block");
-//    $('.indiv-percent').removeAttr("disabled")
-//});
-
-//$("#acc button").on('click', function(e){
-//    $("#acc").addClass("hide-block");
-//    $("#sign-in").removeClass("hide-block");
-//    $('.indiv-percent').attr("disabled", "disabled")
-//});
-
-
-
-//$(document).ready(function () {
-
-//    console.log("yes");
-
-//    console.log($.cookie('.AspNetCore.Cookie'));
-
-//    //if ($.cookie('.AspNetCore.Cookie') == null) {
-//    //    $("#sign-in").addClass("hide-block");
-//    //    $("#acc").removeClass("hide-block");
-//    //    $('.indiv-percent').removeAttr("disabled")
-//    //}
-//}); 

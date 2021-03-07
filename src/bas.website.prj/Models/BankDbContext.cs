@@ -12,10 +12,11 @@ namespace bas.website.Models.Data
     {
         private string _connectionString;
 
-        public BankDbContext(DbContextOptions<BankDbContext> options) : base(options)
-        {
+        public DbSet<Bank_client> Bank_client { get; set; }
+        public DbSet<Bank_client_company> Bank_client_company { get; set; }
+        public DbSet<Bank_client_history> Bank_client_history { get; set; }
 
-        }
+        public BankDbContext(DbContextOptions<BankDbContext> options) : base(options){ }
         public BankDbContext(string connectionString) : base()
         {
             _connectionString = connectionString;
@@ -26,6 +27,5 @@ namespace bas.website.Models.Data
             optionsBuilder.UseSqlServer(_connectionString);
         }
 
-        public DbSet<Bank_client> Bank_client { get; set; }
     }
 }

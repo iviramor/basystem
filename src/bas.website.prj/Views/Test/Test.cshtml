@@ -33,6 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Client_password)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client_register_data)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -52,13 +55,16 @@
                 @Html.DisplayFor(modelItem => item.Client_patronymic)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Client_company)
+                @Html.DisplayFor(modelItem => item.Bank_client_company.Clcomp_name)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Client_login)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Client_password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Client_register_data)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

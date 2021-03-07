@@ -1,0 +1,162 @@
+﻿@model LoginViewModel;
+
+
+@using bas.website.Service
+
+@{ 
+    ViewBag.Title = CreditCalcConfig.Title;
+    ViewBag.IconPage = CreditCalcConfig.IconPage;
+}
+
+
+<div class="container-fluid content-block">
+
+    <div id="oper-main" class="content-info-main-block container">
+
+        <h1>Модуль - Кредитный калькулятор </h1>
+
+        @{
+            if (@ViewBag.Authentication)
+            {
+                <div id="acc" class="acc-block">
+                    <div class="acc-data-user">
+                        <img src="~/img/success.png" alt="">
+                        <span>Добро пожаловать, @{ @Context.Request.Cookies["UserName"]}  @{@Context.Request.Cookies["UserSurname"]}.</span>
+                        <span>
+                            Ваша кредитная история - @{
+
+                                if (Context.Request.Cookies["UserCredStatus"] == "excellently")
+                                {
+                                    <b style="color:#4cff00"> Отлично </b>
+                                }
+                                else if (Context.Request.Cookies["UserCredStatus"] == "good")
+                                {
+                                    <b style="color:#b6ff00"> Хорошо </b>
+                                }
+                                else if (Context.Request.Cookies["UserCredStatus"] == "normally")
+                                {
+                                    <b style="color:#ffd800"> Нормально </b>
+                                }
+                                else if (Context.Request.Cookies["UserCredStatus"] == "satisfactory")
+                                {
+                                    <b style="color:#ff6a00"> Удовлетворительно </b>
+                                }
+
+                            }
+                        </span>
+                    </div>
+                    <a asp-controller="Calculator" asp-action="CreditCalcLogOff" type="button" class="def-button">Выйти</a>
+                </div>
+            }
+            else
+            {
+                <div id="sign-in" class="sign-in-block row">
+
+                    <div class="sign-in-text-block col-6">
+                        <p>
+                            Для "персонального" процента для подсчета пользовательского кредита, необходима авторизация
+                        </p>
+                    </div>
+                    <div class="sign-in-form-block col-6">
+                        <form asp-controller="Calculator" asp-action="CreditCalc" method="post">
+                            <div>
+                                <H3>Авторизация</H3>
+
+                                <div class="calc-to-block">
+                                    <h4>Логин</h4>
+                                    <input asp-for="UserLogin" value="" class="calc-input" required>
+                                </div>
+                                <div class="calc-to-block">
+                                    <h4>Пароль</h4>
+                                    <input type="password" asp-for="Password" value="" class="calc-input" required>
+                                </div>
+
+                                <div asp-validation-summary="All"></div>
+
+                            </div>
+                            <button type="submit" class="get-button get-value-block">
+                                Войти
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+        }
+
+
+        <div class="calc-block">
+            <form name="test" method="post" action="">
+                <div class="calc-to-block">
+                    <h4>Сумма займа</h4>
+                    <div>
+                        <input id="sum" value="3000" type="number" class="calc-input">
+                    </div>
+                </div>
+                <div id="cur" class="calc-to-block">
+                    <h4>Валюта</h4>
+                    <button type="button" data-currency="rub" data-currency-active="true" class="currency-button">&#8381;</button>
+                    <button type="button" data-currency="dol" data-currency-active="false" class="currency-button currency-active">&#36;</button>
+                    <button type="button" data-currency="eur" data-currency-active="false" class="currency-button">&#8364;</button>
+                </div>
+                <div class="calc-to-block">
+                    <h4>Информация о целях кредита</h4>
+                    <select id='pur' class="calc-select">
+                        <option value="5.6" title="От 5.6 %">Образовательные услуги</option>
+                        <option value="11.9" title="От 11.9 %">Ремонт</option>
+                        <option value="10.6" title="От 10.6 %">Автомобиль</option>
+                        <option value="10.1" title="От 10.1 %">Недвижемость</option>
+                        <option value="9.2" title="От 9.2 %">Бизнес</option>
+                        <option value="10.6" title="От 10.6 %">Отпуск</option>
+                        <option value="6.3" title="От 6.3 %">Медицинские услуги</option>
+                        <option value="12" title="От 12 %">Бытовая техника и мебель</option>
+                        <option value="13.1" title="От 13.1 %">Другое</option>
+                    </select>
+                </div>
+                <div class="calc-to-block calc-percent">
+                    <h4>Процентная ставка</h4>
+                    <input id="rate" value="11.4" type="number" class="calc-input">
+                    <h4>%</h4>
+                    @{
+                       if (@ViewBag.Authentication)
+                       {
+                            <button type="button" class="indiv-percent def-button">Индивидуальная</button>
+                       }
+                    }
+                </div>
+                <div id="tdl" class="calc-to-block">
+                    <h4>Срок займа </h4>
+                    <input id="ddly" size="2" value="0" type="number" class="calc-input"> <h4>Год(a)</h4>
+                    <input id="ddlm" size="2" value="5" type="number" class="calc-input"> <h4>Месяц(a)</h4>
+                </div>
+                <div class="calc-to-block">
+                    <h4>Дата выдачи</h4>
+                    <input id="sdate" value="2012-12-12" type="date" class="calc-input">
+                </div>
+                <div class="calc-to-block">
+                    <h4>Порядок погашения</h4>
+                    <select id="tpay" class="calc-select">
+                        <option value="a">Аннуитетный</option>
+                        <option value="d">Дифференцированный</option>
+                    </select>
+                </div>
+                <div class="calc-to-block">
+                    <h4>Периодичность погашения</h4>
+                    <select id="perpay" class="calc-select">
+                        <option value="m">Eжемесячно</option>
+                        <option value="kv">Квартал</option>
+                        <option value="y">Ежегодно</option>
+                    </select>
+                </div>
+                <div id="fdate" class="calc-to-block">
+                    <h4>Сроки досрочного погашения</h4>
+                    <input value="2012-12-12" type="date" class="calc-input calc-input-hide">
+                    <button type="button" data-new-deadline="yes" data-new-deadline-active="true" class="new-deadline-button">Да</button>
+                    <button type="button" data-new-deadline="no" data-new-deadline-active="false" class="new-deadline-button currency-active">Нет</button>
+                </div>
+            </form>
+        </div>
+        <button id='get-value-block' type="button" class="get-button get-value-block">
+            Получить результат
+        </button>
+    </div>
+</div>

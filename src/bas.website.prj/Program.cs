@@ -18,6 +18,7 @@ namespace bas.website
                 .SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
                 .AddJsonFile("appsettings.PagesInfo.json", optional: false, reloadOnChange: false)
+                .AddJsonFile("appsettings.Project.json", optional: false, reloadOnChange: false)
                 .Build();
 
             CreateHostBuilder(args, configuration).Build().Run();
