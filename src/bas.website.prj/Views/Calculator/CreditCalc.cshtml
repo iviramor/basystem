@@ -45,19 +45,22 @@
                             }
                         </span>
                     </div>
-                    <a asp-controller="Calculator" asp-action="CreditCalcLogOff" type="button" class="def-button">Выйти</a>
+                    <div class="profile-button-block row">
+                        <a asp-controller="Profile" asp-action="History" title="История кредитов">История кредитов</a>
+                        <a asp-controller="Calculator" asp-action="CreditCalcLogOff" title="Выйти">Выйти</a>
+                    </div>
                 </div>
             }
             else
             {
                 <div id="sign-in" class="sign-in-block row">
 
-                    <div class="sign-in-text-block col-6">
+                    <div class="sign-in-text-block col-12 col-md-12 col-lg-6">
                         <p>
                             Для "персонального" процента для подсчета пользовательского кредита, необходима авторизация
                         </p>
                     </div>
-                    <div class="sign-in-form-block col-6">
+                    <div class="sign-in-form-block col-12 col-md-12 col-lg-6">
                         <form asp-controller="Calculator" asp-action="CreditCalc" method="post">
                             <div>
                                 <H3>Авторизация</H3>
@@ -123,7 +126,7 @@
                        }
                     }
                 </div>
-                <div id="tdl" class="calc-to-block">
+                <div id="tdl" class="calc-to-block row">
                     <h4>Срок займа </h4>
                     <input id="ddly" size="2" value="0" type="number" class="calc-input"> <h4>Год(a)</h4>
                     <input id="ddlm" size="2" value="5" type="number" class="calc-input"> <h4>Месяц(a)</h4>

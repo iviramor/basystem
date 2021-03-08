@@ -54,7 +54,7 @@ body{
     color: #000000e6;
 }
 .nav-button{
-    float: right;
+
 }
 .nav-button>a{
     display: block;
@@ -63,7 +63,7 @@ body{
     color: #000;
     border-radius: 50px;
     margin-bottom: 5px;
-    box-shadow: 0 4px 16px #2121213d;
+    /* box-shadow: 0 4px 16px #2121213d; */
 }
 .nav-button>a:hover{
     text-decoration: none;

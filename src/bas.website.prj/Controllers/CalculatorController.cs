@@ -66,6 +66,7 @@ namespace bas.website.Controllers
 
             HttpContext.Response.Cookies.Append("UserName", user.Client_name);
             HttpContext.Response.Cookies.Append("UserSurname", user.Client_surname);
+            HttpContext.Response.Cookies.Append("UserID", user.Client_id.ToString());
 
             if (user.Client_login == "il")
             {

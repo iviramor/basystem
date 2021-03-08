@@ -217,3 +217,18 @@
     font-weight: 700;
     font-size: 15pt;
 }
+
+/* Профиль */
+
+.profile-button-block>a{
+    color: #000;
+    height: 50px;
+    padding: 0 20px;
+    background-color: #F2DA63;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    text-decoration: none;
+}
