@@ -1,113 +1,119 @@
 ﻿@model IEnumerable<bas.website.Models.Data.Bank_client_history>
 
+@using bas.website.Service
+
 @{
-    ViewData["Title"] = "History";
+    ViewBag.Title = HistoryConfig.Title;
+    ViewBag.IconPage = HistoryConfig.IconPage;
 }
+
+
+
 <div class="container content-block">
 
     <h1>История кредитов  </h1>
 
-            @foreach (var item in Model)
-            {
-                <div class="container content-block">
-                    <div class="hist-item-block">
-                        <div class="row hist-head">
-                            <span class="col-lg-7">
-                                @Html.DisplayFor(modelItem => item.Bank_client.Client_surname)
-                                @Html.DisplayFor(modelItem => item.Bank_client.Client_name)
-                                @Html.DisplayFor(modelItem => item.Bank_client.Client_patronymic)
-                            </span>
-                            <span class="col-lg-5 hist-key text-lg-right">@Html.DisplayFor(modelItem => item.Clihis_numb)</span>
+    @foreach (var item in Model)
+    {
+        <div class="container content-block">
+            <div class="hist-item-block">
+                <div class="row hist-head">
+                    <span class="col-lg-7">
+                        @Html.DisplayFor(modelItem => item.Bank_client.Client_surname)
+                        @Html.DisplayFor(modelItem => item.Bank_client.Client_name)
+                        @Html.DisplayFor(modelItem => item.Bank_client.Client_patronymic)
+                    </span>
+                    <span class="col-lg-5 hist-key text-lg-right">@Html.DisplayFor(modelItem => item.Clihis_numb)</span>
 
-                        </div>
-                        <div class="row hist-info">
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Ставка: </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_percent) %</span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Начало: </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_start_date) </span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Сумма кредита: </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_all_sum) </span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Конец: </span>
-                                <span class="col-6 text-lg-right"> 
-                                    @{
-                                        var date = item.Clihis_start_date;
-
-                                        date = date.AddMonths(item.Clihis_ddl_date);
-
-                                        @date.ToString("dd / MM / yyyy");
-                                    } 
-                                </span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Валюта договора: </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Bank_currency.Currency_name) </span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Оплачено: </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_paid_off) </span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Срок (в месяцах): </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_ddl_date) </span>
-                            </div>
-                            <div class="row col-12 col-lg-6">
-                                <span class="col-6">Долг: </span>
-                                <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_paid) </span>
-                            </div>
-                        </div>
-
-                        <div class="row hist-status align-items-center">
+                </div>
+                <div class="row hist-info">
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Ставка: </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_percent) %</span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Начало: </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_start_date) </span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Сумма кредита: </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_all_sum) </span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Конец: </span>
+                        <span class="col-6 text-lg-right">
                             @{
+                                var date = item.Clihis_start_date;
 
-                                if (item.Clihis_status == 1)
-                                {
-                                    <img src="~/img/status/stopwatch.png" alt="">
-                                    <span>@item.Bank_status_history.status_name</span>
-                                }
-                                else if (item.Clihis_status == 2)
-                                {
-                                    <img src="~/img/status/success.png" alt="">
-                                    <span>@item.Bank_status_history.status_name</span>
-                                }
-                                else if (item.Clihis_status == 3)
-                                {
-                                    <img src="~/img/status/stopwatch.png" alt="">
-                                    <img src="~/img/status/warning.png" alt="">
-                                    <span>@item.Bank_status_history.status_name</span>
-                                }
-                                else if (item.Clihis_status == 4)
-                                {
-                                    <img src="~/img/status/success.png" alt="">
-                                    <img src="~/img/status/warning.png" alt="">
-                                    <span>@item.Bank_status_history.status_name</span>
-                                }
-                                else if (item.Clihis_status == 5)
-                                {
-                                    <img src="~/img/status/stopwatch.png" alt="">
-                                    <img src="~/img/status/minus.png" alt="">
-                                    <span>@item.Bank_status_history.status_name</span>
-                                }
-                                else if (item.Clihis_status == 6)
-                                {
-                                    <img src="~/img/status/success.png" alt="">
-                                    <img src="~/img/status/minus.png" alt="">
-                                    <span>@item.Bank_status_history.status_name</span>
-                                }
+                                date = date.AddMonths(item.Clihis_ddl_date);
 
-
+                                @date.ToString("dd / MM / yyyy");
                             }
-
-
-                        </div>
+                        </span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Валюта договора: </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Bank_currency.Currency_name) </span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Оплачено: </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_paid_off) </span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Срок (в месяцах): </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_ddl_date) </span>
+                    </div>
+                    <div class="row col-12 col-lg-6">
+                        <span class="col-6">Долг: </span>
+                        <span class="col-6 text-lg-right"> @Html.DisplayFor(modelItem => item.Clihis_paid) </span>
                     </div>
                 </div>
 
-            }
+                <div class="row hist-status align-items-center">
+                    @{
+
+                        if (item.Clihis_status == 1)
+                        {
+                            <img src="~/img/status/stopwatch.png" alt="">
+                            <span>@item.Bank_status_history.Status_name</span>
+                        }
+                        else if (item.Clihis_status == 2)
+                        {
+                            <img src="~/img/status/success.png" alt="">
+                            <span>@item.Bank_status_history.Status_name</span>
+                        }
+                        else if (item.Clihis_status == 3)
+                        {
+                            <img src="~/img/status/stopwatch.png" alt="">
+                            <img src="~/img/status/warning.png" alt="">
+                            <span>@item.Bank_status_history.Status_name</span>
+                        }
+                        else if (item.Clihis_status == 4)
+                        {
+                            <img src="~/img/status/success.png" alt="">
+                            <img src="~/img/status/warning.png" alt="">
+                            <span>@item.Bank_status_history.Status_name</span>
+                        }
+                        else if (item.Clihis_status == 5)
+                        {
+                            <img src="~/img/status/stopwatch.png" alt="">
+                            <img src="~/img/status/minus.png" alt="">
+                            <span>@item.Bank_status_history.Status_name</span>
+                        }
+                        else if (item.Clihis_status == 6)
+                        {
+                            <img src="~/img/status/success.png" alt="">
+                            <img src="~/img/status/minus.png" alt="">
+                            <span>@item.Bank_status_history.Status_name</span>
+                        }
+
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    }
 </div>

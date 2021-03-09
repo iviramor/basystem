@@ -4,7 +4,7 @@ namespace bas.website.Models.Data
 {
     public class BankDbContext : DbContext
     {
-        private string _connectionString;
+        readonly string _connectionString;
 
         public DbSet<Bank_client> Bank_client { get; set; }
         public DbSet<Bank_client_company> Bank_client_company { get; set; }

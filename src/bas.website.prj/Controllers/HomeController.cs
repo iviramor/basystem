@@ -9,7 +9,7 @@ namespace bas.website.Controllers
     {
 
 
-        public BankDbContext db = new BankDbContext(ProjectConfig.Connection);
+        public BankDbContext db = new (ProjectConfig.Connection);
 
         /// <summary>
         /// Старинца: Предметная область

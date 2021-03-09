@@ -8,7 +8,7 @@ namespace bas.website.Controllers
 {
     public class TestController : Controller
     {
-        public BankDbContext db = new BankDbContext(ProjectConfig.Connection);
+        public BankDbContext db = new (ProjectConfig.Connection);
 
 
 

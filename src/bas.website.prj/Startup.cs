@@ -34,7 +34,8 @@ namespace bas.website
             Configuration.Bind("SubjectArea", new SubjectAreaConfig());
             Configuration.Bind("CreditCalc", new CreditCalcConfig());
             Configuration.Bind("CreditCalcOut", new CreditCalcOutConfig());
-            
+            Configuration.Bind("History", new HistoryConfig());
+
 
             services.AddDbContext<BankDbContext>(config =>
             {

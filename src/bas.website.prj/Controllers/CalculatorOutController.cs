@@ -1,31 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace bas.website.Controllers
 {
     public class CalculatorOutController : Controller
     {
+
+        DataTable At;
+        DataColumn column;
+        DataRow row;
+
+
+
         /// <summary>
         /// Вывод параметров калькулятора
         /// </summary>
         /// <param name="sum"> Сумма кредита/займа </param>
         /// <param name="cur">Валюта кредита </param>
-        /// <param name="pur">Информация о целях кредита(вычетаем)</param>
         /// <param name="rate">Процентная ставка</param>
         /// <param name="ddlm">Срок займа в месяцах</param>
         /// <param name="sdate">Дата выдачи</param>
         /// <param name="tpay">Порядок погашения</param>
-        /// <param name="perpay">Периодичность погашения</param>
         /// <param name="fdate">Сроки досрочного погашения</param>
         /// <returns></returns>
 
         [Route("/credit/calculator/out/{sum, cur, pur, rate, ddlm, sdate, tpay, perpay, fdate, arr?}")]
-        public IActionResult CreditCalcOut(decimal sum, string cur, decimal pur, decimal rate, int ddlm, string sdate, char tpay, string perpay, string fdate, string[] arr)
+        public IActionResult CreditCalcOut(decimal sum, string cur, decimal rate, int ddlm, string sdate, char tpay, string[] arr)
         {
             ViewBag.Sum = sum;
             ViewBag.Cur = cur;
@@ -41,21 +42,18 @@ namespace bas.website.Controllers
             ViewBag.Fdate = date.AddMonths(ddlm).ToString("dd / MM / yyyy");
             ViewBag.Type = date.GetType();
 
+            if (tpay == 'a') ViewBag.Table = AnnuityTable(sum, rate, ddlm, date);
+            else if (tpay == 'b')  ViewBag.Table = AnnuityTable(sum, rate, ddlm, date);
 
-            var tb = AnnuityTable(sum, rate, ddlm, date, perpay);
-            ViewBag.Table = AnnuityTable(sum, rate, ddlm, date, perpay);
-            
+
             return View();
         }
 
 
-
-        private DataTable AnnuityTable(decimal sum, decimal rate, int ddlm, DateTime date, string perpay)
+        private DataTable GetDataTable()
         {
             /// Создания таблицы
-            DataTable At = new DataTable("AnnuityTable");
-            DataColumn column;
-            DataRow row;
+            At = new DataTable("AnnuityTable");
 
             /// Создание 0 столбца с Номером платежа
             column = new DataColumn("Numb", Type.GetType("System.Int32"));
@@ -81,6 +79,14 @@ namespace bas.website.Controllers
             column = new DataColumn("OffPaid", Type.GetType("System.Decimal"));
             At.Columns.Add(column);
 
+            return At;
+        }
+
+
+        private DataTable AnnuityTable(decimal sum, decimal rate, int ddlm, DateTime date)
+        {
+
+            var At = GetDataTable();
 
             row = At.NewRow();
 
@@ -109,7 +115,7 @@ namespace bas.website.Controllers
 
                 row["BodyPaid"] = Math.Round(Paid - percO, 2);
                 row["PercentPaid"] = Math.Round(percO, 2);
-                row["OffPaid"] = (Math.Round(offP - (Paid - percO), 2) < 0) ? 0 : Math.Round(offP - (Paid - percO));
+                row["OffPaid"] = (Math.Round(offP - (Paid - percO), 2) < 0) ? 0 : Math.Round(offP - (Paid - percO), 2);
 
                 At.Rows.Add(row);
             }

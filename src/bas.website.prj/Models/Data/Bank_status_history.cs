@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace bas.website.Models.Data
 {
@@ -12,11 +7,11 @@ namespace bas.website.Models.Data
 
 
         [Key]
-        public int status_id { get; set; }
+        public int Status_id { get; set; }
 
-        public string status_name { get; set; }
+        public string Status_name { get; set; }
 
-        public decimal status_value { get; set; }
+        public decimal Status_value { get; set; }
 
     }
 }

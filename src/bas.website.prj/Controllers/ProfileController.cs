@@ -14,7 +14,7 @@ namespace bas.website.Controllers
         /// <summary>
         /// Подключение к базе данных
         /// </summary>
-        public BankDbContext db = new BankDbContext(ProjectConfig.Connection);
+        public BankDbContext db = new (ProjectConfig.Connection);
 
         [Route("/credit/user/history")]
         public IActionResult History()

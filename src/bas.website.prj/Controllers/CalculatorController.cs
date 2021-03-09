@@ -1,18 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using bas.website.Service;
-using System.ComponentModel;
 using System.Data;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using bas.website.Models.Data;
-using System.IO;
 
 namespace bas.website.Controllers
 {
@@ -21,14 +16,14 @@ namespace bas.website.Controllers
         /// <summary>
         /// Подключение к базе данных
         /// </summary>
-        public BankDbContext db = new BankDbContext(ProjectConfig.Connection);
+        public BankDbContext db = new (ProjectConfig.Connection);
 
 
 
         /// <summary>
         /// Критерии оценки истории кредитов
         /// </summary>
-        private Dictionary<decimal, string[]> PercentCrit = new Dictionary<decimal, string[]>() 
+        readonly Dictionary<decimal, string[]> PercentCrit = new () 
         {
             { 0, new string[2] { "0", "excellently" } },
             { (decimal)-0.3, new string[2] { "0.3", "good" } },
@@ -88,7 +83,7 @@ namespace bas.website.Controllers
                 return View();
             }
 
-            var res = getIndiPercent(user.Client_id);
+            var res = GetIndiPercent(user.Client_id);
 
             HttpContext.Response.Cookies.Append("UserName", user.Client_name);
             HttpContext.Response.Cookies.Append("UserSurname", user.Client_surname);
@@ -133,7 +128,7 @@ namespace bas.website.Controllers
         /// </summary>
         /// <param name="client_id"> Индификатор пользователя </param>
         /// <returns>Массив с оценкой</returns>
-        private string[] getIndiPercent(int client_id)
+        private string[] GetIndiPercent(int client_id)
         {
             /// Выходной массив
             string[] percent = new string[2];
@@ -150,7 +145,7 @@ namespace bas.website.Controllers
 
 
             /// Сумма статуса
-            foreach (var r in history) sum += r.Bank_status_history.status_value;
+            foreach (var r in history) sum += r.Bank_status_history.Status_value;
 
 
             /// Среднее значение
