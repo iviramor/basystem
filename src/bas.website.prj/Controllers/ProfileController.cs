@@ -27,6 +27,8 @@ namespace bas.website.Controllers
 
             var histiry = db.Bank_client_history
                 .Include(h => h.Bank_client)
+                .Include(h => h.Bank_currency)
+                .Include(h => h.Bank_status_history)
                 .Where(h => h.Clihis_client == user);
 
             return View(histiry.ToList());

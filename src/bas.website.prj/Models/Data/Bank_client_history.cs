@@ -31,10 +31,19 @@ namespace bas.website.Models.Data
 
         public decimal Clihis_paid { get; set; }
 
-        public string Clihis_status { get; set; }
+        public int Clihis_status { get; set; }
+
+        public int Clihis_cur { get; set; }
 
         [ForeignKey("Clihis_client")]
         public virtual Bank_client Bank_client { get; set; }
+
+        [ForeignKey("clihis_cur")]
+        public virtual Bank_currency Bank_currency { get; set; }
+
+        [ForeignKey("Clihis_status")]
+        public virtual Bank_status_history Bank_status_history { get; set; }
+
 
     }
 }

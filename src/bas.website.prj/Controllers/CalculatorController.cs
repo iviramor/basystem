@@ -26,6 +26,26 @@ namespace bas.website.Controllers
 
 
         /// <summary>
+        /// Критерии оценки истории кредитов
+        /// </summary>
+        private Dictionary<decimal, string[]> PercentCrit = new Dictionary<decimal, string[]>() 
+        {
+            { 0, new string[2] { "0", "excellently" } },
+            { (decimal)-0.3, new string[2] { "0.3", "good" } },
+            { (decimal)-0.5, new string[2] { "0.5", "good" } },
+            { (decimal)-0.7, new string[2] { "0.7", "good" } },
+            { (decimal)-0.9, new string[2] { "0.9", "good" } },
+            { (decimal)-1.1, new string[2] { "1.0", "normally" } },
+            { (decimal)-1.3, new string[2] { "1.3", "normally" } },
+            { (decimal)-1.5, new string[2] { "1.5", "normally" } },
+            { (decimal)-1.7, new string[2] { "1.7", "normally" } },
+            { (decimal)-1.9, new string[2] { "1.9", "normally" } },
+
+        };
+
+
+
+        /// <summary>
         /// Калькулятор
         /// </summary>
         /// <returns>Рендер страницы</returns>
@@ -48,12 +68,16 @@ namespace bas.website.Controllers
         }
 
 
-
+        /// <summary>
+        /// Авторизация
+        /// </summary>
+        /// <param name="model">Модель Формы авторизации</param>
+        /// <returns>Редирект на страницу калькулятора</returns>
         [HttpPost]
         [Route("/credit/calculator")]
         public async Task<IActionResult> CreditCalcAsync(LoginViewModel model)
         {
-
+            /// Поиск пользователя
             var user = await db.Bank_client
                 .SingleOrDefaultAsync(x => x.Client_login == model.UserLogin && x.Client_password == model.Password);
 
@@ -64,20 +88,14 @@ namespace bas.website.Controllers
                 return View();
             }
 
+            var res = getIndiPercent(user.Client_id);
+
             HttpContext.Response.Cookies.Append("UserName", user.Client_name);
             HttpContext.Response.Cookies.Append("UserSurname", user.Client_surname);
             HttpContext.Response.Cookies.Append("UserID", user.Client_id.ToString());
+            HttpContext.Response.Cookies.Append("UserPercent", res[0]);
+            HttpContext.Response.Cookies.Append("UserCredStatus", res[1]);
 
-            if (user.Client_login == "il")
-            {
-                HttpContext.Response.Cookies.Append("UserCredStatus", "normally");
-                HttpContext.Response.Cookies.Append("UserPercent", "0.8");
-            }
-            if (user.Client_login == "ivi")
-            {
-                HttpContext.Response.Cookies.Append("UserCredStatus", "good");
-                HttpContext.Response.Cookies.Append("UserPercent", "0.3");
-            }
 
 
             var claims = new List<Claim>
@@ -94,7 +112,6 @@ namespace bas.website.Controllers
         }
 
 
-
         /// <summary>
         /// Выйти из аккаунта
         /// </summary>
@@ -104,50 +121,72 @@ namespace bas.website.Controllers
             HttpContext.Response.Cookies.Delete("UserName");
             HttpContext.Response.Cookies.Delete("UserSurname");
             HttpContext.Response.Cookies.Delete("UserPercent");
+            HttpContext.Response.Cookies.Delete("UserCredStatus");
+            HttpContext.Response.Cookies.Delete("UserID");
             HttpContext.SignOutAsync("Cookie");
             return Redirect("/credit/calculator");
         }
 
 
         /// <summary>
-        /// Вывод параметров калькулятора
+        /// Функция дающая расчет оценки кредитной истории
         /// </summary>
-        /// <param name="sum"> Сумма кредита/займа </param>
-        /// <param name="cur">Валюта кредита </param>
-        /// <param name="pur">Информация о целях кредита(вычетаем)</param>
-        /// <param name="rate">Процентная ставка</param>
-        /// <param name="ddl">Срок займа в месяцах</param>
-        /// <param name="sdate">Дата выдачи</param>
-        /// <param name="tpay">Порядок погашения</param>
-        /// <param name="perpay">Периодичность погашения</param>
-        /// <param name="fdate">Сроки досрочного погашения</param>
-        /// <returns></returns>
-
-        [Route("/credit/calculator/out/{sum, cur, pur, rate, ddl, sdate, tpay, perpay, fdate, arr?}")]
-        public IActionResult CreditCalcOut(int sum, string cur, float pur, float rate, int ddlm, string sdate, char tpay, string perpay, string fdate, string[] arr)
+        /// <param name="client_id"> Индификатор пользователя </param>
+        /// <returns>Массив с оценкой</returns>
+        private string[] getIndiPercent(int client_id)
         {
-            ViewBag.Sum = sum;
-            ViewBag.Cur = cur;
-            ViewBag.Rate = rate;
-            ViewBag.Ddl = ddlm;
-            ViewBag.Arr = arr;
+            /// Выходной массив
+            string[] percent = new string[2];
 
-            string[] subs = sdate.Split('-');
-            DateTime date = new DateTime(int.Parse(subs[0]), int.Parse(subs[1]), int.Parse(subs[2])).Date;
-            ViewBag.Sdate = date.ToString("MM / dd / yyyy");
-            ViewBag.Fdate = date.AddMonths(ddlm).ToString("dd / MM / yyyy");
+            /// Сумма
+            decimal sum = 0;
 
 
+            /// Полная история клиента
+            var history = db.Bank_client_history
+                .Include(ch => ch.Bank_status_history)
+                .Include(ch => ch.Bank_client)
+                .Where(ch => ch.Clihis_client == client_id);
 
-            return View();
+
+            /// Сумма статуса
+            foreach (var r in history) sum += r.Bank_status_history.status_value;
+
+
+            /// Среднее значение
+            decimal rang = sum / history.Count();
+
+
+            /// Сравноение со словарем Критериев
+            foreach (var row in PercentCrit)
+            {
+                if (row.Key <= rang)
+                {
+                    percent = row.Value;
+                    break;
+                }
+                else
+                {
+                    percent[0] = "2.3";
+                    percent[1] = "satisfactory";
+                }
+            }
+
+
+            return percent;
         }
 
     }
 
+
+    /// <summary>
+    /// Модель Формы авторизации
+    /// </summary>
     public class LoginViewModel
     {
         public string UserLogin { get; set; }
         public string Password { get; set; }
 
     }
+
 }

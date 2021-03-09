@@ -23,6 +23,9 @@
                     @Html.DisplayNameFor(model => model.Clihis_all_sum)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Bank_currency.Currency_name)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Clihis_start_date)
                 </th>
                 <th>
@@ -42,35 +45,38 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_numb)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Bank_client.Client_name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_percent)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_all_sum)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_start_date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_ddl_date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_paid_off)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_paid)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Clihis_status)
-                    </td>
-                </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_numb)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bank_client.Client_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_percent)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_all_sum)
+                </td>
+                <th>
+                    @Html.DisplayFor(modelItem => item.Bank_currency.Currency_name)
+                </th>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_start_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_ddl_date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_paid_off)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clihis_paid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bank_status_history.status_name)
+                </td>
+            </tr>
             }
         </tbody>
     </table>

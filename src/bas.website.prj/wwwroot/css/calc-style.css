@@ -38,12 +38,12 @@
     width: 240px;
 
 }
-.calc-input:focusn{
+.calc-input:focus{
     border: #fff;
     border-radius: 50px;
 
 }
-.calc-input:active, .calc-input:hover, .calc-input:focus,
+.calc-input:active, .calc-input:hover, .calc-input,
 .currency-button:active, .currency-button:hover, .currency-button:focus,
 .def-button:active, .def-button:hover, .def-button:focus,
 .calc-select:active, .calc-select:hover, .calc-select:focus,
