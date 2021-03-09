@@ -22,7 +22,7 @@ namespace bas.website.Models.Data
         public decimal Clihis_all_sum { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd / MM / yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Clihis_start_date { get; set; }
 
         public int Clihis_ddl_date { get; set; }

@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/calc-style.css">
+    <link rel="stylesheet" href="css/profile-history-style.css">
     <link rel="shortcut icon" href="img/bank (1).png" type="image/x-icon">
     <title>BankAssistanceSystem</title>
 </head>
@@ -13,118 +14,51 @@
 
 
 
-<div class="container-fluid content-block">
-
-    <div id="oper-main" class="content-info-main-block container">
-
-        <h1>Модуль - Кредитный калькулятор</h1>
-
-        <div id="sign-in" class="sign-in-block row">
-
-            <div class="sign-in-text-block col-6">
-                <p>
-                    Для "персонального" процента для подсчета пользовательского кредита, необходима авторизация
-                </p>
+<div class="container content-block">
+    <div class="hist-item-block">
+        <div class="row hist-head">
+            <span class="col-lg-7">Козлов Дмитрий Алексеевич</span>
+            <span class="col-lg-5 hist-key text-lg-right">831b8715-a3b7-419e-9aad-40c618251d0c</span>
+        </div>
+        <div class="row hist-info">
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Ставка: </span>
+                <span class="col-6 text-lg-right"> 10.70 %</span>
             </div>
-            <div class="sign-in-form-block col-6">
-                <form  asp-controller="Home" asp-action="CreditCalc" ><!--method="post"-->
-                    <div>
-                        <H3>Авторизация</H3>
-
-                        <div class="calc-to-block">
-                            <h4>Логин</h4>
-                            <input asp-for="UserName" value="user" class="calc-input" required>
-                        </div>
-                        <div class="calc-to-block">
-                            <h4>Пароль</h4>
-                            <input asp-for="Password" value="user" class="calc-input" required>
-                        </div>
-
-                    </div>
-                    <button type="button" class="get-button get-value-block">
-                        Войти
-                    </button>
-                </form>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Начало: </span>
+                <span class="col-6 text-lg-right"> 25/08/2020</span>
+            </div>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Сумма кредита: </span>
+                <span class="col-6 text-lg-right"> 450000</span>
+            </div>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Конец: </span>
+                <span class="col-6 text-lg-right"> 25/08/2020</span>
+            </div>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Валюта договора: </span>
+                <span class="col-6 text-lg-right"> Рубль</span>
+            </div>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Оплачено: </span>
+                <span class="col-6 text-lg-right"> 200000</span>
+            </div>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Срок (в месяцах): </span>
+                <span class="col-6 text-lg-right"> 6</span>
+            </div>
+            <div class="row col-12 col-lg-6">
+                <span class="col-6">Долг: </span>
+                <span class="col-6 text-lg-right"> 40000</span>
             </div>
         </div>
 
-        <div id="acc" class="acc-block">
-            <div class="acc-data-user">
-                <img src="img/success.png" alt="">
-                <span>Добро пожаловать, USER.</span>
-                <span>Ваша персональная ставка составляет - <b> 9.3 </b></span>
-            </div>
-            <div class="profile-button-block row">
-                <a title="История кредитов">История кредитов</a>
-                <a title="Выйти">Выйти</a>
-            </div>
-            
+        <div class="row hist-status align-items-center">
+            <img src="img/success.png" alt="">
+            <span>Активный с долгом по сроку</span>
         </div>
-
-
-        <div class="calc-block">
-            <form name="test" method="post" action="">
-                <div class="calc-to-block">
-                    <h4>Сумма займа</h4>
-                    <div>
-                        <input id="sum" value="3000" type="number" class="calc-input">
-                    </div>
-                </div>
-                <div id="cur" class="calc-to-block">
-                    <h4>Валюта</h4>
-                    <button type="button" data-currency="rub" data-currency-active="true" class="currency-button">&#8381;</button>
-                    <button type="button" data-currency="dol" data-currency-active="false" class="currency-button currency-active">&#36;</button>
-                    <button type="button" data-currency="eur" data-currency-active="false" class="currency-button">&#8364;</button>
-                </div>
-                <div class="calc-to-block">
-                    <h4>Информация о целях кредита</h4>
-                    <select id='pur' class="calc-select">
-                        <option value="3" title="-3% от ставки">Для учебы</option>
-                        <option value="0" title="-0% от ставки">Для развлечения</option>
-                        <option value="4.2" title="-4.2% от ставки">Для лечения</option>
-                    </select>
-                </div>
-                <div class="calc-to-block calc-percent">
-                    <h4>Процентная ставка</h4>
-                    <input id="rate" value="11.4" type="number" class="calc-input" >
-                    <h4>%</h4>
-                    <button type="button" disabled="disabled" class="indiv-percent def-button">Индивидуальная</button>
-                </div>
-                <div id="tdl" class="calc-to-block">
-                    <h4>Срок займа </h4>
-                    <input id="ddly" size="2" value="0" type="number" class="calc-input"> <h4>Год(a)</h4>
-                    <input id="ddlm" size="2" value="5" type="number" class="calc-input"> <h4>Месяц(a)</h4>
-                </div>
-                <div class="calc-to-block">
-                    <h4>Дата выдачи</h4>
-                    <input id="sdate" value="2012-12-12" type="date" class="calc-input">
-                </div>
-                <div class="calc-to-block">
-                    <h4>Порядок погашения</h4>
-                    <select id="tpay" class="calc-select">
-                        <option value="a" >Аннуитетный</option>
-                        <option value="d" >Дифференцированный</option>
-                    </select>
-                </div>
-                <div class="calc-to-block">
-                    <h4>Периодичность погашения</h4>
-                    <select id="perpay" class="calc-select">
-                        <option value="m" >Eжемесячно</option>
-                        <option value="kv" >Квартал</option>
-                        <option value="y" >Ежегодно</option>
-                    </select>
-                </div>
-                <div id="fdate" class="calc-to-block">
-                    <h4>Сроки досрочного погашения</h4>
-                    <input value="2012-12-12" type="date" class="calc-input calc-input-hide">
-                    <button type="button" data-new-deadline="yes" data-new-deadline-active="true" class="new-deadline-button">Да</button>
-                    <button type="button" data-new-deadline="no" data-new-deadline-active="false" class="new-deadline-button currency-active">Нет</button>
-                </div>
-            </form>
-        </div>
-        <button id='get-value-block' type="button" class="get-button get-value-block">
-            Получить результат
-        </button>
     </div>
 </div>
 

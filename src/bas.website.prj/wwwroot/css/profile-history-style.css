@@ -1,0 +1,33 @@
+.hist-item-block{
+    margin: 25px 0;
+    border-radius: 10px;
+    background-color: #fff;
+    /* height: 650px; */
+    width: 100%;
+    padding: 40px;
+    font-size: 18pt;
+}
+.hist-item-block .row{
+    margin: 0;
+}
+
+.hist-item-block>.hist-head{
+    margin-bottom: 40px;
+}
+
+.hist-key{
+    color: rgb(134, 134, 134);
+}
+
+.hist-info *{
+    margin-bottom: 15px;
+}
+
+.hist-status{
+    margin: 40px 0 0 0!important;
+}
+.hist-status>img{
+    height: 60px;
+    width: 60px;
+    margin: 0  15px 0 15px;
+}
