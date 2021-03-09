@@ -38,47 +38,46 @@
     <div id="oper-main" class="content-info-main-block container">
 
         <h1>Вывод данных</h1>
-
+        @ViewBag.Type
         <div class="calc-info-block">
             <h4>Информация о кредите</h4>
 
-            <div class="calc-info">
+            <ul class="calc-info">
                 <li>Сумма кредита: <span>@ViewBag.Sum </span> Валюта: <span>@ViewBag.CorOut</span> </li>
                 <li>Срок платежа: <span>@ViewBag.Ddl</span> Месяцев</li>
                 <li>Старт кредита: <span>@ViewBag.Sdate</span> Конец кредита: <span>@ViewBag.Fdate</span> </li>
                 <li>Текущая ставка: <span>@ViewBag.Rate %</span></li>
-            </div>
+            </ul>
 
         </div>
 
         <table class="table">
             <tr>
+                <th>Номер</th>
                 <th>Дата</th>
                 <th>Платеж</th>
+                <th>Тело займа</th>
                 <th>Процент</th>
-                <th>Остаток</th>
-                <th>Погашено</th>
+                <th>Остаток платежа</th>
             </tr>
 
-            <tr>
+            
                 @{
-                    if (ViewBag.Arr.Length != 0)
-                    {
-                        foreach (var i in ViewBag.Arr)
-                        {
-                                <td>@i</td>
-                        }
 
+                    for (int row = 0; row < ViewBag.Table.Rows.Count; ++row)
+                    {
+                        <tr>
+                            <td> @ViewBag.Table.Rows[row][0] </td>
+                            <td> @ViewBag.Table.Rows[row][1].ToString("dd / MM / yyyy") </td>
+                            <td> @ViewBag.Table.Rows[row][2] </td>
+                            <td> @ViewBag.Table.Rows[row][3] </td>
+                            <td> @ViewBag.Table.Rows[row][4] </td>
+                            <td> @ViewBag.Table.Rows[row][5] </td>
+                        </tr>
                     }
                 }
 
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-
-        </table>
+            </table>
 
     </div>
 </div>
