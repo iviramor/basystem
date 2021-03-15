@@ -15,6 +15,8 @@ namespace bas.website.Models.Data
 
         public string Client_patronymic { get; set; }
 
+        public bool Client_sex { get; set; }
+
         [DisplayFormat(NullDisplayText = "Отсутствует")]
         public int? Client_company { get; set; }
 

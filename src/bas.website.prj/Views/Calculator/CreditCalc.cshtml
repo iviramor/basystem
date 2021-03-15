@@ -19,32 +19,43 @@
             if (@ViewBag.Authentication)
             {
                 <div id="acc" class="acc-block">
-                    <div class="acc-data-user">
-                        <img src="~/img/success.png" alt="">
-                        <span>Добро пожаловать, @{ @Context.Request.Cookies["UserName"]}  @{@Context.Request.Cookies["UserSurname"]}.</span>
-                        <span>
-                            Ваша кредитная история - @{
+                            <div class="acc-data-user">
 
-                                if (Context.Request.Cookies["UserCredStatus"] == "excellently")
-                                {
-                                    <b style="color:#4cff00"> Отлично </b>
-                                }
-                                else if (Context.Request.Cookies["UserCredStatus"] == "good")
-                                {
-                                    <b style="color:#b6ff00"> Хорошо </b>
-                                }
-                                else if (Context.Request.Cookies["UserCredStatus"] == "normally")
-                                {
-                                    <b style="color:#ffd800"> Нормально </b>
-                                }
-                                else if (Context.Request.Cookies["UserCredStatus"] == "satisfactory")
-                                {
-                                    <b style="color:#ff6a00"> Удовлетворительно </b>
+                                @{
+                                    if (Context.Request.Cookies["UserSex"] == "True")
+                                    {
+                                        <img src="~/img/status/user.png" alt="">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/img/status/userW.png" alt="">
+                                    }
                                 }
 
-                            }
-                        </span>
-                    </div>
+                                <span>Добро пожаловать, @{ @Context.Request.Cookies["UserName"]}  @{@Context.Request.Cookies["UserSurname"]}.</span>
+                                <span>
+                                    Ваша кредитная история - @{
+
+                                        if (Context.Request.Cookies["UserCredStatus"] == "excellently")
+                                        {
+                                            <b style="color:#4cff00"> Отлично </b>
+                                        }
+                                        else if (Context.Request.Cookies["UserCredStatus"] == "good")
+                                        {
+                                            <b style="color:#b6ff00"> Хорошо </b>
+                                        }
+                                        else if (Context.Request.Cookies["UserCredStatus"] == "normally")
+                                        {
+                                            <b style="color:#ffd800"> Нормально </b>
+                                        }
+                                        else if (Context.Request.Cookies["UserCredStatus"] == "satisfactory")
+                                        {
+                                            <b style="color:#ff6a00"> Удовлетворительно </b>
+                                        }
+
+                                    }
+                                </span>
+                            </div>
                     <div class="profile-button-block row">
                         <a asp-controller="Profile" asp-action="History" title="История кредитов">История кредитов</a>
                         <a asp-controller="Calculator" asp-action="CreditCalcLogOff" title="Выйти">Выйти</a>
@@ -91,7 +102,7 @@
                 <div class="calc-to-block">
                     <h4>Сумма займа</h4>
                     <div>
-                        <input id="sum" value="1" type="number" class="calc-input" required>
+                        <input id="sum" value="1000" type="number" class="calc-input" required>
                     </div>
                 </div>
                 <div id="cur" class="calc-to-block">
@@ -127,8 +138,8 @@
                 </div>
                 <div id="tdl" class="calc-to-block row">
                     <h4>Срок займа </h4>
-                    <input id="ddly" size="2" value="0" type="number" class="calc-input"> <h4>Год(a)</h4>
-                    <input id="ddlm" size="2" value="5" type="number" class="calc-input" required> <h4>Месяц(a)</h4>
+                    <input id="ddly" size="2" value="0" type="number" class="calc-input" > <h4 class="ddly">Год(a)</h4>
+                    <input id="ddlm" size="2" value="1" type="number" class="calc-input" required> <h4 class="ddlm">Месяц</h4>
                 </div>
                 <div class="calc-to-block">
                     <h4>Дата выдачи</h4>

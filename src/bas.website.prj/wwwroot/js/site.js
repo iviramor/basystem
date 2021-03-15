@@ -98,7 +98,77 @@ $('#get-value-block').on('click', function(e){
 });
 
 
+function checkCur(e){
+    let cur = $('#cur').children('.currency-active').attr('data-currency')
+    let sum = $('#sum').val();
+    console.log(cur);
+
+    if (cur == 'rub' & sum < 1000) {
+        alert("Минимум 1000 рублей");
+        $('#sum').val(1000);
+    }
+    else if (cur == 'eur' & sum < 100) {
+        alert("Минимум 100 евро");
+        $('#sum').val(100);
+    }
+    else if (cur == 'dol' & sum < 100) {
+        alert("Минимум 100 долларов");
+        $('#sum').val(100);
+    }
+
+}
+
+$('.currency-button').on('click', function(e){
+    checkCur();
+});
+$('#sum').change(function(e){
+    checkCur();
+});
+
+$('#rate').change(function(e){
+    if ($('#rate').val() < 0.1) {
+        alert("Минимум 0.1%");
+        $('#rate').val(0.1);
+    }
+});
+
+
 // Название блоков
+
+
+$('#ddly').on('input', function(e){
+
+    if ($('#ddly').val() < 0){
+        alert("Меньше нуля!");
+        $('#ddly').val(0);
+    } else {
+        let z = $('#ddly').val();
+        if (z == 0) $('.ddly').text("Месяц(a)");
+        else if( z >= 11 & z  < 20) $('.ddly').text("Лет");
+        else if (z % 10 == 1) $('.ddly').text("Год");
+        else if( z % 10 > 1 & z % 10 <= 4) $('.ddly').text("Года");
+        else $('.ddly').text("Лет");
+    }
+});
+
+$('#ddlm').on('input', function(e){
+    if ($('#ddlm').val() < 1){
+        alert("Минимальное значение - 1!");
+        $('#ddlm').val(1);
+    } else {
+        let z = $('#ddlm').val();
+        if (z >= 11 & z < 20){
+            $('.ddlm').text("Месяцев");
+        }
+        else if (z == 1 || z % 10 == 1){
+            $('.ddlm').text("Месяц");
+        } 
+        else if( z % 10 > 1 & z % 10 <= 4) $('.ddlm').text("Месяца");
+        else{
+            $('.ddlm').text("Месяцев")
+        }
+    }
+});
 
 
 //  Авторизация 

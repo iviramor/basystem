@@ -87,6 +87,7 @@ namespace bas.website.Controllers
 
             HttpContext.Response.Cookies.Append("UserName", user.Client_name);
             HttpContext.Response.Cookies.Append("UserSurname", user.Client_surname);
+            HttpContext.Response.Cookies.Append("UserSex", user.Client_sex.ToString());
             HttpContext.Response.Cookies.Append("UserID", user.Client_id.ToString());
             HttpContext.Response.Cookies.Append("UserPercent", res[0]);
             HttpContext.Response.Cookies.Append("UserCredStatus", res[1]);
