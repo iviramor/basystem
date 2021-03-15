@@ -40,7 +40,6 @@ namespace bas.website.Controllers
 
             ViewBag.Sdate = date.ToString("dd / MM / yyyy");
             ViewBag.Fdate = date.AddMonths(ddlm).ToString("dd / MM / yyyy");
-            ViewBag.Type = date.GetType();
 
             if (tpay == 'a') ViewBag.Table = AnnuityTable(sum, rate, ddlm, date);
             else if (tpay == 'b')  ViewBag.Table = AnnuityTable(sum, rate, ddlm, date);

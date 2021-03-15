@@ -98,6 +98,8 @@ $('#get-value-block').on('click', function(e){
 });
 
 
+// Название блоков
+
 
 //  Авторизация 
 

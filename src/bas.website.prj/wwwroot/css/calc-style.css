@@ -4,13 +4,17 @@
     border-radius: 10px 10px 0 0;
     padding: 30px 30px;
 }
+    .calc-block > .row {
+        margin-left: 0;
+        margin-right: 0;
+    }
 
-.calc-to-block{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-bottom: 40px;
-}
+    .calc-to-block {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-bottom: 40px;
+    }
 .calc-to-block>*{
     margin: 0 15px;
 }
@@ -38,12 +42,12 @@
     width: 240px;
 
 }
-.calc-input:focus{
+.calc-input:focusn{
     border: #fff;
     border-radius: 50px;
 
 }
-.calc-input:active, .calc-input:hover, .calc-input,
+.calc-input:active, .calc-input:hover, .calc-input:focus,
 .currency-button:active, .currency-button:hover, .currency-button:focus,
 .def-button:active, .def-button:hover, .def-button:focus,
 .calc-select:active, .calc-select:hover, .calc-select:focus,
@@ -209,13 +213,9 @@
 .calc-info{
     margin-left: 10px;
 }
-.calc-info>li{
-    margin-bottom: 10px;
-    list-style-type: none;
-}
-.calc-info>li>span{
-    font-weight: 700;
-    font-size: 15pt;
+.calc-info>div>span{
+    font-size: 16pt;
+    margin: 5px 0 ;
 }
 
 /* Профиль */

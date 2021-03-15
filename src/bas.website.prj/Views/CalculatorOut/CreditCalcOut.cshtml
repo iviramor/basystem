@@ -38,20 +38,28 @@
     <div id="oper-main" class="content-info-main-block container">
 
         <h1>Вывод данных</h1>
-        @ViewBag.Type
-        <div class="calc-info-block">
-            <h4>Информация о кредите</h4>
 
-            <ul class="calc-info">
-                <li>Сумма кредита: <span>@ViewBag.Sum </span> Валюта: <span>@ViewBag.CorOut</span> </li>
-                <li>Срок платежа: <span>@ViewBag.Ddl</span> Месяцев</li>
-                <li>Старт кредита: <span>@ViewBag.Sdate</span> Конец кредита: <span>@ViewBag.Fdate</span> </li>
-                <li>Текущая ставка: <span>@ViewBag.Rate %</span></li>
-            </ul>
+    <div class="calc-info-block">
+        <h4>Информация о кредите</h4>
 
+        <div class="row calc-info">
+            <div class="col-12 col-lg-12 row">
+                <span class="col-lg-6">Текущая ставка: @ViewBag.Rate</span>
+                <span class="col-lg-6">Начало: @ViewBag.Sdate</span>
+            </div>
+            <div class="col-12 col-lg-12 row">
+                <span class="col-lg-6">Срок кредита: @ViewBag.Ddl  Месяцев</span>
+                <span class="col-lg-6">Конец: @ViewBag.Fdate</span>
+            </div>
+            <div class="col-12 col-lg-12 row">
+                <span class="col-lg-6">Сумма кредита: @ViewBag.Sum</span>
+                <span class="col-lg-6">Валюта: @ViewBag.CorOut</span>
+            </div>
         </div>
 
-        <table class="table">
+    </div>
+
+        <table class="table table-secondary">
             <tr>
                 <th>Номер</th>
                 <th>Дата</th>

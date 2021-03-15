@@ -209,13 +209,9 @@
 .calc-info{
     margin-left: 10px;
 }
-.calc-info>li{
-    margin-bottom: 10px;
-    list-style-type: none;
-}
-.calc-info>li>span{
-    font-weight: 700;
-    font-size: 15pt;
+.calc-info>div>span{
+    font-size: 16pt;
+    margin: 5px 0 ;
 }
 
 /* Профиль */
