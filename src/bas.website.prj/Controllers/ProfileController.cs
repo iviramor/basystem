@@ -22,13 +22,17 @@ namespace bas.website.Controllers
 
             var user = int.Parse(HttpContext.Request.Cookies["UserID"]);
 
-            var histiry = db.Bank_client_history
+            var history = db.Bank_client_history
                 .Include(h => h.Bank_client)
                 .Include(h => h.Bank_currency)
                 .Include(h => h.Bank_status_history)
                 .Where(h => h.Clihis_client == user);
 
-            return View(histiry.ToList());
+            ViewBag.HistNull = false;
+
+            if (history.Any()) ViewBag.HistNull = true;
+
+            return View(history.ToList());
         }
     }
 }

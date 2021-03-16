@@ -39,7 +39,6 @@ namespace bas.website.Controllers
         };
 
 
-
         /// <summary>
         /// Калькулятор
         /// </summary>
@@ -48,16 +47,9 @@ namespace bas.website.Controllers
         [Route("/credit/calculator")]
         public IActionResult CreditCalc()
         {
-
-            if (User.Identity.IsAuthenticated)
-            {
-                ViewBag.Authentication = true;
-            }
-            else
-            {
-
-                ViewBag.Authentication = false;
-            }
+            /// Проверка авторизации пользователя
+            if (User.Identity.IsAuthenticated) ViewBag.Authentication = true;
+            else ViewBag.Authentication = false;
 
             return View();
         }
@@ -76,6 +68,8 @@ namespace bas.website.Controllers
             var user = await db.Bank_client
                 .SingleOrDefaultAsync(x => x.Client_login == model.UserLogin && x.Client_password == model.Password);
 
+
+            /// Если пользователя нет в базе данных
             if (user == null)
             {
                 ModelState.TryAddModelError("", "Пользователь не найден!");
@@ -83,23 +77,32 @@ namespace bas.website.Controllers
                 return View();
             }
 
-            var res = GetIndiPercent(user.Client_id);
 
+            /// Выборка всей истории клиента
+            var history = db.Bank_client_history
+                .Include(ch => ch.Bank_status_history)
+                .Include(ch => ch.Bank_client)
+                .Where(ch => ch.Clihis_client == user.Client_id);
+
+            /// Запись результата истории кредита при чистой истории кредитов
+            var CreditResult = new string[2] { "0", "excellently" };
+
+
+            /// Если список истории кредитов не пуст
+            if (history.Any()) CreditResult = GetIndiPercent(history);
+
+
+            /// Запись данных в Cookie
             HttpContext.Response.Cookies.Append("UserName", user.Client_name);
             HttpContext.Response.Cookies.Append("UserSurname", user.Client_surname);
             HttpContext.Response.Cookies.Append("UserSex", user.Client_sex.ToString());
             HttpContext.Response.Cookies.Append("UserID", user.Client_id.ToString());
-            HttpContext.Response.Cookies.Append("UserPercent", res[0]);
-            HttpContext.Response.Cookies.Append("UserCredStatus", res[1]);
+            HttpContext.Response.Cookies.Append("UserPercent", CreditResult[0]);
+            HttpContext.Response.Cookies.Append("UserCredStatus", CreditResult[1]);
 
 
-
-            var claims = new List<Claim>
-            {
-                new Claim("Name", user.Client_login),
-            };
-
-
+            /// Авторизация с помощью Клеймов
+            var claims = new List<Claim> { new Claim("Name", user.Client_login) };
             var claimIdentity = new ClaimsIdentity(claims, "Cookie");
             var claimPrincipal = new ClaimsPrincipal(claimIdentity);
             await HttpContext.SignInAsync("Cookie", claimPrincipal);
@@ -114,12 +117,15 @@ namespace bas.website.Controllers
         /// <returns>Перенаправление</returns>
         public IActionResult CreditCalcLogOff()
         {
+            /// Удаление Cookies из сайта
             HttpContext.Response.Cookies.Delete("UserName");
             HttpContext.Response.Cookies.Delete("UserSurname");
             HttpContext.Response.Cookies.Delete("UserPercent");
             HttpContext.Response.Cookies.Delete("UserCredStatus");
             HttpContext.Response.Cookies.Delete("UserID");
             HttpContext.SignOutAsync("Cookie");
+
+
             return Redirect("/credit/calculator");
         }
 
@@ -128,22 +134,15 @@ namespace bas.website.Controllers
         /// Функция дающая расчет оценки кредитной истории
         /// </summary>
         /// <param name="client_id"> Индификатор пользователя </param>
+        /// <param name="hist"> История клиента </param>
         /// <returns>Массив с оценкой</returns>
-        private string[] GetIndiPercent(int client_id)
+        private string[] GetIndiPercent(IQueryable<Bank_client_history> history)
         {
             /// Выходной массив
             string[] percent = new string[2];
 
             /// Сумма
             decimal sum = 0;
-
-
-            /// Полная история клиента
-            var history = db.Bank_client_history
-                .Include(ch => ch.Bank_status_history)
-                .Include(ch => ch.Bank_client)
-                .Where(ch => ch.Clihis_client == client_id);
-
 
             /// Сумма статуса
             foreach (var r in history) sum += r.Bank_status_history.Status_value;
@@ -153,9 +152,10 @@ namespace bas.website.Controllers
             decimal rang = sum / history.Count();
 
 
-            /// Сравноение со словарем Критериев
+            /// Сравноение со словарем Критериев для выставления рейтинка истории
             foreach (var row in PercentCrit)
             {
+                /// Сравнение Ключем(Баллом) с подсчитанным рейтингом
                 if (row.Key <= rang)
                 {
                     percent = row.Value;

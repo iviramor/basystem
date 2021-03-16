@@ -13,6 +13,17 @@
 
     <h1>История кредитов  </h1>
 
+    @{
+        if (ViewBag.HistNull)
+        {
+            <br>
+            <br>
+            <h3 style="text-align:center; color: seagreen;">Пусто</h3>
+            <br>
+            <br>
+        }
+    }
+
     @foreach (var item in Model)
     {
         <div class="container content-block">
