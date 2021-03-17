@@ -143,7 +143,7 @@ $('#ddly').on('input', function(e){
         $('#ddly').val(0);
     } else {
         let z = $('#ddly').val();
-        if (z == 0) $('.ddly').text("Лет/Года");
+        if (z == 0) $('.ddly').text("(Года)");
         else if( z >= 11 & z  < 20) $('.ddly').text("Лет");
         else if (z % 10 == 1) $('.ddly').text("Год");
         else if( z % 10 > 1 & z % 10 <= 4) $('.ddly').text("Года");

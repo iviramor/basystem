@@ -30,7 +30,7 @@ namespace bas.website.Controllers
 
             ViewBag.HistNull = false;
 
-            if (history.Any()) ViewBag.HistNull = true;
+            if (!history.Any()) ViewBag.HistNull = true;
 
             return View(history.ToList());
         }
