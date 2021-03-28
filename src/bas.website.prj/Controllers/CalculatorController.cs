@@ -18,8 +18,6 @@ namespace bas.website.Controllers
         /// </summary>
         public BankDbContext db = new (ProjectConfig.Connection);
 
-
-
         /// <summary>
         /// Критерии оценки истории кредитов
         /// </summary>

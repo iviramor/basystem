@@ -22,9 +22,6 @@ namespace bas.website
                 .Build();
 
             CreateHostBuilder(args, configuration).Build().Run();
-
-                
-            
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args, IConfiguration configuration) =>

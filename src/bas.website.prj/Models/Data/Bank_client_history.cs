@@ -22,7 +22,7 @@ namespace bas.website.Models.Data
         public DateTime Clihis_start_date { get; set; }
 
         public int Clihis_ddl_date { get; set; }
-
+        
         public decimal Clihis_paid_off { get; set; }
 
         public decimal Clihis_paid { get; set; }
