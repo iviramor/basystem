@@ -14,33 +14,5 @@ namespace bas.program.ViewModels
     {
 
 
-
-        #region Команды
-
-        #region Закрыть приложение
-        public ICommand CloseSystemCommand { get; }
-
-        private void OnCloseSystemCommandExecuted(object p)
-        {
-            Application.Current.Shutdown();
-        }
-
-        private bool CanCloseSystemCommandExecuted(object p) => true;
-
-        #endregion
-
-        #endregion
-
-        public HelloWindowViewModel()
-        {
-            #region Команды
-
-            CloseSystemCommand = new ActionCommand(OnCloseSystemCommandExecuted, CanCloseSystemCommandExecuted);
-
-            #endregion
-        }
-
-
-
     }
 }

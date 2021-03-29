@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:cmd="clr-namespace:bas.program.Infrastructure.Commands.HelloWindowCommands"
         xmlns:vm="clr-namespace:bas.program.ViewModels"
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
@@ -10,14 +11,13 @@
         Height="480" Width="854" Visibility="Visible" WindowStyle="None"
         ResizeMode="NoResize"
         >
+    <Window.Background>
+        <ImageBrush ImageSource="/Views/bg.jpg"/>
+    </Window.Background>
 
     <Window.DataContext>
         <vm:HelloWindowViewModel/>
     </Window.DataContext>
-
-    <Window.Background>
-        <ImageBrush ImageSource="/Views/bg.jpg" Stretch="Fill" TileMode="None"/>
-    </Window.Background>
 
 
     <Grid>
@@ -28,11 +28,29 @@
             <RowDefinition Height="97*"/>
         </Grid.RowDefinitions>
 
-        <Rectangle Height="30" Fill="Transparent" Grid.Row="0" PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"/>
-        <Button Width="30" Grid.Row="0" Margin="824,0,0,0" Command="{Binding Path=CloseSystemCommand}" Background="#FFD43030" />
+        <Rectangle Height="30" 
+                   Fill="Transparent" 
+                   Grid.Row="0"
+                   PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
+                   />
+
+
+        <Button Width="30" Grid.Row="0" Margin="824,0,0,0" Background="Red">
+            <Button.Command>
+                <cmd:CloseSystemCommand/>
+            </Button.Command>
+            <!--<StackPanel Orientation="Horizontal">
+                <Image Source="D:\basystem\BankAssistanceSystem\src\bas.program\Static\img\ex.png">
+
+                </Image>
+            </StackPanel>-->
+        </Button>
 
         <TextBox HorizontalAlignment="Left" Margin="50,50,0,0" Grid.Row="2" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Height="37"/>
-        <TextBox HorizontalAlignment="Left" Margin="50,162,0,0" Grid.Row="2" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Height="37"/>
+        
+<TextBox HorizontalAlignment="Left" Margin="50,162,0,0" Grid.Row="2" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" Height="37"/>
+
+        <Label Content="Label" HorizontalAlignment="Left" Margin="96,54,0,0" Grid.Row="1" VerticalAlignment="Top"/>
 
     </Grid>
 
