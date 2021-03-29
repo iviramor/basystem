@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bas.website", "bas.website.prj\bas.website.csproj", "{736162A4-FAE4-405A-8B58-1CF67030FF1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bas.program", "bas.program\bas.program.csproj", "{CD6DEAB0-B992-46BD-A32F-BABA07353EFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bas.program", "bas.program.prj\bas.program.csproj", "{CD6DEAB0-B992-46BD-A32F-BABA07353EFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
