@@ -191,7 +191,8 @@
             <Run Text="Имя "/><Run Language="ru-ru" Text="пользователя сотрудника"/>
         </TextBlock>
 
-        <TextBox Style="{DynamicResource loginTextBoxStyle}"
+        <TextBox Text="{Binding Login}"
+                 Style="{DynamicResource loginTextBoxStyle}"
                  HorizontalAlignment="Center" 
                  Grid.Row="4"  Grid.Column="1"
                  Padding="20, 10, 20, 10"
@@ -220,6 +221,7 @@
                  Grid.Column="1"
                  Padding="20, 10, 20, 10"
                  TextWrapping="Wrap" 
+                 Text="{Binding Login}"
                  VerticalAlignment="Center" 
                  FontFamily="Static/Fonts/#Roboto-Regular" FontSize="16" FontWeight="Medium" 
                  Width="290" Height="40" />

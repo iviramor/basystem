@@ -13,5 +13,42 @@ namespace bas.program.ViewModels
     public class HelloWindowViewModel : ViewModel
     {
 
+        #region Логин
+
+        private string _Login = "";
+
+        public string Login
+        {
+            get => _Login;
+            set
+            {
+                if (Equals(_Login, value)) return;
+                _Login = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Пароль
+
+        public string _Password;
+
+        public string Password
+        {
+            get => _Password;
+            set
+            {
+                if (Equals(_Password, value)) return;
+                _Password = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+
+
+
     }
 }
