@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Views\bg-flue.jpg" />
     <Resource Include="Views\bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Static\Fonts\" />
   </ItemGroup>
 
 </Project>

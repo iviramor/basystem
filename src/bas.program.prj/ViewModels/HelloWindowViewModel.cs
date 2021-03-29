@@ -13,6 +13,5 @@ namespace bas.program.ViewModels
     public class HelloWindowViewModel : ViewModel
     {
 
-
     }
 }

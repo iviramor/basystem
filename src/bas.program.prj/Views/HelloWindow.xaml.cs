@@ -29,5 +29,6 @@ namespace bas.program
         {
             this.DragMove();
         }
+
     }
 }
