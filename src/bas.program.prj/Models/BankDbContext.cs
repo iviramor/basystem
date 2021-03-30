@@ -7,7 +7,7 @@ namespace bas.website.Models.Data
 {
     public class BankDbContext : DbContext
     {
-        readonly string _connectionString;
+        readonly string _connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Database = BANK; Persist Security Info = False; MultipleActiveResultSets = True; Trusted_Connection = True;";
 
 
         #region Данные пользовтеля
@@ -38,10 +38,7 @@ namespace bas.website.Models.Data
 
 
         public BankDbContext(DbContextOptions<BankDbContext> options) : base(options){ }
-        public BankDbContext(string connectionString) : base()
-        {
-            _connectionString = connectionString;
-        }
+        public BankDbContext() : base() { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

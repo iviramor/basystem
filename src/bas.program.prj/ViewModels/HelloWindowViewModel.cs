@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using bas.program.Infrastructure.Commands;
+using bas.program.Infrastructure.Commands.HelloWindowCommands;
 using bas.program.ViewModels.Base;
+using bas.program.Views;
+using bas.website.Models.Data;
 
 namespace bas.program.ViewModels
 {
     public class HelloWindowViewModel : ViewModel
     {
+
+        private BankDbContext _DataBase = new BankDbContext();
 
         #region Логин
 
@@ -32,7 +37,7 @@ namespace bas.program.ViewModels
 
         #region Пароль
 
-        public string _Password;
+        public string _Password = "";
 
         public string Password
         {
@@ -47,7 +52,35 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Команды
 
+        #region Авторизация 
+
+        public ICommand SignInCommand { get; }
+
+        private bool CanSignInCommandExecuted(object p) => true;
+
+        private void OnSignInCommandExecute(object p)
+        {
+            var user = _DataBase.Bank_user
+                .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
+
+            if (user != null) MessageBox.Show($"Hello! {user.User_name} {user.User_patronymic}");
+            else MessageBox.Show("Пользователь не найден");
+
+            new WorkSpaceWindow().Show();
+
+        }
+
+        #endregion
+
+        #endregion
+
+
+        public HelloWindowViewModel()
+        {
+            SignInCommand = new ActionCommand(OnSignInCommandExecute, CanSignInCommandExecuted);
+        }
 
 
     }
