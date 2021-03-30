@@ -3,10 +3,101 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:bas.program.Views"
+        xmlns:viewModels="clr-namespace:bas.program.ViewModels"
+        xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
         Title="WorkSpaceWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+    <Window.DataContext>
+        <viewModels:WorkSpaceWindowViewModel/>
+    </Window.DataContext>
+
+    <DockPanel LastChildFill="False">
+
+
+        <Grid DockPanel.Dock="Top" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+
+            <Menu 
+                Height="40px" 
+                Background="#FBF37C" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                <MenuItem Style="{DynamicResource ButtonTopMenu}"   
+                          Header="Профиль"
+                          Height="40"
+                          Padding="20, 0, 20, 0"
+                          FontFamily="Roboto Medium">
+
+                    <MenuItem Header="Изменить профиль"
+                              Height="40"
+                              FontFamily="Roboto Medium">
+                        <MenuItem.Icon>
+                            <Image Source="/Views/settings.png" Stretch="Fill"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+
+
+                    <MenuItem Header="Выйти из профиля"
+                              Height="40"
+                              FontFamily="Roboto Medium" 
+                              Command="{Binding Path=ShowSignInCommand}"
+                    >
+                        <MenuItem.Icon>
+                            <Image Source="/Views/exit.png" Stretch="Fill"/>
+                        </MenuItem.Icon>
+
+                    </MenuItem>
+
+                </MenuItem>
+
+                <MenuItem Header="Профили"
+                          Height="40"
+                          Padding="20, 0, 20, 0"
+                          FontFamily="Roboto Medium" >
+                </MenuItem>
+                <MenuItem Header="Администратор"
+                          Height="40"
+                          Padding="20, 0, 20, 0"
+                          FontFamily="Roboto Medium" >
+                </MenuItem>
+
+            </Menu>
+
+            <Border Grid.Column="1"
+                    Background="#FBF37C">
+                <TextBlock Text="{Binding User}"
+                           Margin="0,0,30,0"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Right"  
+                           FontFamily="Roboto"/>
+            </Border>
+
+
+        </Grid>
+
+
+
+
+        <StatusBar DockPanel.Dock="Bottom" Height="28">
+
+        </StatusBar>
+
+
+    </DockPanel>
+
+
+
 </Window>

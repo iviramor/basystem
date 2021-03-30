@@ -9,14 +9,24 @@
 
   <ItemGroup>
     <Compile Remove="Models\Tables\UserTables\**" />
+    <Compile Remove="Views\img\**" />
+    <Compile Remove="Views\Styles\Fonts\**" />
     <EmbeddedResource Remove="Models\Tables\UserTables\**" />
+    <EmbeddedResource Remove="Views\img\**" />
+    <EmbeddedResource Remove="Views\Styles\Fonts\**" />
     <None Remove="Models\Tables\UserTables\**" />
+    <None Remove="Views\img\**" />
+    <None Remove="Views\Styles\Fonts\**" />
     <Page Remove="Models\Tables\UserTables\**" />
+    <Page Remove="Views\img\**" />
+    <Page Remove="Views\Styles\Fonts\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
+    <None Remove="Views\exit.png" />
+    <None Remove="Views\settings.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,11 +37,8 @@
 
   <ItemGroup>
     <Resource Include="Views\bg-flue.jpg" />
-    <Resource Include="Views\bg.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Static\Fonts\" />
+    <Resource Include="Views\exit.png" />
+    <Resource Include="Views\settings.png" />
   </ItemGroup>
 
   <ItemGroup>

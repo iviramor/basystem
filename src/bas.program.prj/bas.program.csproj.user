@@ -7,6 +7,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\Styles\MainSpaceButtons.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\WorkSpaceWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

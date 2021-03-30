@@ -10,6 +10,7 @@ using bas.program.Infrastructure.Commands.HelloWindowCommands;
 using bas.program.ViewModels.Base;
 using bas.program.Views;
 using bas.website.Models.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace bas.program.ViewModels
 {
@@ -63,9 +64,10 @@ namespace bas.program.ViewModels
         private void OnSignInCommandExecute(object p)
         {
             var user = _DataBase.Bank_user
+                .Include(u => u.Bank_user_status)
                 .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
 
-            if (user != null) MessageBox.Show($"Hello! {user.User_name} {user.User_patronymic}");
+            if (user != null) MessageBox.Show($"Hello! {user.User_name} {user.User_patronymic} {user.Bank_user_status.Status_name}");
             else MessageBox.Show("Пользователь не найден");
 
             new WorkSpaceWindow().Show();
