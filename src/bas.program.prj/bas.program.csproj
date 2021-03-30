@@ -8,8 +8,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Tables\UserTables\**" />
+    <EmbeddedResource Remove="Models\Tables\UserTables\**" />
+    <None Remove="Models\Tables\UserTables\**" />
+    <Page Remove="Models\Tables\UserTables\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Models\Tables\UserTables\Bank_user.cs" />
+    <Compile Include="Models\Tables\UserTables\Bank_user_access.cs" />
+    <Compile Include="Models\Tables\UserTables\Bank_user_status.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +32,11 @@
 
   <ItemGroup>
     <Folder Include="Static\Fonts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
   </ItemGroup>
 
 </Project>
