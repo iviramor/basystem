@@ -7,17 +7,20 @@
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
         Title="WorkSpaceWindow" Height="600" Width="1172" WindowState="Maximized"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+        IsEnabled = "{Binding IsEnabled}"
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <Window.Resources>
 
         <ResourceDictionary>
+
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
                 <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
+
             <SolidColorBrush x:Key="Button.ToolsBar.Collour" Color="#F5F5F5"/>
             <SolidColorBrush x:Key="Button.ToolsBar.IsMouse.Collour" Color="#DADADA"/>
 
@@ -76,12 +79,27 @@
 
         </ResourceDictionary>
 
-
     </Window.Resources>
 
     <Window.DataContext>
         <viewModels:WorkSpaceWindowViewModel/>
     </Window.DataContext>
+
+    <Window.Style>
+        <Style TargetType="Window">
+            <!--#region Показ/скрыть-->
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Visibility}" Value="True">
+                    <Setter Property="Visibility" Value="Visible"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Visibility}" Value="False">
+                    <Setter Property="Visibility" Value="Hidden"/>
+                </DataTrigger>
+            </Style.Triggers>
+            <!--#endregion-->
+        </Style>
+    </Window.Style>
+
 
     <DockPanel>
 
@@ -142,7 +160,7 @@
 
             <Border Grid.Column="1"
                     Background="{StaticResource Main.Collour}">
-                <TextBlock Text="{Binding User}"
+                <TextBlock Text="{Binding UserData.User_name}"
                            Margin="0,0,30,0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"  

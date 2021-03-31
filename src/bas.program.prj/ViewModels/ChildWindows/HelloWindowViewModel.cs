@@ -19,6 +19,10 @@ namespace bas.program.ViewModels
 
         private BankDbContext _DataBase = new BankDbContext();
 
+        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+
+        private HelloWindow _HelloWindow;
+
         #region Логин
 
         private string _Login = "";
@@ -63,6 +67,7 @@ namespace bas.program.ViewModels
 
         private void OnSignInCommandExecute(object p)
         {
+
             var user = _DataBase.Bank_user
                 .Include(u => u.Bank_user_status)
                 .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
@@ -70,8 +75,11 @@ namespace bas.program.ViewModels
             if (user != null)
             {
                 MessageBox.Show($"Hello! {user.User_name} {user.User_patronymic} {user.Bank_user_status.Status_name}");
-                new WorkSpaceWindow().Show();
+                _workSpaceWindowViewModel.UserData = user;
+                _workSpaceWindowViewModel.Session = true;
+                _HelloWindow.Close();
             }
+
             else MessageBox.Show("Пользователь не найден");
 
 
@@ -82,9 +90,18 @@ namespace bas.program.ViewModels
         #endregion
 
 
-        public HelloWindowViewModel()
+
+        public HelloWindowViewModel(WorkSpaceWindowViewModel wswvm)
         {
+            _workSpaceWindowViewModel = wswvm;
             SignInCommand = new ActionCommand(OnSignInCommandExecute, CanSignInCommandExecuted);
+        }
+
+        public void ShowHelloWindow()
+        {
+            _HelloWindow = new HelloWindow();
+            _HelloWindow.DataContext = this;
+            _HelloWindow.ShowDialog();
         }
 
 

@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:cmd="clr-namespace:bas.program.Infrastructure.Commands.HelloWindowCommands"
-        xmlns:vm="clr-namespace:bas.program.ViewModels"
         xmlns:local="clr-namespace:bas.program"
 
         mc:Ignorable="d"
@@ -68,10 +67,6 @@
         <ImageBrush ImageSource="/Views/bg-flue.jpg"/>
     </Window.Background>
 
-    <Window.DataContext>
-        <vm:HelloWindowViewModel/>
-    </Window.DataContext>
-
     <!--#endregion-->
 
     <Grid>
@@ -122,7 +117,7 @@
                 FontWeight="Medium"
                 Content="Выйти из системы"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center" >
+                HorizontalAlignment="Center" Click="Button_Click" >
 
             <Button.Style>
                 <Style TargetType="Button">
@@ -151,9 +146,6 @@
                 </ControlTemplate>
             </Button.Template>
 
-            <Button.Command>
-                <cmd:CloseSystemCommand/>
-            </Button.Command>
             <!--<StackPanel Orientation="Horizontal">
                 <Image Source="D:\basystem\BankAssistanceSystem\src\bas.program\Static\img\ex.png">
 
