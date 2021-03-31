@@ -67,10 +67,13 @@ namespace bas.program.ViewModels
                 .Include(u => u.Bank_user_status)
                 .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
 
-            if (user != null) MessageBox.Show($"Hello! {user.User_name} {user.User_patronymic} {user.Bank_user_status.Status_name}");
+            if (user != null)
+            {
+                MessageBox.Show($"Hello! {user.User_name} {user.User_patronymic} {user.Bank_user_status.Status_name}");
+                new WorkSpaceWindow().Show();
+            }
             else MessageBox.Show("Пользователь не найден");
 
-            new WorkSpaceWindow().Show();
 
         }
 
