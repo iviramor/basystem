@@ -67,7 +67,7 @@
 
     </Window.Resources>
 
-    <Grid Height="483">
+    <Grid>
 
         <!--#region Сетка-->
 
