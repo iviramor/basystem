@@ -97,14 +97,21 @@ namespace bas.program.ViewModels
 
         #region Показать Меню авторизации
 
-        public ICommand ShowSignInCommand { get; }
+        public ICommand ShowSignOutCommand { get; }
 
-        private bool CanShowSignInCommandExecuted(object p) => true;
+        private bool CanShowSignOutCommandExecuted(object p) => true;
 
-        private void OnShowSignInCommandExecute(object p)
+        private void OnShowSignOutCommandExecute(object p)
         {
-            User.Session = false;
-            Application.Current.Shutdown();
+            
+            var que = MessageBox.Show("Вы точно хотите выйти из Системы?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (que == MessageBoxResult.Yes)
+            {
+                User.Session = false;
+                Application.Current.Shutdown();
+            }
+
+            return;
         }
 
         #endregion
@@ -150,7 +157,7 @@ namespace bas.program.ViewModels
             }
 
 
-            ShowSignInCommand = new ActionCommand(OnShowSignInCommandExecute, CanShowSignInCommandExecuted);
+            ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
             EnableWindowCommand = new ActionCommand(OnEnableWindowCommandExecute, CanEnableWindowCommandExecuted);
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
         }
@@ -174,13 +181,6 @@ namespace bas.program.ViewModels
 
 
         #endregion
-
-
-
-
-
-
-
 
     }
 }

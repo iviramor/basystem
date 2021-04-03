@@ -11,6 +11,11 @@
 
         <ResourceDictionary>
 
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+
             <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
             <SolidColorBrush x:Key="Main.IsMouseOver.Collour" Color="#F5E932"/>
 
@@ -19,6 +24,7 @@
 
             <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="Margin" Value="10"/>
             </Style>
 
 
@@ -33,17 +39,20 @@
                     </Style.Triggers>
                 </Style>
 
-            
-                <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
-                    <Border CornerRadius="20"
+
+            <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
+                <Border CornerRadius="20"
                             Background="{TemplateBinding Background}">
-                        <ContentPresenter VerticalAlignment="Center"
+                    <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            
+                </Border>
+            </ControlTemplate>
+
+
 
         </ResourceDictionary>
+
+
 
     </Window.Resources>
 
@@ -86,7 +95,9 @@
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top"/>
 
-            <TextBox Height="40"
+            <TextBox Style="{DynamicResource CommonTextBoxStyle}" 
+                     Height="40"
+                     Margin="10"
                      VerticalAlignment="Bottom"
                      Text="{Binding User.User_name}"/>
 
@@ -100,6 +111,8 @@
                        VerticalAlignment="Top"/>
 
             <TextBox Grid.Row="1" Grid.Column="0"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
                      Height="40"
                      VerticalAlignment="Bottom"
                      Text="{Binding User.User_surname}"/>
@@ -114,6 +127,8 @@
                        VerticalAlignment="Top"/>
 
             <TextBox Grid.Row="2" Grid.Column="0"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
                      Height="40"
                      VerticalAlignment="Bottom"
                      Text="{Binding User.User_patronymic}"/>
@@ -128,6 +143,8 @@
                        VerticalAlignment="Top"/>
 
             <TextBox Grid.Row="3" Grid.Column="0"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
                      Height="40"
                      VerticalAlignment="Bottom"
                      Text="{Binding User.User_login}"/>
@@ -142,6 +159,8 @@
                        VerticalAlignment="Top"/>
 
             <TextBox Grid.Row="3" Grid.Column="1"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
                      Height="40"
                      VerticalAlignment="Bottom"
                      Text="{Binding User.User_password}"/>
@@ -156,6 +175,7 @@
                        VerticalAlignment="Top"/>
 
             <ComboBox Grid.Row="2" Grid.Column="1"
+                      Margin="10"
                       Height="40"
                       VerticalAlignment="Bottom">
 

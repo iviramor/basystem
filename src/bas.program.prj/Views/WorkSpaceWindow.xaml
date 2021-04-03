@@ -141,7 +141,7 @@
                     <MenuItem Header="Выйти из профиля"
                               Height="40"
                               FontFamily="Roboto Medium" 
-                              Command="{Binding Path=ShowSignInCommand}"
+                              Command="{Binding Path=ShowSignOutCommand}"
                     >
                         <MenuItem.Icon>
                             <Image Source="/Views/exit.png" Stretch="Fill"/>

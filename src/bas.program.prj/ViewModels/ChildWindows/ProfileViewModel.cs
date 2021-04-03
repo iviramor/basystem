@@ -33,7 +33,7 @@ namespace bas.program.ViewModels.ChildWindows
         private void OnUpdateDataCommandExecute(object p)
         {
             _workSpaceWindowViewModel.UserName = User.User_name;
-            MessageBox.Show("Данные обновлены");
+            MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
             _workSpaceWindowViewModel.User.DataBase.Update(User);
             _workSpaceWindowViewModel.User.DataBase.SaveChanges();
 
