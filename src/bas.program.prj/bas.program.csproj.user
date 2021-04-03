@@ -16,6 +16,9 @@
     <Page Update="Views\Styles\ComboBoxToolsBarMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Styles\CommonComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Styles\CommonTextBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>

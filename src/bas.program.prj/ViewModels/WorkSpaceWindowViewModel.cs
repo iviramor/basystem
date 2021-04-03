@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 using bas.program.Infrastructure.Commands;
-using bas.program.Infrastructure.Commands.HelloWindowCommands;
 using bas.program.Models;
 using bas.program.ViewModels.Base;
-using bas.program.Views;
-using bas.website.Models.Data;
-using Microsoft.EntityFrameworkCore;
-using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.ChildWindows;
-using bas.program.Views.ChildViews;
 
 
 namespace bas.program.ViewModels

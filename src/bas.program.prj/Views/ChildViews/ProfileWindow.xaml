@@ -13,6 +13,7 @@
 
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="../Styles/CommonComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -47,7 +48,6 @@
                                           HorizontalAlignment="Center"/>
                 </Border>
             </ControlTemplate>
-
 
 
         </ResourceDictionary>
@@ -174,10 +174,17 @@
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top"/>
 
-            <ComboBox Grid.Row="2" Grid.Column="1"
+            <ComboBox Template="{StaticResource ComboBoxTemplate}" Grid.Row="2" Grid.Column="1"
                       Margin="10"
                       Height="40"
-                      VerticalAlignment="Bottom">
+                      VerticalAlignment="Bottom" >
+
+                <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                              Content="Мужской"/>
+
+                <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                              IsSelected="True" Content="Женский"/>
+
 
             </ComboBox>
 
@@ -203,6 +210,8 @@
                 Command="{Binding UpdateDataCommand}">
 
         </Button>
+
+        
 
 
     </Grid>

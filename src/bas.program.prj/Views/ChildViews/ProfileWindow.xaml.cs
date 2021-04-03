@@ -23,5 +23,6 @@ namespace bas.program.Views.ChildViews
         {
             InitializeComponent();
         }
+
     }
 }

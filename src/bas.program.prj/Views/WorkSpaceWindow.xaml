@@ -17,7 +17,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
                 <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
-
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -233,13 +233,18 @@
                                   Margin="0, 3"
                                   VerticalAlignment="Center"
                                   Grid.Row="1" FontFamily="Roboto Medium">
-                            <ComboBoxItem Content="Таблица 1" 
+
+                            <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                                          Content="Таблица 1" 
                                           IsSelected="True">
 
                             </ComboBoxItem>
-                            <ComboBoxItem Content="Таблица 2">
+
+                            <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                                          Content="Таблица 2">
 
                             </ComboBoxItem>
+
                         </ComboBox>
                     </Grid>
 
