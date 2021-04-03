@@ -10,30 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace bas.program
+namespace bas.program.Views.ChildViews
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ProfileWindow.xaml
     /// </summary>
-    public partial class HelloWindow : Window
+    public partial class ProfileWindow : Window
     {
-        public HelloWindow()
+        public ProfileWindow()
         {
             InitializeComponent();
         }
-
-        public void Rectangle_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
     }
 }

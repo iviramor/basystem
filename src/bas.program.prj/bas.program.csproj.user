@@ -2,11 +2,17 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Views\ChildViews\ProfileWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\WorkSpaceWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\ChildViews\ProfileWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Styles\ComboBoxToolsBarMainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

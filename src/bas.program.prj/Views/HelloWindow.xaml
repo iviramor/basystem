@@ -63,6 +63,7 @@
     <!--#endregion-->
 
     <!--#region Настройка окна-->
+    
     <Window.Background>
         <ImageBrush ImageSource="/Views/bg-flue.jpg"/>
     </Window.Background>

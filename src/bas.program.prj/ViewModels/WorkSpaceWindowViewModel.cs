@@ -8,19 +8,20 @@ using System.Windows;
 using System.Windows.Input;
 using bas.program.Infrastructure.Commands;
 using bas.program.Infrastructure.Commands.HelloWindowCommands;
+using bas.program.Models;
 using bas.program.ViewModels.Base;
 using bas.program.Views;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using bas.program.Models.Tables.UserTables;
+using bas.program.ViewModels.ChildWindows;
+using bas.program.Views.ChildViews;
 
 
 namespace bas.program.ViewModels
 {
     public class WorkSpaceWindowViewModel : ViewModel
     {
-
-        private BankDbContext _DataBase = new BankDbContext();
 
         #region Блоки окна
 
@@ -52,23 +53,40 @@ namespace bas.program.ViewModels
             }
         }
 
+        private bool _AdminStatus;
+
+        public bool AdminStatus
+        {
+            get
+            {
+                return _AdminStatus;
+            }
+            set
+            {
+                if (Equals(_AdminStatus, value)) return;
+                _AdminStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         #endregion
 
         #endregion
 
         #region Данные
 
-        public bool Session { get; set; } = false;
+        public UserDataSession User = new UserDataSession();
 
-        private Bank_user _UserData = null;
+        private string _UserName = null;
 
-        public Bank_user UserData
+        public string UserName
         {
-            get => _UserData;
+            get => _UserName;
             set
             {
-                if (Equals(_UserData, value)) return;
-                _UserData = value;
+                if (Equals(_UserName, value)) return;
+                _UserName = value;
                 OnPropertyChanged();
             }
         }
@@ -85,7 +103,7 @@ namespace bas.program.ViewModels
 
         private void OnShowSignInCommandExecute(object p)
         {
-            Session = false;
+            User.Session = false;
             Application.Current.Shutdown();
         }
 
@@ -104,13 +122,26 @@ namespace bas.program.ViewModels
 
         #endregion
 
+
+        #region Профиль 
+        public ICommand ShowProfileCommand { get; }
+
+        private bool CanShowProfileExecuted(object p) => true;
+
+        private void OnShowProfileExecute(object p)
+        {
+            new ProfileViewModel(this).ShowProfileWindow();
+        }
+
+        #endregion
+
         #endregion
 
 
         public WorkSpaceWindowViewModel()
         {
 
-            if (!Session)
+            if (!User.Session)
             {
                 if (!AuthorizeHelloWindow())
                 {
@@ -121,6 +152,7 @@ namespace bas.program.ViewModels
 
             ShowSignInCommand = new ActionCommand(OnShowSignInCommandExecute, CanShowSignInCommandExecuted);
             EnableWindowCommand = new ActionCommand(OnEnableWindowCommandExecute, CanEnableWindowCommandExecuted);
+            ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
         }
 
 
@@ -128,15 +160,18 @@ namespace bas.program.ViewModels
 
         #region Диалоговые окна
 
-        
 
+        #region Окно авторизации
         private bool AuthorizeHelloWindow()
         {
             new HelloWindowViewModel(this).ShowHelloWindow();
-            if (Session) return true;
+            if (User.Session) return true;
             else return false;
 
         }
+        #endregion
+
+
 
         #endregion
 

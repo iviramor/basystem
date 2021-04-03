@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="WorkSpaceWindow" Height="600" Width="1172" WindowState="Maximized"
         IsEnabled = "{Binding IsEnabled}"
-        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" Background="White">
 
     <Window.Resources>
 
@@ -17,7 +17,10 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
                 <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
+
             </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
             <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
 
@@ -30,7 +33,7 @@
 
             <!--#region Стили кнопки-->
 
-            
+
 
             <Style x:Key="Button.ToolsBar" TargetType="Button">
                 <Setter Property="Height" Value="90"/>
@@ -53,9 +56,9 @@
                                       HorizontalAlignment="Center">
 
                     </ContentPresenter>
-                    </Border>
+                </Border>
             </ControlTemplate>
-            
+
 
             <!--#endregion-->
 
@@ -65,7 +68,7 @@
                 <Setter Property="Height" Value="55"/>
                 <Setter Property="Width" Value="55"/>
                 <Setter Property="Margin" Value="0"/>
-                
+
             </Style>
 
             <Style x:Key="Button.InsideTools" TargetType="TextBlock">
@@ -78,6 +81,8 @@
             <!--#endregion-->
 
         </ResourceDictionary>
+
+
 
     </Window.Resources>
 
@@ -125,7 +130,8 @@
 
                     <MenuItem Header="Изменить профиль"
                               Height="40"
-                              FontFamily="Roboto Medium">
+                              FontFamily="Roboto Medium"
+                              Command="{Binding ShowProfileCommand}">
                         <MenuItem.Icon>
                             <Image Source="/Views/settings.png" Stretch="Fill"/>
                         </MenuItem.Icon>
@@ -148,22 +154,25 @@
                 <MenuItem Header="Профили"
                           Height="40"
                           Padding="20, 0, 20, 0"
-                          FontFamily="Roboto Medium" >
+                          FontFamily="Roboto Medium" 
+                          Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
+
                 <MenuItem Header="Администратор"
                           Height="40"
                           Padding="20, 0, 20, 0"
-                          FontFamily="Roboto Medium" >
+                          FontFamily="Roboto Medium" 
+                          Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
 
             </Menu>
 
             <Border Grid.Column="1"
                     Background="{StaticResource Main.Collour}">
-                <TextBlock Text="{Binding UserData.User_name}"
+                <TextBlock Text="{Binding UserName}"
                            Margin="0,0,30,0"
                            VerticalAlignment="Center"
-                           HorizontalAlignment="Right"  
+                           HorizontalAlignment="Right"
                            FontFamily="Roboto"/>
             </Border>
 
@@ -465,7 +474,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
             </Grid>
-            
+
 
         </DockPanel>
 
