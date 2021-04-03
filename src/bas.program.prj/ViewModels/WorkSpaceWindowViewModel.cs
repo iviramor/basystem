@@ -117,7 +117,6 @@ namespace bas.program.ViewModels
 
         #endregion
 
-
         #region Профиль 
         public ICommand ShowProfileCommand { get; }
 
@@ -125,7 +124,8 @@ namespace bas.program.ViewModels
 
         private void OnShowProfileExecute(object p)
         {
-            new ProfileViewModel(this).ShowProfileWindow();
+            var profile = new ProfileViewModel(this);
+            profile.ShowProfileWindow();
         }
 
         #endregion

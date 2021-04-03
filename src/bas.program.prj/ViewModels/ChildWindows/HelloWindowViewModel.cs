@@ -74,7 +74,7 @@ namespace bas.program.ViewModels
 
             if (user != null)
             {
-                _workSpaceWindowViewModel.UserName = user.User_name;
+                _workSpaceWindowViewModel.UserName = $"В системе: {user.User_name} {user.User_patronymic}";
                 _workSpaceWindowViewModel.User.User = user;
                 _workSpaceWindowViewModel.User.Session = true;
                 if (user.User_status_to_system == 2) _workSpaceWindowViewModel.AdminStatus = true;

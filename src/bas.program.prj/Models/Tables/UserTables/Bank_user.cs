@@ -34,5 +34,19 @@ namespace bas.program.Models.Tables.UserTables
 
         [ForeignKey("User_status_to_system")]
         public virtual Bank_user_status Bank_user_status { get; set; }
+
+
+        public void ChangeUser(Bank_user oldUser, Bank_user user)
+        {
+            oldUser.User_id = user.User_id;
+            oldUser.User_name = user.User_name;
+            oldUser.User_surname = user.User_surname;
+            oldUser.User_patronymic = user.User_patronymic;
+            oldUser.User_sex = user.User_sex;
+            oldUser.User_login = user.User_login;
+            oldUser.User_password = user.User_password;
+            oldUser.User_status_to_system = user.User_status_to_system;
+            oldUser.User_register_data = user.User_register_data;
+        }
     }
 }
