@@ -224,9 +224,7 @@
                                    Width="200"
                                    Grid.Row="0"
                                    HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom" FontFamily="Roboto Medium">
-
-                        </TextBlock>
+                                   VerticalAlignment="Bottom" FontFamily="Roboto Medium"/>
 
                         <ComboBox Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}" 
                                   Width="230" Height="30"
@@ -236,14 +234,10 @@
 
                             <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
                                           Content="Таблица 1" 
-                                          IsSelected="True">
-
-                            </ComboBoxItem>
+                                          IsSelected="True"/>
 
                             <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
-                                          Content="Таблица 2">
-
-                            </ComboBoxItem>
+                                          Content="Таблица 2"/>
 
                         </ComboBox>
                     </Grid>
