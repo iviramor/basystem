@@ -185,7 +185,7 @@
 
             <!--#endregion-->
 
-            <!--#region Дата регистарции-->
+            <!--#region Даты -->
 
             <TextBlock Grid.Row="3" Grid.Column="0"
                        Text="Статус"
@@ -204,26 +204,49 @@
                       Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                       VerticalAlignment="Bottom" >
 
-
             </ComboBox>
 
             <!--#endregion-->
 
             <!--#region Статус-->
 
-            <TextBlock Grid.Row="3" Grid.Column="1"
-                       Text="Дата регистарции"
-                       Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+            <Grid Grid.Row="3" Grid.Column="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Column="0"
+                           Style="{StaticResource TextBlockStyle}"
+                           VerticalAlignment="Top">
+                    <Run FontSize="10" Text="Дата рождения "/><LineBreak/>
+                    <Run FontSize="8" Text="(Год-Месяц-День)"/>
+                </TextBlock>
+
+                <TextBox Grid.Column="0"
+                         Style="{DynamicResource CommonTextBoxStyle}"
+                         Margin="10"
+                         Height="40"
+                         VerticalAlignment="Bottom"
+                         Text="{Binding Age, StringFormat='yyyy-MM-dd'}"/>
 
 
-            <TextBox Grid.Row="3" Grid.Column="1"
-                     Style="{DynamicResource CommonTextBoxStyle}"
-                     Margin="10"
-                     Height="40"
-                     IsEnabled="False"
-                     VerticalAlignment="Bottom"
-                     Text="{Binding Register_data}"/>
+                <TextBlock Grid.Column="1"
+                           Text="Дата регистрации"
+                           Style="{StaticResource TextBlockStyle}"
+                           VerticalAlignment="Top"/>
+
+                <TextBox Grid.Column="1"
+                         Style="{DynamicResource CommonTextBoxStyle}"
+                         Margin="10"
+                         Height="40"
+                         IsEnabled="False"
+                         VerticalAlignment="Bottom"
+                         Text="{Binding Register_data}"/>
+            </Grid>
+
+
 
             <!--#endregion-->
 

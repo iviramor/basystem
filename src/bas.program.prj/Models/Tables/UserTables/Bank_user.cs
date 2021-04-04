@@ -18,6 +18,10 @@ namespace bas.program.Models.Tables.UserTables
         [MaxLength(50)]
         public string User_patronymic { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime User_age { get; set; }
+
         public bool User_sex { get; set; }
 
         [MaxLength(30)]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -207,6 +208,18 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
+        private DateTime _Age;
+        public DateTime Age
+        {
+            get => _Age;
+            set
+            {
+                if (Equals(_Age, value)) return;
+                _Age = value;
+                OnPropertyChanged();
+            }
+        }
+
         private string _Login;
         public string Login
         {
@@ -309,6 +322,7 @@ namespace bas.program.ViewModels.ChildWindows
             _workSpaceWindowViewModel.User.User.User_sex = _Sex;
             _workSpaceWindowViewModel.User.User.User_status_to_system = _SelectedStatus.Status_id;
             _workSpaceWindowViewModel.User.User.User_register_data = _Register_data;
+            _workSpaceWindowViewModel.User.User.User_age = _Age;
 
             #endregion
 
@@ -335,6 +349,7 @@ namespace bas.program.ViewModels.ChildWindows
             _BankUser.User_sex = _Sex;
             _BankUser.User_status_to_system = _SelectedStatus.Status_id;
             _BankUser.User_register_data = _Register_data;
+            _BankUser.User_age = _Age;
 
             #endregion
 
@@ -397,6 +412,7 @@ namespace bas.program.ViewModels.ChildWindows
             _Password = workVM.User.User.User_password;
             _Sex = workVM.User.User.User_sex;
             _Register_data = workVM.User.User.User_register_data;
+            _Age = workVM.User.User.User_age;
 
             #endregion
 
@@ -448,6 +464,7 @@ namespace bas.program.ViewModels.ChildWindows
             _Password = bankUser.User_password;
             _Sex = bankUser.User_sex;
             _Register_data = bankUser.User_register_data;
+            _Age = bankUser.User_age;
 
             #endregion
 
