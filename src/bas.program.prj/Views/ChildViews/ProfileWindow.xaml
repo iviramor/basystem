@@ -109,8 +109,9 @@
             <TextBox Style="{DynamicResource CommonTextBoxStyle}" 
                      Height="40"
                      Margin="10"
+                     IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding User.User_name}"/>
+                     Text="{Binding Name}"/>
 
             <!--#endregion-->
 
@@ -125,8 +126,9 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
+                     IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding User.User_surname}"/>
+                     Text="{Binding Surname}"/>
 
             <!--#endregion-->
 
@@ -141,8 +143,9 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
+                     IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding User.User_patronymic}"/>
+                     Text="{Binding Patronymic}"/>
 
             <!--#endregion-->
 
@@ -157,8 +160,9 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
+                     IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding User.User_login}"/>
+                     Text="{Binding Login}"/>
 
             <!--#endregion-->
 
@@ -173,8 +177,9 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
+                     IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding User.User_password}"/>
+                     Text="{Binding Password}"/>
 
             <!--#endregion-->
 
@@ -188,22 +193,32 @@
             <ComboBox Template="{StaticResource ComboBoxTemplate}" Grid.Row="2" Grid.Column="1"
                       Margin="10"
                       Height="40"
+                      IsEnabled="{Binding IsEnabled}"
                       VerticalAlignment="Bottom" >
 
                 <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
                               Content="Мужской"
-                              IsSelected="{Binding User.User_sex}">
+                              IsSelected="{Binding Sex}">
 
                 </ComboBoxItem>
 
                 <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
                               Content="Женский"
-                              IsSelected="{Binding User.User_sex, Converter={StaticResource InverseBooleanConverter}}"/>
+                              IsSelected="{Binding Sex, Converter={StaticResource InverseBooleanConverter}}"/>
 
 
             </ComboBox>
 
             <!--#endregion-->
+
+            <TextBlock Grid.Row="4" Grid.Column="0"
+                       Foreground="#BB2020"
+                       FontSize="15"
+                       VerticalAlignment="Center"
+                       Margin="15,0"
+                       FontFamily="Roboto"
+                       IsEnabled="{Binding IsEnabled, Converter={StaticResource InverseBooleanConverter}}"
+                       Text="Доступ запрещен"/>
 
         </Grid>
 
@@ -223,6 +238,7 @@
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="Изменить"
+                IsEnabled="{Binding IsEnabled}"
                 Command="{Binding UpdateDataCommand}">
 
         </Button>
