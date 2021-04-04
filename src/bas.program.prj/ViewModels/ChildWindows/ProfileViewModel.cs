@@ -21,8 +21,11 @@ namespace bas.program.ViewModels.ChildWindows
 
         private ProfileWindow _ProfileWindow;
         private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+        private BankDbContext _DataBase;
 
-        private bool _IsEnabled = false;
+        #region Видимость элементов
+
+        private bool _IsEnabled = true;
         public bool IsEnabled
         {
             get => _IsEnabled;
@@ -33,6 +36,75 @@ namespace bas.program.ViewModels.ChildWindows
                 OnPropertyChanged();
             }
         }
+
+        private bool _AccessLabel = false;
+        public bool AccessLabel
+        {
+            get => _AccessLabel;
+            set
+            {
+                if (Equals(_AccessLabel, value)) return;
+                _AccessLabel = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _IsVisibility = true;
+        public bool IsVisibility
+        {
+            get => _IsVisibility;
+            set
+            {
+                if (Equals(_IsVisibility, value)) return;
+                _IsVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _StatusEnable = false;
+        public bool StatusEnable
+        {
+            get => _StatusEnable;
+            set
+            {
+                if (Equals(_StatusEnable, value)) return;
+                _StatusEnable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Лист со статусами
+
+        private List<Bank_user_status> _BankStatuses;
+
+        public List<Bank_user_status> BankStatuses
+        {
+            get => _BankStatuses;
+            set
+            {
+                if (Equals(_BankStatuses, value)) return;
+                _BankStatuses = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Bank_user_status _SelectedStatus;
+
+        public Bank_user_status SelectedStatus
+        {
+            get => _SelectedStatus;
+            set
+            {
+                if (Equals(_SelectedStatus, value)) return;
+                _SelectedStatus = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #endregion
 
         #region Свойства пользователя
 
@@ -161,6 +233,19 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
+        private DateTime _Register_data;
+
+        public DateTime Register_data
+        {
+            get => _Register_data;
+            set
+            {
+                if (Equals(_Register_data, value)) return;
+                _Register_data = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #endregion
 
@@ -187,12 +272,14 @@ namespace bas.program.ViewModels.ChildWindows
             _workSpaceWindowViewModel.User.User.User_login = _Login;
             _workSpaceWindowViewModel.User.User.User_password = _Password;
             _workSpaceWindowViewModel.User.User.User_sex = _Sex;
+            _workSpaceWindowViewModel.User.User.User_status_to_system = _SelectedStatus.Status_id;
+            _workSpaceWindowViewModel.User.User.User_register_data = _Register_data;
 
             #endregion
 
             /// Изменение данных в базе данных
-            _workSpaceWindowViewModel.User.DataBase.Update(_workSpaceWindowViewModel.User.User);
-            _workSpaceWindowViewModel.User.DataBase.SaveChanges();
+            _DataBase.Update(_workSpaceWindowViewModel.User.User);
+            _DataBase.SaveChanges();
 
             /// Уведомление об успешой операции
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -220,6 +307,8 @@ namespace bas.program.ViewModels.ChildWindows
         {
             _workSpaceWindowViewModel = workVM;
 
+            _DataBase = workVM.User.DataBase;
+
             #region Значение совойств пользователя
 
             _Name = workVM.User.User.User_name;
@@ -228,6 +317,27 @@ namespace bas.program.ViewModels.ChildWindows
             _Login = workVM.User.User.User_login;
             _Password = workVM.User.User.User_password;
             _Sex = workVM.User.User.User_sex;
+            _Register_data = workVM.User.User.User_register_data;
+
+            #endregion
+
+            #region Ограничение доступа к полям
+
+            if (workVM.User.User.User_status_to_system == 2) _StatusEnable = false;
+            else if (workVM.User.User.User_status_to_system == 3)
+            {
+                _IsEnabled = false;
+                _IsVisibility = false;
+            }
+            #endregion
+
+            #region Список статусов
+
+            _BankStatuses = _DataBase.Bank_user_status
+                .ToList();
+
+            _SelectedStatus = _DataBase.Bank_user_status
+                .SingleOrDefault(status => status.Status_id == workVM.User.User.User_status_to_system);
 
             #endregion
 
@@ -244,8 +354,6 @@ namespace bas.program.ViewModels.ChildWindows
             _ProfileWindow.ShowDialog();
 
         }
-
-
 
     }
 }

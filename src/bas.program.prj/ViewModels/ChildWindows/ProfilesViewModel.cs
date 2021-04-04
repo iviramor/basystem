@@ -20,8 +20,9 @@ namespace bas.program.ViewModels.ChildWindows
         private ProfilesWindow _ProfilesWindow;
         private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
         private BankDbContext _DataBase;
-        private Bank_user _SelectedItem;
 
+
+        private Bank_user _SelectedItem;
         public Bank_user SelectedItem
         {
             get => _SelectedItem;
@@ -116,9 +117,6 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
-
-
-
         public ProfilesViewModel(WorkSpaceWindowViewModel workVM)
         {
             _workSpaceWindowViewModel = workVM;
@@ -128,14 +126,10 @@ namespace bas.program.ViewModels.ChildWindows
             _Bank_users = _DataBase.Bank_user
                 .Include(u => u.Bank_user_status)
                 .ToList();
-
-
+            
             RemoveDataCommand = new ActionCommand(OnRemoveDataCommandExecute, CanRemoveDataCommandExecuted);
             CloseProfilesCommand = new ActionCommand(OnCloseProfilesCommandExecute, CanCloseProfilesCommandExecuted);
         }
-
-
-
 
         public void ShowProfilesWindow()
         {

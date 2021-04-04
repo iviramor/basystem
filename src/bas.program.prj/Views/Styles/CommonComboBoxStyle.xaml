@@ -112,31 +112,26 @@
                 </Setter>
             </Trigger>
         </Style.Triggers>
-
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-
-                    <Border Padding="10">
-
-                        <ContentPresenter/>
-
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{StaticResource ComboBox.MouseOver.Border}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                    </Border>
-
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-
     </Style>
+
+    <ControlTemplate x:Key="CommonComboBoxItemTemplate" TargetType="{x:Type ComboBoxItem}">
+
+        <Border Padding="10">
+
+            <ContentPresenter/>
+
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{StaticResource ComboBox.MouseOver.Border}"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+        </Border>
+
+    </ControlTemplate>
 
 
 
@@ -361,6 +356,10 @@
                 <Setter Property="Padding" Value="2"/>
             </Trigger>
         </Style.Triggers>
+
+
+
+
     </Style>
 
 </ResourceDictionary>

@@ -26,6 +26,7 @@
 
 
             <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
             <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="FontFamily" Value="Roboto"/>
@@ -168,12 +169,14 @@
                       VerticalAlignment="Bottom" >
 
                 <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                              Template="{DynamicResource CommonComboBoxItemTemplate}"
                               Content="Мужской"
                               IsSelected="{Binding Sex}">
 
                 </ComboBoxItem>
 
                 <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                              Template="{DynamicResource CommonComboBoxItemTemplate}"
                               Content="Женский"
                               IsSelected="{Binding Sex, Converter={StaticResource InverseBooleanConverter}}"/>
 
@@ -182,13 +185,56 @@
 
             <!--#endregion-->
 
+            <!--#region Дата регистарции-->
+
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                       Text="Статус"
+                       Style="{StaticResource TextBlockStyle}"
+                       Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
+                       VerticalAlignment="Top"/>
+
+            <ComboBox Template="{StaticResource ComboBoxTemplate}"
+                      Grid.Row="3" Grid.Column="0"
+                      Margin="10"
+                      Height="40"
+                      IsEnabled="{Binding StatusEnable}"
+                      ItemsSource="{Binding BankStatuses}"
+                      DisplayMemberPath="Status_name"
+                      SelectedItem="{Binding SelectedStatus}"
+                      Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
+                      VerticalAlignment="Bottom" >
+
+
+            </ComboBox>
+
+            <!--#endregion-->
+
+            <!--#region Статус-->
+
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                       Text="Дата регистарции"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top"/>
+
+
+            <TextBox Grid.Row="3" Grid.Column="1"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
+                     Height="40"
+                     IsEnabled="False"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Register_data}"/>
+
+            <!--#endregion-->
+
+
             <TextBlock Grid.Row="4" Grid.Column="0"
                        Foreground="#BB2020"
                        FontSize="15"
                        VerticalAlignment="Center"
                        Margin="15,0"
                        FontFamily="Roboto"
-                       IsEnabled="{Binding IsEnabled, Converter={StaticResource InverseBooleanConverter}}"
+                       Visibility="{Binding AccessLabel, Converter={StaticResource BoolToVis}}"
                        Text="Доступ запрещен"/>
 
         </Grid>
