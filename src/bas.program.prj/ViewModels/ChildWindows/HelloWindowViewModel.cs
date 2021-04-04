@@ -77,7 +77,7 @@ namespace bas.program.ViewModels
                 _workSpaceWindowViewModel.UserName = $"В системе: {user.User_name} {user.User_patronymic}";
                 _workSpaceWindowViewModel.User.User = user;
                 _workSpaceWindowViewModel.User.Session = true;
-                if (user.User_status_to_system == 2) _workSpaceWindowViewModel.AdminStatus = true;
+                if (user.User_status_to_system == 1) _workSpaceWindowViewModel.AdminStatus = true;
                 _HelloWindow.Close();
             }
             

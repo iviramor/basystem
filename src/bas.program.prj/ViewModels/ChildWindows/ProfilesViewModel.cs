@@ -18,7 +18,8 @@ namespace bas.program.ViewModels.ChildWindows
         #region Поля и Свойства
 
         private ProfilesWindow _ProfilesWindow;
-        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+        public WorkSpaceWindowViewModel _workSpaceWindowViewModel { get; private set; }
+
         private BankDbContext _DataBase;
 
 
@@ -73,9 +74,7 @@ namespace bas.program.ViewModels.ChildWindows
                         _DataBase.Remove(SelectedItem);
                         _DataBase.SaveChanges();
 
-                        Bank_users = _DataBase.Bank_user
-                            .Include(u => u.Bank_user_status)
-                            .ToList();
+                        UpdateTable();
 
                         MessageBox.Show($"Успех");
                         return;
@@ -115,6 +114,20 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Окно редактировать
+
+        public ICommand EditDataCommand { get; }
+
+        private bool CanEditDataCommandExecuted(object p) => true;
+
+        private void OnEditDataCommandExecute(object p)
+        {
+            var profile = new ProfileViewModel(this, _SelectedItem);
+            profile.ShowProfileWindow();
+        }
+
+        #endregion
+
         #endregion
 
         public ProfilesViewModel(WorkSpaceWindowViewModel workVM)
@@ -128,7 +141,15 @@ namespace bas.program.ViewModels.ChildWindows
                 .ToList();
             
             RemoveDataCommand = new ActionCommand(OnRemoveDataCommandExecute, CanRemoveDataCommandExecuted);
+            EditDataCommand = new ActionCommand(OnEditDataCommandExecute, CanEditDataCommandExecuted);
             CloseProfilesCommand = new ActionCommand(OnCloseProfilesCommandExecute, CanCloseProfilesCommandExecuted);
+        }
+
+        public void UpdateTable()
+        {
+            Bank_users = _DataBase.Bank_user
+                .Include(u => u.Bank_user_status)
+                .ToList();
         }
 
         public void ShowProfilesWindow()

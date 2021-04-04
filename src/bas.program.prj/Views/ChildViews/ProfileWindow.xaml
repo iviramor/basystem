@@ -254,7 +254,7 @@
                 HorizontalAlignment="Right"
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
-                Content="Изменить"
+                Content="{Binding NameAction}"
                 IsEnabled="{Binding IsEnabled}"
                 Command="{Binding UpdateDataCommand}">
 

@@ -19,11 +19,44 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Поля и свойства 
 
+        /// <summary>
+        /// Окно профиля View
+        /// </summary>
         private ProfileWindow _ProfileWindow;
+
+        /// <summary>
+        /// ViewModel главного рабочего окна
+        /// </summary>
         private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+
+        /// <summary>
+        /// ViewModel окна Профилей
+        /// </summary>
+        private ProfilesViewModel _ProfilesWiewModel;
+
+        /// <summary>
+        /// Контекст базы данных
+        /// </summary>
         private BankDbContext _DataBase;
 
+        /// <summary>
+        /// Данные пользователя
+        /// </summary>
+        private Bank_user _BankUser;
+
         #region Видимость элементов
+
+        private string _NameAction = "Изменить";
+        public string NameAction
+        {
+            get => _NameAction;
+            set
+            {
+                if (Equals(_NameAction, value)) return;
+                _NameAction = value;
+                OnPropertyChanged();
+            }
+        }
 
         private bool _IsEnabled = true;
         public bool IsEnabled
@@ -257,6 +290,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         public ICommand UpdateDataCommand { get; }
 
+        #region Изменение данных
+
         private bool CanUpdateDataCommandExecuted(object p) => true;
 
         private void OnUpdateDataCommandExecute(object p)
@@ -285,6 +320,47 @@ namespace bas.program.ViewModels.ChildWindows
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
+        private bool CanUpdateProfileCommandExecuted(object p) => true;
+
+        private void OnUpdateProfileExecute(object p)
+        {
+
+            #region Смена изменений в сессии пользователя
+
+            _BankUser.User_name = _Name;
+            _BankUser.User_surname = _Surname;
+            _BankUser.User_patronymic = _Patronymic;
+            _BankUser.User_login = _Login;
+            _BankUser.User_password = _Password;
+            _BankUser.User_sex = _Sex;
+            _BankUser.User_status_to_system = _SelectedStatus.Status_id;
+            _BankUser.User_register_data = _Register_data;
+
+            #endregion
+
+            /// Изменение данных в базе данных
+            _DataBase.Update(_BankUser);
+            _DataBase.SaveChanges();
+
+            /// Обновление таблицы в Профилях
+            _ProfilesWiewModel.UpdateTable();
+
+            /// Уведомление об успешой операции
+            MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        #endregion
+
+        #region Добавление данных
+        private bool CanAddDataCommandExecuted(object p) => true;
+
+        private void OnAddDataCommandExecute(object p)
+        {
+
+        }
+
+        #endregion
+
         #endregion
 
         #region Закрыть окно
@@ -305,8 +381,11 @@ namespace bas.program.ViewModels.ChildWindows
 
         public ProfileViewModel(WorkSpaceWindowViewModel workVM)
         {
+
+            /// Главное окно
             _workSpaceWindowViewModel = workVM;
 
+            /// Контекст базы данных
             _DataBase = workVM.User.DataBase;
 
             #region Значение совойств пользователя
@@ -323,11 +402,12 @@ namespace bas.program.ViewModels.ChildWindows
 
             #region Ограничение доступа к полям
 
-            if (workVM.User.User.User_status_to_system == 2) _StatusEnable = false;
-            else if (workVM.User.User.User_status_to_system == 3)
+            if (workVM.User.User.User_status_to_system == 1) _StatusEnable = false;
+            else if (workVM.User.User.User_status_to_system == 2)
             {
                 _IsEnabled = false;
                 _IsVisibility = false;
+                _AccessLabel = true;
             }
             #endregion
 
@@ -342,6 +422,48 @@ namespace bas.program.ViewModels.ChildWindows
             #endregion
 
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
+            CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
+
+        }
+
+        public ProfileViewModel(ProfilesViewModel profilesWM, Bank_user bankUser)
+        {
+
+            /// Окно с профилями
+            _ProfilesWiewModel = profilesWM;
+
+            /// Контекст базы данных
+            _DataBase = profilesWM._workSpaceWindowViewModel.User.DataBase;
+
+
+            /// Данные Профиля (пользователя)
+            _BankUser = bankUser;
+
+            #region Значение совойств пользователя
+
+            _Name = bankUser.User_name;
+            _Surname = bankUser.User_surname;
+            _Patronymic = bankUser.User_patronymic;
+            _Login = bankUser.User_login;
+            _Password = bankUser.User_password;
+            _Sex = bankUser.User_sex;
+            _Register_data = bankUser.User_register_data;
+
+            #endregion
+
+            /// Разблокировать список статусов
+            _StatusEnable = true;
+
+            /// Выборка статусов (кроме админа)
+            _BankStatuses = _DataBase.Bank_user_status
+                .Where(x => x.Status_id != 1)
+                .ToList();
+
+            /// Выделить текущий статус
+            _SelectedStatus = _DataBase.Bank_user_status
+                .SingleOrDefault(status => status.Status_id == bankUser.User_status_to_system);
+
+            UpdateDataCommand = new ActionCommand(OnUpdateProfileExecute, CanUpdateProfileCommandExecuted);
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
 
         }
