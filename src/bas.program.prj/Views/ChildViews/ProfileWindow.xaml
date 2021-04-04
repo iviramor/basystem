@@ -21,45 +21,16 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml"/>
                 <ResourceDictionary Source="../Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="../Styles/CommonButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
-            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
-            <SolidColorBrush x:Key="Main.IsMouseOver.Collour" Color="#F5E932"/>
-
-            <SolidColorBrush x:Key="Button.ToolsBar.Collour" Color="#F5F5F5"/>
-            <SolidColorBrush x:Key="Button.ToolsBar.IsMouse.Collour" Color="#DADADA"/>
-
-
             <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-
 
             <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
                 <Setter Property="FontFamily" Value="Roboto"/>
                 <Setter Property="Margin" Value="10"/>
             </Style>
-
-
-            <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-                <Setter Property="Background" Value="{StaticResource Main.Collour}"/>
-                    <Setter Property="Cursor" Value="Hand"/>
-                    <Setter Property="FontFamily" Value="Roboto"/>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="{StaticResource Main.IsMouseOver.Collour}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-
-
-            <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
-                <Border CornerRadius="20"
-                            Background="{TemplateBinding Background}">
-                    <ContentPresenter VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"/>
-                </Border>
-            </ControlTemplate>
-
 
         </ResourceDictionary>
 

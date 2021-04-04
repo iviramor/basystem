@@ -26,6 +26,9 @@
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
     <None Remove="Views\calculator.png" />
+    <None Remove="Views\ChildViews\AddUsers.png" />
+    <None Remove="Views\ChildViews\EditUsers.png" />
+    <None Remove="Views\ChildViews\RemUsers.png" />
     <None Remove="Views\compose.png" />
     <None Remove="Views\exit.png" />
     <None Remove="Views\funnel.png" />
@@ -43,6 +46,9 @@
   <ItemGroup>
     <Resource Include="Views\bg-flue.jpg" />
     <Resource Include="Views\calculator.png" />
+    <Resource Include="Views\ChildViews\AddUsers.png" />
+    <Resource Include="Views\ChildViews\EditUsers.png" />
+    <Resource Include="Views\ChildViews\RemUsers.png" />
     <Resource Include="Views\compose.png" />
     <Resource Include="Views\exit.png" />
     <Resource Include="Views\funnel.png" />

@@ -2,6 +2,9 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
+    <Compile Update="Views\ChildViews\ProfilesWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ChildViews\ProfileWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -10,10 +13,19 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\ChildViews\ProfilesWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ChildViews\ProfileWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Styles\ButtonToolsBar.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Styles\ComboBoxToolsBarMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Styles\CommonButton.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Styles\CommonComboBoxStyle.xaml">

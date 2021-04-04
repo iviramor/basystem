@@ -1,0 +1,178 @@
+﻿<Window x:Class="bas.program.Views.ChildViews.ProfilesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:bas.program.Views.ChildViews"
+        xmlns:converters="clr-namespace:bas.program.Infrastructure.Converters"
+        mc:Ignorable="d"
+        Title="ProfilesWindow" Height="560" Width="840" ResizeMode="NoResize">
+
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="../Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="../Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="../Styles/ButtonToolsBar.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <converters:InverseSexConverter x:Key="InverseSexConverter"/>
+
+        </ResourceDictionary>
+
+    </Window.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="30"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+
+        <!--#region Сетка с действиями-->
+
+        <Grid Grid.Row="1" Grid.Column="3">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="10"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Действия" 
+                       Style="{StaticResource TextBlockToolsBar}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
+            <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    Style="{DynamicResource Button.ToolsBar}"
+                    Grid.Row="1" Grid.Column="0">
+
+                <!--#region Внутри кнопки-->
+
+                <Grid Width="80" Height="90">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="15"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/ChildViews/AddUsers.png"/>
+
+                    <TextBlock Grid.Row="1"
+                               Style="{StaticResource Button.InsideTools}"
+                               Text="Добавить"/>
+
+                </Grid>
+
+                <!--#endregion-->
+
+            </Button>
+
+            <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    Style="{StaticResource Button.ToolsBar}"
+                    Grid.Row="3" Grid.Column="0">
+
+                <!--#region Внутри кнопки-->
+
+                <Grid Width="80" Height="90">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="15"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/ChildViews/EditUsers.png"/>
+
+                    <TextBlock Grid.Row="1"
+                               Style="{StaticResource Button.InsideTools}"
+                               Text="Изменить"/>
+
+                </Grid>
+
+                <!--#endregion-->
+
+            </Button>
+
+            <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    Style="{StaticResource Button.ToolsBar}"
+                    Grid.Row="5" Grid.Column="0"
+                    Command="{Binding RemoveDataCommand}">
+
+                <!--#region Внутри кнопки-->
+
+                <Grid Width="80" Height="90">
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="75"/>
+                        <RowDefinition Height="15"/>
+                    </Grid.RowDefinitions>
+
+                    <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/ChildViews/RemUsers.png"/>
+
+                    <TextBlock Grid.Row="1"
+                               Style="{StaticResource Button.InsideTools}"
+                               Text="Удалить"/>
+
+                </Grid>
+
+                <!--#endregion-->
+
+            </Button>
+
+        </Grid>
+
+        <!--#endregion-->
+
+        <!--#region Таблица с пользователями-->
+
+        <DataGrid ItemsSource="{Binding Bank_users}"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1" Grid.Column="1"
+                  IsReadOnly="True"
+                  SelectedItem="{Binding SelectedItem}"
+                  CanUserResizeColumns="False">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя" Binding="{Binding User_name}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding User_surname}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding User_patronymic}"/>
+                <DataGridTextColumn Header="Пол" Binding="{Binding User_sex, Converter={StaticResource InverseSexConverter}}"/>
+                <DataGridTextColumn Header="Статус в системе" Binding="{Binding Bank_user_status.Status_name}"/>
+            </DataGrid.Columns>
+
+        </DataGrid>
+
+
+        <!--#endregion-->
+
+        <Button Grid.Row="3" Grid.Column="1" 
+                Width="150"
+                HorizontalAlignment="Left"
+                Style="{StaticResource ButtonStyle}"
+                Template="{StaticResource ButtonTemplate}"
+                Content="Назад" 
+                Command="{Binding CloseProfilesCommand}">
+
+        </Button>
+
+    </Grid>
+
+</Window>

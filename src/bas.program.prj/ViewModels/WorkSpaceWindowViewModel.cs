@@ -130,6 +130,19 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Профили
+        public ICommand ShowProfilesCommand { get; }
+
+        private bool CanShowProfilesExecuted(object p) => true;
+
+        private void OnShowProfilesExecute(object p)
+        {
+            var profiles = new ProfilesViewModel(this);
+            profiles.ShowProfilesWindow();
+        }
+
+        #endregion
+
         #endregion
 
 
@@ -148,9 +161,9 @@ namespace bas.program.ViewModels
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
             EnableWindowCommand = new ActionCommand(OnEnableWindowCommandExecute, CanEnableWindowCommandExecuted);
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
+            ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
+
         }
-
-
 
 
         #region Диалоговые окна

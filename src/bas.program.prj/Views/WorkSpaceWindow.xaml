@@ -7,8 +7,7 @@
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
         Title="WorkSpaceWindow" Height="600" Width="1172" WindowState="Maximized"
-        IsEnabled = "{Binding IsEnabled}"
-        xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2" Background="White">
+        IsEnabled = "{Binding IsEnabled}">
 
     <Window.Resources>
 
@@ -18,67 +17,17 @@
                 <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
                 <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
                 <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
 
             <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
 
-            <SolidColorBrush x:Key="Button.ToolsBar.Collour" Color="#F5F5F5"/>
-            <SolidColorBrush x:Key="Button.ToolsBar.IsMouse.Collour" Color="#DADADA"/>
 
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Roboto"/>
             </Style>
-
-            <!--#region Стили кнопки-->
-
-
-
-            <Style x:Key="Button.ToolsBar" TargetType="Button">
-                <Setter Property="Height" Value="90"/>
-                <Setter Property="Width" Value="90"/>
-                <Setter Property="TextElement.FontFamily" 
-                        Value="Static/Fonts/#Roboto-Bold"/>
-                <Setter Property="Background" Value="{StaticResource Button.ToolsBar.Collour}"/>
-                <Setter Property="Cursor" Value="Hand"/>
-                <Style.Triggers>
-                    <Trigger Property="IsMouseOver" Value="True">
-                        <Setter Property="Background" Value="{StaticResource Button.ToolsBar.IsMouse.Collour}"/>
-                    </Trigger>
-                </Style.Triggers>
-            </Style>
-
-            <ControlTemplate x:Key="ButtonTemplateToolBar" TargetType="{x:Type Button}">
-                <Border CornerRadius="10"
-                        Background="{TemplateBinding Background}">
-                    <ContentPresenter VerticalAlignment="Center"
-                                      HorizontalAlignment="Center">
-
-                    </ContentPresenter>
-                </Border>
-            </ControlTemplate>
-
-
-            <!--#endregion-->
-
-            <!--#region Внутри кнопки-->
-
-            <Style x:Key="Icon.InsideTools" TargetType="Image">
-                <Setter Property="Height" Value="55"/>
-                <Setter Property="Width" Value="55"/>
-                <Setter Property="Margin" Value="0"/>
-
-            </Style>
-
-            <Style x:Key="Button.InsideTools" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="9"/>
-                <Setter Property="FontStyle" Value="Normal"/>
-                <Setter Property="FontFamily" Value="Roboto"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-            </Style>
-            <!--#endregion-->
 
         </ResourceDictionary>
 
@@ -137,12 +86,11 @@
                         </MenuItem.Icon>
                     </MenuItem>
 
-
                     <MenuItem Header="Выйти из профиля"
                               Height="40"
                               FontFamily="Roboto Medium" 
-                              Command="{Binding Path=ShowSignOutCommand}"
-                    >
+                              Command="{Binding Path=ShowSignOutCommand}">
+
                         <MenuItem.Icon>
                             <Image Source="/Views/exit.png" Stretch="Fill"/>
                         </MenuItem.Icon>
@@ -155,6 +103,7 @@
                           Height="40"
                           Padding="20, 0, 20, 0"
                           FontFamily="Roboto Medium" 
+                          Command="{Binding ShowProfilesCommand}"
                           Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
 
@@ -245,6 +194,7 @@
 
                     <TextBlock Text="Таблица" 
                                Grid.Row="1"
+                               Style="{StaticResource TextBlockToolsBar}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
 
@@ -285,7 +235,7 @@
 
                         <!--#region Внутри кнопки-->
 
-                        <Grid Width="70" Height="90">
+                        <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -310,7 +260,7 @@
 
                         <!--#region Внутри кнопки-->
 
-                        <Grid Width="70" Height="90">
+                        <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -336,7 +286,7 @@
 
                         <!--#region Внутри кнопки-->
 
-                        <Grid Width="70" Height="90">
+                        <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -359,6 +309,7 @@
                     <TextBlock Text="Изменение" 
                                Grid.Row="1"
                                Grid.ColumnSpan="3"
+                               Style="{StaticResource TextBlockToolsBar}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
 
@@ -398,7 +349,7 @@
 
                         <!--#region Внутри кнопки-->
 
-                        <Grid Width="70" Height="90">
+                        <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -424,7 +375,7 @@
 
                         <!--#region Внутри кнопки-->
 
-                        <Grid Width="70" Height="90">
+                        <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="75"/>
@@ -448,6 +399,7 @@
                     <TextBlock Text="Действия" 
                                Grid.Row="1"
                                Grid.ColumnSpan="2"
+                               Style="{StaticResource TextBlockToolsBar}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
 
