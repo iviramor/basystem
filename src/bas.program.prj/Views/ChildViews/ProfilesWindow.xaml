@@ -63,6 +63,7 @@
 
             <Button Template="{DynamicResource ButtonTemplateToolBar}" 
                     Style="{DynamicResource Button.ToolsBar}"
+                    Command="{Binding AddDataCommand}"
                     Grid.Row="1" Grid.Column="0">
 
                 <!--#region Внутри кнопки-->
