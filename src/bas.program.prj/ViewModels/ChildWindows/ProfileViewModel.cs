@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using bas.program.Infrastructure.Commands;
@@ -11,7 +8,6 @@ using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views.ChildViews;
 using bas.website.Models.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace bas.program.ViewModels.ChildWindows
 {
@@ -353,6 +349,12 @@ namespace bas.program.ViewModels.ChildWindows
 
             #endregion
 
+            /// Сравнение сессии и изменяемого Профиля, для смены имени окна
+            if (_ProfilesWiewModel._workSpaceWindowViewModel.User.User.User_id == _BankUser.User_id)
+            {
+                _ProfilesWiewModel._workSpaceWindowViewModel.UserName = _BankUser.User_name + " " + _BankUser.User_surname;
+            }
+
             /// Изменение данных в базе данных
             _DataBase.Update(_BankUser);
             _DataBase.SaveChanges();
@@ -471,10 +473,19 @@ namespace bas.program.ViewModels.ChildWindows
             /// Разблокировать список статусов
             _StatusEnable = true;
 
-            /// Выборка статусов (кроме админа)
-            _BankStatuses = _DataBase.Bank_user_status
-                .Where(x => x.Status_id != 1)
-                .ToList();
+            if (bankUser.User_status_to_system == 1)
+            {
+                /// Выборка статусов (кроме админа)
+                _BankStatuses = _DataBase.Bank_user_status.ToList();
+                _StatusEnable = false;
+            }
+            else
+            {
+                /// Выборка статусов (кроме админа)
+                _BankStatuses = _DataBase.Bank_user_status
+                    .Where(x => x.Status_id != 1)
+                    .ToList();
+            }
 
             /// Выделить текущий статус
             _SelectedStatus = _DataBase.Bank_user_status
@@ -484,6 +495,32 @@ namespace bas.program.ViewModels.ChildWindows
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
 
         }
+
+        public ProfileViewModel(ProfilesViewModel profilesWM, string actionName)
+        {
+
+            _NameAction = actionName;
+
+            /// Окно с профилями
+            _ProfilesWiewModel = profilesWM;
+
+            /// Контекст базы данных
+            _DataBase = profilesWM._workSpaceWindowViewModel.User.DataBase;
+
+
+            /// Разблокировать список статусов
+            _StatusEnable = true;
+
+            /// Выборка статусов (кроме админа)
+            _BankStatuses = _DataBase.Bank_user_status
+                .Where(x => x.Status_id != 1)
+                .ToList();
+
+            UpdateDataCommand = new ActionCommand(OnUpdateProfileExecute, CanUpdateProfileCommandExecuted);
+            CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
+
+        }
+
 
         public void ShowProfileWindow()
         {
