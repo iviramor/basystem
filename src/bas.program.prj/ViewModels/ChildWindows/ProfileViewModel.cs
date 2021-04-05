@@ -374,6 +374,31 @@ namespace bas.program.ViewModels.ChildWindows
         private void OnAddDataCommandExecute(object p)
         {
 
+            Bank_user NewUser = new Bank_user();
+
+            #region Смена изменений в сессии пользователя
+
+            NewUser.User_name = _Name;
+            NewUser.User_surname = _Surname;
+            NewUser.User_patronymic = _Patronymic;
+            NewUser.User_login = _Login;
+            NewUser.User_password = _Password;
+            NewUser.User_sex = _Sex;
+            NewUser.User_status_to_system = _SelectedStatus.Status_id;
+            NewUser.User_register_data = DateTime.Now;
+            NewUser.User_age = _Age;
+
+            #endregion
+
+            _DataBase.Bank_user.Add(NewUser);
+            _DataBase.SaveChanges();
+
+            /// Обновление таблицы в Профилях
+            _ProfilesWiewModel.UpdateTable();
+
+            MessageBox.Show("Добавлен новый пользователь \n" +
+                            $"Ф.И.О.: {NewUser.User_name} {NewUser.User_patronymic} {NewUser.User_surname} \n" +
+                            $"Должность: {NewUser.Bank_user_status.Status_name}");
         }
 
         #endregion
@@ -507,6 +532,7 @@ namespace bas.program.ViewModels.ChildWindows
             /// Контекст базы данных
             _DataBase = profilesWM._workSpaceWindowViewModel.User.DataBase;
 
+            _Register_data = DateTime.Now;
 
             /// Разблокировать список статусов
             _StatusEnable = true;
@@ -516,7 +542,7 @@ namespace bas.program.ViewModels.ChildWindows
                 .Where(x => x.Status_id != 1)
                 .ToList();
 
-            UpdateDataCommand = new ActionCommand(OnUpdateProfileExecute, CanUpdateProfileCommandExecuted);
+            UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
 
         }
