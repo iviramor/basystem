@@ -119,10 +119,29 @@ namespace bas.program.ViewModels.ChildWindows
         public ICommand EditDataCommand { get; }
 
         private bool CanEditDataCommandExecuted(object p) => true;
-
         private void OnEditDataCommandExecute(object p)
         {
+            if (_SelectedItem == null)
+            {
+                MessageBox.Show("Выделите Сотрудника в таблице", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
             var profile = new ProfileViewModel(this, _SelectedItem);
+            profile.ShowProfileWindow();
+        }
+
+        #endregion
+
+        #region Окно добавить
+
+        public ICommand AddDataCommand { get; }
+
+        private bool CanAddDataCommandExecuted(object p) => true;
+
+        private void OnAddDataCommandExecute(object p)
+        {
+            var profile = new ProfileViewModel(this, "Добавить");
             profile.ShowProfileWindow();
         }
 
@@ -142,6 +161,7 @@ namespace bas.program.ViewModels.ChildWindows
             
             RemoveDataCommand = new ActionCommand(OnRemoveDataCommandExecute, CanRemoveDataCommandExecuted);
             EditDataCommand = new ActionCommand(OnEditDataCommandExecute, CanEditDataCommandExecuted);
+            AddDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
             CloseProfilesCommand = new ActionCommand(OnCloseProfilesCommandExecute, CanCloseProfilesCommandExecuted);
         }
 
