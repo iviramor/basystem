@@ -302,7 +302,6 @@ namespace bas.program.ViewModels.ChildWindows
         #region Изменение данных
 
         private bool CanUpdateDataCommandExecuted(object p) => true;
-
         private void OnUpdateDataCommandExecute(object p)
         {
             /// Смена имени пользователя в главом окне
@@ -331,7 +330,6 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private bool CanUpdateProfileCommandExecuted(object p) => true;
-
         private void OnUpdateProfileExecute(object p)
         {
 
@@ -370,10 +368,9 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Добавление данных
         private bool CanAddDataCommandExecuted(object p) => true;
-
         private void OnAddDataCommandExecute(object p)
         {
-
+            /// Данные нового пользователя
             Bank_user NewUser = new Bank_user();
 
             #region Смена изменений в сессии пользователя
@@ -390,6 +387,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             #endregion
 
+            /// Добавление в базу данных нового пользователя
             _DataBase.Bank_user.Add(NewUser);
             _DataBase.SaveChanges();
 
