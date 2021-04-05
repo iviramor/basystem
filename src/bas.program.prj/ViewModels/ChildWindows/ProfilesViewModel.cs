@@ -69,7 +69,7 @@ namespace bas.program.ViewModels.ChildWindows
             {
                 if (SelectedItem.User_id != _workSpaceWindowViewModel.User.User.User_id)
                 {
-                    if (SelectedItem.User_status_to_system != 2)
+                    if (SelectedItem.User_status_to_system != 1)
                     {
                         _DataBase.Remove(SelectedItem);
                         _DataBase.SaveChanges();
