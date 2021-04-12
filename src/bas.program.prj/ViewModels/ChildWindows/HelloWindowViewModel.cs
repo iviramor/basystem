@@ -1,26 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using bas.program.Infrastructure.Commands;
+using bas.program.ViewModels.Base;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using bas.program.Infrastructure.Commands;
-using bas.program.Infrastructure.Commands.HelloWindowCommands;
-using bas.program.Models;
-using bas.program.Models.Tables.UserTables;
-using bas.program.ViewModels.Base;
-using bas.program.Views;
-using bas.website.Models.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace bas.program.ViewModels
 {
     public class HelloWindowViewModel : ViewModel
     {
-
-
-        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+        private readonly WorkSpaceWindowViewModel _workSpaceWindowViewModel;
 
         private HelloWindow _HelloWindow;
 
@@ -39,7 +28,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Логин
 
         #region Пароль
 
@@ -56,7 +45,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Пароль
 
         #region Команды
 
@@ -68,9 +57,9 @@ namespace bas.program.ViewModels
 
         private void OnSignInCommandExecute(object p)
         {
-            var user =  _workSpaceWindowViewModel.User.DataBase.Bank_user
+            var user = _workSpaceWindowViewModel.User.DataBase.Bank_user
                 .Include(u => u.Bank_user_status)
-                .SingleOrDefault(u => u.User_login == Login && u.User_password == Password); 
+                .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
 
             if (user != null)
             {
@@ -80,17 +69,12 @@ namespace bas.program.ViewModels
                 if (user.User_status_to_system == 1) _workSpaceWindowViewModel.AdminStatus = true;
                 _HelloWindow.Close();
             }
-            
             else MessageBox.Show("Пользователь не найден", "Ошибка входа", MessageBoxButton.OK, MessageBoxImage.Error);
-
-
         }
 
-        #endregion
+        #endregion Авторизация
 
-
-        #endregion
-
+        #endregion Команды
 
         public HelloWindowViewModel(WorkSpaceWindowViewModel workWindow)
         {
@@ -98,14 +82,13 @@ namespace bas.program.ViewModels
             SignInCommand = new ActionCommand(OnSignInCommandExecute, CanSignInCommandExecuted);
         }
 
-
         public void ShowHelloWindow()
         {
-            _HelloWindow = new HelloWindow();
-            _HelloWindow.DataContext = this;
+            _HelloWindow = new HelloWindow
+            {
+                DataContext = this,
+            };
             _HelloWindow.ShowDialog();
         }
-
-
     }
 }

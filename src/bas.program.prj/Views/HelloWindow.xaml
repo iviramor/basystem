@@ -7,42 +7,41 @@
         xmlns:local="clr-namespace:bas.program"
 
         mc:Ignorable="d"
-        Title="Добро пожаловть в систему " 
+        Title="Добро пожаловть в систему "
         Height="480" Width="854" Visibility="Visible" WindowStyle="None"
-        ResizeMode="NoResize"
-        >
+        ResizeMode="NoResize">
 
     <!--#region Стиль текст бокса-->
     <Window.Resources>
-        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FBF37C"/>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#F5E932"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#F5E932"/>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FBF37C" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#F5E932" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#F5E932" />
         <Style x:Key="loginTextBoxStyle" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" CornerRadius="20" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -51,21 +50,20 @@
             <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                        <Condition Property="IsSelectionActive" Value="false"/>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                        <Condition Property="IsSelectionActive" Value="false" />
                     </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
-
     </Window.Resources>
     <!--#endregion-->
 
     <!--#region Настройка окна-->
-    
+
     <Window.Background>
-        <ImageBrush ImageSource="/Views/bg-flue.jpg"/>
+        <ImageBrush ImageSource="/Views/bg-flue.jpg" />
     </Window.Background>
 
     <!--#endregion-->
@@ -75,36 +73,35 @@
         <!--#region Сетка Столбцов и Рядов -->
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50"/>
-            <ColumnDefinition Width="290"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="254"/>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="290" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="254" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition Width="150" />
+            <ColumnDefinition Width="50" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
             <RowDefinition Height="30" />
-            <RowDefinition Height="180"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="180" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <!--#endregion-->
 
         <!--#region Полоска передвижения-->
 
-        <Rectangle Fill="Transparent" 
+        <Rectangle Fill="Transparent"
                    Grid.Row="0"
                    Grid.ColumnSpan="7"
-                   PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown"
-                   />
+                   PreviewMouseLeftButtonDown="Rectangle_PreviewMouseLeftButtonDown" />
 
         <!--#endregion-->
 
@@ -118,18 +115,18 @@
                 FontWeight="Medium"
                 Content="Выйти из системы"
                 VerticalAlignment="Center"
-                HorizontalAlignment="Center" Click="Button_Click" >
+                HorizontalAlignment="Center" Click="Button_Click">
 
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="TextElement.FontFamily" 
-                            Value="Static/Fonts/#Roboto-Bold"/>
-                    <Setter Property="Background" Value="#BF0426"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="TextElement.FontFamily"
+                            Value="Static/Fonts/#Roboto-Bold" />
+                    <Setter Property="Background" Value="#BF0426" />
+                    <Setter Property="Foreground" Value="White" />
+                    <Setter Property="Cursor" Value="Hand" />
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#A60311"/>
+                            <Setter Property="Background" Value="#A60311" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -141,7 +138,6 @@
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center">
-
                         </ContentPresenter>
                     </Border>
                 </ControlTemplate>
@@ -149,7 +145,6 @@
 
             <!--<StackPanel Orientation="Horizontal">
                 <Image Source="D:\basystem\BankAssistanceSystem\src\bas.program\Static\img\ex.png">
-
                 </Image>
             </StackPanel>-->
         </Button>
@@ -158,18 +153,17 @@
 
         <!--#region Заголовок-->
 
-        <TextBlock HorizontalAlignment="Left" 
-                   Grid.Row="2" 
-                   TextWrapping="Wrap" 
+        <TextBlock HorizontalAlignment="Left"
+                   Grid.Row="2"
+                   TextWrapping="Wrap"
                    VerticalAlignment="Center"
-                   FontFamily="Static/Fonts/#Roboto-Regular" FontSize="36" FontWeight="Bold" 
-                   Height="86" Width="682" 
+                   FontFamily="Static/Fonts/#Roboto-Regular" FontSize="36" FontWeight="Bold"
+                   Height="86" Width="682"
                    Grid.Column="1" Grid.ColumnSpan="5"
-        ><Run Text="Добро пожаловать в систему "/>
+        ><Run Text="Добро пожаловать в систему " />
 
-            <LineBreak/>
-            <Run Text="BankAssistanceSystem"/>
-
+            <LineBreak />
+            <Run Text="BankAssistanceSystem" />
         </TextBlock>
 
         <!--#endregion-->
@@ -177,21 +171,21 @@
         <!--#region Воод логина-->
 
         <TextBlock FontFamily="Static/Fonts/#Roboto-Regular" FontSize="18" FontWeight="Bold"
-                   Grid.Row="3" Grid.Column="1" 
+                   Grid.Row="3" Grid.Column="1"
                    TextWrapping="Wrap"
                    Padding="0, 5"
-                   VerticalAlignment="Center" 
+                   VerticalAlignment="Center"
                    HorizontalAlignment="Center"
                    Width="282" Height="30">
-            <Run Text="Имя "/><Run Language="ru-ru" Text="пользователя сотрудника"/>
+            <Run Text="Имя " /><Run Language="ru-ru" Text="пользователя сотрудника" />
         </TextBlock>
 
         <TextBox Text="{Binding Login}"
                  Style="{DynamicResource loginTextBoxStyle}"
-                 HorizontalAlignment="Center" 
+                 HorizontalAlignment="Center"
                  Grid.Row="4"  Grid.Column="1"
                  Padding="20, 10, 20, 10"
-                 TextWrapping="Wrap" 
+                 TextWrapping="Wrap"
                  VerticalAlignment="Center"
                  FontFamily="Static/Fonts/#Roboto-Regular" FontSize="16" FontWeight="Medium"
                  Width="290" Height="40" />
@@ -200,25 +194,25 @@
 
         <!--#region Воод Пароля-->
 
-        <TextBlock HorizontalAlignment="Center" 
-                   FontFamily="Static/Fonts/#Roboto-Regular" FontSize="18" FontWeight="Bold" 
-                   Grid.Row="5" Grid.Column="1" 
-                   TextWrapping="Wrap" 
-                   VerticalAlignment="Center" 
+        <TextBlock HorizontalAlignment="Center"
+                   FontFamily="Static/Fonts/#Roboto-Regular" FontSize="18" FontWeight="Bold"
+                   Grid.Row="5" Grid.Column="1"
+                   TextWrapping="Wrap"
+                   VerticalAlignment="Center"
                    Width="280" Height="30"
                    Padding="0, 5">
-                    
-            <Run Language="ru-ru" Text="Пароль"/>
+
+            <Run Language="ru-ru" Text="Пароль" />
         </TextBlock>
 
-        <TextBox Style="{DynamicResource loginTextBoxStyle}" HorizontalAlignment="Center" 
+        <TextBox Style="{DynamicResource loginTextBoxStyle}" HorizontalAlignment="Center"
                  Grid.Row="6"
                  Grid.Column="1"
                  Padding="20, 10, 20, 10"
-                 TextWrapping="Wrap" 
+                 TextWrapping="Wrap"
                  Text="{Binding Password}"
-                 VerticalAlignment="Center" 
-                 FontFamily="Static/Fonts/#Roboto-Regular" FontSize="16" FontWeight="Medium" 
+                 VerticalAlignment="Center"
+                 FontFamily="Static/Fonts/#Roboto-Regular" FontSize="16" FontWeight="Medium"
                  Width="290" Height="40" />
 
         <!--#endregion-->
@@ -226,22 +220,21 @@
         <!--#region Войти-->
 
         <Button Content="Войти"
-                Grid.Column="1" Grid.Row="8" 
-                HorizontalAlignment="Left" 
+                Grid.Column="1" Grid.Row="8"
+                HorizontalAlignment="Left"
                 FontSize="14" FontWeight="Medium"
                 Width="150" Height="40"
                 VerticalAlignment="Center" Command="{Binding SignInCommand}">
 
-
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="TextElement.FontFamily" 
-                            Value="Static/Fonts/#Roboto-Bold"/>
-                    <Setter Property="Background" Value="#FBF37C"/>
-                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="TextElement.FontFamily"
+                            Value="Static/Fonts/#Roboto-Bold" />
+                    <Setter Property="Background" Value="#FBF37C" />
+                    <Setter Property="Cursor" Value="Hand" />
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#F5E932"/>
+                            <Setter Property="Background" Value="#F5E932" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -253,35 +246,33 @@
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
                                           HorizontalAlignment="Center">
-
                         </ContentPresenter>
                     </Border>
                 </ControlTemplate>
             </Button.Template>
-
         </Button>
 
         <!--#endregion-->
 
         <!--#region Связь с админом-->
 
-        <Button Content="Сообщить об ошибке" 
+        <Button Content="Сообщить об ошибке"
                 Grid.Column="4"
                 Grid.Row="8"
-                HorizontalAlignment="Center" 
+                HorizontalAlignment="Center"
                 FontSize="14" FontWeight="Medium"
                 Width="180" Height="40"
                 VerticalAlignment="Center" Grid.ColumnSpan="2">
 
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="TextElement.FontFamily" 
-                            Value="Static/Fonts/#Roboto-Bold"/>
-                    <Setter Property="Background" Value="#FBF37C"/>
-                    <Setter Property="Cursor" Value="Hand"/>
+                    <Setter Property="TextElement.FontFamily"
+                            Value="Static/Fonts/#Roboto-Bold" />
+                    <Setter Property="Background" Value="#FBF37C" />
+                    <Setter Property="Cursor" Value="Hand" />
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#F5E932"/>
+                            <Setter Property="Background" Value="#F5E932" />
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -292,16 +283,12 @@
                     <Border CornerRadius="20"
                             Background="{TemplateBinding Background}">
                         <ContentPresenter VerticalAlignment="Center"
-                                          HorizontalAlignment="Center"/>
+                                          HorizontalAlignment="Center" />
                     </Border>
                 </ControlTemplate>
             </Button.Template>
-
         </Button>
 
         <!--#endregion-->
-
     </Grid>
-
-
 </Window>

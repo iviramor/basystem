@@ -1,16 +1,14 @@
-﻿using System.Windows;
-using System.Windows.Input;
-using bas.program.Infrastructure.Commands;
+﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models;
 using bas.program.ViewModels.Base;
 using bas.program.ViewModels.ChildWindows;
-
+using System.Windows;
+using System.Windows.Input;
 
 namespace bas.program.ViewModels
 {
     public class WorkSpaceWindowViewModel : ViewModel
     {
-
         #region Блоки окна
 
         #region Действия с окном
@@ -57,14 +55,13 @@ namespace bas.program.ViewModels
             }
         }
 
+        #endregion Действия с окном
 
-        #endregion
-
-        #endregion
+        #endregion Блоки окна
 
         #region Данные
 
-        public UserDataSession User = new UserDataSession();
+        public UserDataSession User = new();
 
         private string _UserName = null;
 
@@ -79,7 +76,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Данные
 
         #region Команды
 
@@ -91,7 +88,6 @@ namespace bas.program.ViewModels
 
         private void OnShowSignOutCommandExecute(object p)
         {
-            
             var que = MessageBox.Show("Вы точно хотите выйти из Системы?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (que == MessageBoxResult.Yes)
             {
@@ -102,7 +98,7 @@ namespace bas.program.ViewModels
             return;
         }
 
-        #endregion
+        #endregion Показать Меню авторизации
 
         #region Заблокировать окно
 
@@ -115,9 +111,10 @@ namespace bas.program.ViewModels
             new HelloWindow().Show();
         }
 
-        #endregion
+        #endregion Заблокировать окно
 
-        #region Профиль 
+        #region Профиль
+
         public ICommand ShowProfileCommand { get; }
 
         private bool CanShowProfileExecuted(object p) => true;
@@ -128,9 +125,10 @@ namespace bas.program.ViewModels
             profile.ShowProfileWindow();
         }
 
-        #endregion
+        #endregion Профиль
 
         #region Профили
+
         public ICommand ShowProfilesCommand { get; }
 
         private bool CanShowProfilesExecuted(object p) => true;
@@ -141,14 +139,12 @@ namespace bas.program.ViewModels
             profiles.ShowProfilesWindow();
         }
 
-        #endregion
+        #endregion Профили
 
-        #endregion
-
+        #endregion Команды
 
         public WorkSpaceWindowViewModel()
         {
-
             if (!User.Session)
             {
                 if (!AuthorizeHelloWindow())
@@ -157,31 +153,25 @@ namespace bas.program.ViewModels
                 }
             }
 
-
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
             EnableWindowCommand = new ActionCommand(OnEnableWindowCommandExecute, CanEnableWindowCommandExecuted);
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
             ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
-
         }
-
 
         #region Диалоговые окна
 
-
         #region Окно авторизации
+
         private bool AuthorizeHelloWindow()
         {
             new HelloWindowViewModel(this).ShowHelloWindow();
             if (User.Session) return true;
             else return false;
-
         }
-        #endregion
 
+        #endregion Окно авторизации
 
-
-        #endregion
-
+        #endregion Диалоговые окна
     }
 }

@@ -1,20 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using bas.program.Infrastructure.Commands;
+﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views.ChildViews;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace bas.program.ViewModels.ChildWindows
 {
     public class ProfilesViewModel : ViewModel
     {
-
         #region Поля и Свойства
 
         private ProfilesWindow _ProfilesWindow;
@@ -22,8 +20,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         private readonly BankDbContext _DataBase;
 
-
         private Bank_user _SelectedItem;
+
         public Bank_user SelectedItem
         {
             get => _SelectedItem;
@@ -39,7 +37,6 @@ namespace bas.program.ViewModels.ChildWindows
 
         public List<Bank_user> Bank_users
         {
-
             get
             {
                 return _Bank_users;
@@ -50,10 +47,9 @@ namespace bas.program.ViewModels.ChildWindows
                 _Bank_users = value;
                 OnPropertyChanged();
             }
-
         }
 
-        #endregion
+        #endregion Поля и Свойства
 
         #region Команды
 
@@ -83,27 +79,22 @@ namespace bas.program.ViewModels.ChildWindows
                     MessageBox.Show("Удалять Профиль со статусом - Администатор, запрещено", "Ошибка ввода", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     return;
-
                 }
 
                 MessageBox.Show("Удалять собственный Профиль, запрещено", "Ошибка ввода", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return;
-
             }
 
             MessageBox.Show("Выделите Сотрудника в таблице", "Ошибка ввода", MessageBoxButton.OK,
                 MessageBoxImage.Error);
-
-
         }
 
-        #endregion
+        #endregion Удалить
 
         #region Закрыть окно
 
         public ICommand CloseProfilesCommand { get; }
-
 
         private bool CanCloseProfilesCommandExecuted(object p) => true;
 
@@ -112,13 +103,14 @@ namespace bas.program.ViewModels.ChildWindows
             _ProfilesWindow.Close();
         }
 
-        #endregion
+        #endregion Закрыть окно
 
         #region Окно редактировать
 
         public ICommand EditDataCommand { get; }
 
         private bool CanEditDataCommandExecuted(object p) => true;
+
         private void OnEditDataCommandExecute(object p)
         {
             if (_SelectedItem == null)
@@ -131,7 +123,7 @@ namespace bas.program.ViewModels.ChildWindows
             profile.ShowProfileWindow();
         }
 
-        #endregion
+        #endregion Окно редактировать
 
         #region Окно добавить
 
@@ -145,9 +137,9 @@ namespace bas.program.ViewModels.ChildWindows
             profile.ShowProfileWindow();
         }
 
-        #endregion
+        #endregion Окно добавить
 
-        #endregion
+        #endregion Команды
 
         public ProfilesViewModel(WorkSpaceWindowViewModel workVM)
         {
@@ -158,7 +150,7 @@ namespace bas.program.ViewModels.ChildWindows
             _Bank_users = _DataBase.Bank_user
                 .Include(u => u.Bank_user_status)
                 .ToList();
-            
+
             RemoveDataCommand = new ActionCommand(OnRemoveDataCommandExecute, CanRemoveDataCommandExecuted);
             EditDataCommand = new ActionCommand(OnEditDataCommandExecute, CanEditDataCommandExecuted);
             AddDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
@@ -174,14 +166,11 @@ namespace bas.program.ViewModels.ChildWindows
 
         public void ShowProfilesWindow()
         {
-
             _ProfilesWindow = new ProfilesWindow
             {
                 DataContext = this
             };
             _ProfilesWindow.ShowDialog();
-
         }
-
     }
 }
