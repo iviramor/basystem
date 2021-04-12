@@ -20,7 +20,7 @@ namespace bas.program.ViewModels.ChildWindows
         private ProfilesWindow _ProfilesWindow;
         public WorkSpaceWindowViewModel _workSpaceWindowViewModel { get; private set; }
 
-        private BankDbContext _DataBase;
+        private readonly BankDbContext _DataBase;
 
 
         private Bank_user _SelectedItem;
@@ -175,8 +175,10 @@ namespace bas.program.ViewModels.ChildWindows
         public void ShowProfilesWindow()
         {
 
-            _ProfilesWindow = new ProfilesWindow();
-            _ProfilesWindow.DataContext = this;
+            _ProfilesWindow = new ProfilesWindow
+            {
+                DataContext = this
+            };
             _ProfilesWindow.ShowDialog();
 
         }

@@ -24,22 +24,22 @@ namespace bas.program.ViewModels.ChildWindows
         /// <summary>
         /// ViewModel главного рабочего окна
         /// </summary>
-        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+        private readonly WorkSpaceWindowViewModel _workSpaceWindowViewModel;
 
         /// <summary>
         /// ViewModel окна Профилей
         /// </summary>
-        private ProfilesViewModel _ProfilesWiewModel;
+        private readonly ProfilesViewModel _ProfilesWiewModel;
 
         /// <summary>
         /// Контекст базы данных
         /// </summary>
-        private BankDbContext _DataBase;
+        private readonly BankDbContext _DataBase;
 
         /// <summary>
         /// Данные пользователя
         /// </summary>
-        private Bank_user _BankUser;
+        private readonly Bank_user _BankUser;
 
         #region Видимость элементов
 
@@ -371,7 +371,7 @@ namespace bas.program.ViewModels.ChildWindows
         private void OnAddDataCommandExecute(object p)
         {
             /// Данные нового пользователя
-            Bank_user NewUser = new Bank_user();
+            Bank_user NewUser = new();
 
             #region Смена изменений в сессии пользователя
 
@@ -548,9 +548,11 @@ namespace bas.program.ViewModels.ChildWindows
 
         public void ShowProfileWindow()
         {
-            
-            _ProfileWindow = new ProfileWindow();
-            _ProfileWindow.DataContext = this;
+
+            _ProfileWindow = new ProfileWindow
+            {
+                DataContext = this
+            };
             _ProfileWindow.ShowDialog();
 
         }
