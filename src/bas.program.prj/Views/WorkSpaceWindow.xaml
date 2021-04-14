@@ -7,7 +7,13 @@
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
         Title="WorkSpaceWindow" Height="600" Width="1172" WindowState="Maximized"
-        IsEnabled = "{Binding IsEnabled}">
+        IsEnabled = "{Binding IsEnabled}" Icon="/bank.ico" 
+        WindowStartupLocation="CenterScreen">
+
+
+    <Window.DataContext>
+        <viewModels:WorkSpaceWindowViewModel/>
+    </Window.DataContext>
 
     <Window.Resources>
 
@@ -35,9 +41,7 @@
 
     </Window.Resources>
 
-    <Window.DataContext>
-        <viewModels:WorkSpaceWindowViewModel/>
-    </Window.DataContext>
+
 
     <Window.Style>
         <Style TargetType="Window">
@@ -82,7 +86,7 @@
                               FontFamily="Roboto Medium"
                               Command="{Binding ShowProfileCommand}">
                         <MenuItem.Icon>
-                            <Image Source="/Views/settings.png" Stretch="Fill"/>
+                            <Image Source="/Resources/Image/Action/WindowAction/settings.png" Stretch="Fill"/>
                         </MenuItem.Icon>
                     </MenuItem>
 
@@ -92,7 +96,7 @@
                               Command="{Binding Path=ShowSignOutCommand}">
 
                         <MenuItem.Icon>
-                            <Image Source="/Views/exit.png" Stretch="Fill"/>
+                            <Image Source="/Resources/Image/Action/WindowAction/exit.png" Stretch="Fill"/>
                         </MenuItem.Icon>
 
                     </MenuItem>
@@ -242,7 +246,7 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/compose.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/compose.png" />
 
                             <TextBlock Grid.Row="1"
                                       Style="{StaticResource Button.InsideTools}"
@@ -267,7 +271,7 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/plus.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/plus.png" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
@@ -293,7 +297,7 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/trash.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/trash.png"/>
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
@@ -356,7 +360,7 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/funnel.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/funnel.png"/>
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
@@ -382,7 +386,7 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/calculator.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/calculator.png"/>
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:bas.program.Views.ChildViews"
         xmlns:converters="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="ProfilesWindow" Height="560" Width="840" ResizeMode="NoResize">
 
 
@@ -14,10 +15,10 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="../../Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="../../Styles/CommonButton.xaml"/>
-                <ResourceDictionary Source="../../Styles/ButtonToolsBar.xaml"/>
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseSexConverter x:Key="InverseSexConverter"/>

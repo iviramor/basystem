@@ -9,7 +9,8 @@
         mc:Ignorable="d"
         Title="ProfileWindow" 
         Height="480" Width="800"
-        x:Name="window" ResizeMode="NoResize">
+        x:Name="window" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
 
@@ -19,9 +20,9 @@
 
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../../Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="../../Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="../../Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
