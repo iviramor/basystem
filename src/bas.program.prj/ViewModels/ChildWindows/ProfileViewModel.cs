@@ -409,6 +409,8 @@ namespace bas.program.ViewModels.ChildWindows
             MessageBox.Show("Добавлен новый пользователь \n" +
                             $"Ф.И.О.: {NewUser.User_name} {NewUser.User_patronymic} {NewUser.User_surname} \n" +
                             $"Должность: {NewUser.Bank_user_status.Status_name}");
+
+            _ProfileWindow.Close();
         }
 
         #endregion Добавление данных
