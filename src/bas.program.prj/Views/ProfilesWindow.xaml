@@ -76,7 +76,7 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" Source="/Static/img/Action/ProfileAction/AddUsers.png">
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfileAction/AddUsers.png">
 
                     </Image>
 
@@ -105,7 +105,7 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" Source="/Static/img/Action/ProfileAction/EditUsers.png" />
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfileAction/EditUsers.png" />
 
                     <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
@@ -132,7 +132,7 @@
                     </Grid.RowDefinitions>
 
                     <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" Source="/Static/img/Action/ProfileAction/RemUsers.png" />
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfileAction/RemUsers.png" />
 
                     <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"

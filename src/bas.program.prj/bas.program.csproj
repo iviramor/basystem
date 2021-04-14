@@ -39,9 +39,6 @@
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
     <None Remove="Views\calculator.png" />
-    <None Remove="Views\ChildViews\AddUsers.png" />
-    <None Remove="Views\ChildViews\EditUsers.png" />
-    <None Remove="Views\ChildViews\RemUsers.png" />
     <None Remove="Views\compose.png" />
     <None Remove="Views\exit.png" />
     <None Remove="Views\funnel.png" />
