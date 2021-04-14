@@ -19,6 +19,8 @@
                 <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="Styles/CommonButton.xaml"/>
                 <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseSexConverter x:Key="InverseSexConverter"/>
@@ -151,7 +153,9 @@
 
         <!--#region Таблица с пользователями-->
 
-        <DataGrid ItemsSource="{Binding Bank_users}"
+        <DataGrid Style="{DynamicResource CommonDataGridTemplate}" 
+                  ItemsSource="{Binding Bank_users}"
+                  ColumnWidth="*"
                   AutoGenerateColumns="False"
                   Grid.Row="1" Grid.Column="1"
                   IsReadOnly="True"
@@ -159,12 +163,19 @@
                   CanUserResizeColumns="False">
 
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя" Binding="{Binding User_name}"/>
+                <DataGridTextColumn Header="Имя" 
+                                    Binding="{Binding User_name}"/>
+
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding User_surname}"/>
+                
                 <DataGridTextColumn Header="Отчество" Binding="{Binding User_patronymic}"/>
+                
                 <DataGridTextColumn Header="Пол" Binding="{Binding User_sex, Converter={StaticResource InverseSexConverter}}"/>
+
                 <DataGridTextColumn Header="Статус в системе" Binding="{Binding Bank_user_status.Status_name}"/>
+                
             </DataGrid.Columns>
+            
 
         </DataGrid>
 
