@@ -4,6 +4,9 @@
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Views\Messages\ConfirmPassword.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\ProfilesWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -15,6 +18,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\Messages\ConfirmPassword.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\ProfilesWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
