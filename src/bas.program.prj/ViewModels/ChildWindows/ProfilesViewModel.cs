@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
+using bas.program.ViewModels.Messages;
 using bas.program.Views.ChildViews;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
@@ -13,6 +14,7 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class ProfilesViewModel : ViewModel
     {
+
         #region Поля и Свойства
 
         private ProfilesWindow _ProfilesWindow;
@@ -67,12 +69,31 @@ namespace bas.program.ViewModels.ChildWindows
                 {
                     if (SelectedItem.User_status_to_system != 1)
                     {
-                        _DataBase.Remove(SelectedItem);
-                        _DataBase.SaveChanges();
 
-                        UpdateTable();
+                        var PasswordWindow = new ConfirmPasswordViewModel();
+                        var password =  PasswordWindow.ShowMessagePassword();
 
-                        MessageBox.Show($"Успех");
+                        if (password == null)
+                        {
+                            return;
+                        }
+                        else if (password == _workSpaceWindowViewModel.User.User.User_password)
+                        {
+                            _DataBase.Remove(SelectedItem);
+                            _DataBase.SaveChanges();
+
+                            UpdateTable();
+
+                            MessageBox.Show($"Успех");
+                            return;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Неверный пароль!", "Ошибка ввода", MessageBoxButton.OK,
+                                MessageBoxImage.Error);
+                            
+                        }
+
                         return;
                     }
 
