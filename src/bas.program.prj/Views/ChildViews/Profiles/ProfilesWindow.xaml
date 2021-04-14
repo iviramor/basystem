@@ -14,10 +14,10 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="../Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="../Styles/CommonButton.xaml"/>
-                <ResourceDictionary Source="../Styles/ButtonToolsBar.xaml"/>
+                <ResourceDictionary Source="../../Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="../../Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="../../Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="../../Styles/ButtonToolsBar.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseSexConverter x:Key="InverseSexConverter"/>
@@ -75,7 +75,10 @@
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/ChildViews/AddUsers.png"/>
+                    <Image Grid.Row="0" 
+                           Style="{StaticResource Icon.InsideTools}" Source="/Static/img/Action/ProfileAction/AddUsers.png">
+
+                    </Image>
 
                     <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
@@ -101,7 +104,8 @@
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/ChildViews/EditUsers.png"/>
+                    <Image Grid.Row="0" 
+                           Style="{StaticResource Icon.InsideTools}" Source="/Static/img/Action/ProfileAction/EditUsers.png" />
 
                     <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
@@ -127,7 +131,8 @@
                         <RowDefinition Height="15"/>
                     </Grid.RowDefinitions>
 
-                    <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Views/ChildViews/RemUsers.png"/>
+                    <Image Grid.Row="0" 
+                           Style="{StaticResource Icon.InsideTools}" Source="/Static/img/Action/ProfileAction/RemUsers.png" />
 
                     <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"

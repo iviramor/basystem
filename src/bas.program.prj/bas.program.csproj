@@ -23,6 +23,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\Roboto-Black.ttf" />
+    <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
+    <None Remove="Resources\Fonts\Roboto-Bold.ttf" />
+    <None Remove="Resources\Fonts\Roboto-BoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Roboto-Italic.ttf" />
+    <None Remove="Resources\Fonts\Roboto-Light.ttf" />
+    <None Remove="Resources\Fonts\Roboto-LightItalic.ttf" />
+    <None Remove="Resources\Fonts\Roboto-Medium.ttf" />
+    <None Remove="Resources\Fonts\Roboto-MediumItalic.ttf" />
+    <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
+    <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
+    <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
+    <None Remove="Resources\Image\Backgrounds\bg-flue.jpg" />
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
     <None Remove="Views\calculator.png" />
@@ -44,22 +57,38 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Views\bg-flue.jpg" />
-    <Resource Include="Views\calculator.png" />
-    <Resource Include="Views\ChildViews\AddUsers.png" />
-    <Resource Include="Views\ChildViews\EditUsers.png" />
-    <Resource Include="Views\ChildViews\RemUsers.png" />
-    <Resource Include="Views\compose.png" />
-    <Resource Include="Views\exit.png" />
-    <Resource Include="Views\funnel.png" />
-    <Resource Include="Views\plus.png" />
-    <Resource Include="Views\settings.png" />
-    <Resource Include="Views\trash.png" />
+    <Resource Include="Resources\Fonts\Roboto-Black.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-BlackItalic.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Bold.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-BoldItalic.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Italic.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Light.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-LightItalic.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-MediumItalic.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Regular.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-Thin.ttf" />
+    <Resource Include="Resources\Fonts\Roboto-ThinItalic.ttf" />
+    <Resource Include="Resources\Image\Action\Instruments\calculator.png" />
+    <Resource Include="Resources\Image\Action\ProfileAction\AddUsers.png" />
+    <Resource Include="Resources\Image\Action\ProfileAction\EditUsers.png" />
+    <Resource Include="Resources\Image\Action\ProfileAction\RemUsers.png" />
+    <Resource Include="Resources\Image\Action\Instruments\compose.png" />
+    <Resource Include="Resources\Image\Action\WindowAction\exit.png" />
+    <Resource Include="Resources\Image\Action\Instruments\funnel.png" />
+    <Resource Include="Resources\Image\Action\Instruments\plus.png" />
+    <Resource Include="Resources\Image\Action\WindowAction\settings.png" />
+    <Resource Include="Resources\Image\Action\Instruments\trash.png" />
+    <Resource Include="Resources\Image\Backgrounds\bg-flue.jpg" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 </Project>

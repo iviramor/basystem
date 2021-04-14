@@ -19,9 +19,9 @@
 
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="../Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="../Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="../../Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="../../Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="../../Styles/CommonButton.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
