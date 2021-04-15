@@ -14,7 +14,9 @@ namespace bas.program.ViewModels
         #region Действия с окном
 
         private bool _Visibility = true;
-
+        /// <summary>
+        /// Отображение и скрытие нужных элементов, Используется для статуса "Администратор"
+        /// </summary>
         public bool Visibility
         {
             get => _Visibility;
@@ -27,7 +29,9 @@ namespace bas.program.ViewModels
         }
 
         private bool _IsEnabled = true;
-
+        /// <summary>
+        /// Свойство для блокирования элементов в Главном меню
+        /// </summary>
         public bool IsEnabled
         {
             get => _IsEnabled;
@@ -40,7 +44,11 @@ namespace bas.program.ViewModels
         }
 
         private bool _AdminStatus;
-
+        /// <summary>
+        /// Свойство, в котором храниться статус Администратор, если true то 
+        /// пользователь является администратором
+        /// если false, то обычный пользователь
+        /// </summary>
         public bool AdminStatus
         {
             get
@@ -61,10 +69,15 @@ namespace bas.program.ViewModels
 
         #region Данные
 
+        /// <summary>
+        /// Поле с данными пользователя в текущей сессии.
+        /// </summary>
         public UserDataSession User = new();
 
         private string _UserName = null;
-
+        /// <summary>
+        /// Свойство блока Имя и Фамилия для правого верхнего угла "В системе: "
+        /// </summary>
         public string UserName
         {
             get => _UserName;
@@ -82,6 +95,9 @@ namespace bas.program.ViewModels
 
         #region Показать Меню авторизации
 
+        /// <summary>
+        /// Команда кнопки "Выйти из системы", выполняет выходи из системы
+        /// </summary>
         public ICommand ShowSignOutCommand { get; }
 
         private bool CanShowSignOutCommandExecuted(object p) => true;
@@ -100,21 +116,12 @@ namespace bas.program.ViewModels
 
         #endregion Показать Меню авторизации
 
-        #region Заблокировать окно
-
-        public ICommand EnableWindowCommand { get; }
-
-        private bool CanEnableWindowCommandExecuted(object p) => true;
-
-        private void OnEnableWindowCommandExecute(object p)
-        {
-            new HelloWindow().Show();
-        }
-
-        #endregion Заблокировать окно
 
         #region Профиль
 
+        /// <summary>
+        /// Команда для отображения окна "Профиля" текущего пользователя в системе
+        /// </summary>
         public ICommand ShowProfileCommand { get; }
 
         private bool CanShowProfileExecuted(object p) => true;
@@ -129,6 +136,9 @@ namespace bas.program.ViewModels
 
         #region Профили
 
+        /// <summary>
+        /// Отображение окна "Профили"
+        /// </summary>
         public ICommand ShowProfilesCommand { get; }
 
         private bool CanShowProfilesExecuted(object p) => true;
@@ -143,26 +153,42 @@ namespace bas.program.ViewModels
 
         #endregion Команды
 
+        #region Конструктор
+
+        /// <summary>
+        /// Конструктор Главного окна
+        /// </summary>
         public WorkSpaceWindowViewModel()
         {
-            if (!User.Session)
+            
+            /// Авторизация
+            if (!AuthorizeHelloWindow())
             {
-                if (!AuthorizeHelloWindow())
-                {
-                    Application.Current.Shutdown();
-                }
+                Application.Current.Shutdown();
             }
 
+            #region Команды 
+
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
-            EnableWindowCommand = new ActionCommand(OnEnableWindowCommandExecute, CanEnableWindowCommandExecuted);
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
             ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
+
+            #endregion
         }
+
+        #endregion
 
         #region Диалоговые окна
 
         #region Окно авторизации
 
+        /// <summary>
+        /// Создает и отображает Окно авторизации
+        /// </summary>
+        /// <returns> 
+        /// True - если пользователь прошел авторизацию
+        /// False - если не закрыл окно и не прошел регистрацию
+        /// </returns>
         private bool AuthorizeHelloWindow()
         {
             new HelloWindowViewModel(this).ShowHelloWindow();
