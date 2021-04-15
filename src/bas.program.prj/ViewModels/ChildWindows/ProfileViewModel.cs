@@ -13,6 +13,7 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class ProfileViewModel : ViewModel
     {
+
         #region Поля и свойства
 
         /// <summary>

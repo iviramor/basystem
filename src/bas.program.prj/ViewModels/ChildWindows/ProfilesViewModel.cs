@@ -17,13 +17,25 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Поля и Свойства
 
+        /// <summary>
+        /// Окно Профилей
+        /// </summary>
         private ProfilesWindow _ProfilesWindow;
-        public WorkSpaceWindowViewModel _workSpaceWindowViewModel { get; private set; }
 
+        /// <summary>
+        /// ViewModel главного меню
+        /// </summary>
+        public readonly WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+
+        /// <summary>
+        /// База данных или же Контекст моделей
+        /// </summary>
         private readonly BankDbContext _DataBase;
 
         private Bank_user _SelectedItem;
-
+        /// <summary>
+        /// Свойство - Выделенный Профиль в таблице всех профилей
+        /// </summary>
         public Bank_user SelectedItem
         {
             get => _SelectedItem;
@@ -36,7 +48,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private List<Bank_user> _Bank_users;
-
+        /// <summary>
+        /// Данные пользователя
+        /// </summary>
         public List<Bank_user> Bank_users
         {
             get
@@ -57,26 +71,36 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Удалить
 
+
+        /// <summary>
+        /// Команда для удаления профиля
+        /// </summary>
         public ICommand RemoveDataCommand { get; }
 
         private bool CanRemoveDataCommandExecuted(object p) => true;
 
         private void OnRemoveDataCommandExecute(object p)
         {
+            /// Проверяет выделен ли профиль в таблице
+            /// если нет, то показывает уведомление ошибкой
             if (SelectedItem != null)
             {
+                /// Проверяет, является ли выделенный Профиль
+                /// уже авторизованным в данной сессии
                 if (SelectedItem.User_id != _workSpaceWindowViewModel.User.User.User_id)
                 {
+                    /// Проверяет, является ли профиль Администратором
                     if (SelectedItem.User_status_to_system != 1)
                     {
-
+                        /// Сообщение, для подтверждения пароля
                         var PasswordWindow = new ConfirmPasswordViewModel();
+                        /// Отображение сообщения и запись вводимого в
+                        /// окне пароля
                         var password =  PasswordWindow.ShowMessagePassword();
-
-                        if (password == null)
-                        {
-                            return;
-                        }
+                        
+                        /// Проверка есть ли пароль
+                        if (password == null) return;
+                        /// Сравнивает введенный пароль с паролем пользователя
                         else if (password == _workSpaceWindowViewModel.User.User.User_password)
                         {
                             _DataBase.Remove(SelectedItem);
@@ -87,17 +111,15 @@ namespace bas.program.ViewModels.ChildWindows
                             MessageBox.Show($"Успех");
                             return;
                         }
+                        /// если пароль не подходить, то сообщение об ошибке Ввода
                         else
-                        {
                             MessageBox.Show("Неверный пароль!", "Ошибка ввода", MessageBoxButton.OK,
-                                MessageBoxImage.Error);
-                            
-                        }
+                            MessageBoxImage.Error);
 
                         return;
                     }
 
-                    MessageBox.Show("Удалять Профиль со статусом - Администатор, запрещено", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBox.Show("Удалять Профиль со статусом - Администратор, запрещено", "Ошибка ввода", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     return;
                 }
