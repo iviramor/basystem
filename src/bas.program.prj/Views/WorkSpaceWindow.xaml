@@ -120,14 +120,24 @@
 
             </Menu>
 
-            <Border Grid.Column="1"
-                    Background="{StaticResource Main.Collour}">
-                <TextBlock Text="{Binding UserName}"
-                           Margin="0,0,30,0"
+
+
+
+            <Border Background="{StaticResource Menu.Static.Background}" 
+                    Grid.Column="1">
+                <TextBlock Margin="0,0,30,0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
-                           FontFamily="Roboto"/>
+                           FontFamily="Roboto">
+                    
+                    <Run Text="В системе: " />
+                    <Run Text="{Binding UserName}"/>
+                </TextBlock>
+                
+
+
             </Border>
+
 
 
         </Grid>
