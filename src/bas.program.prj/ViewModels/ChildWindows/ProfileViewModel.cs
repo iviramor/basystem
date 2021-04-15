@@ -109,10 +109,13 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion Видимость элементов
 
-        #region Лист со статусами
+        #region Лист со статусами, для окна Добавить профиль
+
 
         private List<Bank_user_status> _BankStatuses;
-
+        /// <summary>
+        /// Список всех статусов в банке
+        /// </summary>
         public List<Bank_user_status> BankStatuses
         {
             get => _BankStatuses;
@@ -125,7 +128,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private Bank_user_status _SelectedStatus;
-
+        /// <summary>
+        /// Храниться выделенный в списке статус, для добавления
+        /// </summary>
         public Bank_user_status SelectedStatus
         {
             get => _SelectedStatus;
@@ -142,7 +147,9 @@ namespace bas.program.ViewModels.ChildWindows
         #region Свойства пользователя
 
         public string _Name;
-
+        /// <summary>
+        /// Имя пользователя(Профиля)
+        /// </summary>
         public string Name
         {
             get => _Name;
@@ -165,7 +172,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Surname;
-
+        /// <summary>
+        /// Фамилия пользователя(Профиля)
+        /// </summary>
         public string Surname
         {
             get => _Surname;
@@ -188,7 +197,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Patronymic;
-
+        /// <summary>
+        /// Отчество пользователя(Профиля)
+        /// </summary>
         public string Patronymic
         {
             get => _Patronymic;
@@ -211,7 +222,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private DateTime _Age;
-
+        /// <summary>
+        /// Возраст пользователя(Профиля)
+        /// </summary>
         public DateTime Age
         {
             get => _Age;
@@ -224,7 +237,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Login;
-
+        /// <summary>
+        /// Логин пользователя(Профиля)
+        /// </summary>
         public string Login
         {
             get => _Login;
@@ -247,7 +262,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Password;
-
+        /// <summary>
+        /// Пароль пользователя(Профиля)
+        /// </summary>
         public string Password
         {
             get => _Password;
@@ -273,7 +290,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private bool _Sex;
-
+        /// <summary>
+        /// Пол пользователя(Профиля)
+        /// </summary>
         public bool Sex
         {
             get => _Sex;
@@ -286,7 +305,9 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private DateTime _Register_data;
-
+        /// <summary>
+        /// Дата регистрации пользователя(Профиля)
+        /// </summary>
         public DateTime Register_data
         {
             get => _Register_data;
@@ -306,6 +327,10 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Обновление
 
+
+        /// <summary>
+        /// Команда обновления данных
+        /// </summary>
         public ICommand UpdateDataCommand { get; }
 
         #region Изменение данных
@@ -314,8 +339,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void OnUpdateDataCommandExecute(object p)
         {
-            /// Смена имени пользователя в главом окне
-            _workSpaceWindowViewModel.UserName = _Name;
+            /// Смена имени пользователя в главном окне
+            _workSpaceWindowViewModel.UserName =  $"{_Name} {_Surname}";
 
             #region Смена изменений в сессии пользователя
 
@@ -335,7 +360,7 @@ namespace bas.program.ViewModels.ChildWindows
             _DataBase.Update(_workSpaceWindowViewModel.User.User);
             _DataBase.SaveChanges();
 
-            /// Уведомление об успешой операции
+            /// Уведомление об успешной операции
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -360,7 +385,7 @@ namespace bas.program.ViewModels.ChildWindows
             /// Сравнение сессии и изменяемого Профиля, для смены имени окна
             if (_ProfilesWiewModel._workSpaceWindowViewModel.User.User.User_id == _BankUser.User_id)
             {
-                _ProfilesWiewModel._workSpaceWindowViewModel.UserName = _BankUser.User_name + " " + _BankUser.User_surname;
+                _ProfilesWiewModel._workSpaceWindowViewModel.UserName = $"{_Name} {_Surname}";
             }
 
             /// Изменение данных в базе данных
@@ -370,7 +395,7 @@ namespace bas.program.ViewModels.ChildWindows
             /// Обновление таблицы в Профилях
             _ProfilesWiewModel.UpdateTable();
 
-            /// Уведомление об успешой операции
+            /// Уведомление об успешной операции
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
@@ -419,6 +444,9 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Закрыть окно
 
+        /// <summary>
+        /// Команда закрытия окна Профиля
+        /// </summary>
         public ICommand CloseProfileCommand { get; }
 
         private bool CanCloseProfileCommandExecuted(object p) => true;
@@ -432,6 +460,12 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion Команды
 
+        #region Конструкторы 
+
+        /// <summary>
+        /// Конструктор для изменения профиля в Главном меню
+        /// </summary>
+        /// <param name="workVM">ViewModel Главного окна</param>
         public ProfileViewModel(WorkSpaceWindowViewModel workVM)
         {
             /// Главное окно
@@ -440,7 +474,7 @@ namespace bas.program.ViewModels.ChildWindows
             /// Контекст базы данных
             _DataBase = workVM.User.DataBase;
 
-            #region Значение совойств пользователя
+            #region Значение свойство пользователя
 
             _Name = workVM.User.User.User_name;
             _Surname = workVM.User.User.User_surname;
@@ -451,10 +485,11 @@ namespace bas.program.ViewModels.ChildWindows
             _Register_data = workVM.User.User.User_register_data;
             _Age = workVM.User.User.User_age;
 
-            #endregion Значение совойств пользователя
+            #endregion Значение свойство пользователя
 
             #region Ограничение доступа к полям
 
+            /// Проверка На статус Администратор
             if (workVM.User.User.User_status_to_system == 1) _StatusEnable = false;
             else if (workVM.User.User.User_status_to_system == 2)
             {
@@ -479,6 +514,11 @@ namespace bas.program.ViewModels.ChildWindows
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
         }
 
+        /// <summary>
+        /// Конструктор для редактирования профиля пользователя
+        /// </summary>
+        /// <param name="profilesWM">ViewModel Окна профилей</param>
+        /// <param name="bankUser">Объект Bank_user заполненный данными из выбранного(Selected) в таблице</param>
         public ProfileViewModel(ProfilesViewModel profilesWM, Bank_user bankUser)
         {
             /// Окно с профилями
@@ -490,7 +530,7 @@ namespace bas.program.ViewModels.ChildWindows
             /// Данные Профиля (пользователя)
             _BankUser = bankUser;
 
-            #region Значение совойств пользователя
+            #region Значение свойство пользователя
 
             _Name = bankUser.User_name;
             _Surname = bankUser.User_surname;
@@ -501,7 +541,7 @@ namespace bas.program.ViewModels.ChildWindows
             _Register_data = bankUser.User_register_data;
             _Age = bankUser.User_age;
 
-            #endregion Значение совойств пользователя
+            #endregion Значение свойство пользователя
 
             /// Разблокировать список статусов
             _StatusEnable = true;
@@ -528,6 +568,11 @@ namespace bas.program.ViewModels.ChildWindows
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
         }
 
+        /// <summary>
+        /// Конструктор для добавления Нового профиля
+        /// </summary>
+        /// <param name="profilesWM">ViewModel Окна профилей</param>
+        /// <param name="actionName">Название операции</param>
         public ProfileViewModel(ProfilesViewModel profilesWM, string actionName)
         {
             _NameAction = actionName;
@@ -551,6 +596,8 @@ namespace bas.program.ViewModels.ChildWindows
             UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
         }
+
+        #endregion
 
         public void ShowProfileWindow()
         {
