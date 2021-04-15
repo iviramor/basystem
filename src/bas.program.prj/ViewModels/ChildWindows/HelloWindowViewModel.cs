@@ -9,14 +9,22 @@ namespace bas.program.ViewModels
 {
     public class HelloWindowViewModel : ViewModel
     {
+        /// <summary>
+        /// ViewModel главного окна
+        /// </summary>
         private readonly WorkSpaceWindowViewModel _workSpaceWindowViewModel;
 
+        /// <summary>
+        /// Окно HelloWindow
+        /// </summary>
         private HelloWindow _HelloWindow;
 
         #region Логин
 
         private string _Login = "";
-
+        /// <summary>
+        /// Свойство поля ввода Логина
+        /// </summary>
         public string Login
         {
             get => _Login;
@@ -33,7 +41,9 @@ namespace bas.program.ViewModels
         #region Пароль
 
         public string _Password = "";
-
+        /// <summary>
+        /// Свойство поля ввода Пароля
+        /// </summary>
         public string Password
         {
             get => _Password;
@@ -51,6 +61,12 @@ namespace bas.program.ViewModels
 
         #region Авторизация
 
+        /// <summary>
+        /// Команда для авторизации в системе, если не нашел, 
+        /// то выводит сообщение
+        /// если найден, то в сессию помещает пользователя 
+        /// и открывает Главное окно, в соответствии с ролью
+        /// </summary>
         public ICommand SignInCommand { get; }
 
         private bool CanSignInCommandExecuted(object p) => true;
@@ -63,7 +79,7 @@ namespace bas.program.ViewModels
 
             if (user != null)
             {
-                _workSpaceWindowViewModel.UserName = $"В системе: {user.User_name} {user.User_patronymic}";
+                _workSpaceWindowViewModel.UserName = $"{user.User_name} {user.User_patronymic}";
                 _workSpaceWindowViewModel.User.User = user;
                 _workSpaceWindowViewModel.User.Session = true;
                 if (user.User_status_to_system == 1) _workSpaceWindowViewModel.AdminStatus = true;
@@ -76,12 +92,19 @@ namespace bas.program.ViewModels
 
         #endregion Команды
 
+        /// <summary>
+        /// Конструктор ViewModel для HelloWindow
+        /// </summary>
+        /// <param name="workWindow">ViewModel Главного окна</param>
         public HelloWindowViewModel(WorkSpaceWindowViewModel workWindow)
         {
             _workSpaceWindowViewModel = workWindow;
             SignInCommand = new ActionCommand(OnSignInCommandExecute, CanSignInCommandExecuted);
         }
 
+        /// <summary>
+        /// Отображает окно HelloWindow
+        /// </summary>
         public void ShowHelloWindow()
         {
             _HelloWindow = new HelloWindow
