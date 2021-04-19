@@ -231,7 +231,7 @@ namespace bas.program.ViewModels.ChildWindows
             get => _Age;
             set
             {
-                if (Equals(_Age, value)) return;
+
                 _Age = value;
                 OnPropertyChanged();
             }

@@ -225,13 +225,17 @@
                     <Run FontSize="8" Text="(Год-Месяц-День)"/>
                 </TextBlock>
 
-                <TextBox Grid.Column="0"
-                         Style="{DynamicResource CommonTextBoxStyle}"
-                         Margin="10"
-                         Height="40"
-                         IsEnabled="{Binding IsEnabled}"
-                         VerticalAlignment="Bottom"
-                         Text="{Binding Age, StringFormat='yyyy-MM-dd'}"/>
+
+
+                <DatePicker Grid.Column="0"
+                            Margin="10"
+                            Height="40"
+                            IsEnabled="{Binding IsEnabled}"
+                            VerticalAlignment="Bottom"
+                            SelectedDateFormat="Short"
+                            SelectedDate="{Binding Age}">
+
+                </DatePicker>
 
 
                 <TextBlock Grid.Column="1"
