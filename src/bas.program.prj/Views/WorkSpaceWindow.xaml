@@ -115,6 +115,7 @@
                           Height="40"
                           Padding="20, 0, 20, 0"
                           FontFamily="Roboto Medium" 
+                          Command="{Binding ShowAdministratorCommand}"
                           Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
 

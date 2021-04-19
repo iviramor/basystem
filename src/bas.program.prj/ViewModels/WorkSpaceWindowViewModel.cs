@@ -116,7 +116,6 @@ namespace bas.program.ViewModels
 
         #endregion Показать Меню авторизации
 
-
         #region Профиль
 
         /// <summary>
@@ -151,6 +150,20 @@ namespace bas.program.ViewModels
 
         #endregion Профили
 
+        #region Администратор
+        public ICommand ShowAdministratorCommand { get; }
+
+        private bool CanShowAdministratorCommandExecuted(object p) => true;
+
+        private void OnShowAdministratorCommandExecute(object p)
+        {
+            AdministratorViewModel adminVM = new();
+            adminVM.ShowAdministratorWindow();
+
+        }
+
+        #endregion
+
         #endregion Команды
 
         #region Конструктор
@@ -172,6 +185,7 @@ namespace bas.program.ViewModels
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
             ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
+            ShowAdministratorCommand = new ActionCommand(OnShowAdministratorCommandExecute, CanShowAdministratorCommandExecuted);
 
             #endregion
         }
