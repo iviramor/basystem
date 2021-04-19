@@ -5,8 +5,222 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
-        Title="AdministratorWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        WindowStartupLocation="CenterScreen"
+        Title="AdministratorWindow" Height="600" Width="940">
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
+                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
+
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Roboto"/>
+            </Style>
+
+        </ResourceDictionary>
+
+
+
+    </Window.Resources>
+
+    <DockPanel>
+
+        <Menu DockPanel.Dock="Top"
+              Height="40px" 
+              Background="{StaticResource Main.Collour}" 
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+            <MenuItem Header="Доступ к таблицам"
+                      Height="40"
+                      Padding="20, 0, 20, 0"
+                      FontFamily="Roboto Medium" 
+                      Command=""
+                      Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
+
+            </MenuItem>
+
+
+
+        </Menu>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <!--#region Сетка с действиями-->
+
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Действия" 
+                       Style="{StaticResource TextBlockToolsBar}"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+
+                <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    Style="{DynamicResource Button.ToolsBar}"
+                    Command="{Binding AddDataCommand}"
+                    Grid.Row="1" Grid.Column="0">
+
+                    <!--#region Внутри кнопки-->
+
+                    <Grid Width="80" Height="90">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" 
+                           Style="{StaticResource Icon.InsideTools}" >
+
+                        </Image>
+
+                        <TextBlock Grid.Row="1"
+                               Style="{StaticResource Button.InsideTools}"
+                               Text="Добавить"/>
+
+                    </Grid>
+
+                    <!--#endregion-->
+
+                </Button>
+
+                <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    Style="{StaticResource Button.ToolsBar}"
+                    Grid.Row="3" Grid.Column="0"
+                    Command="{Binding EditDataCommand}">
+
+                    <!--#region Внутри кнопки-->
+
+                    <Grid Width="80" Height="90">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" 
+                           Style="{StaticResource Icon.InsideTools}" />
+
+                        <TextBlock Grid.Row="1"
+                               Style="{StaticResource Button.InsideTools}"
+                               Text="Изменить"/>
+
+                    </Grid>
+
+                    <!--#endregion-->
+
+                </Button>
+
+                <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    Style="{StaticResource Button.ToolsBar}"
+                    Grid.Row="5" Grid.Column="0"
+                    Command="{Binding RemoveDataCommand}">
+
+                    <!--#region Внутри кнопки-->
+
+                    <Grid Width="80" Height="90">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="75"/>
+                            <RowDefinition Height="15"/>
+                        </Grid.RowDefinitions>
+
+                        <Image Grid.Row="0" 
+                           Style="{StaticResource Icon.InsideTools}" />
+
+                        <TextBlock Grid.Row="1"
+                               Style="{StaticResource Button.InsideTools}"
+                               Text="Удалить"/>
+
+                    </Grid>
+
+                    <!--#endregion-->
+
+                </Button>
+
+            </Grid>
+
+            <!--#endregion-->
+
+            <!--#region Таблица с пользователями-->
+
+            <DataGrid Style="{DynamicResource CommonDataGridTemplate}" 
+                  ItemsSource="{Binding Bank_users}"
+                  ColumnWidth="*"
+                  AutoGenerateColumns="False"
+                  Grid.Row="1" Grid.Column="1"
+                  IsReadOnly="True"
+                  CanUserResizeColumns="False">
+
+                <DataGrid.Columns>
+                    
+                    <DataGridTextColumn Header="Наименование"/>
+
+                    <DataGridTextColumn Header="Описание" />
+
+                    <DataGridTextColumn Header="Кол-во доступа" />
+
+                </DataGrid.Columns>
+
+
+            </DataGrid>
+
+
+            <!--#endregion-->
+
+            <Button Grid.Row="3" Grid.Column="1" 
+                Width="150"
+                HorizontalAlignment="Left"
+                Style="{StaticResource ButtonStyle}"
+                Template="{StaticResource ButtonTemplate}"
+                Content="Назад" 
+                Command="{Binding CloseProfilesCommand}">
+
+            </Button>
+
+
+
+
+        </Grid>
+
+    </DockPanel>
+
+
 </Window>
