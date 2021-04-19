@@ -14,7 +14,6 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class ProfilesViewModel : ViewModel
     {
-
         #region Поля и Свойства
 
         /// <summary>
@@ -33,6 +32,7 @@ namespace bas.program.ViewModels.ChildWindows
         private readonly BankDbContext _DataBase;
 
         private Bank_user _SelectedItem;
+
         /// <summary>
         /// Свойство - Выделенный Профиль в таблице всех профилей
         /// </summary>
@@ -48,6 +48,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private List<Bank_user> _Bank_users;
+
         /// <summary>
         /// Данные пользователя
         /// </summary>
@@ -70,7 +71,6 @@ namespace bas.program.ViewModels.ChildWindows
         #region Команды
 
         #region Удалить
-
 
         /// <summary>
         /// Команда для удаления профиля
@@ -96,8 +96,8 @@ namespace bas.program.ViewModels.ChildWindows
                         var PasswordWindow = new ConfirmPasswordViewModel();
                         /// Отображение сообщения и запись вводимого в
                         /// окне пароля
-                        var password =  PasswordWindow.ShowMessagePassword();
-                        
+                        var password = PasswordWindow.ShowMessagePassword();
+
                         /// Проверка есть ли пароль
                         if (password == null) return;
                         /// Сравнивает введенный пароль с паролем пользователя

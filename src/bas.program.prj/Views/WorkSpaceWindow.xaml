@@ -7,12 +7,11 @@
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
         Title="WorkSpaceWindow" Height="600" Width="1172" WindowState="Maximized"
-        IsEnabled = "{Binding IsEnabled}" Icon="/bank.ico" 
+        IsEnabled = "{Binding IsEnabled}" Icon="/bank.ico"
         WindowStartupLocation="CenterScreen">
 
-
     <Window.DataContext>
-        <viewModels:WorkSpaceWindowViewModel/>
+        <viewModels:WorkSpaceWindowViewModel />
     </Window.DataContext>
 
     <Window.Resources>
@@ -20,62 +19,52 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
-                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
-                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
+                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml" />
+                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml" />
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
-            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
-
+            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C" />
 
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontFamily" Value="Roboto" />
             </Style>
-
         </ResourceDictionary>
-
-
-
     </Window.Resources>
-
-
 
     <Window.Style>
         <Style TargetType="Window">
             <!--#region Показ/скрыть-->
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Visibility}" Value="True">
-                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="Visibility" Value="Visible" />
                 </DataTrigger>
                 <DataTrigger Binding="{Binding Visibility}" Value="False">
-                    <Setter Property="Visibility" Value="Hidden"/>
+                    <Setter Property="Visibility" Value="Hidden" />
                 </DataTrigger>
             </Style.Triggers>
             <!--#endregion-->
         </Style>
     </Window.Style>
 
-
     <DockPanel>
-
 
         <Grid DockPanel.Dock="Top">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-
-            <Menu 
-                Height="40px" 
-                Background="{StaticResource Main.Collour}" 
+            <Menu
+                Height="40px"
+                Background="{StaticResource Main.Collour}"
                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
-                <MenuItem Style="{DynamicResource ButtonTopMenu}"   
+                <MenuItem Style="{DynamicResource ButtonTopMenu}"
                           Header="Профиль"
                           Height="40"
                           Padding="20, 0, 20, 0"
@@ -86,27 +75,25 @@
                               FontFamily="Roboto Medium"
                               Command="{Binding ShowProfileCommand}">
                         <MenuItem.Icon>
-                            <Image Source="/Resources/Image/Action/WindowAction/settings.png" Stretch="Fill"/>
+                            <Image Source="/Resources/Image/Action/WindowAction/settings.png" Stretch="Fill" />
                         </MenuItem.Icon>
                     </MenuItem>
 
                     <MenuItem Header="Выйти из профиля"
                               Height="40"
-                              FontFamily="Roboto Medium" 
+                              FontFamily="Roboto Medium"
                               Command="{Binding Path=ShowSignOutCommand}">
 
                         <MenuItem.Icon>
-                            <Image Source="/Resources/Image/Action/WindowAction/exit.png" Stretch="Fill"/>
+                            <Image Source="/Resources/Image/Action/WindowAction/exit.png" Stretch="Fill" />
                         </MenuItem.Icon>
-
                     </MenuItem>
-
                 </MenuItem>
 
                 <MenuItem Header="Профили"
                           Height="40"
                           Padding="20, 0, 20, 0"
-                          FontFamily="Roboto Medium" 
+                          FontFamily="Roboto Medium"
                           Command="{Binding ShowProfilesCommand}"
                           Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
@@ -114,37 +101,26 @@
                 <MenuItem Header="Администратор"
                           Height="40"
                           Padding="20, 0, 20, 0"
-                          FontFamily="Roboto Medium" 
+                          FontFamily="Roboto Medium"
                           Command="{Binding ShowAdministratorCommand}"
                           Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
-
             </Menu>
 
-
-
-
-            <Border Background="{StaticResource Menu.Static.Background}" 
+            <Border Background="{StaticResource Menu.Static.Background}"
                     Grid.Column="1">
                 <TextBlock Margin="0,0,30,0"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Right"
                            FontFamily="Roboto">
-                    
+
                     <Run Text="В системе: " />
-                    <Run Text="{Binding UserName}"/>
+                    <Run Text="{Binding UserName}" />
                 </TextBlock>
-                
-
-
             </Border>
-
-
-
         </Grid>
 
         <StatusBar DockPanel.Dock="Bottom" Height="28">
-
         </StatusBar>
 
         <DockPanel>
@@ -152,15 +128,15 @@
             <Grid DockPanel.Dock="Top">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="300"/>
-                    <ColumnDefinition Width="350"/>
-                    <ColumnDefinition Width="240"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="300" />
+                    <ColumnDefinition Width="350" />
+                    <ColumnDefinition Width="240" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1*"/>
-                    <RowDefinition Height="0.1"/>
+                    <RowDefinition Height="1*" />
+                    <RowDefinition Height="0.1" />
                 </Grid.RowDefinitions>
 
                 <!--#region Таблица-->
@@ -168,60 +144,56 @@
                 <Grid Grid.Column="0" Height="130">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="110"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="110" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Row="0">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="35"/>
-                            <RowDefinition/>
+                            <RowDefinition Height="35" />
+                            <RowDefinition />
                         </Grid.RowDefinitions>
 
                         <TextBlock Text="Текущая таблица"
                                    Width="200"
                                    Grid.Row="0"
                                    HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom" FontFamily="Roboto Medium"/>
+                                   VerticalAlignment="Bottom" FontFamily="Roboto Medium" />
 
-                        <ComboBox Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}" 
+                        <ComboBox Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
                                   Width="230" Height="30"
                                   Margin="0, 3"
                                   VerticalAlignment="Center"
                                   Grid.Row="1" FontFamily="Roboto Medium">
 
                             <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
-                                          Content="Таблица 1" 
-                                          IsSelected="True"/>
+                                          Content="Таблица 1"
+                                          IsSelected="True" />
 
                             <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
-                                          Content="Таблица 2"/>
-
+                                          Content="Таблица 2" />
                         </ComboBox>
                     </Grid>
 
-
-                    <TextBlock Text="Таблица" 
+                    <TextBlock Text="Таблица"
                                Grid.Row="1"
                                Style="{StaticResource TextBlockToolsBar}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
-
                     </TextBlock>
 
-                    <Rectangle Height="80" Width="0.1" 
+                    <Rectangle Height="80" Width="0.1"
                                Grid.Column="1"
                                Grid.RowSpan="2"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Fill="Black"/>
-
+                               Fill="Black" />
                 </Grid>
 
                 <!--#endregion-->
@@ -231,20 +203,18 @@
                 <Grid Grid.Column="1" Height="130">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="110"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="110" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
 
-
-
-                    <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                    <Button Template="{DynamicResource ButtonTemplateToolBar}"
                             Style="{StaticResource Button.ToolsBar}"
                             Grid.Row="0" Grid.Column="0">
 
@@ -253,24 +223,22 @@
                         <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="75"/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
 
                             <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/compose.png" />
 
                             <TextBlock Grid.Row="1"
                                       Style="{StaticResource Button.InsideTools}"
-                                      Text="Редактировать"/>
-
+                                      Text="Редактировать" />
                         </Grid>
 
                         <!--#endregion-->
-
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="1"
-                            Template="{DynamicResource ButtonTemplateToolBar}" 
+                            Template="{DynamicResource ButtonTemplateToolBar}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -278,25 +246,22 @@
                         <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="75"/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
 
                             <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/plus.png" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
-                                       Text="Добавить"/>
-
+                                       Text="Добавить" />
                         </Grid>
 
                         <!--#endregion-->
-
-
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="2"
-                            Template="{DynamicResource ButtonTemplateToolBar}" 
+                            Template="{DynamicResource ButtonTemplateToolBar}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -304,39 +269,34 @@
                         <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="75"/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/trash.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/trash.png" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
-                                       Text="Удалить"/>
-
+                                       Text="Удалить" />
                         </Grid>
 
                         <!--#endregion-->
-
                     </Button>
 
-
-                    <TextBlock Text="Изменение" 
+                    <TextBlock Text="Изменение"
                                Grid.Row="1"
                                Grid.ColumnSpan="3"
                                Style="{StaticResource TextBlockToolsBar}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
-
                     </TextBlock>
 
-                    <Rectangle Height="80" Width="0.1" 
+                    <Rectangle Height="80" Width="0.1"
                                Grid.Column="3"
                                Grid.RowSpan="2"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Fill="Black"/>
-
+                               Fill="Black" />
                 </Grid>
 
                 <!--#endregion-->
@@ -346,20 +306,18 @@
                 <Grid Grid.Column="2" Height="130">
 
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="110"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="110" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
 
-
-
                     <Button Grid.Row="0" Grid.Column="0"
-                            Template="{DynamicResource ButtonTemplateToolBar}" 
+                            Template="{DynamicResource ButtonTemplateToolBar}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -367,25 +325,22 @@
                         <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="75"/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/funnel.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/funnel.png" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
-                                       Text="Фильтр"/>
-
+                                       Text="Фильтр" />
                         </Grid>
 
                         <!--#endregion-->
-
-
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="1"
-                            Template="{DynamicResource ButtonTemplateToolBar}" 
+                            Template="{DynamicResource ButtonTemplateToolBar}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -393,63 +348,46 @@
                         <Grid Width="80" Height="90">
 
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="75"/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition Height="75" />
+                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
 
-                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/calculator.png"/>
+                            <Image Grid.Row="0" Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/Instruments/calculator.png" />
 
                             <TextBlock Grid.Row="1"
                                        Style="{StaticResource Button.InsideTools}"
-                                       Text="Расчеты"/>
-
+                                       Text="Расчеты" />
                         </Grid>
 
                         <!--#endregion-->
-
-
                     </Button>
 
-
-                    <TextBlock Text="Действия" 
+                    <TextBlock Text="Действия"
                                Grid.Row="1"
                                Grid.ColumnSpan="2"
                                Style="{StaticResource TextBlockToolsBar}"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
-
                     </TextBlock>
 
-                    <Rectangle Height="80" Width="0.1" 
+                    <Rectangle Height="80" Width="0.1"
                                Grid.Column="2"
                                Grid.RowSpan="2"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"
-                               Fill="Black"/>
-
+                               Fill="Black" />
                 </Grid>
 
                 <!--#endregion-->
 
-                <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="0.1" Fill="Black"/>
-
+                <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="0.1" Fill="Black" />
             </Grid>
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
             </Grid>
-
-
         </DockPanel>
-
-
-
-
-
     </DockPanel>
-
-
-
 </Window>

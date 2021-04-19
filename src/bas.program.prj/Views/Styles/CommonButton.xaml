@@ -1,28 +1,25 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <SolidColorBrush x:Key="Collour" Color="#FBF37C"/>
-    <SolidColorBrush x:Key="IsMouseOver.Collour" Color="#F5E932"/>
-
+    <SolidColorBrush x:Key="Collour" Color="#FBF37C" />
+    <SolidColorBrush x:Key="IsMouseOver.Collour" Color="#F5E932" />
 
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{StaticResource Collour}"/>
-        <Setter Property="Cursor" Value="Hand"/>
-        <Setter Property="FontFamily" Value="Roboto"/>
+        <Setter Property="Background" Value="{StaticResource Collour}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FontFamily" Value="Roboto" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource IsMouseOver.Collour}"/>
+                <Setter Property="Background" Value="{StaticResource IsMouseOver.Collour}" />
             </Trigger>
         </Style.Triggers>
     </Style>
-
 
     <ControlTemplate x:Key="ButtonTemplate" TargetType="{x:Type Button}">
         <Border CornerRadius="20"
                 Background="{TemplateBinding Background}">
             <ContentPresenter VerticalAlignment="Center"
-                              HorizontalAlignment="Center"/>
+                              HorizontalAlignment="Center" />
         </Border>
     </ControlTemplate>
-
 </ResourceDictionary>

@@ -1,44 +1,34 @@
 ﻿<Window x:Class="bas.program.Views.ChildViews.ProfileWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
-        Title="ProfileWindow" 
+        Title="ProfileWindow"
         Height="480" Width="800"
         x:Name="window" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
 
-        
         <ResourceDictionary>
 
-
-
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
-                <ResourceDictionary Source="Styles/CommonDatePickerStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/CommonButton.xaml" />
+                <ResourceDictionary Source="Styles/CommonDatePickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-
-            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter"/>
-            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
             <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-                <Setter Property="FontFamily" Value="Roboto"/>
-                <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="Margin" Value="10" />
             </Style>
-
         </ResourceDictionary>
-
-
-
     </Window.Resources>
 
     <Grid>
@@ -46,46 +36,46 @@
         <!--#region Сетка-->
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
 
         <!--#endregion-->
 
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
             <!--#region Имя-->
-                
+
             <TextBlock Grid.Row="0" Grid.Column="0"
                        Text="Имя"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
-            <TextBox Style="{DynamicResource CommonTextBoxStyle}" 
+            <TextBox Style="{DynamicResource CommonTextBoxStyle}"
                      Height="40"
                      Margin="10"
                      IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Name}"/>
+                     Text="{Binding Name}" />
 
             <!--#endregion-->
 
@@ -94,7 +84,7 @@
             <TextBlock Grid.Row="1" Grid.Column="0"
                        Text="Фамилия"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
             <TextBox Grid.Row="1" Grid.Column="0"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -102,7 +92,7 @@
                      Height="40"
                      IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Surname}"/>
+                     Text="{Binding Surname}" />
 
             <!--#endregion-->
 
@@ -111,7 +101,7 @@
             <TextBlock Grid.Row="2" Grid.Column="0"
                        Text="Отчество"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
             <TextBox Grid.Row="2" Grid.Column="0"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -119,7 +109,7 @@
                      Height="40"
                      IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Patronymic}"/>
+                     Text="{Binding Patronymic}" />
 
             <!--#endregion-->
 
@@ -128,7 +118,7 @@
             <TextBlock Grid.Row="0" Grid.Column="1"
                        Text="Имя пользователя сотрудника"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
             <TextBox Grid.Row="0" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -136,7 +126,7 @@
                      Height="40"
                      IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Login}"/>
+                     Text="{Binding Login}" />
 
             <!--#endregion-->
 
@@ -145,7 +135,7 @@
             <TextBlock Grid.Row="1" Grid.Column="1"
                        Text="Пароль"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
             <TextBox Grid.Row="1" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -153,7 +143,7 @@
                      Height="40"
                      IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Password}"/>
+                     Text="{Binding Password}" />
 
             <!--#endregion-->
 
@@ -162,27 +152,24 @@
             <TextBlock Grid.Row="2" Grid.Column="1"
                        Text="Пол"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
             <ComboBox Template="{StaticResource ComboBoxTemplate}" Grid.Row="2" Grid.Column="1"
                       Margin="10"
                       Height="40"
                       IsEnabled="{Binding IsEnabled}"
-                      VerticalAlignment="Bottom" >
+                      VerticalAlignment="Bottom">
 
                 <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
                               Template="{DynamicResource CommonComboBoxItemTemplate}"
                               Content="Мужской"
                               IsSelected="{Binding Sex}">
-
                 </ComboBoxItem>
 
                 <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
                               Template="{DynamicResource CommonComboBoxItemTemplate}"
                               Content="Женский"
-                              IsSelected="{Binding Sex, Converter={StaticResource InverseBooleanConverter}}"/>
-
-
+                              IsSelected="{Binding Sex, Converter={StaticResource InverseBooleanConverter}}" />
             </ComboBox>
 
             <!--#endregion-->
@@ -193,7 +180,7 @@
                        Text="Статус"
                        Style="{StaticResource TextBlockStyle}"
                        Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
-                       VerticalAlignment="Top"/>
+                       VerticalAlignment="Top" />
 
             <ComboBox Template="{StaticResource ComboBoxTemplate}"
                       Grid.Row="3" Grid.Column="0"
@@ -204,8 +191,7 @@
                       DisplayMemberPath="Status_name"
                       SelectedItem="{Binding SelectedStatus}"
                       Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
-                      VerticalAlignment="Bottom" >
-
+                      VerticalAlignment="Bottom">
             </ComboBox>
 
             <!--#endregion-->
@@ -215,18 +201,16 @@
             <Grid Grid.Row="3" Grid.Column="1">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0"
                            Style="{StaticResource TextBlockStyle}"
                            VerticalAlignment="Top">
-                    <Run FontSize="10" Text="Дата рождения "/><LineBreak/>
-                    <Run FontSize="8" Text="(Год-Месяц-День)"/>
+                    <Run FontSize="10" Text="Дата рождения " /><LineBreak />
+                    <Run FontSize="8" Text="(Год-Месяц-День)" />
                 </TextBlock>
-
-
 
                 <DatePicker Style="{DynamicResource CommonDatePickerStyle}" Grid.Column="0"
                             Margin="10"
@@ -235,14 +219,12 @@
                             VerticalAlignment="Bottom"
                             SelectedDateFormat="Short"
                             SelectedDate="{Binding Age}">
-
                 </DatePicker>
-
 
                 <TextBlock Grid.Column="1"
                            Text="Дата регистрации"
                            Style="{StaticResource TextBlockStyle}"
-                           VerticalAlignment="Top"/>
+                           VerticalAlignment="Top" />
 
                 <TextBox Grid.Column="1"
                          Style="{DynamicResource CommonTextBoxStyle}"
@@ -250,13 +232,10 @@
                          Height="40"
                          IsEnabled="False"
                          VerticalAlignment="Bottom"
-                         Text="{Binding Register_data}"/>
+                         Text="{Binding Register_data}" />
             </Grid>
 
-
-
             <!--#endregion-->
-
 
             <TextBlock Grid.Row="4" Grid.Column="0"
                        Foreground="#BB2020"
@@ -265,21 +244,19 @@
                        Margin="15,0"
                        FontFamily="Roboto"
                        Visibility="{Binding AccessLabel, Converter={StaticResource BoolToVis}}"
-                       Text="Доступ запрещен"/>
-
+                       Text="Доступ запрещен" />
         </Grid>
 
-        <Button Grid.Row="2" Grid.Column="1" 
+        <Button Grid.Row="2" Grid.Column="1"
                 Width="150"
                 HorizontalAlignment="Left"
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
-                Content="Назад" 
+                Content="Назад"
                 Command="{Binding CloseProfileCommand}">
-
         </Button>
 
-        <Button Grid.Row="2" Grid.Column="2" 
+        <Button Grid.Row="2" Grid.Column="2"
                 Width="150"
                 HorizontalAlignment="Right"
                 Style="{StaticResource ButtonStyle}"
@@ -287,13 +264,6 @@
                 Content="{Binding NameAction}"
                 IsEnabled="{Binding IsEnabled}"
                 Command="{Binding UpdateDataCommand}">
-
         </Button>
-
-        
-
-
     </Grid>
-
-
 </Window>

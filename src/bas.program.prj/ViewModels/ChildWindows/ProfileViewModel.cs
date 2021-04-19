@@ -13,7 +13,6 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class ProfileViewModel : ViewModel
     {
-
         #region Поля и свойства
 
         /// <summary>
@@ -112,8 +111,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Лист со статусами, для окна Добавить профиль
 
-
         private List<Bank_user_status> _BankStatuses;
+
         /// <summary>
         /// Список всех статусов в банке
         /// </summary>
@@ -129,6 +128,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private Bank_user_status _SelectedStatus;
+
         /// <summary>
         /// Храниться выделенный в списке статус, для добавления
         /// </summary>
@@ -143,11 +143,12 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
-        #endregion Лист со статусами
+        #endregion Лист со статусами, для окна Добавить профиль
 
         #region Свойства пользователя
 
         public string _Name;
+
         /// <summary>
         /// Имя пользователя(Профиля)
         /// </summary>
@@ -173,6 +174,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Surname;
+
         /// <summary>
         /// Фамилия пользователя(Профиля)
         /// </summary>
@@ -198,6 +200,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Patronymic;
+
         /// <summary>
         /// Отчество пользователя(Профиля)
         /// </summary>
@@ -223,6 +226,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private DateTime _Age;
+
         /// <summary>
         /// Возраст пользователя(Профиля)
         /// </summary>
@@ -231,13 +235,13 @@ namespace bas.program.ViewModels.ChildWindows
             get => _Age;
             set
             {
-
                 _Age = value;
                 OnPropertyChanged();
             }
         }
 
         private string _Login;
+
         /// <summary>
         /// Логин пользователя(Профиля)
         /// </summary>
@@ -263,6 +267,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private string _Password;
+
         /// <summary>
         /// Пароль пользователя(Профиля)
         /// </summary>
@@ -291,6 +296,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private bool _Sex;
+
         /// <summary>
         /// Пол пользователя(Профиля)
         /// </summary>
@@ -306,6 +312,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         private DateTime _Register_data;
+
         /// <summary>
         /// Дата регистрации пользователя(Профиля)
         /// </summary>
@@ -327,7 +334,6 @@ namespace bas.program.ViewModels.ChildWindows
         #region Команды
 
         #region Обновление
-
 
         /// <summary>
         /// Команда обновления данных
@@ -461,7 +467,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion Команды
 
-        #region Конструкторы 
+        #region Конструкторы
 
         /// <summary>
         /// Конструктор для изменения профиля в Главном меню
@@ -598,7 +604,7 @@ namespace bas.program.ViewModels.ChildWindows
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
         }
 
-        #endregion
+        #endregion Конструкторы
 
         public void ShowProfileWindow()
         {
