@@ -45,6 +45,9 @@
     <Page Update="Views\Styles\CommonComboBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Styles\CommonDatePickerStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Styles\DataGrid\CommonDataGridTemplate.xaml">
       <SubType>Designer</SubType>
     </Page>

@@ -23,6 +23,7 @@
                 <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="Styles/CommonDatePickerStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -227,7 +228,7 @@
 
 
 
-                <DatePicker Grid.Column="0"
+                <DatePicker Style="{DynamicResource CommonDatePickerStyle}" Grid.Column="0"
                             Margin="10"
                             Height="40"
                             IsEnabled="{Binding IsEnabled}"
