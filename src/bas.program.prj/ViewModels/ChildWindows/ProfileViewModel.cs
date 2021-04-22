@@ -3,6 +3,7 @@ using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views.ChildViews;
 using bas.website.Models.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -526,13 +527,14 @@ namespace bas.program.ViewModels.ChildWindows
             #region Ограничение доступа к полям
 
             /// Проверка На статус Администратор
-            if (workVM.User.User.User_status_to_system == 1) _StatusEnable = false;
-            else if (workVM.User.User.User_status_to_system == 2)
-            {
-                _IsEnabled = false;
-                _IsVisibility = false;
-                _AccessLabel = true;
-            }
+            if (workVM.User.User.Bank_user_status.Status_full_access) _StatusEnable = false;
+            //Реализация нулевого пропуска
+            //else if (workVM.User.User.User_status_to_system == 2)
+            //{
+            //    _IsEnabled = false;
+            //    _IsVisibility = false;
+            //    _AccessLabel = true;
+            //}
 
             #endregion Ограничение доступа к полям
 
@@ -585,17 +587,19 @@ namespace bas.program.ViewModels.ChildWindows
             /// Разблокировать список статусов
             _StatusEnable = true;
 
-            if (bankUser.User_status_to_system == 1)
+            if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher &
+                profilesWM._workSpaceWindowViewModel.User.User.User_id == bankUser.User_id)
             {
-                /// Выборка статусов (кроме админа)
+                /// Выборка статусов
                 _BankStatuses = _DataBase.Bank_user_status.ToList();
                 _StatusEnable = false;
+
             }
             else
             {
                 /// Выборка статусов (кроме админа)
                 _BankStatuses = _DataBase.Bank_user_status
-                    .Where(x => x.Status_id != 1)
+                    .Include(st => st.Bank_user_access)
                     .ToList();
             }
 

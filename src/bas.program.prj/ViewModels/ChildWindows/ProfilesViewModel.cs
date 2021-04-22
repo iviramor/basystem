@@ -90,7 +90,7 @@ namespace bas.program.ViewModels.ChildWindows
                 if (SelectedItem.User_id != _workSpaceWindowViewModel.User.User.User_id)
                 {
                     /// Проверяет, является ли профиль Администратором
-                    if (SelectedItem.User_status_to_system != 1)
+                    if (!SelectedItem.Bank_user_status.Status_full_access)
                     {
                         /// Сообщение, для подтверждения пароля
                         var PasswordWindow = new ConfirmPasswordViewModel();
@@ -119,7 +119,7 @@ namespace bas.program.ViewModels.ChildWindows
                         return;
                     }
 
-                    MessageBox.Show("Удалять Профиль со статусом - Администратор, запрещено", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBox.Show("Удалять Профиль со статусом - Высший Администратор, запрещено", "Ошибка ввода", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                     return;
                 }
