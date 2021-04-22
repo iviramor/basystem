@@ -8,7 +8,7 @@
         Title="ProfileWindow"
         Height="480" Width="800"
         x:Name="window" ResizeMode="NoResize"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen" Icon="/Resources/Image/Icons/id-card-mini.png">
 
     <Window.Resources>
 

@@ -36,7 +36,13 @@
     <None Remove="Resources\Fonts\Roboto-Regular.ttf" />
     <None Remove="Resources\Fonts\Roboto-Thin.ttf" />
     <None Remove="Resources\Fonts\Roboto-ThinItalic.ttf" />
+    <None Remove="Resources\Image\Action\ProfileAction\id-card .png" />
+    <None Remove="Resources\Image\Action\ProfilesAction\AddProf.png" />
+    <None Remove="Resources\Image\Action\ProfilesAction\EditProf.png" />
+    <None Remove="Resources\Image\Action\ProfilesAction\list.png" />
+    <None Remove="Resources\Image\Action\ProfilesAction\RemProf.png" />
     <None Remove="Resources\Image\Backgrounds\bg-flue.jpg" />
+    <None Remove="Resources\Image\Icons\id-card-mini.png" />
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
     <None Remove="Views\calculator.png" />
@@ -71,14 +77,20 @@
     <Resource Include="Resources\Image\Action\Instruments\calculator.png" />
     <Resource Include="Resources\Image\Action\ProfileAction\AddUsers.png" />
     <Resource Include="Resources\Image\Action\ProfileAction\EditUsers.png" />
+    <Resource Include="Resources\Image\Action\ProfileAction\id-card .png" />
     <Resource Include="Resources\Image\Action\ProfileAction\RemUsers.png" />
     <Resource Include="Resources\Image\Action\Instruments\compose.png" />
+    <Resource Include="Resources\Image\Action\ProfilesAction\AddProf.png" />
+    <Resource Include="Resources\Image\Action\ProfilesAction\EditProf.png" />
+    <Resource Include="Resources\Image\Action\ProfilesAction\list.png" />
+    <Resource Include="Resources\Image\Action\ProfilesAction\RemProf.png" />
     <Resource Include="Resources\Image\Action\WindowAction\exit.png" />
     <Resource Include="Resources\Image\Action\Instruments\funnel.png" />
     <Resource Include="Resources\Image\Action\Instruments\plus.png" />
     <Resource Include="Resources\Image\Action\WindowAction\settings.png" />
     <Resource Include="Resources\Image\Action\Instruments\trash.png" />
     <Resource Include="Resources\Image\Backgrounds\bg-flue.jpg" />
+    <Resource Include="Resources\Image\Icons\id-card-mini.png" />
   </ItemGroup>
 
   <ItemGroup>
