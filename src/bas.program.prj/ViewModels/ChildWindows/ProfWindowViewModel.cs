@@ -1,4 +1,5 @@
-﻿using bas.program.Models.Tables.UserTables;
+﻿using bas.program.Infrastructure.Commands;
+using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views;
 using System;
@@ -7,6 +8,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace bas.program.ViewModels.ChildWindows
 {
@@ -156,6 +159,42 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Команды
 
+        #region Закрыть окно
+        /// <summary>
+        /// Команда закрывает окно
+        /// </summary>
+        public ICommand CloseProfCommand { get; }
+
+        private bool CanCloseProfCommandExecuted(object p) => true;
+
+        private void OnCloseProfCommandExecute(object p)
+        {
+            _ProfWindow.Close();
+        }
+
+        #endregion
+
+        #region Применить изменения
+
+
+        public ICommand UpdateDataCommand { get; }
+
+        private bool CanUpdateDataCommandExecuted(object p) => true;
+
+        private void OnUpdateDataCommandExecute(object p)
+        {
+            UserStatus.Status_name = _ProfName;
+            UserStatus.Status_describ = _ProfDescription;
+            UserStatus.Status_full_access = _ProfFullAccess;
+
+            _WorkSpaceWindowViewModel.User.DataBase.Bank_user_status.Update(UserStatus);
+            _AdministratorViewModel.UpdateProfTable();
+            MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+
+        #endregion  
+
         #endregion
 
         /// <summary>
@@ -178,13 +217,13 @@ namespace bas.program.ViewModels.ChildWindows
 
             #region Добавления значений в свойства
 
-            _ProfName = user_Status.Status_name;
-            _ProfDescription = user_Status.Status_describ;
-            _ProfFullAccess = user_Status.Status_full_access;
+            _ProfName = UserStatus.Status_name;
+            _ProfDescription = UserStatus.Status_describ;
+            _ProfFullAccess = UserStatus.Status_full_access;
 
             /// Скрыть CheckBox Полного доступа, если Высшего доступа
             if (!workSpace.User.User.Bank_user_status.Status_higher |
-                workSpace.User.User.Bank_user_status.Status_id == user_Status.Status_id)
+                workSpace.User.User.Bank_user_status.Status_id == UserStatus.Status_id)
                 _IsVisibility = false;
 
             #endregion
@@ -192,6 +231,11 @@ namespace bas.program.ViewModels.ChildWindows
 
             _WorkSpaceWindowViewModel = workSpace;
             _AdministratorViewModel = adminVM;
+
+            CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
+            UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
+
+
         }
 
         public void ShowProfWindow()

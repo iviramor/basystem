@@ -153,11 +153,13 @@ namespace bas.program.ViewModels.ChildWindows
         /// <summary>
         /// Обновляет таблицу данными
         /// </summary>
-        private void UpdateProfTable()
+        public void UpdateProfTable()
         {
             var user_Accesses = _DataBase.Bank_user_status
                 .Include(ac => ac.Bank_user_access)
                 .ToList();
+
+            _ProfTable.Clear();
 
             foreach (var item in user_Accesses)
                 _ProfTable.Rows.Add(
