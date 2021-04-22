@@ -210,7 +210,7 @@
                            Style="{StaticResource TextBlockStyle}"
                            VerticalAlignment="Top">
                     <Run FontSize="10" Text="Дата рождения " /><LineBreak />
-                    <Run FontSize="8" Text="(Год-Месяц-День)" />
+                    <Run FontSize="8" Text="(Месяц/День/Год)" />
                 </TextBlock>
 
                 <DatePicker Style="{DynamicResource CommonDatePickerStyle}" Grid.Column="0"
