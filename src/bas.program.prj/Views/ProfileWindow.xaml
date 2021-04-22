@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
-        Title="Профиль"
+        Title="{Binding TitleName}"
         Height="480" Width="800"
         x:Name="window" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Image/Icons/id-card-mini.png">
 
+    
     <Window.Resources>
 
         <ResourceDictionary>

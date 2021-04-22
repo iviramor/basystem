@@ -42,8 +42,22 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Видимость элементов
 
-        private string _NameAction = "Изменить";
+        private string _TitleName;
+        public string TitleName
+        {
+            get
+            {
+                return _TitleName;
+            }
+            set
+            {
+                if (Equals(_TitleName, value)) return;
+                _TitleName = value;
+                OnPropertyChanged();
+            }
+        }
 
+        private string _NameAction = "Изменить";
         public string NameAction
         {
             get => _NameAction;
@@ -478,6 +492,9 @@ namespace bas.program.ViewModels.ChildWindows
             /// Главное окно
             _workSpaceWindowViewModel = workVM;
 
+            /// Заголовок окна с именем
+            _TitleName = $"Изменить: {workVM.UserName}";
+
             /// Контекст базы данных
             _DataBase = workVM.User.DataBase;
 
@@ -530,6 +547,9 @@ namespace bas.program.ViewModels.ChildWindows
         {
             /// Окно с профилями
             _ProfilesWiewModel = profilesWM;
+
+            /// Заголовок окна с именем
+            _TitleName = $"Изменить: {bankUser.User_name} {bankUser.User_patronymic}";
 
             /// Контекст базы данных
             _DataBase = profilesWM._workSpaceWindowViewModel.User.DataBase;
@@ -586,6 +606,9 @@ namespace bas.program.ViewModels.ChildWindows
 
             /// Окно с профилями
             _ProfilesWiewModel = profilesWM;
+
+            /// Заголовок окна с именем
+            _TitleName = $"Добавить новый профиль";
 
             /// Контекст базы данных
             _DataBase = profilesWM._workSpaceWindowViewModel.User.DataBase;
