@@ -176,7 +176,6 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Применить изменения
 
-
         public ICommand UpdateDataCommand { get; }
 
         private bool CanUpdateDataCommandExecuted(object p) => true;
@@ -187,11 +186,13 @@ namespace bas.program.ViewModels.ChildWindows
             UserStatus.Status_describ = _ProfDescription;
             UserStatus.Status_full_access = _ProfFullAccess;
 
-            _WorkSpaceWindowViewModel.User.DataBase.Bank_user_status.Update(UserStatus);
+            _WorkSpaceWindowViewModel.User.DataBase.Bank_user_status
+                .Update(UserStatus);
+            _WorkSpaceWindowViewModel.User.DataBase.SaveChanges();
+
             _AdministratorViewModel.UpdateProfTable();
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
 
         #endregion  
 
