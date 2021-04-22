@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Администрация" Height="600" Width="940" Icon="/Resources/Image/Action/ProfAction/list.png">
+        Title="Администрация" 
+        Height="600" Width="940" 
+        MinHeight="600" MinWidth="350"
+        Icon="/Resources/Image/Action/ProfAction/list.png">
 
     <Window.Resources>
 
@@ -184,21 +187,9 @@
             <DataGrid Style="{DynamicResource CommonDataGridTemplate}" 
                   ItemsSource="{Binding ProfTable}"
                   ColumnWidth="*"
-                  AutoGenerateColumns="False"
                   Grid.Row="1" Grid.Column="1"
                   IsReadOnly="True"
                   CanUserResizeColumns="False">
-
-                <DataGrid.Columns>
-                    
-                    <DataGridTextColumn Header="Наименование"/>
-
-                    <DataGridTextColumn Header="Описание" />
-
-                    <DataGridTextColumn Header="Кол-во доступа" />
-
-                </DataGrid.Columns>
-
 
             </DataGrid>
 
