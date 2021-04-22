@@ -72,11 +72,67 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Свойства элементов
+
+        /// <summary>
+        /// Название статуса(Должности)
+        /// </summary>
+        private string _ProfName;
+        public string ProfName
+        {
+            get
+            {
+                return _ProfName;
+            }
+            set
+            {
+                if (Equals(_ProfName, value)) return;
+                _ProfName = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Описание статуса(Должности)
+        /// </summary>
+        private string _ProfDescription;
+        public string ProfDescription
+        {
+            get
+            {
+                return _ProfDescription;
+            }
+            set
+            {
+                if (Equals(_ProfDescription, value)) return;
+                _ProfDescription = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Полный доступ статуса(Должности)
+        /// </summary>
+        private bool _ProfFullAccess;
+        public bool ProfFullAccess
+        {
+            get
+            {
+                return _ProfFullAccess;
+            }
+            set
+            {
+                if (Equals(_ProfFullAccess, value)) return;
+                _ProfFullAccess = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Команды
-
-
 
         #endregion
 
@@ -89,6 +145,14 @@ namespace bas.program.ViewModels.ChildWindows
             NameAction = "Изменить";
             /// Название окна
             Title = $"{NameAction}: {UserStatus.Status_name}";
+
+            #region Добавления значений в свойства
+
+            _ProfName = user_Status.Status_name;
+            _ProfDescription = user_Status.Status_describ;
+            _ProfFullAccess = user_Status.Status_full_access;
+
+            #endregion
 
             _AdministratorViewModel = adminVM;
         }
