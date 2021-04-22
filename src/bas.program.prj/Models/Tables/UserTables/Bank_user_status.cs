@@ -17,6 +17,12 @@ namespace bas.program.Models.Tables.UserTables
         [DisplayName("Описание")]
         public string Status_describ { get; set; }
 
+        [DisplayName(null)]
+        public bool Status_full_access { get; set; }
+
+        [DisplayName(null)]
+        public bool Status_higher { get; set; }
+
         [DisplayName("Доступы")]
         public List<Bank_user_access> Bank_user_access { get; set; }
 
