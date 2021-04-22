@@ -433,6 +433,17 @@ namespace bas.program.ViewModels.ChildWindows
 
             #region Смена изменений в сессии пользователя
 
+            if (_Name == null ||
+                _Surname == null ||
+                _Patronymic == null ||
+                _Login == null ||
+                _Password == null ||
+                _SelectedStatus == null)
+            {
+                MessageBox.Show("Проверьте данные! Вы могли пропустить поле.", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
             NewUser.User_name = _Name;
             NewUser.User_surname = _Surname;
             NewUser.User_patronymic = _Patronymic;
@@ -443,7 +454,8 @@ namespace bas.program.ViewModels.ChildWindows
             NewUser.User_register_data = DateTime.Now;
             NewUser.User_age = _Age;
 
-            #endregion Смена изменений в сессии пользователя
+
+            #endregion 
 
             /// Добавление в базу данных нового пользователя
             _DataBase.Bank_user.Add(NewUser);
