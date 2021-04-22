@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="AdministratorWindow" Height="600" Width="940">
+        Title="Администрация" Height="600" Width="940" Icon="/Resources/Image/Action/ProfAction/list.png">
 
     <Window.Resources>
 
@@ -107,7 +107,7 @@
                         </Grid.RowDefinitions>
 
                         <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" >
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/AddProf.png" >
 
                         </Image>
 
@@ -136,7 +136,7 @@
                         </Grid.RowDefinitions>
 
                         <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" />
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/EditProf.png" />
 
                         <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
@@ -163,7 +163,7 @@
                         </Grid.RowDefinitions>
 
                         <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" />
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/RemProf.png" />
 
                         <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
