@@ -21,6 +21,11 @@ namespace bas.program.ViewModels.ChildWindows
         private AdministratorWindow _administratorWindow;
 
         /// <summary>
+        /// Поле с ViewModel главного окна
+        /// </summary>
+        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+
+        /// <summary>
         /// База данных или же Контекст моделей
         /// </summary>
         private readonly BankDbContext _DataBase;
@@ -107,7 +112,7 @@ namespace bas.program.ViewModels.ChildWindows
                                           st.Status_describ == (string)_SelectedItem[1]);
 
             /// Передача данных Профессии в ProfWindowViewModel
-            var profile = new ProfWindowViewModel(this, user_Status);
+            var profile = new ProfWindowViewModel(this, user_Status, ref _workSpaceWindowViewModel);
             profile.ShowProfWindow();
         }
 
@@ -117,6 +122,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         public AdministratorViewModel(WorkSpaceWindowViewModel workVM)
         {
+
+            _workSpaceWindowViewModel = workVM;
 
             _DataBase = workVM.User.DataBase;
 
