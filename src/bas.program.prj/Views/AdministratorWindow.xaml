@@ -182,7 +182,7 @@
             <!--#region Таблица с пользователями-->
 
             <DataGrid Style="{DynamicResource CommonDataGridTemplate}" 
-                  ItemsSource="{Binding Bank_users}"
+                  ItemsSource="{Binding ProfTable}"
                   ColumnWidth="*"
                   AutoGenerateColumns="False"
                   Grid.Row="1" Grid.Column="1"
@@ -211,7 +211,7 @@
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="Назад" 
-                Command="{Binding CloseProfilesCommand}">
+                Command="{Binding CloseAdminCommand}">
 
             </Button>
 
