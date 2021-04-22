@@ -239,7 +239,7 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
-        private DateTime _Age;
+        private DateTime _Age = DateTime.Now;
 
         /// <summary>
         /// Возраст пользователя(Профиля)
