@@ -157,7 +157,7 @@ namespace bas.program.ViewModels
 
         private void OnShowAdministratorCommandExecute(object p)
         {
-            AdministratorViewModel adminVM = new();
+            AdministratorViewModel adminVM = new(this);
             adminVM.ShowAdministratorWindow();
 
         }
