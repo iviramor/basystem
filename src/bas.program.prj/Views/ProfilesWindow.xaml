@@ -7,7 +7,10 @@
         xmlns:converters="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Профили" Height="560" Width="840" ResizeMode="NoResize" Icon="/Resources/Image/Icons/id-card-mini.png">
+        Title="Профили" 
+        Height="560" Width="840" 
+        MinHeight="560" MinWidth="350"
+        Icon="/Resources/Image/Icons/id-card-mini.png">
 
     <Window.Resources>
 
