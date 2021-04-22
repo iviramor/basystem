@@ -82,7 +82,7 @@ namespace bas.program.ViewModels
                 _workSpaceWindowViewModel.UserName = $"{user.User_name} {user.User_patronymic}";
                 _workSpaceWindowViewModel.User.User = user;
                 _workSpaceWindowViewModel.User.Session = true;
-                if (user.User_status_to_system == 1) _workSpaceWindowViewModel.AdminStatus = true;
+                _workSpaceWindowViewModel.AdminStatus = user.Bank_user_status.Status_full_access;
                 _HelloWindow.Close();
             }
             else MessageBox.Show("Пользователь не найден", "Ошибка входа", MessageBoxButton.OK, MessageBoxImage.Error);
