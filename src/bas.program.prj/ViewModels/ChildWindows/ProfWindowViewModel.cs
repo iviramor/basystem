@@ -25,6 +25,11 @@ namespace bas.program.ViewModels.ChildWindows
         private ProfWindow _ProfWindow;
 
         /// <summary>
+        /// ViewModel Главного окна
+        /// </summary>
+        private readonly WorkSpaceWindowViewModel _WorkSpaceWindowViewModel;
+
+        /// <summary>
         /// ViewModel администратора
         /// </summary>
         private readonly AdministratorViewModel _AdministratorViewModel;
@@ -153,7 +158,15 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
-        public ProfWindowViewModel(AdministratorViewModel adminVM, Bank_user_status user_Status, ref WorkSpaceWindowViewModel workSpace)
+        /// <summary>
+        /// Конструктор "Изменить"
+        /// </summary>
+        /// <param name="adminVM">ViewModel окна администратора</param>
+        /// <param name="user_Status">Объект с данными о Статусе(Должности)</param>
+        /// <param name="workSpace">ViewModel главного окна</param>
+        public ProfWindowViewModel(AdministratorViewModel adminVM, 
+                                   Bank_user_status user_Status, 
+                                   ref WorkSpaceWindowViewModel workSpace)
         {
             /// Запись ряда с данными профессии
             UserStatus = user_Status;
@@ -176,6 +189,8 @@ namespace bas.program.ViewModels.ChildWindows
 
             #endregion
 
+
+            _WorkSpaceWindowViewModel = workSpace;
             _AdministratorViewModel = adminVM;
         }
 
