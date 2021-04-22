@@ -69,6 +69,23 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
+        private bool _IsVisibility = true;
+        /// <summary>
+        /// Видимость элементов (Полный доступ)
+        /// </summary>
+        public bool IsVisibility
+        {
+            get
+            {
+                return _IsVisibility;
+            }
+            set
+            {
+                if (Equals(_IsVisibility, value)) return;
+                _IsVisibility = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -136,7 +153,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
-        public ProfWindowViewModel(AdministratorViewModel adminVM, Bank_user_status user_Status)
+        public ProfWindowViewModel(AdministratorViewModel adminVM, Bank_user_status user_Status, ref WorkSpaceWindowViewModel workSpace)
         {
             /// Запись ряда с данными профессии
             UserStatus = user_Status;
@@ -151,6 +168,11 @@ namespace bas.program.ViewModels.ChildWindows
             _ProfName = user_Status.Status_name;
             _ProfDescription = user_Status.Status_describ;
             _ProfFullAccess = user_Status.Status_full_access;
+
+            /// Скрыть CheckBox Полного доступа, если Высшего доступа
+            if (!workSpace.User.User.Bank_user_status.Status_higher |
+                workSpace.User.User.Bank_user_status.Status_id == user_Status.Status_id)
+                _IsVisibility = false;
 
             #endregion
 

@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bas.program.Views"
+        xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}" 
         ResizeMode="NoResize"
@@ -86,14 +87,16 @@
         <!--#region Описание-->
 
         <TextBlock Grid.Row="3" Grid.Column="1"
-                       Text="Полный доступ"
-                       Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top" />
+                   Text="Полный доступ"
+                   Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
+                   Style="{StaticResource TextBlockStyle}"
+                   VerticalAlignment="Top" />
 
 
         <CheckBox Grid.Row="3" Grid.Column="1"
                   VerticalAlignment="Bottom"
                   Margin="10"
+                  Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                   IsChecked="{Binding ProfFullAccess}"
                   />
 
