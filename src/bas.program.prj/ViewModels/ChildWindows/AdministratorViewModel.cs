@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 
 namespace bas.program.ViewModels.ChildWindows
@@ -26,6 +27,23 @@ namespace bas.program.ViewModels.ChildWindows
 
 
         #region Свойства
+
+        private DataRowView _SelectedItem;
+
+        /// <summary>
+        /// Свойство - Выделенная профессия в таблице всех Профессий
+        /// </summary>
+        public DataRowView SelectedItem
+        {
+            get => _SelectedItem;
+            set
+            {
+                if (Equals(_SelectedItem, value)) return;
+                _SelectedItem = value;
+                OnPropertyChanged();
+            }
+        }
+
 
         #region Свойства элементов
 
@@ -64,6 +82,27 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Изменить профиль
+
+        public ICommand EditProfCommand { get; }
+
+        private bool CanEditProfCommandExecuted(object p) => true;
+
+        private void OnEditProfCommandExecute(object p)
+        {
+            if (_SelectedItem == null)
+            {
+                MessageBox.Show("Выделите Сотрудника в таблице", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+            var profile = new ProfWindowViewModel(this, _SelectedItem);
+            profile.ShowProfWindow();
+        }
+
+        #endregion
+
+
         #endregion
 
         public AdministratorViewModel(WorkSpaceWindowViewModel workVM)
@@ -74,6 +113,8 @@ namespace bas.program.ViewModels.ChildWindows
             CreateProfTable();
             UpdateProfTable();
 
+
+            EditProfCommand = new ActionCommand(OnEditProfCommandExecute, CanEditProfCommandExecuted);
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
         }
 

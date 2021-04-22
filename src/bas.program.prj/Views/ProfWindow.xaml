@@ -41,7 +41,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="90"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="170"/>
             <RowDefinition />
             <RowDefinition Height="20"/>
             <RowDefinition Height="40"/>
@@ -49,7 +49,7 @@
         </Grid.RowDefinitions>
 
         <!--#region Название должности-->
-        
+
         <TextBlock Grid.Row="1" Grid.Column="1"
                        Text="Название должности"
                        Style="{StaticResource TextBlockStyle}"
@@ -74,9 +74,11 @@
 
         <TextBox Grid.Row="2" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
-                     Margin="10"
-                     Height="150"
-                     VerticalAlignment="Bottom"
+                     Margin="10,40,10,0"
+                     TextWrapping="WrapWithOverflow"
+                     Height="120"
+                     AcceptsReturn="True"
+                     VerticalAlignment="Top"
                      Text="{Binding ProfDescription}" />
 
         <!--#endregion-->
@@ -98,7 +100,7 @@
 
 
         <!--#endregion-->
-        
+
         <Button Grid.Row="5" Grid.Column="1"
                 Width="150"
                 HorizontalAlignment="Left"

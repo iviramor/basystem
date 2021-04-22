@@ -127,7 +127,7 @@
                 <Button Template="{DynamicResource ButtonTemplateToolBar}" 
                     Style="{StaticResource Button.ToolsBar}"
                     Grid.Row="3" Grid.Column="0"
-                    Command="{Binding EditDataCommand}">
+                    Command="{Binding EditProfCommand}">
 
                     <!--#region Внутри кнопки-->
 
@@ -188,6 +188,7 @@
                   ItemsSource="{Binding ProfTable}"
                   ColumnWidth="*"
                   Grid.Row="1" Grid.Column="1"
+                  SelectedItem="{Binding SelectedItem}"
                   IsReadOnly="True"
                   CanUserResizeColumns="False">
 
