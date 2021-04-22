@@ -17,7 +17,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Класс
 
-        private DataRow SelectedtRow;
+        private Bank_user_status UserStatus;
 
         /// <summary>
         /// Окно Свойств Профессии
@@ -80,15 +80,15 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
-        public ProfWindowViewModel(AdministratorViewModel adminVM, DataRowView prof)
+        public ProfWindowViewModel(AdministratorViewModel adminVM, Bank_user_status user_Status)
         {
             /// Запись ряда с данными профессии
-            SelectedtRow = prof.Row;
+            UserStatus = user_Status;
 
             ///Название действия 
             NameAction = "Изменить";
             /// Название окна
-            Title = $"{NameAction}: {SelectedtRow[0]}";
+            Title = $"{NameAction}: {UserStatus.Status_name}";
 
             _AdministratorViewModel = adminVM;
         }

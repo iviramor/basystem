@@ -44,7 +44,6 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
-
         #region Свойства элементов
 
         private DataTable _ProfTable = new();
@@ -84,24 +83,35 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Изменить профиль
 
+        /// <summary>
+        /// Команда Открытия окна на изменения Профессии
+        /// </summary>
         public ICommand EditProfCommand { get; }
 
         private bool CanEditProfCommandExecuted(object p) => true;
 
         private void OnEditProfCommandExecute(object p)
         {
+            /// Проверка выделен ли ряд в таблице
             if (_SelectedItem == null)
             {
                 MessageBox.Show("Выделите Сотрудника в таблице", "Ошибка ввода", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return;
             }
-            var profile = new ProfWindowViewModel(this, _SelectedItem);
+
+            /// Поиск совпадения
+            Bank_user_status user_Status = 
+                _DataBase.Bank_user_status
+                   .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
+                                          st.Status_describ == (string)_SelectedItem[1]);
+
+            /// Передача данных Профессии в ProfWindowViewModel
+            var profile = new ProfWindowViewModel(this, user_Status);
             profile.ShowProfWindow();
         }
 
         #endregion
-
 
         #endregion
 
@@ -118,8 +128,6 @@ namespace bas.program.ViewModels.ChildWindows
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
         }
 
-
-
         /// <summary>
         /// Создает структуру таблицы (Колонки)
         /// </summary>
@@ -131,6 +139,7 @@ namespace bas.program.ViewModels.ChildWindows
             {
                 if (prop.DisplayName != null)
                     _ProfTable.Columns.Add(prop.DisplayName);
+                    
             }
         }
 
@@ -144,9 +153,14 @@ namespace bas.program.ViewModels.ChildWindows
                 .ToList();
 
             foreach (var item in user_Accesses)
-                _ProfTable.Rows.Add(item.Status_name, item.Status_describ, item.Bank_user_access.Count);
+                _ProfTable.Rows.Add(
+                    item.Status_name,
+                    item.Status_describ,
+                    (item.Status_full_access) ? "Полный доступ" : item.Bank_user_access.Count
+                    );
 
         }
+
 
         /// <summary>
         /// Показывает окно Администратора
