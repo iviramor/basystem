@@ -161,6 +161,29 @@ namespace bas.program.ViewModels.ChildWindows
                 return;
             }
 
+            /// Поиск совпадения
+            Bank_user_status user_Status =
+                _DataBase.Bank_user_status
+                   .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
+                                          st.Status_describ == (string)_SelectedItem[1]);
+
+            /// Проверка, является ли профиль высшим
+            if (user_Status.Status_higher)
+            {
+                MessageBox.Show("Должность имеет высший доступ", "Ошибка удаления", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            /// Проверка, есть ли с данной должностью Профили
+            if (_DataBase.Bank_user
+                .Any(user => user.User_status_to_system == user_Status.Status_id))
+            {
+                MessageBox.Show("С такой должностью существует Профиль!", "Ошибка удаления", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
             /// Сообщение, для подтверждения пароля
             var PasswordWindow = new ConfirmPasswordViewModel();
             /// Отображение сообщения и запись вводимого в
@@ -172,11 +195,6 @@ namespace bas.program.ViewModels.ChildWindows
             /// Сравнивает введенный пароль с паролем пользователя
             else if (password == _workSpaceWindowViewModel.User.User.User_password)
             {
-                /// Поиск совпадения
-                Bank_user_status user_Status =
-                    _DataBase.Bank_user_status
-                       .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
-                                              st.Status_describ == (string)_SelectedItem[1]);
 
                 /// Удаление Должности
                 _DataBase.Bank_user_status.Remove(user_Status);
@@ -205,7 +223,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void OnShowProfCommandExecute(object p)
         {
-
+            if (_SelectedItem == null) return;
             /// Поиск совпадения
             Bank_user_status user_Status =
                 _DataBase.Bank_user_status
