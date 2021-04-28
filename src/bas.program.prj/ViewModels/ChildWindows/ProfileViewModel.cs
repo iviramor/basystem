@@ -153,40 +153,45 @@ namespace bas.program.ViewModels.ChildWindows
             set
             {
                 if (Equals(_SelectedStatus, value)) return;
-                /// Повышение на Администратор
-                if (!_SelectedStatus.Status_higher &&
-                    value.Status_higher)
-                {
-                    MessageBox.Show("Вы пытаетесь повысить этого сотрудника до Администратор\n" +
-                                    $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
 
-                }
-                ///Повышение уровня до "Без полного доступа"
-                if (!_SelectedStatus.Status_full_access && value.Status_full_access)
+                /// Проверка на выделенный статус
+                if (_SelectedStatus != null)
                 {
-                    MessageBox.Show("Этот доступ имеет \"Полный доступ\" ! \n" +
-                                    $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
+                    /// Повышение на Администратор
+                    if (!_SelectedStatus.Status_higher &&
+                        value.Status_higher)
+                    {
+                        MessageBox.Show("Вы пытаетесь повысить этого сотрудника до Администратор\n" +
+                                        $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
                             MessageBoxImage.Information);
 
-                }
-                ///Понижение уровня "Без полного доступа"
-                if (_SelectedStatus.Status_full_access && !value.Status_full_access)
-                {
-                    MessageBox.Show("Вы понижаете статус! \n" +
-                                    "С полного доступа на НЕ полный доступ\n" +
-                                    $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
-                            MessageBoxImage.Information);
-                    
-                }
+                    }
+                    ///Повышение уровня до "Без полного доступа"
+                    if (!_SelectedStatus.Status_full_access && value.Status_full_access)
+                    {
+                        MessageBox.Show("Этот статус имеет \"Полный доступ\" ! \n" +
+                                        $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
+                                MessageBoxImage.Information);
 
-                MessageBox.Show("Информация о статусах: \n" +
-                                "------------------------------------------------------------------------\n" +
-                                $"С \"{_SelectedStatus.Status_name}\" имеет: \n" +
-                                $"* - \n" +
-                                $"На \"{value.Status_name}\" имеет: \n" +
-                                $"* - \n");
+                    }
+                    ///Понижение уровня "Без полного доступа"
+                    if (_SelectedStatus.Status_full_access && !value.Status_full_access)
+                    {
+                        MessageBox.Show("Вы понижаете статус! \n" +
+                                        "С полного доступа на НЕ полный доступ\n" +
+                                        $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
+                                MessageBoxImage.Information);
 
+                    }
+
+                    MessageBox.Show("Информация о статусах: \n" +
+                                    "------------------------------------------------------------------------\n" +
+                                    $"С \"{_SelectedStatus.Status_name}\" имеет: \n" +
+                                    $"* - \n" +
+                                    $"На \"{value.Status_name}\" имеет: \n" +
+                                    $"* - \n");
+                }
+                
                 _SelectedStatus = value;
                 OnPropertyChanged();
             }
