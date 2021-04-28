@@ -57,12 +57,11 @@
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top" />
 
-        
+        <!--IsEnabled="{Binding IsEnabled}"-->
         <TextBox Grid.Row="1" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                     IsEnabled="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
                      Text="{Binding ProfName}" />
 
@@ -74,7 +73,8 @@
                        Text="Описание"
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top" />
-
+        
+        <!--IsEnabled="{Binding IsEnabled}"-->
         <TextBox Grid.Row="2" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10,40,10,0"
@@ -82,7 +82,6 @@
                      Height="120"
                      AcceptsReturn="True"
                      VerticalAlignment="Top"
-                     IsEnabled="{Binding IsEnabled}"
                      Text="{Binding ProfDescription}" />
 
         <!--#endregion-->
@@ -123,8 +122,9 @@
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
-                IsEnabled="{Binding IsEnabled}"
+                Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}" >
+            
         </Button>
 
 

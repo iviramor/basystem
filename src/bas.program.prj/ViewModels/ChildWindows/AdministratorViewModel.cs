@@ -16,6 +16,8 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class AdministratorViewModel : ViewModel
     {
+        #region Классы
+
         /// <summary>
         /// Окно администратора
         /// </summary>
@@ -31,6 +33,7 @@ namespace bas.program.ViewModels.ChildWindows
         /// </summary>
         private readonly BankDbContext _DataBase;
 
+        #endregion
 
         #region Свойства
 
@@ -87,7 +90,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
-        #region Изменить профиль
+        #region Изменить Должность
 
         /// <summary>
         /// Команда Открытия окна на изменения Должности
@@ -113,15 +116,14 @@ namespace bas.program.ViewModels.ChildWindows
                                           st.Status_describ == (string)_SelectedItem[1]);
 
             /// Передача данных Профессии в ProfWindowViewModel
-            var profile = new ProfWindowViewModel(this, user_Status, ref _workSpaceWindowViewModel);
+            var profile = new ProfWindowViewModel(user_Status, ref _workSpaceWindowViewModel);
             profile.ShowProfWindow();
             UpdateProfTable();
         }
 
         #endregion
 
-        #region Добавить профиль
-
+        #region Добавить Должность
 
         public ICommand AddProfCommand { get; }
 
@@ -131,7 +133,7 @@ namespace bas.program.ViewModels.ChildWindows
         {
 
             /// Передача данных Профессии в ProfWindowViewModel
-            var profile = new ProfWindowViewModel(this, ref _workSpaceWindowViewModel);
+            var profile = new ProfWindowViewModel(ref _workSpaceWindowViewModel);
             profile.ShowProfWindow();
             UpdateProfTable();
 
@@ -139,7 +141,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
-        #region Удаление 
+        #region Удаление Должность
 
         /// <summary>
         /// Команда для удаления выделенного элемента Должности
@@ -195,7 +197,31 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Просмотр Должность
+
+        public ICommand ShowProfCommand { get; }
+
+        private bool CanShowProfCommandExecuted(object p) => true;
+
+        private void OnShowProfCommandExecute(object p)
+        {
+
+            /// Поиск совпадения
+            Bank_user_status user_Status =
+                _DataBase.Bank_user_status
+                   .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
+                                          st.Status_describ == (string)_SelectedItem[1]);
+
+            /// Передача данных Профессии в ProfWindowViewModel
+            var profile = new ProfWindowViewModel(user_Status);
+            profile.ShowProfWindow();
+
+        }
+
         #endregion
+
+        #endregion
+
         public AdministratorViewModel(WorkSpaceWindowViewModel workVM)
         {
 
@@ -210,8 +236,12 @@ namespace bas.program.ViewModels.ChildWindows
             EditProfCommand = new ActionCommand(OnEditProfCommandExecute, CanEditProfCommandExecuted);
             AddProfCommand = new ActionCommand(OnAddProfCommandExecute, CanAddProfCommandExecuted);
             RemoveProfCommand = new ActionCommand(OnRemoveProfCommandExecute, CanRemoveProfCommandExecuted);
+            ShowProfCommand = new ActionCommand(OnShowProfCommandExecute, CanShowProfCommandExecuted);
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
+        
         }
+
+        #region Методы класса
 
         /// <summary>
         /// Создает структуру таблицы (Колонки)
@@ -260,5 +290,7 @@ namespace bas.program.ViewModels.ChildWindows
             };
             _administratorWindow.ShowDialog();
         }
+
+        #endregion
     }
 }

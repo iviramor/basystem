@@ -191,6 +191,10 @@
                   IsReadOnly="True"
                   CanUserResizeColumns="False">
 
+                <DataGrid.InputBindings>
+                    <MouseBinding Gesture="LeftDoubleClick"
+                                  Command="{Binding ShowProfCommand}"/>
+                </DataGrid.InputBindings>
                 
             </DataGrid>
 

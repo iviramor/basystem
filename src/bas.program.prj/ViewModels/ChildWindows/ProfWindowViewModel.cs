@@ -32,11 +32,6 @@ namespace bas.program.ViewModels.ChildWindows
         /// </summary>
         private readonly WorkSpaceWindowViewModel _WorkSpaceWindowViewModel;
 
-        /// <summary>
-        /// ViewModel администратора
-        /// </summary>
-        private readonly AdministratorViewModel _AdministratorViewModel;
-
         #endregion
 
         #region Свойства окна
@@ -238,14 +233,15 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Конструкторы
+
         /// <summary>
         /// Конструктор "Изменить"
         /// </summary>
         /// <param name="adminVM">ViewModel окна администратора</param>
         /// <param name="user_Status">Объект с данными о Статусе(Должности)</param>
         /// <param name="workSpace">ViewModel главного окна</param>
-        public ProfWindowViewModel(AdministratorViewModel adminVM, 
-                                   Bank_user_status user_Status, 
+        public ProfWindowViewModel(Bank_user_status user_Status, 
                                    ref WorkSpaceWindowViewModel workSpace)
         {
             /// Запись ряда с данными профессии
@@ -271,7 +267,6 @@ namespace bas.program.ViewModels.ChildWindows
 
 
             _WorkSpaceWindowViewModel = workSpace;
-            _AdministratorViewModel = adminVM;
 
             CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
@@ -279,8 +274,12 @@ namespace bas.program.ViewModels.ChildWindows
 
         }
 
-        public ProfWindowViewModel(AdministratorViewModel adminVM,
-                                   ref WorkSpaceWindowViewModel workSpace)
+        /// <summary>
+        /// Конструктор "Добавить"
+        /// </summary>
+        /// <param name="adminVM">ViewModel Админа</param>
+        /// <param name="workSpace">ViewModel Главного окна</param>
+        public ProfWindowViewModel(ref WorkSpaceWindowViewModel workSpace)
         {
 
             ///Название действия 
@@ -298,13 +297,47 @@ namespace bas.program.ViewModels.ChildWindows
 
 
             _WorkSpaceWindowViewModel = workSpace;
-            _AdministratorViewModel = adminVM;
 
             CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
 
 
         }
+
+        /// <summary>
+        /// Конструктор для просмотра Должности
+        /// </summary>
+        /// <param name="user_Status"></param>
+        public ProfWindowViewModel(Bank_user_status user_Status)
+        {
+            /// Запись ряда с данными профессии
+            UserStatus = user_Status;
+
+            ///Название действия 
+            NameAction = "Просмотр";
+            /// Название окна
+            Title = $"{NameAction}: {UserStatus.Status_name}";
+
+            #region Добавления значений в свойства
+
+            _ProfName = UserStatus.Status_name;
+            _ProfDescription = UserStatus.Status_describ;
+            _ProfFullAccess = UserStatus.Status_full_access;
+
+            _IsVisibility = false;
+            _IsEnabled = false;
+
+            #endregion
+
+            CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
+            UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
+
+
+        }
+
+        #endregion
+
+        #region Методы класса
 
         public void ShowProfWindow()
         {
@@ -315,5 +348,6 @@ namespace bas.program.ViewModels.ChildWindows
             _ProfWindow.ShowDialog();
         }
 
+        #endregion
     }
 }
