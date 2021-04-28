@@ -20,7 +20,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Класс
 
-        private Bank_user_status UserStatus;
+        private readonly Bank_user_status UserStatus;
 
         /// <summary>
         /// Окно Свойств Профессии
@@ -91,6 +91,22 @@ namespace bas.program.ViewModels.ChildWindows
             {
                 if (Equals(_IsVisibility, value)) return;
                 _IsVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _IsEnabled = true;
+
+        /// <summary>
+        /// Блокировка элементов
+        /// </summary>
+        public bool IsEnabled
+        {
+            get => _IsEnabled;
+            set
+            {
+                if (Equals(_IsEnabled, value)) return;
+                _IsEnabled = value;
                 OnPropertyChanged();
             }
         }

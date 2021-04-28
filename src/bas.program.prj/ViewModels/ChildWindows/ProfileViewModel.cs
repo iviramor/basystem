@@ -587,6 +587,8 @@ namespace bas.program.ViewModels.ChildWindows
             /// Разблокировать список статусов
             _StatusEnable = true;
 
+            /// Если Текущий пользователь является Высшим 
+            /// и его id равен id того профиля который изменяется
             if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher &
                 profilesWM._workSpaceWindowViewModel.User.User.User_id == bankUser.User_id)
             {
@@ -595,11 +597,25 @@ namespace bas.program.ViewModels.ChildWindows
                 _StatusEnable = false;
 
             }
+            else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher)
+            {
+                _BankStatuses = _DataBase.Bank_user_status
+                    .Include(st => st.Bank_user_access)
+                    .ToList();
+            }
+            else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher 
+                != bankUser.Bank_user_status.Status_higher)
+            {
+                _BankStatuses = _DataBase.Bank_user_status.ToList();
+                _IsEnabled = false;
+                _StatusEnable = false;
+            }
             else
             {
                 /// Выборка статусов (кроме админа)
                 _BankStatuses = _DataBase.Bank_user_status
                     .Include(st => st.Bank_user_access)
+                    .Where(st => !st.Status_higher)
                     .ToList();
             }
 

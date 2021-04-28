@@ -162,6 +162,15 @@ namespace bas.program.ViewModels.ChildWindows
                     MessageBoxImage.Error);
                 return;
             }
+            ///Если статус выделенного профиля выше чем текущий доступ
+            if (_SelectedItem.Bank_user_status.Status_higher &&
+                _workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher 
+                != _SelectedItem.Bank_user_status.Status_higher)
+            {
+                MessageBox.Show("Не позволяет доступ", "Ошибка ввода", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                return;
+            }
             var profile = new ProfileViewModel(this, _SelectedItem);
             profile.ShowProfileWindow();
         }
