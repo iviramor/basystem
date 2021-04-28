@@ -123,6 +123,23 @@ namespace bas.program.ViewModels.ChildWindows
             set
             {
                 if (Equals(_ProfName, value)) return;
+
+                if (value.Length < 2)
+                {
+                    MessageBox.Show("Название должности не может быть:\n" +
+                                    "-> Меньше 2 символов\n", "Ошибка ввода", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
+
+                if (_WorkSpaceWindowViewModel.User.DataBase.Bank_user_status
+                    .Any(user => user.Status_name == value))
+                {
+                    MessageBox.Show("Данное Название занято!", "Ошибка ввода", MessageBoxButton.OK,
+                            MessageBoxImage.Error);
+                    return;
+                }
+
                 _ProfName = value;
                 OnPropertyChanged();
             }
@@ -131,7 +148,7 @@ namespace bas.program.ViewModels.ChildWindows
         /// <summary>
         /// Описание статуса(Должности)
         /// </summary>
-        private string _ProfDescription;
+        private string _ProfDescription = "";
         public string ProfDescription
         {
             get
@@ -349,5 +366,6 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         #endregion
+
     }
 }
