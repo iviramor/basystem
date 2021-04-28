@@ -153,6 +153,14 @@ namespace bas.program.ViewModels.ChildWindows
             set
             {
                 if (Equals(_SelectedStatus, value)) return;
+                if (_SelectedStatus.Status_full_access && 
+                    !value.Status_full_access)
+                {
+                    MessageBox.Show("Вы точно хотите понизить статус? \n" +
+                                    "С полного доступа на НЕ полный доступ", "Ошибка ввода", MessageBoxButton.YesNo,
+                            MessageBoxImage.Information);
+                    
+                }
                 _SelectedStatus = value;
                 OnPropertyChanged();
             }
@@ -597,12 +605,14 @@ namespace bas.program.ViewModels.ChildWindows
                 _StatusEnable = false;
 
             }
+            /// Если текущий пользователь - Админ
             else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher)
             {
                 _BankStatuses = _DataBase.Bank_user_status
                     .Include(st => st.Bank_user_access)
                     .ToList();
             }
+            /// Если изменяемый профиль выше текущего
             else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher 
                 != bankUser.Bank_user_status.Status_higher)
             {
