@@ -124,6 +124,7 @@ namespace bas.program.ViewModels.ChildWindows
             {
                 if (Equals(_ProfName, value)) return;
 
+                /// Проверка на длину
                 if (value.Length < 2)
                 {
                     MessageBox.Show("Название должности не может быть:\n" +
@@ -132,6 +133,7 @@ namespace bas.program.ViewModels.ChildWindows
                     return;
                 }
 
+                /// Проверка на схожесть данных
                 if (_WorkSpaceWindowViewModel.User.DataBase.Bank_user_status
                     .Any(user => user.Status_name == value))
                 {
