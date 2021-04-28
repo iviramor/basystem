@@ -194,6 +194,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         public ICommand UpdateDataCommand { get; }
 
+        #region Изменить данные Должности
         private bool CanUpdateDataCommandExecuted(object p) => true;
 
         private void OnUpdateDataCommandExecute(object p)
@@ -206,11 +207,34 @@ namespace bas.program.ViewModels.ChildWindows
                 .Update(UserStatus);
             _WorkSpaceWindowViewModel.User.DataBase.SaveChanges();
 
-            _AdministratorViewModel.UpdateProfTable();
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
-        #endregion  
+        #endregion
+
+        #region Добавить должность
+        private bool CanAddDataCommandExecuted(object p) => true;
+
+        private void OnAddDataCommandExecute(object p)
+        {
+
+            Bank_user_status bank_User_Status = new();
+
+            bank_User_Status.Status_name = _ProfName;
+            bank_User_Status.Status_describ = _ProfDescription;
+            bank_User_Status.Status_full_access = _ProfFullAccess;
+            bank_User_Status.Status_higher = false;
+
+            _WorkSpaceWindowViewModel.User.DataBase.Bank_user_status
+                .Update(bank_User_Status);
+            _WorkSpaceWindowViewModel.User.DataBase.SaveChanges();
+
+            MessageBox.Show("Операция выполнена, \n Данные добавлены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        #endregion
+
+        #endregion
 
         #endregion
 
@@ -251,6 +275,33 @@ namespace bas.program.ViewModels.ChildWindows
 
             CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
+
+
+        }
+
+        public ProfWindowViewModel(AdministratorViewModel adminVM,
+                                   ref WorkSpaceWindowViewModel workSpace)
+        {
+
+            ///Название действия 
+            NameAction = "Добавить";
+            /// Название окна
+            Title = $"Добавить нового пользователя";
+
+            #region Добавления значений в свойства
+
+            /// Скрыть CheckBox Полного доступа, если Высшего доступа
+            if (!workSpace.User.User.Bank_user_status.Status_higher)
+                _IsVisibility = false;
+
+            #endregion
+
+
+            _WorkSpaceWindowViewModel = workSpace;
+            _AdministratorViewModel = adminVM;
+
+            CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
+            UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
 
 
         }

@@ -52,8 +52,7 @@
                       Height="40"
                       Padding="20, 0, 20, 0"
                       FontFamily="Roboto Medium" 
-                      Command=""
-                      Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
+                      Command="">
 
             </MenuItem>
 
@@ -97,7 +96,7 @@
 
                 <Button Template="{DynamicResource ButtonTemplateToolBar}" 
                     Style="{DynamicResource Button.ToolsBar}"
-                    Command="{Binding AddDataCommand}"
+                    Command="{Binding AddProfCommand}"
                     Grid.Row="1" Grid.Column="0">
 
                     <!--#region Внутри кнопки-->

@@ -114,7 +114,28 @@ namespace bas.program.ViewModels.ChildWindows
             /// Передача данных Профессии в ProfWindowViewModel
             var profile = new ProfWindowViewModel(this, user_Status, ref _workSpaceWindowViewModel);
             profile.ShowProfWindow();
+            UpdateProfTable();
         }
+
+        #endregion
+
+        #region Добавить профиль
+
+
+        public ICommand AddProfCommand { get; }
+
+        private bool CanAddProfCommandExecuted(object p) => true;
+
+        private void OnAddProfCommandExecute(object p)
+        {
+
+            /// Передача данных Профессии в ProfWindowViewModel
+            var profile = new ProfWindowViewModel(this, ref _workSpaceWindowViewModel);
+            profile.ShowProfWindow();
+            UpdateProfTable();
+
+        }
+
 
         #endregion
 
@@ -132,6 +153,7 @@ namespace bas.program.ViewModels.ChildWindows
 
 
             EditProfCommand = new ActionCommand(OnEditProfCommandExecute, CanEditProfCommandExecuted);
+            AddProfCommand = new ActionCommand(OnAddProfCommandExecute, CanAddProfCommandExecuted);
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
         }
 
