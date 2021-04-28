@@ -9,6 +9,8 @@ namespace bas.program.ViewModels
 {
     public class HelloWindowViewModel : ViewModel
     {
+        #region Классы
+
         /// <summary>
         /// ViewModel главного окна
         /// </summary>
@@ -18,6 +20,8 @@ namespace bas.program.ViewModels
         /// Окно HelloWindow
         /// </summary>
         private HelloWindow _HelloWindow;
+
+        #endregion
 
         #region Логин
 
@@ -92,6 +96,8 @@ namespace bas.program.ViewModels
 
         #endregion Команды
 
+        #region Конструкторы
+
         /// <summary>
         /// Конструктор ViewModel для HelloWindow
         /// </summary>
@@ -101,6 +107,10 @@ namespace bas.program.ViewModels
             _workSpaceWindowViewModel = workWindow;
             SignInCommand = new ActionCommand(OnSignInCommandExecute, CanSignInCommandExecuted);
         }
+
+        #endregion
+
+        #region Методы класса
 
         /// <summary>
         /// Отображает окно HelloWindow
@@ -113,5 +123,7 @@ namespace bas.program.ViewModels
             };
             _HelloWindow.ShowDialog();
         }
+
+        #endregion
     }
 }
