@@ -14,6 +14,7 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class ProfilesViewModel : ViewModel
     {
+
         #region Поля и Свойства
 
         /// <summary>
@@ -193,6 +194,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion Команды
 
+        #region Конструкторы
+
         public ProfilesViewModel(WorkSpaceWindowViewModel workVM)
         {
             _workSpaceWindowViewModel = workVM;
@@ -209,6 +212,9 @@ namespace bas.program.ViewModels.ChildWindows
             CloseProfilesCommand = new ActionCommand(OnCloseProfilesCommandExecute, CanCloseProfilesCommandExecuted);
         }
 
+        #endregion
+
+        #region Методы
         public void UpdateTable()
         {
             Bank_users = _DataBase.Bank_user
@@ -224,5 +230,8 @@ namespace bas.program.ViewModels.ChildWindows
             };
             _ProfilesWindow.ShowDialog();
         }
+
+        #endregion
+
     }
 }
