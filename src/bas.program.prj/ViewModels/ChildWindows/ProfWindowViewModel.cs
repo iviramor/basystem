@@ -222,6 +222,7 @@ namespace bas.program.ViewModels.ChildWindows
             _WorkSpaceWindowViewModel.User.DataBase.SaveChanges();
 
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ProfWindow.Close();
         }
 
         #endregion
@@ -244,6 +245,7 @@ namespace bas.program.ViewModels.ChildWindows
             _WorkSpaceWindowViewModel.User.DataBase.SaveChanges();
 
             MessageBox.Show("Операция выполнена, \n Данные добавлены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+            _ProfWindow.Close();
         }
 
         #endregion
