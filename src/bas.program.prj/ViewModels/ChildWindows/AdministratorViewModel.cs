@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
+using bas.program.ViewModels.Messages;
 using bas.program.Views;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
@@ -89,7 +90,7 @@ namespace bas.program.ViewModels.ChildWindows
         #region Изменить профиль
 
         /// <summary>
-        /// Команда Открытия окна на изменения Профессии
+        /// Команда Открытия окна на изменения Должности
         /// </summary>
         public ICommand EditProfCommand { get; }
 
@@ -136,11 +137,65 @@ namespace bas.program.ViewModels.ChildWindows
 
         }
 
+        #endregion
+
+        #region Удаление 
+
+        /// <summary>
+        /// Команда для удаления выделенного элемента Должности
+        /// </summary>
+        public ICommand RemoveProfCommand { get; }
+
+        private bool CanRemoveProfCommandExecuted(object p) => true;
+
+        private void OnRemoveProfCommandExecute(object p)
+        {
+
+            /// Проверка выделен ли ряд в таблице
+            if (_SelectedItem == null)
+            {
+                MessageBox.Show("Выделите Должность в таблице", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            /// Сообщение, для подтверждения пароля
+            var PasswordWindow = new ConfirmPasswordViewModel();
+            /// Отображение сообщения и запись вводимого в
+            /// окне пароля
+            var password = PasswordWindow.ShowMessagePassword();
+
+            /// Проверка есть ли пароль
+            if (password == null) return;
+            /// Сравнивает введенный пароль с паролем пользователя
+            else if (password == _workSpaceWindowViewModel.User.User.User_password)
+            {
+                /// Поиск совпадения
+                Bank_user_status user_Status =
+                    _DataBase.Bank_user_status
+                       .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
+                                              st.Status_describ == (string)_SelectedItem[1]);
+
+                /// Удаление Должности
+                _DataBase.Bank_user_status.Remove(user_Status);
+                _DataBase.SaveChanges();
+
+                UpdateProfTable();
+
+                MessageBox.Show($"Успех");
+                return;
+            }
+            /// если пароль не подходить, то сообщение об ошибке Ввода
+            else
+                MessageBox.Show("Неверный пароль!", "Ошибка ввода", MessageBoxButton.OK,
+                MessageBoxImage.Error);
+
+            return;
+        }
 
         #endregion
 
         #endregion
-
         public AdministratorViewModel(WorkSpaceWindowViewModel workVM)
         {
 
@@ -154,6 +209,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             EditProfCommand = new ActionCommand(OnEditProfCommandExecute, CanEditProfCommandExecuted);
             AddProfCommand = new ActionCommand(OnAddProfCommandExecute, CanAddProfCommandExecuted);
+            RemoveProfCommand = new ActionCommand(OnRemoveProfCommandExecute, CanRemoveProfCommandExecuted);
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
         }
 

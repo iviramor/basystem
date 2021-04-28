@@ -7,6 +7,7 @@
         xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}" 
+        WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Height="480" Width="400">
 
