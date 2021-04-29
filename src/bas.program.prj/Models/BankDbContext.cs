@@ -1,4 +1,5 @@
-﻿using bas.program.Models.Tables.UserTables;
+﻿using bas.program.Models.Tables;
+using bas.program.Models.Tables.UserTables;
 using Microsoft.EntityFrameworkCore;
 
 namespace bas.website.Models.Data
@@ -29,6 +30,8 @@ namespace bas.website.Models.Data
         #region Прочие данные
 
         public DbSet<Bank_currency> Bank_currency { get; set; }
+
+        public DbSet<Bank_tables_info> Bank_tables_info { get; set; }
 
         #endregion Прочие данные
 
