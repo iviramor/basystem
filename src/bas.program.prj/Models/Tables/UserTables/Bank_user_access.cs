@@ -14,11 +14,14 @@ namespace bas.program.Models.Tables.UserTables
 
         [MaxLength(350)]
         [DisplayName("name_table")]
-        public string Access_name_table { get; set; }
+        public int Access_name_table { get; set; }
         [DisplayName("modification")]
         public int Access_modification { get; set; }
 
         [ForeignKey("Access_user_status")]
         public virtual Bank_user_status Bank_user_status { get; set; }
+
+        [ForeignKey("Access_name_table")]
+        public virtual Bank_tables_info Bank_tables_info { get; set; }
     }
 }

@@ -79,6 +79,7 @@ namespace bas.program.ViewModels
         {
             var user = _workSpaceWindowViewModel.User.DataBase.Bank_user
                 .Include(u => u.Bank_user_status)
+                .Include(u => u.Bank_user_status.Bank_user_access)
                 .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
 
             if (user != null)

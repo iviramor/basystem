@@ -13,7 +13,7 @@ namespace bas.program.Models
         /// <summary>
         /// База данных или же Контекст базы данных
         /// </summary>
-        private BankDbContext _DataBase = new BankDbContext();
+        private BankDbContext _DataBase = new();
          
         /// <summary>
         /// Поле со статусом сессии пользователя, если не авторизован, то false

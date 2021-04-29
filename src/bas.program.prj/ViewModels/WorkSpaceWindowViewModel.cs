@@ -1,7 +1,15 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models;
+using bas.program.Models.Tables;
+using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.ViewModels.ChildWindows;
+using bas.website.Models.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -64,6 +72,43 @@ namespace bas.program.ViewModels
         }
 
         #endregion Действия с окном
+
+        #region Combo box с таблицами
+
+        private Bank_tables_info _SelectTableItemComboBox;
+
+        public Bank_tables_info SelectTableItemComboBox
+        {
+            get
+            {
+                return _SelectTableItemComboBox;
+            }
+            set
+            {
+                if (Equals(_SelectTableItemComboBox, value)) return;
+                _SelectTableItemComboBox = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        private List<Bank_tables_info> _ItemsTableComboBox = new List<Bank_tables_info>();
+
+        public List<Bank_tables_info> ItemsTableComboBox
+        {
+            get
+            {
+                return _ItemsTableComboBox;
+            }
+            set
+            {
+                if (Equals(_ItemsTableComboBox, value)) return;
+                _ItemsTableComboBox = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
         #endregion Блоки окна
 
@@ -180,6 +225,9 @@ namespace bas.program.ViewModels
                 Application.Current.Shutdown();
             }
 
+            SetItemsTable();
+
+
             #region Команды 
 
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
@@ -188,6 +236,36 @@ namespace bas.program.ViewModels
             ShowAdministratorCommand = new ActionCommand(OnShowAdministratorCommandExecute, CanShowAdministratorCommandExecuted);
 
             #endregion
+        }
+
+        private void SetItemsTable()
+        {
+            /// Таблица с статусом текущего Пользователя системы
+            var Statuses = User.User.Bank_user_status;
+
+            /// Вывод всех данных, если полный доступ
+            if (Statuses.Status_full_access)
+            {
+                _ItemsTableComboBox = User.DataBase.Bank_tables_info
+                    .Where(table => !table.Tables_isSystem)
+                    .ToList();
+
+                return;
+            }
+
+            /// Создание объекта ItemsTableComboBox
+            _ItemsTableComboBox = new();
+
+            foreach (var itemAccess in Statuses.Bank_user_access)
+            {
+                /// Поиск в таблице с информацией о Таблицах
+                var item = User.DataBase.Bank_tables_info
+                    .SingleOrDefault(tableInfo => tableInfo.Tables_id == itemAccess.Access_name_table);
+
+                /// Добавления в _ItemsTableComboBox
+                _ItemsTableComboBox.Add(item);
+            }
+
         }
 
         #endregion

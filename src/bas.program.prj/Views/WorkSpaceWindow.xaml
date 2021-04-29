@@ -169,15 +169,13 @@
                         <ComboBox Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
                                   Width="230" Height="30"
                                   Margin="0, 3"
+                                  ItemContainerStyle="{DynamicResource CommonComboBoxItemStyle}"
+                                  ItemsSource="{Binding ItemsTableComboBox}"
                                   VerticalAlignment="Center"
+                                  SelectedItem="{Binding SelectTableItemComboBox}"
+                                  DisplayMemberPath="Tables_name"
                                   Grid.Row="1" FontFamily="Roboto Medium">
 
-                            <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
-                                          Content="Таблица 1"
-                                          IsSelected="True" />
-
-                            <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
-                                          Content="Таблица 2" />
                         </ComboBox>
                     </Grid>
 
