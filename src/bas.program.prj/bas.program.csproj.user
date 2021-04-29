@@ -4,6 +4,9 @@
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Update="Views\AccessWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\AdministratorWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -24,6 +27,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\AccessWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\AdministratorWindow.xaml">
       <SubType>Designer</SubType>
     </Page>

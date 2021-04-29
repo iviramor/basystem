@@ -52,7 +52,7 @@
                       Height="40"
                       Padding="20, 0, 20, 0"
                       FontFamily="Roboto Medium" 
-                      Command="">
+                      Command="{Binding ShowAccessCommand}">
 
             </MenuItem>
 

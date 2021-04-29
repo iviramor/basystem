@@ -141,6 +141,21 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Открыть Доступы
+
+
+        public ICommand ShowAccessCommand { get; }
+
+        private bool CanShowAccessCommandExecuted(object p) => true;
+
+        private void OnShowAccessCommandExecute(object p)
+        {
+            new AccessViewModel().ShowAccessWindow();
+        }
+
+
+        #endregion
+
         #region Удаление Должность
 
         /// <summary>
@@ -255,6 +270,7 @@ namespace bas.program.ViewModels.ChildWindows
             AddProfCommand = new ActionCommand(OnAddProfCommandExecute, CanAddProfCommandExecuted);
             RemoveProfCommand = new ActionCommand(OnRemoveProfCommandExecute, CanRemoveProfCommandExecuted);
             ShowProfCommand = new ActionCommand(OnShowProfCommandExecute, CanShowProfCommandExecuted);
+            ShowAccessCommand = new ActionCommand(OnShowAccessCommandExecute, CanShowAccessCommandExecuted);
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
         
         }
