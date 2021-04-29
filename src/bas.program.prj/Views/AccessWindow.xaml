@@ -6,28 +6,106 @@
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
         Title="AccessWindow" Height="450" Width="500">
-    
-    
-    
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
+                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
+                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+
+            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
+
+
+            <Style TargetType="TextBlock">
+                <Setter Property="FontFamily" Value="Roboto"/>
+            </Style>
+
+        </ResourceDictionary>
+
+
+
+    </Window.Resources>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+            <ColumnDefinition />
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition />
+            <RowDefinition Height="40"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        
-        
-        <RadioButton Content="RadioButton" Grid.Column="2" HorizontalAlignment="Left" Margin="141,110,0,0" Grid.Row="1" VerticalAlignment="Top"/>
-        <ListBox Grid.Column="1" Grid.Row="1">
-            <ListBoxItem Content="One"/>
-        </ListBox>
 
+        <Grid Grid.Column="1" Grid.Row="1" 
+              Margin="15">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
 
+            <TextBlock Grid.Row="0"
+                Text="Должность" />
+
+            <ListBox Grid.Row="1">
+                <ListBoxItem Content="One"/>
+            </ListBox>
+
+            <Button Grid.Row="2"
+                Content="Удалить">
+                
+            </Button>
+            
+        </Grid>
+
+        <Grid Grid.Column="2" Grid.Row="1" 
+              Margin="15">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition />
+                <RowDefinition Height="40"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0"
+                Text="Все" />
+
+            <ListBox Grid.Row="1">
+                <ListBoxItem Content="One"/>
+            </ListBox>
+
+            <Button Grid.Row="2"
+                Content="Добавить">
+
+            </Button>
+
+        </Grid>
+
+        <Button Grid.Row="2" Grid.Column="1" 
+                Width="150"
+                HorizontalAlignment="Left"
+                Style="{StaticResource ButtonStyle}"
+                Template="{StaticResource ButtonTemplate}"
+                Content="Назад" 
+                Command="{Binding CloseAdminCommand}">
+
+        </Button>
 
 
     </Grid>
