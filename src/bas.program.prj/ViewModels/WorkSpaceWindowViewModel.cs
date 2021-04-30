@@ -173,7 +173,6 @@ namespace bas.program.ViewModels
         private void OnShowProfileExecute(object p)
         {
             var profile = new ProfileViewModel(this);
-            profile.ShowProfileWindow();
         }
 
         #endregion Профиль
@@ -261,6 +260,8 @@ namespace bas.program.ViewModels
                 /// Поиск в таблице с информацией о Таблицах
                 var item = User.DataBase.Bank_tables_info
                     .SingleOrDefault(tableInfo => tableInfo.Tables_id == itemAccess.Access_name_table);
+
+                if (item.Tables_isSystem) continue;
 
                 /// Добавления в _ItemsTableComboBox
                 _ItemsTableComboBox.Add(item);

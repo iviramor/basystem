@@ -541,6 +541,7 @@ namespace bas.program.ViewModels.ChildWindows
         /// <param name="workVM">ViewModel Главного окна</param>
         public ProfileViewModel(WorkSpaceWindowViewModel workVM)
         {
+
             /// Главное окно
             _workSpaceWindowViewModel = workVM;
 
@@ -563,20 +564,6 @@ namespace bas.program.ViewModels.ChildWindows
 
             #endregion Значение свойство пользователя
 
-            #region Ограничение доступа к полям
-
-            /// Проверка На статус Администратор
-            if (workVM.User.User.Bank_user_status.Status_full_access) _StatusEnable = false;
-            //Реализация нулевого пропуска
-            //else if (workVM.User.User.User_status_to_system == 2)
-            //{
-            //    _IsEnabled = false;
-            //    _IsVisibility = false;
-            //    _AccessLabel = true;
-            //}
-
-            #endregion Ограничение доступа к полям
-
             #region Список статусов
 
             _BankStatuses = _DataBase.Bank_user_status
@@ -589,6 +576,32 @@ namespace bas.program.ViewModels.ChildWindows
 
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
             CloseProfileCommand = new ActionCommand(OnCloseProfileCommandExecute, CanCloseProfileCommandExecuted);
+
+            #region Ограничение доступа к полям
+
+            var TableAccess = workVM.User.User
+                .Bank_user_status.Bank_user_access
+                .SingleOrDefault(ua => ua.Bank_tables_info.Tables_key == "Bank_user");
+
+            /// Проверка На статус Администратор
+            if (workVM.User.User.Bank_user_status.Status_full_access) _StatusEnable = false;
+            /// Реализация нулевого пропуска
+            else if (TableAccess == null)
+            {
+                MessageBox.Show("Нет доступа", "Предупреждение",
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+            else if (TableAccess.Access_modification == 2)
+            {
+                _IsEnabled = false;
+                _IsVisibility = false;
+                _AccessLabel = true;
+            }
+
+            #endregion Ограничение доступа к полям
+
+            ShowProfileWindow();
         }
 
         /// <summary>
