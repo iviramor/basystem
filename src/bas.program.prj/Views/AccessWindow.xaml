@@ -115,8 +115,8 @@
             </ListBox>
 
             <Button Grid.Row="2"
-                    Command="{Binding ShowAccessCommand}"
-                Content="Удалить">
+                    Command="{Binding DelAccessCommand}"
+                    Content="Удалить">
                 
             </Button>
             
@@ -136,9 +136,9 @@
                 Text="Все" />
 
             <ListBox Grid.Row="1"
+                     SelectedItem="{Binding SelectAllAccess}"
                      DisplayMemberPath="Tables_name"
-                     ItemsSource="{Binding ListWithAllAccess}"
-                     />
+                     ItemsSource="{Binding ListWithAllAccess}"/>
 
 
 
@@ -147,6 +147,7 @@
                       VerticalAlignment="Center"
                       FontFamily="Roboto Medium"
                       Height="30"
+                      SelectedItem="{Binding SelectComboBoxAccess}"
                       DisplayMemberPath="NameAccess"
                       ItemsSource="{Binding ComboBoxAccess}"
                       Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
@@ -156,7 +157,8 @@
             </ComboBox>
 
             <Button Grid.Row="3"
-                Content="Добавить">
+                    Command="{Binding AddAccessCommand}"
+                    Content="Добавить">
 
             </Button>
 

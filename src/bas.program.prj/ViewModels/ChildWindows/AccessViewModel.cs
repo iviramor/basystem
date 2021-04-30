@@ -77,6 +77,21 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
+        private Bank_tables_info _SelectAllAccess;
+        /// <summary>
+        /// Выделенный доступ пользователя в листе
+        /// </summary>
+        public Bank_tables_info SelectAllAccess
+        {
+            get => _SelectAllAccess;
+            set
+            {
+                if (Equals(_SelectAllAccess, value)) return;
+                _SelectAllAccess = value;
+                OnPropertyChanged();
+            }
+        }
+
         private List<Bank_tables_info> _ListWithAllAccess;
 
         /// <summary>
@@ -93,6 +108,22 @@ namespace bas.program.ViewModels.ChildWindows
             }
         }
 
+        private AccessForTable _SelectComboBoxAccess;
+
+        /// <summary>
+        /// Выделенный Бокс с доступами извинением к таблице
+        /// </summary>
+        public AccessForTable SelectComboBoxAccess
+        {
+            get => _SelectComboBoxAccess;
+            set
+            {
+                if (Equals(_SelectComboBoxAccess, value)) return;
+                _SelectComboBoxAccess = value;
+                OnPropertyChanged();
+            }
+        }
+
         private List<AccessForTable> _ComboBoxAccess = new() 
         { 
             new AccessForTable() { NameAccess = "Полный" , KeyAccess = 1},
@@ -102,7 +133,7 @@ namespace bas.program.ViewModels.ChildWindows
         };
 
         /// <summary>
-        /// Свойство Бокса с доступами измения к таблице
+        /// Свойство Бокса с доступами извинением к таблице
         /// </summary>
         public List<AccessForTable> ComboBoxAccess
         {
@@ -121,16 +152,59 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Команды
 
+        #region Удалить доступ
+        public ICommand DelAccessCommand { get; }
 
-        public ICommand ShowAccessCommand { get; }
+        private bool CanDelAccessCommandExecuted(object p) => true;
 
-        private bool CanShowAccessCommandExecuted(object p) => true;
-
-        private void OnShowAccessCommandExecute(object p)
+        private void OnDelAccessCommandExecute(object p)
         {
             MessageBox.Show($"{_SelectAccessUser.Bank_tables_info.Tables_name}");
         }
 
+        #endregion
+
+        #region Добавить доступ
+
+        public ICommand AddAccessCommand { get; }
+
+        private bool CanAddAccessCommandExecuted(object p) => true;
+
+        private void OnAddAccessCommandExecute(object p)
+        {
+
+            /// Проверка выделены ли элементы
+            if (_SelectAllAccess == null)
+            {
+                MessageBox.Show("Выделите таблицу!", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+            if (_SelectComboBoxAccess == null)
+            {
+                MessageBox.Show("Выделите тип доступа к таблице", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+                return;
+            }
+
+            Bank_user_access bua = new()
+            {
+                Access_user_status = _Bank_User_Status.Status_id,
+                Access_name_table = _SelectAllAccess.Tables_id,
+                Access_modification = _SelectComboBoxAccess.KeyAccess
+
+            };
+
+            /// Обновление данных
+            _UserDataSession.DataBase.Bank_user_access.Add(bua);
+            _UserDataSession.DataBase.SaveChanges();
+
+            SetSourceAccessUser();
+
+            MessageBox.Show($"{_SelectAllAccess.Tables_name} {_SelectComboBoxAccess.NameAccess}");
+        }
+
+        #endregion
 
         #endregion
 
@@ -144,7 +218,8 @@ namespace bas.program.ViewModels.ChildWindows
             SetSourceAccessUser();
             SetSourceAllAccess();
 
-            ShowAccessCommand = new ActionCommand(OnShowAccessCommandExecute, CanShowAccessCommandExecuted);
+            DelAccessCommand = new ActionCommand(OnDelAccessCommandExecute, CanDelAccessCommandExecuted);
+            AddAccessCommand = new ActionCommand(OnAddAccessCommandExecute, CanAddAccessCommandExecuted);
 
         }
 
@@ -154,12 +229,15 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void SetSourceAccessUser()
         {
-            ListWithAccessUser = _Bank_User_Status.Bank_user_access;
+            ListWithAccessUser = _UserDataSession.DataBase.Bank_user_access
+                .Where(table => table.Access_user_status == _Bank_User_Status.Status_id)
+                .ToList();
         }
 
         private void SetSourceAllAccess()
         {
-            ListWithAllAccess = _UserDataSession.DataBase.Bank_tables_info.ToList();
+            ListWithAllAccess = _UserDataSession.DataBase.Bank_tables_info
+                .ToList();
         }
 
         public void ShowAccessWindow()
