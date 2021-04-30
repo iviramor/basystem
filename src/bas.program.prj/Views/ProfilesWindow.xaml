@@ -66,6 +66,7 @@
             <Button Template="{DynamicResource ButtonTemplateToolBar}"
                     Style="{DynamicResource Button.ToolsBar}"
                     Command="{Binding AddDataCommand}"
+                    IsEnabled="{Binding AddIsEnabled}"
                     Grid.Row="1" Grid.Column="0">
 
                 <!--#region Внутри кнопки-->
@@ -92,6 +93,7 @@
             <Button Template="{DynamicResource ButtonTemplateToolBar}"
                     Style="{StaticResource Button.ToolsBar}"
                     Grid.Row="3" Grid.Column="0"
+                    IsEnabled="{Binding EditIsEnabled}"
                     Command="{Binding EditDataCommand}">
 
                 <!--#region Внутри кнопки-->
@@ -117,6 +119,7 @@
             <Button Template="{DynamicResource ButtonTemplateToolBar}"
                     Style="{StaticResource Button.ToolsBar}"
                     Grid.Row="5" Grid.Column="0"
+                    IsEnabled="{Binding DelIsEnabled}"
                     Command="{Binding RemoveDataCommand}">
 
                 <!--#region Внутри кнопки-->

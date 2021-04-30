@@ -17,6 +17,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Поля и Свойства
 
+        #region Классы
+
         /// <summary>
         /// Окно Профилей
         /// </summary>
@@ -31,6 +33,59 @@ namespace bas.program.ViewModels.ChildWindows
         /// База данных или же Контекст моделей
         /// </summary>
         private readonly BankDbContext _DataBase;
+
+        #endregion
+
+        #region Доступ к элементам окна
+
+        private bool _AddIsEnabled = true;
+        /// <summary>
+        /// Доступ к добавлению
+        /// </summary>
+        public bool AddIsEnabled
+        {
+            get => _AddIsEnabled;
+            set
+            {
+                if (Equals(_AddIsEnabled, value)) return;
+                _AddIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _EditIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool EditIsEnabled
+        {
+            get => _EditIsEnabled;
+            set
+            {
+                if (Equals(_EditIsEnabled, value)) return;
+                _EditIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _DelIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool DelIsEnabled
+        {
+            get => _DelIsEnabled;
+            set
+            {
+                if (Equals(_DelIsEnabled, value)) return;
+                _DelIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Элементы окна
 
         private Bank_user _SelectedItem;
 
@@ -66,6 +121,8 @@ namespace bas.program.ViewModels.ChildWindows
                 OnPropertyChanged();
             }
         }
+
+        #endregion
 
         #endregion Поля и Свойства
 
@@ -210,6 +267,32 @@ namespace bas.program.ViewModels.ChildWindows
             EditDataCommand = new ActionCommand(OnEditDataCommandExecute, CanEditDataCommandExecuted);
             AddDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
             CloseProfilesCommand = new ActionCommand(OnCloseProfilesCommandExecute, CanCloseProfilesCommandExecuted);
+
+            #region Доступ к элементам
+
+            ///Поиск информации таблицы Пользователей
+            var tableInfo = _DataBase.Bank_tables_info
+                .SingleOrDefault(ti => ti.Tables_key == "Bank_user");
+
+            /// Поиск доступа к таблице Bank_user
+            var tableAccess = workVM.User.User.Bank_user_status.Bank_user_access
+                .SingleOrDefault(ua => ua.Access_name_table == tableInfo.Tables_id);
+
+            if (workVM.User.User.Bank_user_status.Status_full_access) return;
+            else if (tableAccess.Access_modification == 2)
+            {
+                _AddIsEnabled = false;
+                _EditIsEnabled = false;
+                _DelIsEnabled = false;
+            }
+            else if (tableAccess.Access_modification == 3)
+            {
+                _AddIsEnabled = false;
+                _DelIsEnabled = false;
+            }
+
+            #endregion
+
         }
 
         #endregion
