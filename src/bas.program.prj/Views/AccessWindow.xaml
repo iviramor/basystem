@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
-        Title="AccessWindow" Height="525" Width="700">
+        MinHeight="550" MinWidth="700"
+        Height="560" Width="700"
+        Title="{Binding Title}" Icon="/Resources/Image/Icons/folder.png" >
 
     <Window.Resources>
 
@@ -40,8 +42,9 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"/>
-            <ColumnDefinition />
-            <ColumnDefinition />
+            <ColumnDefinition Width="17*" />
+            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="64*" />
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -53,8 +56,8 @@
 
         <Grid Grid.Column="1" Grid.Row="1" 
               x:Name="ColumnAccessUser"
-              Margin="15">
-            
+              Margin="15,15,15,15" Grid.ColumnSpan="2">
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition />
@@ -72,11 +75,11 @@
                 <ListBox.ItemTemplate>
 
                     <DataTemplate>
-                        <Grid Width="{Binding ActualWidth, ElementName=ColumnAccessUser}">
-                            
+                        <Grid MinWidth="{Binding ActualWidth, ElementName=ColumnAccessUser}">
+
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition MinWidth="200" />
+                                <ColumnDefinition MinWidth="100" />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -124,7 +127,7 @@
 
                         </Grid>
                     </DataTemplate>
-                    
+
                 </ListBox.ItemTemplate>
 
             </ListBox>
@@ -133,13 +136,13 @@
                     Command="{Binding DelAccessCommand}"
                     IsEnabled="{Binding DelIsEnabled}"
                     Content="Удалить">
-                
+
             </Button>
-            
+
         </Grid>
 
-        <Grid Grid.Column="2" Grid.Row="1" 
-              Margin="15">
+        <Grid Grid.Column="3" Grid.Row="1" 
+              Margin="15,15,15,15">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
@@ -161,8 +164,8 @@
                         <Grid Width="{Binding ActualWidth, ElementName=ColumnAccessUser}">
 
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
+                                <ColumnDefinition MinWidth="200" />
+                                <ColumnDefinition MinWidth="100" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition />
@@ -171,7 +174,7 @@
                             <TextBlock Grid.Column="0" Grid.RowSpan="2" 
                                        VerticalAlignment="Center"
                                        Text="{Binding Path=Tables_name}"/>
-                            
+
                             <TextBlock Grid.Column="1" Grid.RowSpan="2" 
                                        VerticalAlignment="Center">
                                 <TextBlock.Style>
@@ -196,20 +199,32 @@
 
             </ListBox>
 
-            <ComboBox Grid.Row="2"
-                      Margin="0, 5"
-                      VerticalAlignment="Center"
-                      FontFamily="Roboto Medium"
-                      Height="30"
-                      IsEnabled="{Binding AccessListIsEnable}"
-                      SelectedItem="{Binding SelectComboBoxAccess}"
-                      DisplayMemberPath="NameAccess"
-                      ItemsSource="{Binding ComboBoxAccess}"
-                      Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
-                      ItemContainerStyle="{DynamicResource CommonComboBoxItemStyle}">
-
+            <Grid Grid.Row="2">
                 
-            </ComboBox>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="Тип доступа" 
+                           FontWeight="Bold"
+                           Margin="10"
+                           VerticalAlignment="Center"
+                           FontFamily="Roboto"/>
+
+                <ComboBox Grid.Column="1"
+                          Margin="0, 5"
+                          VerticalAlignment="Center"
+                          FontFamily="Roboto Medium"
+                          Height="30"
+                          IsEnabled="{Binding AccessListIsEnable}"
+                          SelectedItem="{Binding SelectComboBoxAccess}"
+                          DisplayMemberPath="NameAccess"
+                          ItemsSource="{Binding ComboBoxAccess}"
+                          Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
+                          ItemContainerStyle="{DynamicResource CommonComboBoxItemStyle}"/>
+
+            </Grid>
 
             <Button Grid.Row="3"
                     Command="{Binding AddAccessCommand}"
@@ -226,13 +241,13 @@
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="Назад" 
-                Command="{Binding CloseAccessCommand}">
+                Command="{Binding CloseAccessCommand}" Grid.ColumnSpan="2">
 
         </Button>
 
 
     </Grid>
-    
-    
-    
+
+
+
 </Window>

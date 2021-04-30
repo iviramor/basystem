@@ -43,6 +43,23 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Свойства окна
 
+        private string _Title;
+        /// <summary>
+        /// Название действия окна
+        /// </summary>
+        public string Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                if (Equals(_Title, value)) return;
+                _Title = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -255,7 +272,7 @@ namespace bas.program.ViewModels.ChildWindows
         {
             if (_SelectAccessUser == null)
             {
-                MessageBox.Show("Выделите доступ!", "Ошибка ввода", MessageBoxButton.OK,
+                MessageBox.Show("Выделите таблицу!", "Ошибка ввода", MessageBoxButton.OK,
                         MessageBoxImage.Error);
                 return;
             }
@@ -357,8 +374,11 @@ namespace bas.program.ViewModels.ChildWindows
 
         public AccessViewModel(Bank_user_status user_Status, UserDataSession userDataSession)
         {
+
             _Bank_User_Status = user_Status;
             _UserDataSession = userDataSession;
+
+            _Title = $"Должность: {user_Status.Status_name}";
 
             SetSourceAccessUser();
             SetSourceAllAccess();
