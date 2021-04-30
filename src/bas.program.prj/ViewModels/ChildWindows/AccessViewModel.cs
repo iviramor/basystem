@@ -159,7 +159,18 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void OnDelAccessCommandExecute(object p)
         {
-            MessageBox.Show($"{_SelectAccessUser.Bank_tables_info.Tables_name}");
+            if (_SelectAccessUser == null)
+            {
+                MessageBox.Show("Выделите доступ!", "Ошибка ввода", MessageBoxButton.OK,
+                        MessageBoxImage.Error);
+                return;
+            }
+
+            /// Обновление данных
+            _UserDataSession.DataBase.Bank_user_access.Remove(_SelectAccessUser);
+            _UserDataSession.DataBase.SaveChanges();
+
+            SetSourceAccessUser();
         }
 
         #endregion
@@ -200,8 +211,6 @@ namespace bas.program.ViewModels.ChildWindows
             _UserDataSession.DataBase.SaveChanges();
 
             SetSourceAccessUser();
-
-            MessageBox.Show($"{_SelectAllAccess.Tables_name} {_SelectComboBoxAccess.NameAccess}");
         }
 
         #endregion

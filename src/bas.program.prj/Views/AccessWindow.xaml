@@ -83,8 +83,9 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Таблица" FontWeight="Bold" />
-                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=Bank_tables_info.Tables_name}"/>
+                            <TextBlock Grid.Column="0" Grid.RowSpan="2" 
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Path=Bank_tables_info.Tables_name}"/>
 
 
                             <TextBlock Grid.Column="1" Grid.Row="0" Text="Тип доступа" FontWeight="Bold" />

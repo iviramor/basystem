@@ -143,7 +143,6 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Открыть Доступы
 
-
         public ICommand ShowAccessCommand { get; }
 
         private bool CanShowAccessCommandExecuted(object p) => true;
@@ -158,8 +157,8 @@ namespace bas.program.ViewModels.ChildWindows
                                           st.Status_describ == (string)_SelectedItem[1]);
 
             new AccessViewModel(user_Status, _workSpaceWindowViewModel.User).ShowAccessWindow();
+            UpdateProfTable();
         }
-
 
         #endregion
 
