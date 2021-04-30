@@ -149,7 +149,12 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void OnShowAccessCommandExecute(object p)
         {
-            if (_SelectedItem == null) return;
+            if (_SelectedItem == null)
+            {
+                MessageBox.Show("Выберете Должность в таблице", "Предупреждение", MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+                return;
+            }
             /// Поиск совпадения
             Bank_user_status user_Status =
                 _DataBase.Bank_user_status

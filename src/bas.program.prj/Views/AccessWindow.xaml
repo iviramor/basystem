@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
-        Title="AccessWindow" Height="450" Width="500">
+        Title="AccessWindow" Height="525" Width="700">
 
     <Window.Resources>
 
@@ -69,12 +69,13 @@
                      SelectedItem="{Binding SelectAccessUser}"
                      ItemsSource="{Binding ListWithAccessUser}">
 
-
                 <ListBox.ItemTemplate>
 
                     <DataTemplate>
                         <Grid Width="{Binding ActualWidth, ElementName=ColumnAccessUser}">
+                            
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
                                 <ColumnDefinition />
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
@@ -86,10 +87,24 @@
                             <TextBlock Grid.Column="0" Grid.RowSpan="2" 
                                        VerticalAlignment="Center"
                                        Text="{Binding Path=Bank_tables_info.Tables_name}"/>
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2" 
+                                       VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Bank_tables_info.Tables_isSystem}" Value="True">
+                                                <Setter Property="Text" Value="Системный"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Bank_tables_info.Tables_isSystem}" Value="False">
+                                                <Setter Property="Text" Value="Данные банка"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
 
-
-                            <TextBlock Grid.Column="1" Grid.Row="0" Text="Тип доступа" FontWeight="Bold" />
-                            <TextBlock Grid.Column="1" Grid.Row="1" >
+                            </TextBlock>
+                            <TextBlock Grid.Column="2" Grid.Row="0" Text="Тип доступа" FontWeight="Bold" />
+                            <TextBlock Grid.Column="2" Grid.Row="1" >
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
@@ -109,9 +124,8 @@
 
                         </Grid>
                     </DataTemplate>
+                    
                 </ListBox.ItemTemplate>
-
-
 
             </ListBox>
 
@@ -138,8 +152,48 @@
 
             <ListBox Grid.Row="1"
                      SelectedItem="{Binding SelectAllAccess}"
-                     DisplayMemberPath="Tables_name"
-                     ItemsSource="{Binding ListWithAllAccess}"/>
+                     ItemsSource="{Binding ListWithAllAccess}">
+
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+                        <Grid Width="{Binding ActualWidth, ElementName=ColumnAccessUser}">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Column="0" Grid.RowSpan="2" 
+                                       VerticalAlignment="Center"
+                                       Text="{Binding Path=Tables_name}"/>
+                            
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2" 
+                                       VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Tables_isSystem}" Value="True">
+                                                <Setter Property="Text" Value="Системный"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Tables_isSystem}" Value="False">
+                                                <Setter Property="Text" Value="Данные банка"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+
+                            </TextBlock>
+
+                        </Grid>
+                    </DataTemplate>
+
+                </ListBox.ItemTemplate>
+
+            </ListBox>
 
 
 
