@@ -430,6 +430,7 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void OnUpdateProfileExecute(object p)
         {
+
             #region Смена изменений в сессии пользователя
 
             _BankUser.User_name = _Name;
@@ -438,7 +439,6 @@ namespace bas.program.ViewModels.ChildWindows
             _BankUser.User_login = _Login;
             _BankUser.User_password = _Password;
             _BankUser.User_sex = _Sex;
-            _BankUser.User_status_to_system = _SelectedStatus.Status_id;
             _BankUser.User_register_data = _Register_data;
             _BankUser.User_age = _Age;
 
@@ -448,6 +448,30 @@ namespace bas.program.ViewModels.ChildWindows
             if (_ProfilesWiewModel._workSpaceWindowViewModel.User.User.User_id == _BankUser.User_id)
             {
                 _ProfilesWiewModel._workSpaceWindowViewModel.UserName = $"{_Name} {_Surname}";
+                if (_ProfilesWiewModel._workSpaceWindowViewModel.User.
+                    User.User_status_to_system != _SelectedStatus.Status_id)
+                {
+                    var que = MessageBox.Show("Вы изменили свою должность\n" +
+                                    "Для применения изменений, необходимо перезагрузить " +
+                                    "и заново авторизоваться в Системе", 
+                                    "Уведомление",
+                                    MessageBoxButton.OKCancel, MessageBoxImage.Question);
+
+                    if (que == MessageBoxResult.OK)
+                    {
+                        _BankUser.User_status_to_system = _SelectedStatus.Status_id;
+
+                        /// Изменение данных в базе данных
+                        _DataBase.Update(_BankUser);
+                        _DataBase.SaveChanges();
+
+                        Application.Current.Shutdown();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
             }
 
             /// Изменение данных в базе данных
@@ -459,6 +483,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             /// Уведомление об успешной операции
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
+        
         }
 
         #endregion Изменение данных
