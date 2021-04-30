@@ -238,15 +238,15 @@ namespace bas.program.ViewModels
         /// </summary>
         public WorkSpaceWindowViewModel()
         {
-            
-            /// Авторизация
-            if (!AuthorizeHelloWindow())
+            AuthorizeHelloWindow();
+
+            if (!User.Session)
             {
                 Application.Current.Shutdown();
+                return;
             }
 
             SetItemsTable();
-
 
             #region Команды 
 
@@ -303,11 +303,9 @@ namespace bas.program.ViewModels
         /// True - если пользователь прошел авторизацию
         /// False - если не закрыл окно и не прошел регистрацию
         /// </returns>
-        private bool AuthorizeHelloWindow()
+        private void AuthorizeHelloWindow()
         {
             new HelloWindowViewModel(this).ShowHelloWindow();
-            if (User.Session) return true;
-            else return false;
         }
 
         #endregion Окно авторизации

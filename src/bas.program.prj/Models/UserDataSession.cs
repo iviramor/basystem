@@ -19,7 +19,7 @@ namespace bas.program.Models
         /// Поле со статусом сессии пользователя, если не авторизован, то false
         /// Если авторизован то true
         /// </summary>
-        private bool _Session;
+        private bool _Session = false;
         /// <summary>
         /// Свойство поля статуса Сессии
         /// </summary>
