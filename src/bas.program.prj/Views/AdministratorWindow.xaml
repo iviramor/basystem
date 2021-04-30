@@ -52,6 +52,7 @@
                       Height="40"
                       Padding="20, 0, 20, 0"
                       FontFamily="Roboto Medium" 
+                      IsEnabled="{Binding AccessTableIsEnabled}"
                       Command="{Binding ShowAccessCommand}">
 
             </MenuItem>
@@ -95,9 +96,10 @@
                        HorizontalAlignment="Center"/>
 
                 <Button Template="{DynamicResource ButtonTemplateToolBar}" 
-                    Style="{DynamicResource Button.ToolsBar}"
-                    Command="{Binding AddProfCommand}"
-                    Grid.Row="1" Grid.Column="0">
+                        Style="{DynamicResource Button.ToolsBar}"
+                        Command="{Binding AddProfCommand}"
+                        IsEnabled="{Binding AddIsEnabled}"
+                        Grid.Row="1" Grid.Column="0">
 
                     <!--#region Внутри кнопки-->
 
@@ -124,9 +126,10 @@
                 </Button>
 
                 <Button Template="{DynamicResource ButtonTemplateToolBar}" 
-                    Style="{StaticResource Button.ToolsBar}"
-                    Grid.Row="3" Grid.Column="0"
-                    Command="{Binding EditProfCommand}">
+                        Style="{StaticResource Button.ToolsBar}"
+                        Grid.Row="3" Grid.Column="0"
+                        IsEnabled="{Binding EditIsEnabled}"
+                        Command="{Binding EditProfCommand}">
 
                     <!--#region Внутри кнопки-->
 
@@ -151,9 +154,10 @@
                 </Button>
 
                 <Button Template="{DynamicResource ButtonTemplateToolBar}" 
-                    Style="{StaticResource Button.ToolsBar}"
-                    Grid.Row="5" Grid.Column="0"
-                    Command="{Binding RemoveProfCommand}">
+                        Style="{StaticResource Button.ToolsBar}"
+                        Grid.Row="5" Grid.Column="0"
+                        IsEnabled="{Binding DelIsEnabled}"
+                        Command="{Binding RemoveProfCommand}">
 
                     <!--#region Внутри кнопки-->
 

@@ -112,7 +112,7 @@ namespace bas.program.ViewModels
                     {
                         _workSpaceWindowViewModel.ProfilesBlock = true;
                     }
-                    else if (tableInfo.Tables_key == "Bank_user_status")
+                    if (tableInfo.Tables_key == "Bank_user_status")
                     {
                         _workSpaceWindowViewModel.AdminBlock = true;
                     }

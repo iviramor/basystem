@@ -35,6 +35,70 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Доступ к элементам окна
+
+        private bool _AddIsEnabled = true;
+        /// <summary>
+        /// Доступ к добавлению
+        /// </summary>
+        public bool AddIsEnabled
+        {
+            get => _AddIsEnabled;
+            set
+            {
+                if (Equals(_AddIsEnabled, value)) return;
+                _AddIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _EditIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool EditIsEnabled
+        {
+            get => _EditIsEnabled;
+            set
+            {
+                if (Equals(_EditIsEnabled, value)) return;
+                _EditIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _DelIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool DelIsEnabled
+        {
+            get => _DelIsEnabled;
+            set
+            {
+                if (Equals(_DelIsEnabled, value)) return;
+                _DelIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _AccessTableIsEnabled = true;
+        /// <summary>
+        /// Доступ к Таблицам доступа
+        /// </summary>
+        public bool AccessTableIsEnabled
+        {
+            get => _AccessTableIsEnabled;
+            set
+            {
+                if (Equals(_AccessTableIsEnabled, value)) return;
+                _AccessTableIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #region Свойства
 
         private DataRowView _SelectedItem;
@@ -74,6 +138,7 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         #endregion
+
 
         #endregion
 
@@ -283,7 +348,56 @@ namespace bas.program.ViewModels.ChildWindows
             ShowProfCommand = new ActionCommand(OnShowProfCommandExecute, CanShowProfCommandExecuted);
             ShowAccessCommand = new ActionCommand(OnShowAccessCommandExecute, CanShowAccessCommandExecuted);
             CloseAdminCommand = new ActionCommand(OnNameCloseAdminCommandExecute, CanCloseAdminCommandExecuted);
-        
+
+            #region Доступ к элементам
+
+            ///Поиск информации таблицы Пользователей
+            var tableInfos = _DataBase.Bank_tables_info
+                .ToList();
+
+            #region Работа с Bank_user_status, блокировка элементов
+
+            /// Поиск Bank_user_status
+            var tableAccess = workVM.User.User.Bank_user_status.Bank_user_access
+                    .SingleOrDefault(ua => 
+                    /// Сравнение с выданной таблицей доступных таблиц в системе
+                    ua.Access_name_table == tableInfos
+                            .SingleOrDefault(ti => 
+                                    ti.Tables_key == "Bank_user_status").Tables_id);
+
+            if (workVM.User.User.Bank_user_status.Status_full_access) return;
+            else if (tableAccess.Access_modification == 2)
+            {
+                _AddIsEnabled = false;
+                _EditIsEnabled = false;
+                _DelIsEnabled = false;
+            }
+            else if (tableAccess.Access_modification == 3)
+            {
+                _AddIsEnabled = false;
+                _DelIsEnabled = false;
+            }
+
+            #endregion
+
+            #region Работа с Bank_user_access, блокировка элементов
+
+            /// Поиск Bank_user_status
+            tableAccess = workVM.User.User.Bank_user_status.Bank_user_access
+                    .SingleOrDefault(ua =>
+                    /// Сравнение с выданной таблицей доступных таблиц в системе
+                    ua.Access_name_table == tableInfos
+                            .SingleOrDefault(ti =>
+                                    ti.Tables_key == "Bank_user_access").Tables_id);
+
+            if (tableAccess == null) _AccessTableIsEnabled = false;
+
+            #endregion
+
+
+
+            #endregion
+
         }
 
         #region Методы класса
