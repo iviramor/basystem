@@ -585,19 +585,6 @@ namespace bas.program.ViewModels.ChildWindows
 
             /// Проверка На статус Администратор
             if (workVM.User.User.Bank_user_status.Status_full_access) _StatusEnable = false;
-            /// Реализация нулевого пропуска
-            else if (TableAccess == null)
-            {
-                MessageBox.Show("Нет доступа", "Предупреждение",
-                            MessageBoxButton.OK, MessageBoxImage.Warning);
-                return;
-            }
-            else if (TableAccess.Access_modification == 2)
-            {
-                _IsEnabled = false;
-                _IsVisibility = false;
-                _AccessLabel = true;
-            }
 
             #endregion Ограничение доступа к полям
 

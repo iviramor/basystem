@@ -95,7 +95,7 @@
                           Padding="20, 0, 20, 0"
                           FontFamily="Roboto Medium"
                           Command="{Binding ShowProfilesCommand}"
-                          Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
+                          Visibility="{Binding ProfilesBlock, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
 
                 <MenuItem Header="Администратор"
@@ -103,7 +103,7 @@
                           Padding="20, 0, 20, 0"
                           FontFamily="Roboto Medium"
                           Command="{Binding ShowAdministratorCommand}"
-                          Visibility="{Binding AdminStatus, Converter={StaticResource BoolToVis}}">
+                          Visibility="{Binding AdminBlock, Converter={StaticResource BoolToVis}}">
                 </MenuItem>
             </Menu>
 

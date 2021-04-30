@@ -17,6 +17,7 @@ namespace bas.program.ViewModels
 {
     public class WorkSpaceWindowViewModel : ViewModel
     {
+
         #region Блоки окна
 
         #region Действия с окном
@@ -51,22 +52,42 @@ namespace bas.program.ViewModels
             }
         }
 
-        private bool _AdminStatus;
+        private bool _AdminBlock = false;
         /// <summary>
-        /// Свойство, в котором храниться статус Администратор, если true то 
+        /// Свойство, в котором храниться доступ к разделу админ
         /// пользователь является администратором
         /// если false, то обычный пользователь
         /// </summary>
-        public bool AdminStatus
+        public bool AdminBlock
         {
             get
             {
-                return _AdminStatus;
+                return _AdminBlock;
             }
             set
             {
-                if (Equals(_AdminStatus, value)) return;
-                _AdminStatus = value;
+                if (Equals(_AdminBlock, value)) return;
+                _AdminBlock = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _ProfilesBlock = false;
+        /// <summary>
+        /// Свойство, в котором храниться доступ к разделу профилей
+        /// пользователь является администратором
+        /// если false, то обычный пользователь
+        /// </summary>
+        public bool ProfilesBlock
+        {
+            get
+            {
+                return _ProfilesBlock;
+            }
+            set
+            {
+                if (Equals(_ProfilesBlock, value)) return;
+                _ProfilesBlock = value;
                 OnPropertyChanged();
             }
         }
@@ -292,5 +313,6 @@ namespace bas.program.ViewModels
         #endregion Окно авторизации
 
         #endregion Диалоговые окна
+
     }
 }
