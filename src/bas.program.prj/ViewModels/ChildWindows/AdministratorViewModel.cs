@@ -226,6 +226,15 @@ namespace bas.program.ViewModels.ChildWindows
                    .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
                                           st.Status_describ == (string)_SelectedItem[1]);
 
+            /// если выделенная Должность имеет полный доступ
+            /// то предупреждение и отмена
+            if (user_Status.Status_full_access)
+            {
+                MessageBox.Show("Данная Должность имеет Полный доступ", "Уведомление",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
             new AccessViewModel(user_Status, _workSpaceWindowViewModel.User).ShowAccessWindow();
             UpdateProfTable();
         }
