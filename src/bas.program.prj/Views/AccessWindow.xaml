@@ -131,6 +131,7 @@
 
             <Button Grid.Row="2"
                     Command="{Binding DelAccessCommand}"
+                    IsEnabled="{Binding DelIsEnabled}"
                     Content="Удалить">
                 
             </Button>
@@ -195,13 +196,12 @@
 
             </ListBox>
 
-
-
             <ComboBox Grid.Row="2"
                       Margin="0, 5"
                       VerticalAlignment="Center"
                       FontFamily="Roboto Medium"
                       Height="30"
+                      IsEnabled="{Binding AccessListIsEnable}"
                       SelectedItem="{Binding SelectComboBoxAccess}"
                       DisplayMemberPath="NameAccess"
                       ItemsSource="{Binding ComboBoxAccess}"
@@ -213,7 +213,8 @@
 
             <Button Grid.Row="3"
                     Command="{Binding AddAccessCommand}"
-                    Content="Добавить">
+                    IsEnabled="{Binding EditIsEnabled}"
+                    Content="{Binding AddOrEditButton}">
 
             </Button>
 

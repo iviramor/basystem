@@ -20,6 +20,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Свойства
 
+        private int Access;
+
         #region Классы
 
         /// <summary>
@@ -45,6 +47,21 @@ namespace bas.program.ViewModels.ChildWindows
         #endregion
 
         #region Свойства элементов Окна
+
+        private string _AddOrEditButton = "Добавить";
+        /// <summary>
+        /// Кнопка добавить или удалить Доступ
+        /// </summary>
+        public string AddOrEditButton
+        {
+            get => _AddOrEditButton;
+            set
+            {
+                if (Equals(_AddOrEditButton, value)) return;
+                _AddOrEditButton = value;
+                OnPropertyChanged();
+            }
+        }
 
         private Bank_user_access _SelectAccessUser;
         /// <summary>
@@ -87,6 +104,34 @@ namespace bas.program.ViewModels.ChildWindows
             set
             {
                 if (Equals(_SelectAllAccess, value)) return;
+                Bank_user_access bua = GetUserAccess(value);
+
+                /// Если не найдено "Добавить"
+                /// если есть то "Изменить"
+                if (bua == null)
+                {
+                    if (Access == 3)
+                    {
+                        EditIsEnabled = false;
+                    }
+                    AddOrEditButton = "Добавить";
+                }
+                else
+                {
+                    if (Access == 3)
+                    {
+                        EditIsEnabled = true;
+                    }
+                    AddOrEditButton = "Изменить";
+                }
+
+                /// блокировка изменения таблицы "Пользовательский доступ", 
+                /// если нет полного доступа
+                if (value.Tables_key == "Bank_user_access" && Access != -1)
+                {
+                    EditIsEnabled = false;
+                }
+
                 _SelectAllAccess = value;
                 OnPropertyChanged();
             }
@@ -148,6 +193,55 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Доступ к элементам окна
+
+        private bool _AccessListIsEnabled = true;
+        /// <summary>
+        /// Доступ к добавлению
+        /// </summary>
+        public bool AccessListIsEnable
+        {
+            get => _AccessListIsEnabled;
+            set
+            {
+                if (Equals(_AccessListIsEnabled, value)) return;
+                _AccessListIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _EditIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool EditIsEnabled
+        {
+            get => _EditIsEnabled;
+            set
+            {
+                if (Equals(_EditIsEnabled, value)) return;
+                _EditIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _DelIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool DelIsEnabled
+        {
+            get => _DelIsEnabled;
+            set
+            {
+                if (Equals(_DelIsEnabled, value)) return;
+                _DelIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #region Команды
@@ -171,6 +265,7 @@ namespace bas.program.ViewModels.ChildWindows
             _UserDataSession.DataBase.SaveChanges();
 
             SetSourceAccessUser();
+            SetSourceAllAccess();
         }
 
         #endregion
@@ -198,11 +293,8 @@ namespace bas.program.ViewModels.ChildWindows
                 return;
             }
 
+            Bank_user_access bua = GetUserAccess(_SelectAllAccess);
 
-            /// Выборка статуса на изменения
-            Bank_user_access bua = _UserDataSession.DataBase.Bank_user_access
-                        .SingleOrDefault(ua => ua.Access_name_table == _SelectAllAccess.Tables_id &&
-                                         ua.Access_user_status == _Bank_User_Status.Status_id);
             /// Если не найдено то
             /// создает новый
             if (bua == null)
@@ -224,7 +316,21 @@ namespace bas.program.ViewModels.ChildWindows
             _UserDataSession.DataBase.Bank_user_access.Update(bua);
             _UserDataSession.DataBase.SaveChanges();
 
+            AddOrEditButton = "Изменить";
             SetSourceAccessUser();
+        }
+
+        /// <summary>
+        /// Выборка статуса на изменения
+        /// </summary>
+        /// <param name="bank_Tables_Info"></param>
+        /// <returns></returns>
+        public Bank_user_access GetUserAccess(Bank_tables_info bank_Tables_Info)
+        {
+            Bank_user_access bua = _UserDataSession.DataBase.Bank_user_access
+                        .SingleOrDefault(ua => ua.Access_name_table == bank_Tables_Info.Tables_id &&
+                                         ua.Access_user_status == _Bank_User_Status.Status_id);
+            return bua;
         }
 
         #endregion
@@ -260,6 +366,38 @@ namespace bas.program.ViewModels.ChildWindows
             DelAccessCommand = new ActionCommand(OnDelAccessCommandExecute, CanDelAccessCommandExecuted);
             AddAccessCommand = new ActionCommand(OnAddAccessCommandExecute, CanAddAccessCommandExecuted);
             CloseAccessCommand = new ActionCommand(OnCloseAccessCommandExecute, CanCloseAccessCommandExecuted);
+
+            #region Доступ к элементам
+
+            ///Поиск информации таблицы Пользователей
+            var tableInfo = userDataSession.DataBase.Bank_tables_info
+                .SingleOrDefault(ti => ti.Tables_key == "Bank_user_access");
+
+            /// Поиск доступа к таблице Bank_user_access
+            var tableAccess = userDataSession.User.Bank_user_status.Bank_user_access
+                .SingleOrDefault(ua => ua.Access_name_table == tableInfo.Tables_id);
+
+
+            if (userDataSession.User.Bank_user_status.Status_full_access)
+            {
+                Access = -1;
+                return;
+            }
+            else if (tableAccess.Access_modification == 2)
+            {
+                _AccessListIsEnabled = false;
+                _EditIsEnabled = false;
+                _DelIsEnabled = false;
+                Access = 2;
+            }
+            else if (tableAccess.Access_modification == 3)
+            {
+                _EditIsEnabled = false;
+                _DelIsEnabled = false;
+                Access = 3;
+            }
+
+            #endregion
 
         }
 
