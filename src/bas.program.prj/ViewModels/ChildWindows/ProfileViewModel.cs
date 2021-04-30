@@ -529,7 +529,7 @@ namespace bas.program.ViewModels.ChildWindows
             _ProfileWindow.Close();
         }
 
-        #endregion Закрыть окно
+        #endregion 
 
         #endregion Команды
 

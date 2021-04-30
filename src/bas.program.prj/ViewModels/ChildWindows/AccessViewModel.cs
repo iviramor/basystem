@@ -198,22 +198,52 @@ namespace bas.program.ViewModels.ChildWindows
                 return;
             }
 
-            Bank_user_access bua = new()
+
+            /// Выборка статуса на изменения
+            Bank_user_access bua = _UserDataSession.DataBase.Bank_user_access
+                        .SingleOrDefault(ua => ua.Access_name_table == _SelectAllAccess.Tables_id &&
+                                         ua.Access_user_status == _Bank_User_Status.Status_id);
+            /// Если не найдено то
+            /// создает новый
+            if (bua == null)
             {
-                Access_user_status = _Bank_User_Status.Status_id,
-                Access_name_table = _SelectAllAccess.Tables_id,
-                Access_modification = _SelectComboBoxAccess.KeyAccess
+                bua = new()
+                {
+                    Access_user_status = _Bank_User_Status.Status_id,
+                    Access_name_table = _SelectAllAccess.Tables_id,
+                    Access_modification = _SelectComboBoxAccess.KeyAccess
 
-            };
+                };
 
-            /// Обновление данных
-            _UserDataSession.DataBase.Bank_user_access.Add(bua);
+            }
+            else
+            {
+                bua.Access_modification = _SelectComboBoxAccess.KeyAccess;
+            }
+
+            _UserDataSession.DataBase.Bank_user_access.Update(bua);
             _UserDataSession.DataBase.SaveChanges();
 
             SetSourceAccessUser();
         }
 
         #endregion
+
+        #region Закрыть окно
+
+        /// <summary>
+        /// Команда закрытия окна Профиля
+        /// </summary>
+        public ICommand CloseAccessCommand { get; }
+
+        private bool CanCloseAccessCommandExecuted(object p) => true;
+
+        private void OnCloseAccessCommandExecute(object p)
+        {
+            _AccessWindow.Close();
+        }
+
+        #endregion 
 
         #endregion
 
@@ -229,6 +259,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             DelAccessCommand = new ActionCommand(OnDelAccessCommandExecute, CanDelAccessCommandExecuted);
             AddAccessCommand = new ActionCommand(OnAddAccessCommandExecute, CanAddAccessCommandExecuted);
+            CloseAccessCommand = new ActionCommand(OnCloseAccessCommandExecute, CanCloseAccessCommandExecuted);
 
         }
 
