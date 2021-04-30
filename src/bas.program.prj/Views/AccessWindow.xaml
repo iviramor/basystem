@@ -52,6 +52,7 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Column="1" Grid.Row="1" 
+              x:Name="ColumnAccessUser"
               Margin="15">
             
             <Grid.RowDefinitions>
@@ -63,11 +64,58 @@
             <TextBlock Grid.Row="0"
                 Text="Должность" />
 
-            <ListBox Grid.Row="1">
-                <ListBoxItem Content="One"/>
+            <ListBox x:Name="ListBox"
+                     Grid.Row="1"
+                     SelectedItem="{Binding SelectAccessUser}"
+                     ItemsSource="{Binding ListWithAccessUser}">
+
+
+                <ListBox.ItemTemplate>
+
+                    <DataTemplate>
+                        <Grid Width="{Binding ActualWidth, ElementName=ColumnAccessUser}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Column="0" Grid.Row="0" Text="Таблица" FontWeight="Bold" />
+                            <TextBlock Grid.Column="0" Grid.Row="1" Text="{Binding Path=Bank_tables_info.Tables_name}"/>
+
+
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="Тип доступа" FontWeight="Bold" />
+                            <TextBlock Grid.Column="1" Grid.Row="1" >
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Access_modification}" Value="1">
+                                                <Setter Property="Text" Value="Полный доступ"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Access_modification}" Value="2">
+                                                <Setter Property="Text" Value="Только чтение"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Path=Access_modification}" Value="3">
+                                                <Setter Property="Text" Value="Чтение и редактирование"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+
+
+
             </ListBox>
 
             <Button Grid.Row="2"
+                    Command="{Binding ShowAccessCommand}"
                 Content="Удалить">
                 
             </Button>
@@ -81,16 +129,33 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition />
                 <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
                 Text="Все" />
 
-            <ListBox Grid.Row="1">
-                <ListBoxItem Content="One"/>
-            </ListBox>
+            <ListBox Grid.Row="1"
+                     DisplayMemberPath="Tables_name"
+                     ItemsSource="{Binding ListWithAllAccess}"
+                     />
 
-            <Button Grid.Row="2"
+
+
+            <ComboBox Grid.Row="2"
+                      Margin="0, 5"
+                      VerticalAlignment="Center"
+                      FontFamily="Roboto Medium"
+                      Height="30"
+                      DisplayMemberPath="NameAccess"
+                      ItemsSource="{Binding ComboBoxAccess}"
+                      Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
+                      ItemContainerStyle="{DynamicResource CommonComboBoxItemStyle}">
+
+                
+            </ComboBox>
+
+            <Button Grid.Row="3"
                 Content="Добавить">
 
             </Button>

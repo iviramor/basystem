@@ -150,7 +150,14 @@ namespace bas.program.ViewModels.ChildWindows
 
         private void OnShowAccessCommandExecute(object p)
         {
-            new AccessViewModel().ShowAccessWindow();
+            if (_SelectedItem == null) return;
+            /// Поиск совпадения
+            Bank_user_status user_Status =
+                _DataBase.Bank_user_status
+                   .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
+                                          st.Status_describ == (string)_SelectedItem[1]);
+
+            new AccessViewModel(user_Status, _workSpaceWindowViewModel.User).ShowAccessWindow();
         }
 
 

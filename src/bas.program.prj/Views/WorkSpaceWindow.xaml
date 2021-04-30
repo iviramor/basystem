@@ -173,7 +173,7 @@
                                   ItemsSource="{Binding ItemsTableComboBox}"
                                   VerticalAlignment="Center"
                                   SelectedItem="{Binding SelectTableItemComboBox}"
-                                  DisplayMemberPath="Tables_name"
+                                  DisplayMemberPath="Status_name"
                                   Grid.Row="1" FontFamily="Roboto Medium">
 
                         </ComboBox>
