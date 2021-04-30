@@ -16,6 +16,7 @@ namespace bas.program.ViewModels.ChildWindows
 {
     public class AdministratorViewModel : ViewModel
     {
+
         #region Классы
 
         /// <summary>
@@ -340,6 +341,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         #endregion
 
+        #region Конструкторы
+
         public AdministratorViewModel(WorkSpaceWindowViewModel workVM)
         {
 
@@ -409,6 +412,8 @@ namespace bas.program.ViewModels.ChildWindows
 
         }
 
+        #endregion
+
         #region Методы класса
 
         /// <summary>
@@ -441,7 +446,8 @@ namespace bas.program.ViewModels.ChildWindows
                 _ProfTable.Rows.Add(
                     item.Status_name,
                     item.Status_describ,
-                    (item.Status_full_access) ? "Полный доступ" : item.Bank_user_access.Count
+                    (item.Status_full_access) ? "Полный доступ" : 
+                        (item.Bank_user_access.Count == 0) ? "Нет доступа" : item.Bank_user_access.Count
                     );
 
         }
