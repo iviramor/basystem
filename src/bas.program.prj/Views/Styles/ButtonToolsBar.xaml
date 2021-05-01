@@ -3,7 +3,7 @@
 
 
     <SolidColorBrush x:Key="ToolsBar.Collour" Color="#F5F5F5"/>
-    <SolidColorBrush x:Key="ToolsBar.IsMouse.Collour" Color="#DADADA"/>
+    <SolidColorBrush x:Key="ToolsBar.IsMouse.Collour" Color="#F5E932"/>
     <SolidColorBrush x:Key="ToolsBar.IsEnabled" Color="#A3A1A8"/>
 
 

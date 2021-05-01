@@ -24,6 +24,8 @@
                 <ResourceDictionary Source="Styles/CommonButton.xaml"/>
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
                 <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridRowStyle.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridCellStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -187,13 +189,19 @@
 
             <!--#region Таблица с пользователями-->
 
-            <DataGrid Style="{DynamicResource CommonDataGridTemplate}" 
-                  ItemsSource="{Binding ProfTable}"
-                  ColumnWidth="*"
-                  Grid.Row="1" Grid.Column="1"
-                  SelectedItem="{Binding SelectedItem}"
-                  IsReadOnly="True"
-                  CanUserResizeColumns="False">
+            <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}" 
+                      RowStyle="{DynamicResource CommonDataGridRowStyle}" 
+                      Style="{DynamicResource CommonDataGridTemplate}"
+                      ItemsSource="{Binding ProfTable}"
+                      ColumnWidth="*"
+                      Grid.Row="1" Grid.Column="1"
+                      SelectedItem="{Binding SelectedItem}"
+                      IsReadOnly="True"
+                      FontFamily="Roboto"
+                      SelectionMode="Single"
+                      VerticalGridLinesBrush="#F5E932"
+                      HorizontalGridLinesBrush="Transparent"
+                      CanUserResizeColumns="False">
 
                 <DataGrid.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick"

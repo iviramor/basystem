@@ -23,6 +23,8 @@
                 <ResourceDictionary Source="Styles/ButtonToolsBar.xaml" />
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml" />
                 <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridRowStyle.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridCellStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <converters:InverseSexConverter x:Key="InverseSexConverter" />
@@ -147,14 +149,19 @@
 
         <!--#region Таблица с пользователями-->
 
-        <DataGrid Style="{DynamicResource CommonDataGridTemplate}"
+        <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}" 
+                  RowStyle="{DynamicResource CommonDataGridRowStyle}" 
+                  Style="{DynamicResource CommonDataGridTemplate}"
                   ItemsSource="{Binding Bank_users}"
                   ColumnWidth="*"
                   AutoGenerateColumns="False"
                   Grid.Row="1" Grid.Column="1"
                   IsReadOnly="True"
                   SelectedItem="{Binding SelectedItem}"
-                  CanUserResizeColumns="False">
+                  CanUserResizeColumns="False"
+                  SelectionMode="Single"
+                  VerticalGridLinesBrush="#F5E932"
+                  HorizontalGridLinesBrush="Transparent">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Имя"

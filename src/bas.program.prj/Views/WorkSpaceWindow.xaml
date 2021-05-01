@@ -6,9 +6,13 @@
         xmlns:viewModels="clr-namespace:bas.program.ViewModels"
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
-        Title="WorkSpaceWindow" Height="600" Width="1172" WindowState="Maximized"
-        IsEnabled = "{Binding IsEnabled}" Icon="/bank.ico"
-        WindowStartupLocation="CenterScreen">
+        Title="Рабочее пространство" 
+        MinHeight="600" MinWidth="1000"
+        Height="610" Width="1172"
+        WindowState="Maximized"
+        IsEnabled = "{Binding IsEnabled}" 
+        Icon="/Resources/Image/Icons/folder_main.png"
+        WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
 
     <Window.DataContext>
         <viewModels:WorkSpaceWindowViewModel />

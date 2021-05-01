@@ -22,6 +22,8 @@
                 <ResourceDictionary Source="Styles/CommonButton.xaml"/>
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
                 <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/Access/DelAccessButtonStyle.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/Access/AddAccessButtonStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis"/>
@@ -132,7 +134,7 @@
 
             </ListBox>
 
-            <Button Grid.Row="2"
+            <Button Style="{DynamicResource DelAccessButtonStyle}" Grid.Row="2"
                     Command="{Binding DelAccessCommand}"
                     IsEnabled="{Binding DelIsEnabled}"
                     Content="Удалить">
@@ -226,7 +228,7 @@
 
             </Grid>
 
-            <Button Grid.Row="3"
+            <Button Style="{DynamicResource AddAccessButtonStyle}" Grid.Row="3"
                     Command="{Binding AddAccessCommand}"
                     IsEnabled="{Binding EditIsEnabled}"
                     Content="{Binding AddOrEditButton}">
