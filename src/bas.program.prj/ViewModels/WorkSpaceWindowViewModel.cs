@@ -108,6 +108,12 @@ namespace bas.program.ViewModels
             {
                 if (Equals(_SelectTableItemComboBox, value)) return;
                 _SelectTableItemComboBox = value;
+
+                if (value == null) SetNullAccess();
+                else if (value.Access_modification == 1) SetFullAccess();
+                else if (value.Access_modification == 2) SetReadOnlyAccess();
+                else if (value.Access_modification == 3) SetEditAndReadOnlyAccess();
+
                 OnPropertyChanged();
             }
         }
@@ -303,7 +309,6 @@ namespace bas.program.ViewModels
         {
             AdministratorViewModel adminVM = new(this);
             adminVM.ShowAdministratorWindow();
-            SetItemsTable();
         }
 
         #endregion
@@ -350,38 +355,45 @@ namespace bas.program.ViewModels
 
         private void SetNullAccess()
         {
-            _AddIsEnabled = false;
-            _EditIsEnabled = false;
-            _DelIsEnabled = false;
-            _FilterIsEnabled = false;
-            _MathsIsEnabled = false;
+            AddIsEnabled = false;
+            EditIsEnabled = false;
+            DelIsEnabled = false;
+            FilterIsEnabled = false;
+            MathsIsEnabled = false;
         }
 
         private void SetReadOnlyAccess()
         {
-            _AddIsEnabled = false;
-            _EditIsEnabled = false;
-            _DelIsEnabled = false;
-            _FilterIsEnabled = true;
-            _MathsIsEnabled = true;
+            AddIsEnabled = false;
+            EditIsEnabled = false;
+            DelIsEnabled = false;
+            FilterIsEnabled = true;
+            MathsIsEnabled = true;
         }
 
         private void SetFullAccess()
         {
-            _AddIsEnabled = true;
-            _EditIsEnabled = true;
-            _DelIsEnabled = true;
-            _FilterIsEnabled = true;
-            _MathsIsEnabled = true;
+            AddIsEnabled = true;
+            EditIsEnabled = true;
+            DelIsEnabled = true;
+            FilterIsEnabled = true;
+            MathsIsEnabled = true;
         }
 
         private void SetEditAndReadOnlyAccess()
         {
-            _AddIsEnabled = false;
-            _EditIsEnabled = true;
-            _DelIsEnabled = false;
-            _FilterIsEnabled = true;
-            _MathsIsEnabled = true;
+            AddIsEnabled = false;
+            EditIsEnabled = true;
+            DelIsEnabled = false;
+            FilterIsEnabled = true;
+            MathsIsEnabled = true;
+        }
+
+        public void CleanAccess()
+        {
+            SetNullAccess();
+            SetItemsTable();
+            SelectTableItemComboBox = null;
         }
 
         #endregion

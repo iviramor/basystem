@@ -236,7 +236,7 @@ namespace bas.program.ViewModels.ChildWindows
                 return;
             }
 
-            new AccessViewModel(user_Status, _workSpaceWindowViewModel.User).ShowAccessWindow();
+            new AccessViewModel(user_Status, _workSpaceWindowViewModel).ShowAccessWindow();
             UpdateProfTable();
 
         }

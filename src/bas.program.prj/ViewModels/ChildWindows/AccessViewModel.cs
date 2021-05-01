@@ -35,6 +35,11 @@ namespace bas.program.ViewModels.ChildWindows
         private Bank_user_status _Bank_User_Status;
 
         /// <summary>
+        /// Поле с ViewModel главного окна
+        /// </summary>
+        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+
+        /// <summary>
         /// Сессия пользователя
         /// </summary>
         private UserDataSession _UserDataSession;
@@ -283,6 +288,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             SetSourceAccessUser();
             SetSourceAllAccess();
+            CleanAccessCurrentUser();
         }
 
         #endregion
@@ -335,6 +341,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             AddOrEditButton = "Изменить";
             SetSourceAccessUser();
+            CleanAccessCurrentUser();
         }
 
         /// <summary>
@@ -372,11 +379,12 @@ namespace bas.program.ViewModels.ChildWindows
 
         #region Конструкторы
 
-        public AccessViewModel(Bank_user_status user_Status, UserDataSession userDataSession)
+        public AccessViewModel(Bank_user_status user_Status, WorkSpaceWindowViewModel workVM)
         {
 
             _Bank_User_Status = user_Status;
-            _UserDataSession = userDataSession;
+            _workSpaceWindowViewModel = workVM;
+            _UserDataSession = workVM.User;
 
             _Title = $"Должность: {user_Status.Status_name}";
 
@@ -390,15 +398,15 @@ namespace bas.program.ViewModels.ChildWindows
             #region Доступ к элементам
 
             ///Поиск информации таблицы Пользователей
-            var tableInfo = userDataSession.DataBase.Bank_tables_info
+            var tableInfo = _UserDataSession.DataBase.Bank_tables_info
                 .SingleOrDefault(ti => ti.Tables_key == "Bank_user_access");
 
             /// Поиск доступа к таблице Bank_user_access
-            var tableAccess = userDataSession.User.Bank_user_status.Bank_user_access
+            var tableAccess = _UserDataSession.User.Bank_user_status.Bank_user_access
                 .SingleOrDefault(ua => ua.Access_name_table == tableInfo.Tables_id);
 
 
-            if (userDataSession.User.Bank_user_status.Status_full_access)
+            if (_UserDataSession.User.Bank_user_status.Status_full_access)
             {
                 Access = -1;
                 return;
@@ -424,6 +432,17 @@ namespace bas.program.ViewModels.ChildWindows
         #endregion
 
         #region Методы
+
+        public void CleanAccessCurrentUser()
+        {
+            /// Если Должность которую изменяем является
+            /// должностью которой владеет текущий пользователь
+            /// Системы то идет обновление и очистка
+            if (_Bank_User_Status.Status_id == _UserDataSession.User.User_status_to_system)
+            {
+                _workSpaceWindowViewModel.CleanAccess();
+            }
+        }
 
         private void SetSourceAccessUser()
         {
