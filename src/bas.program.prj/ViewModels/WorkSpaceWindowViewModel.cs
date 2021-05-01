@@ -436,6 +436,7 @@ namespace bas.program.ViewModels
             SetNullAccess();
             SetItemsTable();
             SelectTableItemComboBox = null;
+            MainTable = null;
         }
 
         #endregion
@@ -499,6 +500,10 @@ namespace bas.program.ViewModels
         /// </summary>
         private void SetMainTable()
         {
+            if (_SelectTableItemComboBox == null)
+            {
+                return;
+            }
 
             DataTable dataTable = new();
 

@@ -222,6 +222,7 @@
 
                     <Button Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding EditIsEnabled}"
+                            
                             Style="{StaticResource Button.ToolsBar}"
                             Grid.Row="0" Grid.Column="0">
 
@@ -406,7 +407,7 @@
                           SelectedItem="{Binding SelectedItemMainTable}"
                           ColumnWidth="*"
                           Grid.Row="1" Grid.Column="1"
-                          IsReadOnly="True"
+                          CanUserAddRows="False"
                           FontFamily="Roboto"
                           SelectionMode="Single"
                           VerticalGridLinesBrush="#F5E932"
