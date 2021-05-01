@@ -8,6 +8,8 @@ using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -114,6 +116,8 @@ namespace bas.program.ViewModels
                 else if (value.Access_modification == 2) SetReadOnlyAccess();
                 else if (value.Access_modification == 3) SetEditAndReadOnlyAccess();
 
+                SetMainTable();
+
                 OnPropertyChanged();
             }
         }
@@ -136,6 +140,43 @@ namespace bas.program.ViewModels
         }
 
         #endregion
+
+        #region Главная таблица
+
+        private DataRowView _SelectedItemMainTable;
+        /// <summary>
+        /// Выделенный ряд в таблице
+        /// </summary>
+        public DataRowView SelectedItemMainTable
+        {
+            get => _SelectedItemMainTable;
+            set
+            {
+                if (Equals(_SelectedItemMainTable, value)) return;
+                _SelectedItemMainTable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private DataTable _MainTable = new();
+        /// <summary>
+        /// Главная таблица
+        /// </summary>
+        public DataTable MainTable
+        {
+            get
+            {
+                return _MainTable;
+            }
+            set
+            {
+                if (Equals(_MainTable, value)) return;
+                _MainTable = value;
+                OnPropertyChanged();
+            }
+        }
+
+        # endregion Главная таблица
 
         #region Доступ к элементам окна
 
@@ -337,6 +378,7 @@ namespace bas.program.ViewModels
                 SetNullAccess();
             }
 
+
             #region Команды 
 
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
@@ -445,6 +487,38 @@ namespace bas.program.ViewModels
                     .ToList();
 
             ItemsTableComboBox = AllStatusAccess;
+
+        }
+
+        #endregion
+
+        #region Работа с таблицей
+
+        /// <summary>
+        /// Создает структуру таблицы (Колонки)
+        /// </summary>
+        private void SetMainTable()
+        {
+
+            DataTable dataTable = new();
+
+            /// Текущий ключ таблицы
+            var currentNameTable = _SelectTableItemComboBox.Bank_tables_info.Tables_key;
+
+            /// Тип данной таблицы
+            var entityTypeCurrentTable = User.DataBase.Model.GetEntityTypes()
+                .SingleOrDefault(table => table.DisplayName() == currentNameTable).ClrType;
+
+            var PropColumn = TypeDescriptor.GetProperties(entityTypeCurrentTable);
+
+            foreach (PropertyDescriptor prop in PropColumn)
+            {
+                if (prop.DisplayName != null)
+                    dataTable.Columns.Add(prop.DisplayName);
+
+            }
+
+            MainTable = dataTable;
 
         }
 

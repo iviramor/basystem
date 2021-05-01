@@ -354,7 +354,6 @@ namespace bas.program.ViewModels.ChildWindows
             CreateProfTable();
             UpdateProfTable();
 
-
             EditProfCommand = new ActionCommand(OnEditProfCommandExecute, CanEditProfCommandExecuted);
             AddProfCommand = new ActionCommand(OnAddProfCommandExecute, CanAddProfCommandExecuted);
             RemoveProfCommand = new ActionCommand(OnRemoveProfCommandExecute, CanRemoveProfCommandExecuted);
@@ -467,5 +466,6 @@ namespace bas.program.ViewModels.ChildWindows
         }
 
         #endregion
+    
     }
 }

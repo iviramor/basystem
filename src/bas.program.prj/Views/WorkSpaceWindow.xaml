@@ -27,6 +27,10 @@
                 <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml" />
                 <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml" />
                 <ResourceDictionary Source="Styles/ButtonToolsBar.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridRowStyle.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridCellStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
@@ -394,7 +398,30 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
+
+                <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}" 
+                          RowStyle="{DynamicResource CommonDataGridRowStyle}" 
+                          Style="{DynamicResource CommonDataGridTemplate}"
+                          ItemsSource="{Binding MainTable}"
+                          SelectedItem="{Binding SelectedItemMainTable}"
+                          ColumnWidth="*"
+                          Grid.Row="1" Grid.Column="1"
+                          IsReadOnly="True"
+                          FontFamily="Roboto"
+                          SelectionMode="Single"
+                          VerticalGridLinesBrush="#F5E932"
+                          HorizontalGridLinesBrush="Transparent"
+                          CanUserResizeColumns="False">
+
+                    <DataGrid.InputBindings>
+                        <MouseBinding Gesture="LeftDoubleClick"
+                                  Command="{Binding ShowProfCommand}"/>
+                    </DataGrid.InputBindings>
+
+                </DataGrid>
+
             </Grid>
+            
         </DockPanel>
     </DockPanel>
 </Window>
