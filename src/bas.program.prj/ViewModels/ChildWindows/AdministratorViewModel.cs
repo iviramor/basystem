@@ -238,6 +238,7 @@ namespace bas.program.ViewModels.ChildWindows
 
             new AccessViewModel(user_Status, _workSpaceWindowViewModel.User).ShowAccessWindow();
             UpdateProfTable();
+
         }
 
         #endregion

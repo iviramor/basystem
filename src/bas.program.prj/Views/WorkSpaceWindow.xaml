@@ -177,7 +177,7 @@
                                   ItemsSource="{Binding ItemsTableComboBox}"
                                   VerticalAlignment="Center"
                                   SelectedItem="{Binding SelectTableItemComboBox}"
-                                  DisplayMemberPath="Tables_name"
+                                  DisplayMemberPath="Bank_tables_info.Tables_name"
                                   Grid.Row="1" FontFamily="Roboto Medium">
 
                         </ComboBox>
@@ -217,6 +217,7 @@
                     </Grid.ColumnDefinitions>
 
                     <Button Template="{DynamicResource ButtonTemplateToolBar}"
+                            IsEnabled="{Binding EditIsEnabled}"
                             Style="{StaticResource Button.ToolsBar}"
                             Grid.Row="0" Grid.Column="0">
 
@@ -241,6 +242,7 @@
 
                     <Button Grid.Row="0" Grid.Column="1"
                             Template="{DynamicResource ButtonTemplateToolBar}"
+                            IsEnabled="{Binding AddIsEnabled}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -264,6 +266,7 @@
 
                     <Button Grid.Row="0" Grid.Column="2"
                             Template="{DynamicResource ButtonTemplateToolBar}"
+                            IsEnabled="{Binding DelIsEnabled}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -320,6 +323,7 @@
 
                     <Button Grid.Row="0" Grid.Column="0"
                             Template="{DynamicResource ButtonTemplateToolBar}"
+                            IsEnabled="{Binding FilterIsEnabled}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -343,6 +347,7 @@
 
                     <Button Grid.Row="0" Grid.Column="1"
                             Template="{DynamicResource ButtonTemplateToolBar}"
+                            IsEnabled="{Binding MathsIsEnabled}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->

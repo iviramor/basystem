@@ -46,6 +46,8 @@
     <None Remove="Resources\Image\Action\ProfAction\RemProf.png" />
     <None Remove="Resources\Image\Action\ProfileAction\id-card .png" />
     <None Remove="Resources\Image\Backgrounds\bg-flue.jpg" />
+    <None Remove="Resources\Image\Icons\folder.png" />
+    <None Remove="Resources\Image\Icons\folder_main.png" />
     <None Remove="Resources\Image\Icons\id-card-mini.png" />
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
@@ -94,6 +96,8 @@
     <Resource Include="Resources\Image\Action\WindowAction\settings.png" />
     <Resource Include="Resources\Image\Action\Instruments\trash.png" />
     <Resource Include="Resources\Image\Backgrounds\bg-flue.jpg" />
+    <Resource Include="Resources\Image\Icons\folder.png" />
+    <Resource Include="Resources\Image\Icons\folder_main.png" />
     <Resource Include="Resources\Image\Icons\id-card-mini.png" />
   </ItemGroup>
 

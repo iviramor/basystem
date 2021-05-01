@@ -474,6 +474,9 @@ namespace bas.program.ViewModels.ChildWindows
                 }
             }
 
+            /// Смена статуса если условие не прошло
+            _BankUser.User_status_to_system = _SelectedStatus.Status_id;
+
             /// Изменение данных в базе данных
             _DataBase.Update(_BankUser);
             _DataBase.SaveChanges();

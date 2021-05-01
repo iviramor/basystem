@@ -45,6 +45,12 @@
     <Page Update="Views\ProfWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Styles\Access\AddAccessButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Styles\Access\DelAccessButtonStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Styles\ButtonToolsBar.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -58,6 +64,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Styles\CommonDatePickerStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Styles\DataGrid\CommonDataGridCellStyle.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Styles\DataGrid\CommonDataGridRowStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Styles\DataGrid\CommonDataGridTemplate.xaml">

@@ -96,9 +96,9 @@ namespace bas.program.ViewModels
 
         #region Combo box с таблицами
 
-        private Bank_tables_info _SelectTableItemComboBox;
+        private Bank_user_access _SelectTableItemComboBox;
 
-        public Bank_tables_info SelectTableItemComboBox
+        public Bank_user_access SelectTableItemComboBox
         {
             get
             {
@@ -113,9 +113,9 @@ namespace bas.program.ViewModels
         }
 
 
-        private List<Bank_tables_info> _ItemsTableComboBox = new List<Bank_tables_info>();
+        private List<Bank_user_access> _ItemsTableComboBox = new();
 
-        public List<Bank_tables_info> ItemsTableComboBox
+        public List<Bank_user_access> ItemsTableComboBox
         {
             get
             {
@@ -125,6 +125,85 @@ namespace bas.program.ViewModels
             {
                 if (Equals(_ItemsTableComboBox, value)) return;
                 _ItemsTableComboBox = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Доступ к элементам окна
+
+        private bool _AddIsEnabled = true;
+        /// <summary>
+        /// Доступ к добавлению
+        /// </summary>
+        public bool AddIsEnabled
+        {
+            get => _AddIsEnabled;
+            set
+            {
+                if (Equals(_AddIsEnabled, value)) return;
+                _AddIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _EditIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool EditIsEnabled
+        {
+            get => _EditIsEnabled;
+            set
+            {
+                if (Equals(_EditIsEnabled, value)) return;
+                _EditIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _DelIsEnabled = true;
+        /// <summary>
+        /// Доступ к Редактированию
+        /// </summary>
+        public bool DelIsEnabled
+        {
+            get => _DelIsEnabled;
+            set
+            {
+                if (Equals(_DelIsEnabled, value)) return;
+                _DelIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _FilterIsEnabled = true;
+        /// <summary>
+        /// Доступ к Фильтру
+        /// </summary>
+        public bool FilterIsEnabled
+        {
+            get => _FilterIsEnabled;
+            set
+            {
+                if (Equals(_FilterIsEnabled, value)) return;
+                _FilterIsEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _MathsIsEnabled = true;
+        /// <summary>
+        /// Доступ к Расчету
+        /// </summary>
+        public bool MathsIsEnabled
+        {
+            get => _MathsIsEnabled;
+            set
+            {
+                if (Equals(_MathsIsEnabled, value)) return;
+                _MathsIsEnabled = value;
                 OnPropertyChanged();
             }
         }
@@ -224,7 +303,7 @@ namespace bas.program.ViewModels
         {
             AdministratorViewModel adminVM = new(this);
             adminVM.ShowAdministratorWindow();
-
+            SetItemsTable();
         }
 
         #endregion
@@ -248,6 +327,11 @@ namespace bas.program.ViewModels
 
             SetItemsTable();
 
+            if (_SelectTableItemComboBox == null)
+            {
+                SetNullAccess();
+            }
+
             #region Команды 
 
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
@@ -258,6 +342,78 @@ namespace bas.program.ViewModels
             #endregion
         }
 
+        #endregion
+
+        #region Методы
+
+        #region Ограничение доступа
+
+        private void SetNullAccess()
+        {
+            _AddIsEnabled = false;
+            _EditIsEnabled = false;
+            _DelIsEnabled = false;
+            _FilterIsEnabled = false;
+            _MathsIsEnabled = false;
+        }
+
+        private void SetReadOnlyAccess()
+        {
+            _AddIsEnabled = false;
+            _EditIsEnabled = false;
+            _DelIsEnabled = false;
+            _FilterIsEnabled = true;
+            _MathsIsEnabled = true;
+        }
+
+        private void SetFullAccess()
+        {
+            _AddIsEnabled = true;
+            _EditIsEnabled = true;
+            _DelIsEnabled = true;
+            _FilterIsEnabled = true;
+            _MathsIsEnabled = true;
+        }
+
+        private void SetEditAndReadOnlyAccess()
+        {
+            _AddIsEnabled = false;
+            _EditIsEnabled = true;
+            _DelIsEnabled = false;
+            _FilterIsEnabled = true;
+            _MathsIsEnabled = true;
+        }
+
+        #endregion
+
+        #region Установка листа со доступами
+
+        private List<Bank_user_access> GetFullListAccess()
+        {
+            List<Bank_user_access> bank_User_Accesses = new();
+
+            var AllTableInfoIsNotSys = User.DataBase.Bank_tables_info
+                .Where(ti => !ti.Tables_isSystem)
+                .ToList();
+
+            foreach (var tableInfo in AllTableInfoIsNotSys)
+            {
+                bank_User_Accesses
+                    .Add(
+
+                        new Bank_user_access()
+                        {
+                            Access_name_table = tableInfo.Tables_id,
+                            Access_modification = 1,
+                            Access_user_status = User.User.Bank_user_status.Status_id,
+                            Bank_tables_info = tableInfo
+                        }
+                    );
+            }
+
+            return bank_User_Accesses;
+        }
+
         private void SetItemsTable()
         {
             /// Таблица с статусом текущего Пользователя системы
@@ -266,29 +422,21 @@ namespace bas.program.ViewModels
             /// Вывод всех данных, если полный доступ
             if (Statuses.Status_full_access)
             {
-                _ItemsTableComboBox = User.DataBase.Bank_tables_info
-                    .Where(table => !table.Tables_isSystem)
-                    .ToList();
-
+                ItemsTableComboBox = GetFullListAccess();
                 return;
             }
 
-            /// Создание объекта ItemsTableComboBox
-            _ItemsTableComboBox = new();
+            var AllStatusAccess = User.DataBase.Bank_user_access
+                    .Include(ua => ua.Bank_tables_info)
+                    .Where(ua => ua.Access_user_status == Statuses.Status_id &
+                          !ua.Bank_tables_info.Tables_isSystem)
+                    .ToList();
 
-            foreach (var itemAccess in Statuses.Bank_user_access)
-            {
-                /// Поиск в таблице с информацией о Таблицах
-                var item = User.DataBase.Bank_tables_info
-                    .SingleOrDefault(tableInfo => tableInfo.Tables_id == itemAccess.Access_name_table);
-
-                if (item.Tables_isSystem) continue;
-
-                /// Добавления в _ItemsTableComboBox
-                _ItemsTableComboBox.Add(item);
-            }
+            ItemsTableComboBox = AllStatusAccess;
 
         }
+
+        #endregion
 
         #endregion
 
