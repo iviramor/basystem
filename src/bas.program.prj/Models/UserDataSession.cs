@@ -10,6 +10,7 @@ namespace bas.program.Models
 {
     public class UserDataSession
     {
+
         /// <summary>
         /// База данных или же Контекст базы данных
         /// </summary>
