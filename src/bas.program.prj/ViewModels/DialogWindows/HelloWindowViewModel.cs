@@ -5,7 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace bas.program.ViewModels
+namespace bas.program.ViewModels.DialogWindows
 {
     public class HelloWindowViewModel : ViewModel
     {

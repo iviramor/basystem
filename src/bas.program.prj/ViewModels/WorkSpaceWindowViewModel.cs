@@ -3,7 +3,7 @@ using bas.program.Models;
 using bas.program.Models.Tables;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
-using bas.program.ViewModels.ChildWindows;
+using bas.program.ViewModels.DialogWindows;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;

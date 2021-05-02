@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
-namespace bas.program.ViewModels.ChildWindows
+namespace bas.program.ViewModels.DialogWindows
 {
     public class AccessViewModel : ViewModel
     {
