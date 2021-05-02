@@ -1,4 +1,6 @@
-﻿using bas.website.Models.Data;
+﻿using bas.program.Infrastructure.Commands;
+using bas.program.Models.Tables.UserTables;
+using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,6 +9,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace bas.program.Infrastructure.RealizationTables.Base
 {
@@ -18,47 +22,66 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         /// <summary>
         ///  Таблица с данными Клиента
         /// </summary>
-        public DataTable _DataTable { get; set; }
+        public DataTable DataTable { get; set; }
 
         /// <summary>
         /// Контекст базы данных
         /// </summary>
-        public BankDbContext _BankDbContext { get; set; }
+        public BankDbContext BankDbContext { get; set; }
 
-        private string _NameTable;
+        public readonly Bank_user_access _Bank_user_access;
 
         #endregion Свойства
 
-        //public abstract void DelFromTable();
+        #region Команды
 
-        //public abstract void AddToTable();
+        #region Удаление
 
-        //public abstract void EditInTable();
+        private bool CanRemoveProfCommandExecuted(object p) => true;
 
-       private void SetColumnTable()
+        public abstract void OnRemoveProfCommandExecute(object p);
+
+        public void ShowRemoveError()
+        {
+            MessageBox.Show("Выберите элемент в таблице!", "Предупреждение", MessageBoxButton.OK,
+                    MessageBoxImage.Warning);
+        }
+
+        #endregion
+
+        #endregion Команды
+
+        public ICommand GetRemoveFromTabeleCommand()
+        {
+            return new ActionCommand(OnRemoveProfCommandExecute, CanRemoveProfCommandExecuted);
+        }
+
+        public abstract void SetSelected(DataRowView selectedItem);
+
+        private void SetColumnTable()
         {
 
             /// Тип данной таблицы
-            var entityTypeCurrentTable = _BankDbContext.Model.GetEntityTypes()
-                .SingleOrDefault(table => table.DisplayName() == _NameTable).ClrType;
+            var entityTypeCurrentTable = BankDbContext.Model.GetEntityTypes()
+                .SingleOrDefault(table => table.DisplayName() == _Bank_user_access.Bank_tables_info.Tables_key).ClrType;
 
             var PropColumn = TypeDescriptor.GetProperties(entityTypeCurrentTable);
 
             foreach (PropertyDescriptor prop in PropColumn)
             {
                 if (prop.DisplayName != null)
-                    _DataTable.Columns.Add(prop.DisplayName);
+                    DataTable.Columns.Add(prop.DisplayName);
             }
 
         }
 
         public abstract DataTable GetFullTable();
 
-        public ATable(string name)
+        public ATable(Bank_user_access bank_User_Access)
         {
-            _NameTable = name;
-            _DataTable = new();
-            _BankDbContext = new();
+            _Bank_user_access = bank_User_Access;
+            DataTable = new();
+            BankDbContext = new();
 
 
             SetColumnTable();

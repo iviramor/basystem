@@ -117,12 +117,12 @@ namespace bas.program.ViewModels
                 else if (value.Access_modification == 2) SetReadOnlyAccess();
                 else if (value.Access_modification == 3) SetEditAndReadOnlyAccess();
 
+                _SelectedItemMainTable = null;
                 SetCurrentTable();
 
                 OnPropertyChanged();
             }
         }
-
 
         private List<Bank_user_access> _ItemsTableComboBox = new();
 
@@ -155,6 +155,9 @@ namespace bas.program.ViewModels
             {
                 if (Equals(_SelectedItemMainTable, value)) return;
                 _SelectedItemMainTable = value;
+
+                Tables.SetSelectedItem(value);
+
                 OnPropertyChanged();
             }
         }
@@ -262,7 +265,7 @@ namespace bas.program.ViewModels
 
         #region Данные
 
-        private Tables _Tables { get; set; }
+        private Tables Tables { get; set; }
 
         /// <summary>
         /// Поле с данными пользователя в текущей сессии.
@@ -323,7 +326,7 @@ namespace bas.program.ViewModels
 
         private void OnShowProfileExecute(object p)
         {
-            var profile = new ProfileViewModel(this);
+            _ = new ProfileViewModel(this);
         }
 
         #endregion Профиль
@@ -358,6 +361,30 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Работа с таблицей
+
+        #region Удаление из таблицы
+
+        private ICommand _RemoveFromTabeleCommand;
+
+        /// <summary>
+        /// Команда для удаления выделенного элемента Должности
+        /// </summary>
+        public ICommand RemoveFromTabeleCommand
+        {
+            get => _RemoveFromTabeleCommand;
+            set
+            {
+                if (Equals(_RemoveFromTabeleCommand, value)) return;
+                _RemoveFromTabeleCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #endregion  Работа с таблицей
+
         #endregion Команды
 
         #region Конструктор
@@ -375,7 +402,7 @@ namespace bas.program.ViewModels
                 return;
             }
 
-            _Tables = new();
+            Tables = new();
 
             SetItemsTable();
 
@@ -505,11 +532,11 @@ namespace bas.program.ViewModels
         {
             if (_SelectTableItemComboBox == null) return;
 
-            /// Текущий ключ таблицы
-            var currentNameTable = _SelectTableItemComboBox.Bank_tables_info.Tables_key;
+            Tables.SetTable(_SelectTableItemComboBox);
 
+            RemoveFromTabeleCommand = Tables.GetRemoveCommand();
 
-            MainTable = _Tables.GetTabel(currentNameTable);
+            MainTable = Tables.GetTable();
 
         }
 

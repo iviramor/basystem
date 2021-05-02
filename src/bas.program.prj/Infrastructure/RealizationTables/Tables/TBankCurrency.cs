@@ -1,4 +1,6 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
+using bas.program.Models.Tables.UserTables;
+using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,13 +8,16 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables
 {
     public class TBankCurrency : ATable
     {
+
         #region Свойства
 
+        private Bank_currency Bank_Currency;
 
         #endregion Свойства
 
@@ -25,13 +30,13 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
-            var data = _BankDbContext.Bank_currency
+            var data = BankDbContext.Bank_currency
                 .ToList();
 
-            _DataTable.Clear();
+            DataTable.Clear();
 
             foreach (var item in data)
-                _DataTable.Rows.Add(
+                DataTable.Rows.Add(
                     item.Currency_name,
                     item.Currency_dollar,
                     item.Currency_euro,
@@ -43,13 +48,38 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Методы
 
+        #region Команды
+
+        #region Удалить
+
+        public override void OnRemoveProfCommandExecute(object p)
+        {
+            if (Bank_Currency == null)
+            {
+                ShowRemoveError();
+                return;
+            }
+            MessageBox.Show($"{Bank_Currency.Currency_name} - Удалено");
+        }
+
+        #endregion Удалить
+
+        #endregion
+
+        public override void SetSelected(DataRowView selectedItem)
+        {
+            Bank_Currency = BankDbContext.Bank_currency
+                .SingleOrDefault(item =>
+                            item.Currency_name == (string)selectedItem[0]);
+        }
+
         public override DataTable GetFullTable()
         {
             SetValuesTable();
-            return _DataTable;
+            return DataTable;
         }
 
-        public TBankCurrency(string name) : base(name)
+        public TBankCurrency(Bank_user_access bank_User_Access) : base(bank_User_Access)
         {
 
         }

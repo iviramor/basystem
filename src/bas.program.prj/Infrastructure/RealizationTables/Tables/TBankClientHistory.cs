@@ -1,4 +1,5 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
+using bas.program.Models.Tables.UserTables;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables
 {
@@ -16,6 +18,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #region Свойства
 
+        private Bank_client_history Bank_Client_History;
 
         #endregion Свойства
 
@@ -29,17 +32,17 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
-            var data = _BankDbContext.Bank_client_history
+            var data = BankDbContext.Bank_client_history
                 .Include(ch => ch.Bank_client)
                 .ThenInclude(ch => ch.Bank_client_company)
                 .Include(ch => ch.Bank_currency)
                 .Include(ch => ch.Bank_status_history)
                 .ToList();
 
-            _DataTable.Clear();
+            DataTable.Clear();
 
             foreach (var item in data)
-                _DataTable.Rows.Add(
+                DataTable.Rows.Add(
                     item.Clihis_numb,
                     item.Clihis_percent,
                     item.Clihis_all_sum,
@@ -57,13 +60,39 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Методы
 
+        #region Команды
+
+        #region Удалить
+
+        public override void OnRemoveProfCommandExecute(object p)
+        {
+            if (Bank_Client_History == null)
+            {
+                ShowRemoveError();
+                return;
+            }
+
+            MessageBox.Show($"{Bank_Client_History.Clihis_numb} - Удалено");
+        }
+
+        #endregion Удалить
+
+        #endregion
+
+        public override void SetSelected(DataRowView selectedItem)
+        {
+            Bank_Client_History = BankDbContext.Bank_client_history
+                .SingleOrDefault(item =>
+                            item.Clihis_numb.ToString() == (string)selectedItem[0]);
+        }
+
         public override DataTable GetFullTable()
         {
             SetValuesTable();
-            return _DataTable;
+            return DataTable;
         }
 
-        public TBankClientHistory(string name) : base(name)
+        public TBankClientHistory(Bank_user_access bank_User_Access) : base(bank_User_Access)
         {
 
         }

@@ -272,6 +272,7 @@
                     <Button Grid.Row="0" Grid.Column="2"
                             Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding DelIsEnabled}"
+                            Command="{Binding RemoveFromTabeleCommand}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->

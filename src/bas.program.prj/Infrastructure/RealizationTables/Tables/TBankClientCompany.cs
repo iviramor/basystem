@@ -1,4 +1,5 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
+using bas.program.Models.Tables.UserTables;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,11 +9,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables
 {
     public class TBankClientCompany : ATable
     {
+
+        #region Свойства
+
+        private Bank_client_company Bank_Client_Company;
+
+        #endregion Свойства
 
         #region Методы
 
@@ -23,13 +31,13 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
-            var data = _BankDbContext.Bank_client_company
+            var data = BankDbContext.Bank_client_company
                 .ToList();
 
-            _DataTable.Clear();
+            DataTable.Clear();
 
             foreach (var item in data)
-                _DataTable.Rows.Add(
+                DataTable.Rows.Add(
                     item.Clcomp_name,
                     item.Clcomp_descr,
                     item.Clcomp_type
@@ -40,13 +48,45 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Методы
 
+        #region Команды
+
+        #region Удалить
+
+        public override void OnRemoveProfCommandExecute(object p)
+        {
+            if (Bank_Client_Company == null)
+            {
+                ShowRemoveError();
+                return;
+            }
+            MessageBox.Show($"{Bank_Client_Company.Clcomp_name} - Удалено");
+        }
+
+        #endregion Удалить
+
+        #endregion
+
+        public override void SetSelected(DataRowView selectedItem)
+        {
+            if (Bank_Client_Company == null)
+            {
+                ShowRemoveError();
+                return;
+            }
+
+            Bank_Client_Company = BankDbContext.Bank_client_company
+                .SingleOrDefault(item =>
+                            item.Clcomp_name == (string)selectedItem[0] &&
+                            item.Clcomp_descr == (string)selectedItem[1]);
+        }
+
         public override DataTable GetFullTable()
         {
             SetValuesTable();
-            return _DataTable;
+            return DataTable;
         }
 
-        public TBankClientCompany(string name) : base(name)
+        public TBankClientCompany(Bank_user_access bank_User_Access) : base(bank_User_Access)
         {
 
         }
