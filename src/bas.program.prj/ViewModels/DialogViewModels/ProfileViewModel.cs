@@ -10,7 +10,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace bas.program.ViewModels.DialogWindows
+namespace bas.program.ViewModels.DialogViewModels
 {
     public class ProfileViewModel : ViewModel
     {
