@@ -122,6 +122,7 @@
   <ItemGroup>
     <Folder Include="Properties\" />
     <Folder Include="ViewModels\DialogViewModels\EditorsDialogWindow\" />
+    <Folder Include="Views\DialogViews\" />
   </ItemGroup>
 
 </Project>

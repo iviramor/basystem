@@ -1,4 +1,5 @@
 ﻿using bas.program.Infrastructure.Commands;
+using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models;
 using bas.program.Models.Tables;
 using bas.program.Models.Tables.UserTables;
@@ -116,7 +117,7 @@ namespace bas.program.ViewModels
                 else if (value.Access_modification == 2) SetReadOnlyAccess();
                 else if (value.Access_modification == 3) SetEditAndReadOnlyAccess();
 
-                SetMainTable();
+                SetCurrentTable();
 
                 OnPropertyChanged();
             }
@@ -261,6 +262,8 @@ namespace bas.program.ViewModels
 
         #region Данные
 
+        private Tables _Tables { get; set; }
+
         /// <summary>
         /// Поле с данными пользователя в текущей сессии.
         /// </summary>
@@ -313,6 +316,7 @@ namespace bas.program.ViewModels
         /// <summary>
         /// Команда для отображения окна "Профиля" текущего пользователя в системе
         /// </summary>
+
         public ICommand ShowProfileCommand { get; }
 
         private bool CanShowProfileExecuted(object p) => true;
@@ -370,6 +374,8 @@ namespace bas.program.ViewModels
                 Application.Current.Shutdown();
                 return;
             }
+
+            _Tables = new();
 
             SetItemsTable();
 
@@ -495,39 +501,19 @@ namespace bas.program.ViewModels
 
         #region Работа с таблицей
 
-        /// <summary>
-        /// Создает структуру таблицы (Колонки)
-        /// </summary>
-        private void SetMainTable()
+        private void SetCurrentTable()
         {
-            if (_SelectTableItemComboBox == null)
-            {
-                return;
-            }
-
-            DataTable dataTable = new();
+            if (_SelectTableItemComboBox == null) return;
 
             /// Текущий ключ таблицы
             var currentNameTable = _SelectTableItemComboBox.Bank_tables_info.Tables_key;
 
-            /// Тип данной таблицы
-            var entityTypeCurrentTable = User.DataBase.Model.GetEntityTypes()
-                .SingleOrDefault(table => table.DisplayName() == currentNameTable).ClrType;
 
-            var PropColumn = TypeDescriptor.GetProperties(entityTypeCurrentTable);
-
-            foreach (PropertyDescriptor prop in PropColumn)
-            {
-                if (prop.DisplayName != null)
-                    dataTable.Columns.Add(prop.DisplayName);
-
-            }
-
-            MainTable = dataTable;
+            MainTable = _Tables.GetTabel(currentNameTable);
 
         }
 
-        #endregion
+        #endregion Работа с таблицей
 
         #endregion
 
