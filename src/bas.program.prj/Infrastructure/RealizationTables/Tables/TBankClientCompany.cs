@@ -1,5 +1,6 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models.Tables.UserTables;
+using bas.program.ViewModels;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -60,6 +61,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                 return;
             }
             MessageBox.Show($"{Bank_Client_Company.Clcomp_name} - Удалено");
+            UpdateDataInTable();
         }
 
         #endregion Удалить
@@ -68,12 +70,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void SetSelected(DataRowView selectedItem)
         {
-            if (Bank_Client_Company == null)
-            {
-                ShowRemoveError();
-                return;
-            }
-
+            
             Bank_Client_Company = BankDbContext.Bank_client_company
                 .SingleOrDefault(item =>
                             item.Clcomp_name == (string)selectedItem[0] &&
@@ -86,7 +83,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             return DataTable;
         }
 
-        public TBankClientCompany(Bank_user_access bank_User_Access) : base(bank_User_Access)
+        public TBankClientCompany(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
 
         }

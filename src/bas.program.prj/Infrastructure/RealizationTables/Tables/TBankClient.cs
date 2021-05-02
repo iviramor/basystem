@@ -1,5 +1,6 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models.Tables.UserTables;
+using bas.program.ViewModels;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -64,6 +65,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                 return;
             }
             MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
+            UpdateDataInTable();
         }
 
         #endregion Удалить
@@ -84,7 +86,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             return DataTable;
         }
 
-        public TBankClient(Bank_user_access bank_User_Access) : base(bank_User_Access)
+        public TBankClient(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
 
         }

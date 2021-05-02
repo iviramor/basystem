@@ -1,5 +1,6 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models.Tables.UserTables;
+using bas.program.ViewModels;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,6 +31,8 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         public BankDbContext BankDbContext { get; set; }
 
         public readonly Bank_user_access _Bank_user_access;
+
+        private readonly WorkSpaceWindowViewModel workSpaceWindowViewModel;
 
         #endregion Свойства
 
@@ -75,10 +78,17 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         }
 
+        public void UpdateDataInTable()
+        {
+            workSpaceWindowViewModel.SetUpdateTabel();
+        }
+
         public abstract DataTable GetFullTable();
 
-        public ATable(Bank_user_access bank_User_Access)
+        public ATable(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM)
         {
+            workSpaceWindowViewModel = workVM;
+
             _Bank_user_access = bank_User_Access;
             DataTable = new();
             BankDbContext = new();

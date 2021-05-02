@@ -156,7 +156,7 @@ namespace bas.program.ViewModels
                 if (Equals(_SelectedItemMainTable, value)) return;
                 _SelectedItemMainTable = value;
 
-                Tables.SetSelectedItem(value);
+                if (value != null) Tables.SetSelectedItem(value);
 
                 OnPropertyChanged();
             }
@@ -402,7 +402,7 @@ namespace bas.program.ViewModels
                 return;
             }
 
-            Tables = new();
+            Tables = new(this);
 
             SetItemsTable();
 
@@ -530,6 +530,7 @@ namespace bas.program.ViewModels
 
         private void SetCurrentTable()
         {
+
             if (_SelectTableItemComboBox == null) return;
 
             Tables.SetTable(_SelectTableItemComboBox);
@@ -538,6 +539,11 @@ namespace bas.program.ViewModels
 
             MainTable = Tables.GetTable();
 
+        }
+
+        public void SetUpdateTabel()
+        {
+            MainTable = Tables.GetTable();
         }
 
         #endregion Работа с таблицей
