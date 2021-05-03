@@ -29,7 +29,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         /// <summary>
         /// Поле с ViewModel главного окна
         /// </summary>
-        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+        private readonly WorkSpaceWindowViewModel _workSpaceWindowViewModel;
 
         #endregion Свойства
 
@@ -75,7 +75,6 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             SetCurrendTabel(bank_User_Access);
         }
 
-
         /// <summary>
         /// Выдает полную таблицу(выделенную в ComboBox, Установленную в SetTable)
         /// </summary>
@@ -101,7 +100,46 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             return Table.GetRemoveFromTabeleCommand();
         }
 
+        /// <summary>
+        /// Отдает команду На Добавление в таблицу
+        /// </summary>
+        /// <returns></returns>
+        public ICommand GetAddCommand()
+        {
+            return Table.GetAddFromTabeleCommand();
+        }
+
+        /// <summary>
+        /// Отдает команду На Изменение в таблице
+        /// </summary>
+        /// <returns></returns>
+        public ICommand GetEditCommand()
+        {
+            return Table.GetEditFromTabeleCommand();
+        }
+
         #endregion Команды таблицы
+
+        #region Элементы главного окна
+
+        /// <summary>
+        /// Функция отдает значения Функции Фильтра
+        /// </summary>
+        /// <returns></returns>
+        public bool GetBoolFilterTable()
+        {
+            return Table.Filter;
+        }
+        /// <summary>
+        /// Функция отдает значения Функции Расчета
+        /// </summary>
+        /// <returns></returns>
+        public bool GetBoolMathsTable()
+        {
+            return Table.Maths;
+        }
+
+        #endregion Элементы главного окна
 
         #endregion Реализация 
 

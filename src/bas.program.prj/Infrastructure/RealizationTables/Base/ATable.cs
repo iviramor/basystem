@@ -32,32 +32,73 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         public readonly Bank_user_access _Bank_user_access;
 
-        private readonly WorkSpaceWindowViewModel workSpaceWindowViewModel;
+        public readonly WorkSpaceWindowViewModel workSpaceWindowViewModel;
 
         #endregion Свойства
+
+        #region Элементы главного окна
+
+        /// <summary>
+        /// Свойства фильтра, если true, то Фильтр для таблицы применим
+        /// </summary>
+        public abstract bool Filter { get; }
+        /// <summary>
+        /// Свойства фильтра, если true, то Расчеты для таблицы применимы
+        /// </summary>
+        public abstract bool Maths { get; }
+
+        #endregion Элементы главного окна
 
         #region Команды
 
         #region Удаление
 
-        private bool CanRemoveProfCommandExecuted(object p) => true;
+        private bool CanRemoveCommandExecuted(object p) => true;
 
-        public abstract void OnRemoveProfCommandExecute(object p);
+        public abstract void OnRemoveCommandExecute(object p);
 
-        public void ShowRemoveError()
+        #endregion
+
+        #region Добавление
+
+        private bool CanAddCommandExecuted(object p) => true;
+
+        public abstract void OnAddCommandExecute(object p);
+
+        #endregion Добавление
+
+        #region Изменить
+
+        private bool CanEditCommandExecuted(object p) => true;
+
+        public abstract void OnEditCommandExecute(object p);
+
+        #endregion Изменить
+
+        public static void ShowNullObjectError()
         {
             MessageBox.Show("Выберите элемент в таблице!", "Предупреждение", MessageBoxButton.OK,
                     MessageBoxImage.Warning);
         }
 
-        #endregion
-
         #endregion Команды
+
+        #region Выдача команд
 
         public ICommand GetRemoveFromTabeleCommand()
         {
-            return new ActionCommand(OnRemoveProfCommandExecute, CanRemoveProfCommandExecuted);
+            return new ActionCommand(OnRemoveCommandExecute, CanRemoveCommandExecuted);
         }
+        public ICommand GetAddFromTabeleCommand()
+        {
+            return new ActionCommand(OnAddCommandExecute, CanAddCommandExecuted);
+        }
+        public ICommand GetEditFromTabeleCommand()
+        {
+            return new ActionCommand(OnEditCommandExecute, CanEditCommandExecuted);
+        }
+
+        #endregion
 
         public abstract void SetSelected(DataRowView selectedItem);
 
@@ -97,6 +138,13 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             SetColumnTable();
 
         }
+
+        #region Дополнительные методы
+
+        public abstract bool HasNullObject();
+
+        #endregion
+
 
     }
 

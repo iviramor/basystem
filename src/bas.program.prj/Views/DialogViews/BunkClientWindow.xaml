@@ -1,0 +1,240 @@
+﻿<Window x:Class="bas.program.Views.DialogViews.BunkClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
+        mc:Ignorable="d"
+        Title="{Binding TitleName}"
+        Height="480" Width="800"
+        x:Name="window" ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" Icon="/Resources/Image/Icons/id-card-mini.png">
+
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/CommonTextBoxStyle.xaml" />
+                <ResourceDictionary Source="../Styles/CommonComboBoxStyle.xaml" />
+                <ResourceDictionary Source="../Styles/CommonButton.xaml" />
+                <ResourceDictionary Source="../Styles/CommonDatePickerStyle.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+            <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Roboto" />
+                <Setter Property="Margin" Value="10" />
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid>
+
+        <!--#region Сетка-->
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+
+        <!--#endregion-->
+
+        <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <!--#region Имя-->
+
+            <TextBlock Grid.Row="0" Grid.Column="0"
+                       Text="Имя"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <TextBox Style="{DynamicResource CommonTextBoxStyle}"
+                     Height="40"
+                     Margin="10"
+                     IsEnabled="{Binding IsEnabled}"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Name}" />
+
+            <!--#endregion-->
+
+            <!--#region Фамилия-->
+
+            <TextBlock Grid.Row="1" Grid.Column="0"
+                       Text="Фамилия"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <TextBox Grid.Row="1" Grid.Column="0"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
+                     Height="40"
+                     IsEnabled="{Binding IsEnabled}"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Surname}" />
+
+            <!--#endregion-->
+
+            <!--#region Отчество-->
+
+            <TextBlock Grid.Row="2" Grid.Column="0"
+                       Text="Отчество"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <TextBox Grid.Row="2" Grid.Column="0"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
+                     Height="40"
+                     IsEnabled="{Binding IsEnabled}"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Patronymic}" />
+
+            <!--#endregion-->
+
+            <!--#region Имя пользователя сотрудника-->
+
+            <TextBlock Grid.Row="0" Grid.Column="1"
+                       Text="Имя пользователя клиента"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <TextBox Grid.Row="0" Grid.Column="1"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
+                     Height="40"
+                     IsEnabled="{Binding IsEnabled}"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Login}" />
+
+            <!--#endregion-->
+
+            <!--#region Пароль-->
+
+            <TextBlock Grid.Row="1" Grid.Column="1"
+                       Text="Пароль"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <TextBox Grid.Row="1" Grid.Column="1"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
+                     Height="40"
+                     IsEnabled="{Binding IsEnabled}"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Password}" />
+
+            <!--#endregion-->
+
+            <!--#region Пол-->
+
+            <TextBlock Grid.Row="2" Grid.Column="1"
+                       Text="Пол"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <ComboBox Template="{StaticResource ComboBoxTemplate}" Grid.Row="2" Grid.Column="1"
+                      Margin="10"
+                      Height="40"
+                      IsEnabled="{Binding IsEnabled}"
+                      VerticalAlignment="Bottom">
+
+                <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                              Template="{DynamicResource CommonComboBoxItemTemplate}"
+                              Content="Мужской"
+                              IsSelected="{Binding Sex}">
+                </ComboBoxItem>
+
+                <ComboBoxItem Style="{DynamicResource CommonComboBoxItemStyle}"
+                              Template="{DynamicResource CommonComboBoxItemTemplate}"
+                              Content="Женский"
+                              IsSelected="{Binding Sex, Converter={StaticResource InverseBooleanConverter}}" />
+            </ComboBox>
+
+            <!--#endregion-->
+
+            <!--#region Даты -->
+
+            <TextBlock Grid.Row="3" Grid.Column="0"
+                       Text="Компания"
+                       Style="{StaticResource TextBlockStyle}"
+                       Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
+                       VerticalAlignment="Top" />
+
+            <ComboBox Template="{StaticResource ComboBoxTemplate}"
+                      Grid.Row="3" Grid.Column="0"
+                      Margin="10"
+                      Height="40"
+                      IsEnabled="{Binding StatusEnable}"
+                      ItemsSource="{Binding BankCompany}"
+                      DisplayMemberPath="Clcomp_name"
+                      SelectedItem="{Binding SelectedBankCompany}"
+                      Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
+                      VerticalAlignment="Bottom">
+            </ComboBox>
+
+            <!--#endregion-->
+
+            <!--#region Статус-->
+
+
+            <TextBlock Grid.Row="3" Grid.Column="1"
+                       Text="Дата регистрации"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
+
+            <TextBox Grid.Row="3" Grid.Column="1"
+                     Style="{DynamicResource CommonTextBoxStyle}"
+                     Margin="10"
+                     Height="40"
+                     IsEnabled="False"
+                     VerticalAlignment="Bottom"
+                     Text="{Binding Register_data}" />
+
+                <!--#endregion-->
+
+        </Grid>
+
+        <Button Grid.Row="2" Grid.Column="1"
+                Width="150"
+                HorizontalAlignment="Left"
+                Style="{StaticResource ButtonStyle}"
+                Template="{StaticResource ButtonTemplate}"
+                Content="Назад"
+                Command="{Binding CloseWindowCommand}">
+        </Button>
+
+        <Button Grid.Row="2" Grid.Column="2"
+                Width="150"
+                HorizontalAlignment="Right"
+                Style="{StaticResource ButtonStyle}"
+                Template="{StaticResource ButtonTemplate}"
+                Content="{Binding NameAction}"
+                IsEnabled="{Binding IsEnabled}"
+                Command="{Binding UpdateDataCommand}">
+        </Button>
+    </Grid>
+
+
+</Window>

@@ -22,6 +22,13 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Свойства
 
+        #region Элементы главного окна
+
+        public override bool Filter { get; } = false;
+        public override bool Maths { get; } = false;
+
+        #endregion Элементы главного окна
+
         #region Методы
 
         #region Работа с таблицей
@@ -53,23 +60,43 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #region Удалить
 
-        public override void OnRemoveProfCommandExecute(object p)
+        public override void OnRemoveCommandExecute(object p)
         {
-            if (Bank_Currency == null)
-            {
-                ShowRemoveError();
-                return;
-            }
+            if (HasNullObject()) return;
             MessageBox.Show($"{Bank_Currency.Currency_name} - Удалено");
             UpdateDataInTable();
         }
 
         #endregion Удалить
 
+        #region Добавить
+
+        public override void OnAddCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+        }
+
+        #endregion Добавить
+
+        #region Изменить
+
+        public override void OnEditCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+        }
+
+        #endregion Изменить
+
         #endregion
 
         public override void SetSelected(DataRowView selectedItem)
         {
+            if (selectedItem == null)
+            {
+                Bank_Currency = null;
+                return;
+            }
+
             Bank_Currency = BankDbContext.Bank_currency
                 .SingleOrDefault(item =>
                             item.Currency_name == (string)selectedItem[0]);
@@ -79,6 +106,16 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
             SetValuesTable();
             return DataTable;
+        }
+
+        public override bool HasNullObject()
+        {
+            if (Bank_Currency == null)
+            {
+                ShowNullObjectError();
+                return true;
+            }
+            return false;
         }
 
         public TBankCurrency(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)

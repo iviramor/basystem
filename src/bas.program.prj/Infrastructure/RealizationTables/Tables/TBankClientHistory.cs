@@ -23,6 +23,13 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Свойства
 
+        #region Элементы главного окна
+
+        public override bool Filter { get; } = true;
+        public override bool Maths { get; } = true;
+
+        #endregion Элементы главного окна
+
         #region Методы
 
         #region Работа с таблицей
@@ -65,13 +72,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #region Удалить
 
-        public override void OnRemoveProfCommandExecute(object p)
+        public override void OnRemoveCommandExecute(object p)
         {
-            if (Bank_Client_History == null)
-            {
-                ShowRemoveError();
-                return;
-            }
+            if (HasNullObject()) return;
 
             MessageBox.Show($"{Bank_Client_History.Clihis_numb} - Удалено");
             UpdateDataInTable();
@@ -79,10 +82,34 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Удалить
 
+        #region Добавить
+
+        public override void OnAddCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+        }
+
+        #endregion Добавить
+
+        #region Изменить
+
+        public override void OnEditCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+        }
+
+        #endregion Изменить
+
         #endregion
 
         public override void SetSelected(DataRowView selectedItem)
         {
+            if (selectedItem == null)
+            {
+                Bank_Client_History = null;
+                return;
+            }
+
             Bank_Client_History = BankDbContext.Bank_client_history
                 .SingleOrDefault(item =>
                             item.Clihis_numb.ToString() == (string)selectedItem[0]);
@@ -92,6 +119,16 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
             SetValuesTable();
             return DataTable;
+        }
+
+        public override bool HasNullObject()
+        {
+            if (Bank_Client_History == null)
+            {
+                ShowNullObjectError();
+                return true;
+            }
+            return false;
         }
 
         public TBankClientHistory(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)

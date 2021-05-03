@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
+using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +23,13 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         private Bank_client Bank_Client;
 
         #endregion Свойства
+
+        #region Элементы главного окна
+
+        public override bool Filter { get; } = true;
+        public override bool Maths { get; } = false;
+
+        #endregion Элементы главного окна
 
         #region Методы
 
@@ -57,23 +65,60 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #region Удалить
 
-        public override void OnRemoveProfCommandExecute(object p)
+        public override void OnRemoveCommandExecute(object p)
         {
-            if (Bank_Client == null)
-            {
-                ShowRemoveError();
-                return;
-            }
+            if (HasNullObject()) return;
+
+            BankDbContext.Bank_client.Remove(Bank_Client);
+            BankDbContext.SaveChanges();
             MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
             UpdateDataInTable();
         }
 
         #endregion Удалить
 
+        #region Добавить
+
+        public override void OnAddCommandExecute(object p)
+        {
+            ClientViewModel clientViewModel = new(workSpaceWindowViewModel, "Добавить");
+            clientViewModel.ShowBankClientWindow();
+        }
+
+        #endregion Добавить
+
+        #region Изменить
+
+        public override void OnEditCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+
+            ClientViewModel clientViewModel = new(workSpaceWindowViewModel, Bank_Client);
+            clientViewModel.ShowBankClientWindow();
+        }
+
+        #endregion Изменить
+
         #endregion
+
+        public override bool HasNullObject()
+        {
+            if (Bank_Client == null)
+            {
+                ShowNullObjectError();
+                return true;
+            }
+            return false;
+        }
 
         public override void SetSelected(DataRowView selectedItem)
         {
+            if (selectedItem == null)
+            {
+                Bank_Client = null;
+                return;
+            }
+
             Bank_Client = BankDbContext.Bank_client
                 .SingleOrDefault(item =>
                             item.Client_surname == (string)selectedItem[1] &&
@@ -90,6 +135,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
 
         }
+
 
     }
 }

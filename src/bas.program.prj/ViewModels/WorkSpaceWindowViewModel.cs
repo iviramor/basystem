@@ -144,7 +144,7 @@ namespace bas.program.ViewModels
 
         #region Главная таблица
 
-        private DataRowView _SelectedItemMainTable;
+        private DataRowView _SelectedItemMainTable = null;
         /// <summary>
         /// Выделенный ряд в таблице
         /// </summary>
@@ -156,7 +156,7 @@ namespace bas.program.ViewModels
                 if (Equals(_SelectedItemMainTable, value)) return;
                 _SelectedItemMainTable = value;
 
-                if (value != null) Tables.SetSelectedItem(value);
+                Tables.SetSelectedItem(value);
 
                 OnPropertyChanged();
             }
@@ -389,7 +389,7 @@ namespace bas.program.ViewModels
         private ICommand _RemoveFromTabeleCommand;
 
         /// <summary>
-        /// Команда для удаления выделенного элемента Должности
+        /// Команда для удаления
         /// </summary>
         public ICommand RemoveFromTabeleCommand
         {
@@ -398,6 +398,46 @@ namespace bas.program.ViewModels
             {
                 if (Equals(_RemoveFromTabeleCommand, value)) return;
                 _RemoveFromTabeleCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Добавление в таблицы
+
+        private ICommand _AddFromTabeleCommand;
+
+        /// <summary>
+        /// Команда для добавления
+        /// </summary>
+        public ICommand AddFromTabeleCommand
+        {
+            get => _AddFromTabeleCommand;
+            set
+            {
+                if (Equals(_AddFromTabeleCommand, value)) return;
+                _AddFromTabeleCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
+        #region Добавление в таблицы
+
+        private ICommand _EditFromTabeleCommand;
+
+        /// <summary>
+        /// Команда для добавления
+        /// </summary>
+        public ICommand EditFromTabeleCommand
+        {
+            get => _EditFromTabeleCommand;
+            set
+            {
+                if (Equals(_EditFromTabeleCommand, value)) return;
+                _EditFromTabeleCommand = value;
                 OnPropertyChanged();
             }
         }
@@ -557,6 +597,11 @@ namespace bas.program.ViewModels
             Tables.SetTable(_SelectTableItemComboBox);
 
             RemoveFromTabeleCommand = Tables.GetRemoveCommand();
+            AddFromTabeleCommand = Tables.GetAddCommand();
+            EditFromTabeleCommand = Tables.GetEditCommand();
+
+            FilterIsEnabled = Tables.GetBoolFilterTable();
+            MathsIsEnabled = Tables.GetBoolMathsTable();
 
             MainTable = Tables.GetTable();
             CountRows = MainTable.Rows.Count;
@@ -565,7 +610,9 @@ namespace bas.program.ViewModels
 
         public void SetUpdateTabel()
         {
+            SelectedItemMainTable = null;
             MainTable = Tables.GetTable();
+            CountRows = MainTable.Rows.Count;
         }
 
         #endregion Работа с таблицей

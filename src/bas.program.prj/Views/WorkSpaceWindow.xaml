@@ -238,7 +238,7 @@
 
                     <Button Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding EditIsEnabled}"
-                            
+                            Command="{Binding EditFromTabeleCommand}"
                             Style="{StaticResource Button.ToolsBar}"
                             Grid.Row="0" Grid.Column="0">
 
@@ -264,6 +264,7 @@
                     <Button Grid.Row="0" Grid.Column="1"
                             Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding AddIsEnabled}"
+                            Command="{Binding AddFromTabeleCommand}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -423,7 +424,8 @@
                           ItemsSource="{Binding MainTable}"
                           SelectedItem="{Binding SelectedItemMainTable}"
                           Grid.Row="1" Grid.Column="1"
-                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          ColumnWidth="*"
                           HorizontalScrollBarVisibility="Auto"
                           FontFamily="Roboto"
                           SelectionMode="Single"
