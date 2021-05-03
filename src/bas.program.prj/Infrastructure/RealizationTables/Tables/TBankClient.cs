@@ -69,10 +69,20 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
             if (HasNullObject()) return;
 
-            BankDbContext.Bank_client.Remove(Bank_Client);
-            BankDbContext.SaveChanges();
-            MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
-            UpdateDataInTable();
+            var res = MessageBox.Show("Вместе с Клиентом удалится Его история Кредитов!", "Предупреждение",
+                MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+            if(res == MessageBoxResult.OK)
+            {
+                BankDbContext.Bank_client.Remove(Bank_Client);
+                BankDbContext.SaveChanges();
+                MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
+                UpdateDataInTable();
+                return;
+            }
+
+            return;
+
         }
 
         #endregion Удалить
@@ -98,6 +108,18 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         }
 
         #endregion Изменить
+
+        #region Просмотр
+
+        public override void OnShowCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+
+            ClientViewModel clientViewModel = new(Bank_Client, workSpaceWindowViewModel.User.DataBase);
+            clientViewModel.ShowBankClientWindow();
+        }
+
+        #endregion
 
         #endregion
 

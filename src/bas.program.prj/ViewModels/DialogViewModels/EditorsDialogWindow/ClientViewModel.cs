@@ -436,7 +436,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
             #endregion Значение свойство пользователя
 
-            /// Выборка статусов (кроме админа)
+            /// Выборка компаний
             _BankCompany = _DataBase.Bank_client_company.ToList();
 
             /// Выделить текущий статус
@@ -471,6 +471,43 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             _BankCompany = _DataBase.Bank_client_company.ToList();
 
             UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
+            CloseWindowCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
+        }
+
+        /// <summary>
+        /// Конструктор для Просмотра данных
+        /// </summary>
+        public ClientViewModel(Bank_client bank_Client, BankDbContext dbContext)
+        {
+
+            /// Заголовок окна с именем
+            _TitleName = $"Просмотр: {bank_Client.Client_name} {bank_Client.Client_patronymic}";
+
+            /// Данные Профиля (пользователя)
+            _Bank_Client = bank_Client;
+
+            #region Значение свойство пользователя
+
+            _Name = bank_Client.Client_name;
+            _Surname = bank_Client.Client_surname;
+            _Patronymic = bank_Client.Client_patronymic;
+            _Login = bank_Client.Client_login;
+            _Password = bank_Client.Client_password;
+            _Sex = bank_Client.Client_sex;
+            _Register_data = bank_Client.Client_register_data;
+
+            #endregion Значение свойство пользователя
+
+            /// Выборка компаний
+            _BankCompany = dbContext.Bank_client_company.ToList();
+
+            /// Выделить текущий статус
+            _SelectedBankCompany = _BankCompany
+                .SingleOrDefault(bc => bc.Clcomp_id == bank_Client.Client_company);
+
+            IsEnabled = false;
+
+            UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
             CloseWindowCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
         }
 

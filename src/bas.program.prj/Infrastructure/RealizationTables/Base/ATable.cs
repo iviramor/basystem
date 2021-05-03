@@ -75,6 +75,14 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         #endregion Изменить
 
+        #region Просмотр
+
+        private bool CanShowCommandExecuted(object p) => true;
+
+        public abstract void OnShowCommandExecute(object p);
+
+        #endregion Просмотр
+
         public static void ShowNullObjectError()
         {
             MessageBox.Show("Выберите элемент в таблице!", "Предупреждение", MessageBoxButton.OK,
@@ -96,6 +104,10 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         public ICommand GetEditFromTabeleCommand()
         {
             return new ActionCommand(OnEditCommandExecute, CanEditCommandExecuted);
+        }
+        public ICommand GetShowFromTabeleCommand()
+        {
+            return new ActionCommand(OnShowCommandExecute, CanShowCommandExecuted);
         }
 
         #endregion

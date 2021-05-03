@@ -100,6 +100,15 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #endregion Изменить
 
+        #region Просмотр
+
+        public override void OnShowCommandExecute(object p)
+        {
+            if (HasNullObject()) return;
+        }
+
+        #endregion
+
         #endregion
 
         public override void SetSelected(DataRowView selectedItem)

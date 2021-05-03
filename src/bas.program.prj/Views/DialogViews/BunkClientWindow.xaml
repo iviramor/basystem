@@ -179,18 +179,16 @@
             <TextBlock Grid.Row="3" Grid.Column="0"
                        Text="Компания"
                        Style="{StaticResource TextBlockStyle}"
-                       Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                        VerticalAlignment="Top" />
 
             <ComboBox Template="{StaticResource ComboBoxTemplate}"
                       Grid.Row="3" Grid.Column="0"
                       Margin="10"
                       Height="40"
-                      IsEnabled="{Binding StatusEnable}"
+                      IsEnabled="{Binding IsEnabled}"
                       ItemsSource="{Binding BankCompany}"
                       DisplayMemberPath="Clcomp_name"
                       SelectedItem="{Binding SelectedBankCompany}"
-                      Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                       VerticalAlignment="Bottom">
             </ComboBox>
 
@@ -232,7 +230,10 @@
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
                 IsEnabled="{Binding IsEnabled}"
+                Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}">
+                
+            
         </Button>
     </Grid>
 

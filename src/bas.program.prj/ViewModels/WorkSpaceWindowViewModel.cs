@@ -444,6 +444,26 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Просмотр в таблице
+
+        private ICommand _ShowFromTabeleCommand;
+
+        /// <summary>
+        /// Команда для Просмотра элемента в таблице
+        /// </summary>
+        public ICommand ShowFromTabeleCommand
+        {
+            get => _ShowFromTabeleCommand;
+            set
+            {
+                if (Equals(_ShowFromTabeleCommand, value)) return;
+                _ShowFromTabeleCommand = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #endregion  Работа с таблицей
 
         #endregion Команды
@@ -599,6 +619,8 @@ namespace bas.program.ViewModels
             RemoveFromTabeleCommand = Tables.GetRemoveCommand();
             AddFromTabeleCommand = Tables.GetAddCommand();
             EditFromTabeleCommand = Tables.GetEditCommand();
+            ShowFromTabeleCommand = Tables.GetShowCommand();
+
 
             FilterIsEnabled = Tables.GetBoolFilterTable();
             MathsIsEnabled = Tables.GetBoolMathsTable();

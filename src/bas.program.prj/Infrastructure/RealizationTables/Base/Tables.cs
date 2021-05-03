@@ -118,6 +118,15 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             return Table.GetEditFromTabeleCommand();
         }
 
+        /// <summary>
+        /// Отдает команду Просмотр данных элемента
+        /// </summary>
+        /// <returns></returns>
+        public ICommand GetShowCommand()
+        {
+            return Table.GetShowFromTabeleCommand();
+        }
+
         #endregion Команды таблицы
 
         #region Элементы главного окна

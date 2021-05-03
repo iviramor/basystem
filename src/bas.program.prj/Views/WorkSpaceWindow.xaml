@@ -434,7 +434,7 @@
 
                     <DataGrid.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick"
-                                  Command="{Binding ShowProfCommand}"/>
+                                  Command="{Binding ShowFromTabeleCommand}"/>
                     </DataGrid.InputBindings>
 
                 </DataGrid>
