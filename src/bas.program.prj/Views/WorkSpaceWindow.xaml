@@ -128,7 +128,23 @@
             </Border>
         </Grid>
 
-        <StatusBar DockPanel.Dock="Bottom" Height="28">
+        <StatusBar DockPanel.Dock="Bottom" 
+                   FontFamily="Roboto"
+                   Padding="10, 0, 10, 0"
+                   Height="28">
+            <StatusBarItem>
+                <TextBlock>
+                    <Run Text="Количество записей: "/>
+                    <Run Text="{Binding CountRows}"/>
+                </TextBlock>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <ToggleButton Content="Сообщить об ошибке">
+                    
+                </ToggleButton>
+                
+            </StatusBarItem>
+
         </StatusBar>
 
         <DockPanel>
@@ -406,14 +422,13 @@
                           Style="{DynamicResource CommonDataGridTemplate}"
                           ItemsSource="{Binding MainTable}"
                           SelectedItem="{Binding SelectedItemMainTable}"
-                          ColumnWidth="*"
                           Grid.Row="1" Grid.Column="1"
                           CanUserAddRows="False"
+                          HorizontalScrollBarVisibility="Auto"
                           FontFamily="Roboto"
                           SelectionMode="Single"
                           VerticalGridLinesBrush="#F5E932"
-                          HorizontalGridLinesBrush="Transparent"
-                          CanUserResizeColumns="False">
+                          HorizontalGridLinesBrush="Transparent">
 
                     <DataGrid.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick"
@@ -425,5 +440,6 @@
             </Grid>
             
         </DockPanel>
+        
     </DockPanel>
 </Window>

@@ -16,6 +16,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         #region Свойства
 
+        /// <summary>
+        /// Выделенный Объект в ComboBox
+        /// </summary>
         private Bank_user_access SelectTableItem { get; set; }
 
         /// <summary>
@@ -32,6 +35,10 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         #region Методы
 
+        /// <summary>
+        /// Установка таблицы с учетом текущей выделенной таблицы в combobox
+        /// </summary>
+        /// <param name="bank_User_Access">Объект выделенной таблицы</param>
         private void SetCurrendTabel(Bank_user_access bank_User_Access)
         {
             string name = bank_User_Access.Bank_tables_info.Tables_key;

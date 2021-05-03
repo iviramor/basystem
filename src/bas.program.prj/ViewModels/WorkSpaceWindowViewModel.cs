@@ -261,6 +261,27 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Статус бар
+
+        private int _CountRows;
+        /// <summary>
+        /// Кол-во записей в таблице
+        /// В статус баре
+        /// </summary>
+        public int CountRows
+        {
+            get => _CountRows;
+            set
+            {
+                if (Equals(_CountRows, value)) return;
+                _CountRows = value;
+
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion Статус бар
+
         #endregion Блоки окна
 
         #region Данные
@@ -538,6 +559,7 @@ namespace bas.program.ViewModels
             RemoveFromTabeleCommand = Tables.GetRemoveCommand();
 
             MainTable = Tables.GetTable();
+            CountRows = MainTable.Rows.Count;
 
         }
 
