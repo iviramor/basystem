@@ -10,24 +10,27 @@ using System.Threading.Tasks;
 
 namespace bas.program.Models.Tables.Active
 {
-    public class Bank_active_deposits
+    public class Bank_active_debit
     {
-
         [Key]
         [DisplayName(null)]
-        public int Act_deposit_id { get; set; }
+        public int Cdebit_id { get; set; }
 
-        [DisplayName("Название депозита")]
-        public string Act_deposit_name { get; set; }
+        [DisplayName("Название операции")]
+        public string Cdebit_name { get; set; }
 
-        [DisplayName("Сумма")]
-        public decimal Act_deposit_cash { get; set; }
+        [DisplayName("У кого заняли (банк)")]
+        public string Cdebit_lender { get; set; }
+
+        [DisplayName("Сумма дебета")]
+        public decimal Cdebit_debit { get; set; }
 
         [DisplayName(null)]
-        public int Act_deposit_type { get; set; }
+        public int Cdebit_type { get; set; }
 
-        [ForeignKey("Act_deposit_type")]
+        [ForeignKey("Cdebit_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
+
     }
 }

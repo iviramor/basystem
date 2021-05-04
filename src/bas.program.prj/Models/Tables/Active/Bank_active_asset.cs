@@ -14,7 +14,7 @@ namespace bas.program.Models.Tables.Active
         [DisplayName("Название имущества")]
         public string Ass_name { get; set; }
 
-        [DisplayName("Единица")]
+        [DisplayName(null)]
         public int Ass_cash { get; set; }
 
         [ForeignKey("Ass_cash")]
