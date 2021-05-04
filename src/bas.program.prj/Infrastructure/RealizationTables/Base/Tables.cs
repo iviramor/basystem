@@ -1,4 +1,5 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Tables;
+using bas.program.Infrastructure.RealizationTables.Tables.Active;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using System;
@@ -19,7 +20,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         /// <summary>
         /// Выделенный Объект в ComboBox
         /// </summary>
-        private Bank_user_access SelectTableItem { get; set; }
+        public Bank_user_access SelectTableItem { get; set; }
 
         /// <summary>
         /// Класс с таблицей
@@ -56,6 +57,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                     return;
                 case "Bank_currency":
                     Table = new TBankCurrency(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
+                case "Bank_active_authorized_capital":
+                    Table = new TBankActiveAuthorizedCapital(bank_User_Access, _workSpaceWindowViewModel);
                     return;
 
             }

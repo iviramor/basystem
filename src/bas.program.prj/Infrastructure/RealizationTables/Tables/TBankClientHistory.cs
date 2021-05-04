@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
+using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -86,6 +87,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnAddCommandExecute(object p)
         {
             if (HasNullObject()) return;
+
+            new BankClientHistoryViewModel().ShowBankClientWindow();
         }
 
         #endregion Добавить

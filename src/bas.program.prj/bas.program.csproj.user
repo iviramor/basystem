@@ -10,6 +10,9 @@
     <Compile Update="Views\AdministratorWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogViews\BankClientHistoryWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DialogViews\BunkClientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,6 +37,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AdministratorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogViews\BankClientHistoryWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DialogViews\BunkClientWindow.xaml">
