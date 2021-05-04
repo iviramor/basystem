@@ -14,10 +14,13 @@ namespace bas.program.Models.Tables.Active
         [DisplayName("Название имущества")]
         public string Ass_name { get; set; }
 
-        [DisplayName(null)]
+        [DisplayName("Сумма")]
         public int Ass_cash { get; set; }
 
-        [ForeignKey("Ass_cash")]
+        [DisplayName(null)]
+        public int Ass_type { get; set; }
+
+        [ForeignKey("Ass_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
 

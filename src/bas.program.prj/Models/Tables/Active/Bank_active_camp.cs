@@ -24,7 +24,7 @@ namespace bas.program.Models.Tables.Active
         public decimal Acamp_quantity { get; set; }
 
         [DisplayName(null)]
-        public string Acamp_type { get; set; }
+        public int Acamp_type { get; set; }
 
         [ForeignKey("Acamp_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
