@@ -1,4 +1,5 @@
 ﻿using bas.program.Models.Tables;
+using bas.program.Models.Tables.Active;
 using bas.program.Models.Tables.UserTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,7 +9,7 @@ namespace bas.website.Models.Data
     {
         private readonly string _connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Database = BANK; Persist Security Info = False; MultipleActiveResultSets = True; Trusted_Connection = True;";
 
-        #region Данные пользовтеля
+        #region Данные пользователя
 
         public DbSet<Bank_user> Bank_user { get; set; }
 
@@ -16,7 +17,7 @@ namespace bas.website.Models.Data
 
         public DbSet<Bank_user_status> Bank_user_status { get; set; }
 
-        #endregion Данные пользовтеля
+        #endregion Данные пользователя
 
         #region Данные пользователя
 
@@ -34,6 +35,40 @@ namespace bas.website.Models.Data
         public DbSet<Bank_tables_info> Bank_tables_info { get; set; }
 
         #endregion Прочие данные
+
+        #region Актив
+
+        /// <summary>
+        /// Актив - Имущество банка
+        /// </summary>
+        public DbSet<Bank_active_asset> Bank_active_asset { get; set; }
+
+        /// <summary>
+        /// Актив - Уставной капитал банка 
+        /// </summary>
+        public DbSet<Bank_active_authorized_capital> Bank_active_authorized_capital { get; set; }
+
+        /// <summary>
+        /// Актив - Денежные средства и драгоценные металлы
+        /// </summary>
+        public DbSet<Bank_active_camp> Bank_active_camp { get; set; }
+
+        /// <summary>
+        /// Актив - Выданные кредиты
+        /// </summary>
+        public DbSet<Bank_active_credits_out> Bank_active_credits_out { get; set; }
+
+        /// <summary>
+        /// Актив - Депозиты и иные размещенные средства
+        /// </summary>
+        public DbSet<Bank_active_deposits> Bank_active_deposits { get; set; }
+
+        /// <summary>
+        /// Актив - Ценные бумаги и финансовые вложения
+        /// </summary>
+        public DbSet<Bank_active_docs> Bank_active_docs { get; set; }
+
+        #endregion
 
         public BankDbContext(DbContextOptions<BankDbContext> options) : base(options)
         {

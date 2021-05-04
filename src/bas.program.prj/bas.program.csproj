@@ -27,6 +27,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Tables\Active\Bank_active_debit.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="bank.ico" />
     <None Remove="Resources\Fonts\Roboto-Black.ttf" />
     <None Remove="Resources\Fonts\Roboto-BlackItalic.ttf" />
