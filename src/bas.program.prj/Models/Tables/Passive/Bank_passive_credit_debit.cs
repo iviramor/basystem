@@ -14,13 +14,13 @@ namespace bas.program.Models.Tables.Passive
         [DisplayName(null)]
         public int Cdebit_id { get; set; }
 
-        [DisplayName("Название депозита")]
+        [DisplayName("Название операции")]
         public string Cdebit_name { get; set; }
 
-        [DisplayName("Название депозита")]
+        [DisplayName("Заемщик депозита")]
         public string Cdebit_lender { get; set; }
 
-        [DisplayName("Сумма")]
+        [DisplayName("Сумма кредита")]
         public decimal Cdebit_cash { get; set; }
 
         [DisplayName(null)]

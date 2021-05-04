@@ -1,5 +1,6 @@
 ﻿using bas.program.Models.Tables;
 using bas.program.Models.Tables.Active;
+using bas.program.Models.Tables.Passive;
 using bas.program.Models.Tables.UserTables;
 using Microsoft.EntityFrameworkCore;
 
@@ -67,6 +68,40 @@ namespace bas.website.Models.Data
         /// Актив - Ценные бумаги и финансовые вложения
         /// </summary>
         public DbSet<Bank_active_docs> Bank_active_docs { get; set; }
+
+        #endregion
+
+        #region Пассив
+
+        /// <summary>
+        /// Пассив - Добавочный капитал
+        /// </summary>
+        public DbSet<Bank_passive_add_capital> Bank_passive_add_capital { get; set; }
+
+        /// <summary>
+        /// Пассив - Уставной капитал банка 
+        /// </summary>
+        public DbSet<Bank_passive_authorized_capital> Bank_passive_authorized_capital { get; set; }
+
+        /// <summary>
+        /// Пассив - Денежные средства и драгоценные металлы
+        /// </summary>
+        public DbSet<Bank_passive_camp> Bank_passive_camp { get; set; }
+
+        /// <summary>
+        /// Пассив - Корреспондентские счета коммерческих банков, открытые в банке
+        /// </summary>
+        public DbSet<Bank_passive_corres_accouts> Bank_passive_corres_accouts { get; set; }
+
+        /// <summary>
+        /// Пассив - Выданные кредиты
+        /// </summary>
+        public DbSet<Bank_passive_credit_debit> Bank_passive_credit_debit { get; set; }
+
+        /// <summary>
+        /// Пассив - Депозиты и иные привлеченные средства
+        /// </summary>
+        public DbSet<Bank_passive_deposits> Bank_passive_deposits { get; set; }
 
         #endregion
 
