@@ -136,6 +136,10 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             workSpaceWindowViewModel.SetUpdateTabel();
         }
 
+        /// <summary>
+        /// Выдает полностью заполненную таблицу
+        /// </summary>
+        /// <returns></returns>
         public abstract DataTable GetFullTable();
 
         public ATable(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM)

@@ -34,7 +34,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #region Работа с таблицей
 
-
         /// <summary>
         /// Заполняет таблицу данными
         /// </summary>

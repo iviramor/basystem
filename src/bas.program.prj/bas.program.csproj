@@ -120,6 +120,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Tables\Passive\" />
     <Folder Include="Properties\" />
   </ItemGroup>
 
