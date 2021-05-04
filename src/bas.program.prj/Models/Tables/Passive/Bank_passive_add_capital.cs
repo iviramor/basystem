@@ -7,25 +7,29 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bas.program.Models.Tables.Passive
 {
-    public class Bank_passive_camp
+    public class Bank_passive_add_capital
     {
-
         [Key]
         [DisplayName(null)]
-        public int Pcamp_id { get; set; }
+        public int Addc_id { get; set; }
 
         [DisplayName("Название операции")]
-        public string Pcamp_name { get; set; }
+        public string Addc_name { get; set; }
 
-        [DisplayName("Название средства")]
-        public decimal Pcamp_quantity { get; set; }
+        [DisplayName("Описание операции")]
+        public string Addc_descrip { get; set; }
+
+        [DisplayName("Дебет")]
+        public decimal Addc_debit { get; set; }
+
+        [DisplayName("Кредит")]
+        public decimal Addc_credit { get; set; }
 
         [DisplayName(null)]
-        public int Pcamp_type { get; set; }
+        public int Addc_type { get; set; }
 
-        [ForeignKey("Pcamp_type")]
+        [ForeignKey("Addc_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
-
     }
 }
