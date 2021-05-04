@@ -24,11 +24,11 @@ namespace bas.program.Models.Tables.Active
         [DisplayName("Кредит")]
         public decimal Aac_credit { get; set; }
 
-        [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
+        [DisplayName(null)]
         public int Aac_type { get; set; }
 
         [ForeignKey("Aac_type")]
-        [DisplayName("Валюта")]
+        [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
 
     }

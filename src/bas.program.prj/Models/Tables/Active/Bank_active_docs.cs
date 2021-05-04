@@ -10,21 +10,24 @@ using System.Threading.Tasks;
 
 namespace bas.program.Models.Tables.Active
 {
-    public class Bank_active_camp
+    public class Bank_active_docs
     {
 
         [Key]
         [DisplayName(null)]
-        public int Acamp_id { get; set; }
+        public int Docs_id { get; set; }
 
-        [DisplayName("Название средства")]
-        public string Acamp_name { get; set; }
+        [DisplayName("Наименование документа")]
+        public string Docs_name { get; set; }
 
-        [DisplayName("Количественный показатель")]
-        public decimal Acamp_quantity { get; set; }
+        [DisplayName("Тип документации(декларация, документ, справка)")]
+        public string Docs_type_doc { get; set; }
+
+        [DisplayName("Дебет")]
+        public decimal Docs_cash { get; set; }
 
         [DisplayName(null)]
-        public string Acamp_type { get; set; }
+        public decimal Docs_type { get; set; }
 
         [ForeignKey("Acamp_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
