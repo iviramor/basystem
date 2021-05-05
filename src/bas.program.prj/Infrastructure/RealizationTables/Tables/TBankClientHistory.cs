@@ -2,16 +2,10 @@
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
-using bas.program.ViewModels.Messages;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables

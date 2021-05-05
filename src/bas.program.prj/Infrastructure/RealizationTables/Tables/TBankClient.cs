@@ -69,19 +69,23 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
             if (HasNullObject()) return;
 
-            var res = MessageBox.Show("Вместе с Клиентом удалится Его история Кредитов!", "Предупреждение",
+            if (CheckUserPassword())
+            {
+
+                var res = MessageBox.Show("Вместе с Клиентом удалится Его история Кредитов!", "Предупреждение",
                 MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
-            if(res == MessageBoxResult.OK)
-            {
-                BankDbContext.Bank_client.Remove(Bank_Client);
-                BankDbContext.SaveChanges();
-                MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
-                UpdateDataInTable();
+                if (res == MessageBoxResult.OK)
+                {
+                    BankDbContext.Bank_client.Remove(Bank_Client);
+                    BankDbContext.SaveChanges();
+                    MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
+                    UpdateDataInTable();
+                    return;
+                }
+
                 return;
             }
-
-            return;
 
         }
 

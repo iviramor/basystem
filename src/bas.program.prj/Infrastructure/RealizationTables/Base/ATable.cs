@@ -58,6 +58,10 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         public abstract void OnRemoveCommandExecute(object p);
 
+        /// <summary>
+        /// Функция Вызывает окно с подтверждением пароля
+        /// </summary>
+        /// <returns>True - если пароль принят</returns>
         public bool CheckUserPassword()
         {
             /// Сообщение, для подтверждения пароля
