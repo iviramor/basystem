@@ -401,12 +401,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             #region Проверка полей
 
             if (_SelectedBankClient == null ||
-                _Percent == null ||
-                _FullSum == null ||
-                _StartDate == null ||
-                _CountMonths == null ||
-                _PaidOff == null ||
-                _Paid == null ||
                 _SelectedBankStatusHistory == null ||
                 _SelectedBankCurrency == null)
             {

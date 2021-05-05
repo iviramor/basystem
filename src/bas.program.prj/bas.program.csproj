@@ -53,6 +53,8 @@
     <None Remove="Resources\Image\Icons\folder.png" />
     <None Remove="Resources\Image\Icons\folder_main.png" />
     <None Remove="Resources\Image\Icons\id-card-mini.png" />
+    <None Remove="Resources\Image\Icons\Tables\calendar.png" />
+    <None Remove="Resources\Image\Icons\Tables\users.png" />
     <None Remove="Views\bg-flue.jpg" />
     <None Remove="Views\bg.jpg" />
     <None Remove="Views\calculator.png" />
@@ -103,6 +105,8 @@
     <Resource Include="Resources\Image\Icons\folder.png" />
     <Resource Include="Resources\Image\Icons\folder_main.png" />
     <Resource Include="Resources\Image\Icons\id-card-mini.png" />
+    <Resource Include="Resources\Image\Icons\Tables\calendar.png" />
+    <Resource Include="Resources\Image\Icons\Tables\users.png" />
   </ItemGroup>
 
   <ItemGroup>

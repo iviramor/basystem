@@ -49,7 +49,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                     item.Clihis_numb,
                     item.Clihis_percent,
                     item.Clihis_all_sum,
-                    item.Clihis_start_date,
+                    item.Clihis_start_date.ToString("dd MMMM yyyy"),
                     item.Clihis_ddl_date,
                     item.Clihis_paid_off,
                     item.Clihis_paid,
