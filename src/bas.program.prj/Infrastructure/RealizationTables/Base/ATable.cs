@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
+using bas.program.ViewModels.Messages;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -56,6 +57,28 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         private bool CanRemoveCommandExecuted(object p) => true;
 
         public abstract void OnRemoveCommandExecute(object p);
+
+        public bool CheckUserPassword()
+        {
+            /// Сообщение, для подтверждения пароля
+            var PasswordWindow = new ConfirmPasswordViewModel();
+            /// Отображение сообщения и запись вводимого в
+            /// окне пароля
+            var password = PasswordWindow.ShowMessagePassword();
+
+            /// Проверка есть ли пароль
+            if (password == null) return false;
+            /// Сравнивает введенный пароль с паролем пользователя
+            else if (password == workSpaceWindowViewModel.User.User.User_password)
+            {
+                return true;
+            }
+            /// если пароль не подходить, то сообщение об ошибке Ввода
+            else
+                MessageBox.Show("Неверный пароль!", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBoxImage.Error);
+            return false;
+        }
 
         #endregion
 

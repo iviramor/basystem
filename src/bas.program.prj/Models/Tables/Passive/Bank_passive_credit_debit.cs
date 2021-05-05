@@ -18,13 +18,17 @@ namespace bas.program.Models.Tables.Passive
         public string Cdebit_name { get; set; }
 
         [DisplayName("Заемщик депозита")]
-        public string Cdebit_lender { get; set; }
+        public int Cdebit_lender { get; set; }
 
         [DisplayName("Сумма кредита")]
         public decimal Cdebit_cash { get; set; }
 
         [DisplayName(null)]
         public int Cdebit_type { get; set; }
+
+        [ForeignKey("Cdebit_lender")]
+        [DisplayName("Заемщик депозита")]
+        public virtual Bank_client Bank_client { get; set; }
 
         [ForeignKey("Cdebit_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]

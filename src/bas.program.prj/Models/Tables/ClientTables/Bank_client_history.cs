@@ -46,7 +46,7 @@ namespace bas.website.Models.Data
         [DisplayName("Клиент")]
         public virtual Bank_client Bank_client { get; set; }
 
-        [ForeignKey("clihis_cur")]
+        [ForeignKey("Clihis_cur")]
         [DisplayName("Валюта")]
         public virtual Bank_currency Bank_currency { get; set; }
 

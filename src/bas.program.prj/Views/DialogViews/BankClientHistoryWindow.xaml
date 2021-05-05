@@ -29,9 +29,9 @@
                 <Setter Property="FontFamily" Value="Roboto" />
                 <Setter Property="Margin" Value="10" />
             </Style>
-            
+
         </ResourceDictionary>
-        
+
     </Window.Resources>
 
     <Grid>
@@ -55,7 +55,7 @@
         <!--#endregion-->
 
         <Grid Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2">
-            
+
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
@@ -79,11 +79,22 @@
                       Margin="10"
                       Height="40"
                       IsEnabled="{Binding IsEnabled}"
-                      ItemsSource="{Binding BankClient}"
-                      DisplayMemberPath="Clcomp_name"
                       SelectedItem="{Binding SelectedBankClient}"
+                      ItemsSource="{Binding BankClient}"
                       VerticalAlignment="Bottom">
-                
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock> 
+                            <Run Text="{Binding Path=Client_surname}"/>
+                            <Run Text="{Binding Path=Client_name}"/>
+                            <Run Text="{Binding Path=Client_patronymic}"/>
+                            <Run Text="{Binding Path=Client_login, StringFormat=({0})}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+
+
             </ComboBox>
 
             <!--#endregion-->
@@ -157,20 +168,20 @@
                        VerticalAlignment="Top" />
 
                 <ComboBox Template="{StaticResource ComboBoxTemplate}"
-                      Grid.RowSpan="2"  Grid.Column="1"
-                      Margin="10"
-                      Height="40"
-                      IsEnabled="{Binding IsEnabled}"
-                      ItemsSource="{Binding BankCompany}"
-                      DisplayMemberPath="Clcomp_name"
-                      SelectedItem="{Binding Currency}"
-                      VerticalAlignment="Bottom">
+                          Grid.RowSpan="2"  Grid.Column="1"
+                          Margin="10"
+                          Height="40"
+                          IsEnabled="{Binding IsEnabled}"
+                          DisplayMemberPath="Currency_name"
+                          SelectedItem="{Binding SelectedBankCurrency}"
+                          ItemsSource="{Binding BankCurrency}"
+                          VerticalAlignment="Bottom">
                 </ComboBox>
 
 
             </Grid>
-            
-            
+
+
             <!--#endregion-->
 
             <!--#region Номер кредита-->
@@ -196,7 +207,6 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <TextBlock Grid.Column="0"
@@ -214,20 +224,6 @@
                             SelectedDate="{Binding StartDate}">
                 </DatePicker>
 
-                <TextBlock Grid.Column="1"
-                           Text="Конец"
-                           Style="{StaticResource TextBlockStyle}"
-                           VerticalAlignment="Top" />
-
-                <DatePicker Grid.Column="1"
-                            Style="{DynamicResource CommonDatePickerStyle}"
-                            Margin="10"
-                            Height="40"
-                            IsEnabled="{Binding IsEnabled}"
-                            VerticalAlignment="Bottom"
-                            SelectedDateFormat="Short"
-                            SelectedDate="{Binding EndDate}">
-                </DatePicker>
             </Grid>
 
 
@@ -260,7 +256,7 @@
                            Text="Долг"
                            Style="{StaticResource TextBlockStyle}"
                            VerticalAlignment="Top" />
-                
+
                 <TextBox Grid.Row="0" Grid.Column="1"
                          Style="{DynamicResource CommonTextBoxStyle}"
                          Margin="10"
@@ -284,11 +280,11 @@
                       Margin="10"
                       Height="40"
                       IsEnabled="{Binding IsEnabled}"
-                      ItemsSource="{Binding BankCompany}"
-                      DisplayMemberPath="Clcomp_name"
-                      SelectedItem="{Binding Status}"
+                      DisplayMemberPath="Status_name"
+                      SelectedItem="{Binding SelectedBankStatusHistory}"
+                      ItemsSource="{Binding BankStatusHistory}"
                       VerticalAlignment="Bottom">
-                
+
             </ComboBox>
 
             <!--#endregion-->
@@ -334,7 +330,7 @@
 
 
         </Button>
-        
+
     </Grid>
 
 </Window>

@@ -2,6 +2,7 @@
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
+using bas.program.ViewModels.Messages;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -76,8 +77,17 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
             if (HasNullObject()) return;
 
-            MessageBox.Show($"{Bank_Client_History.Clihis_numb} - Удалено");
-            UpdateDataInTable();
+            if (CheckUserPassword())
+            {
+                BankDbContext.Remove(Bank_Client_History);
+                BankDbContext.SaveChanges();
+
+                UpdateDataInTable();
+
+                MessageBox.Show($"Успех", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
+
         }
 
         #endregion Удалить
@@ -86,9 +96,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnAddCommandExecute(object p)
         {
-            if (HasNullObject()) return;
-
-            new BankClientHistoryViewModel().ShowBankClientWindow();
+            new BankClientHistoryViewModel(workSpaceWindowViewModel, "Добавить").ShowBankClientWindow();
         }
 
         #endregion Добавить
@@ -98,6 +106,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnEditCommandExecute(object p)
         {
             if (HasNullObject()) return;
+
+            new BankClientHistoryViewModel(workSpaceWindowViewModel, Bank_Client_History).ShowBankClientWindow();
         }
 
         #endregion Изменить
@@ -107,6 +117,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnShowCommandExecute(object p)
         {
             if (HasNullObject()) return;
+
+            new BankClientHistoryViewModel(Bank_Client_History).ShowBankClientWindow();
         }
 
         #endregion
@@ -122,6 +134,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             }
 
             Bank_Client_History = BankDbContext.Bank_client_history
+                .Include(ch => ch.Bank_client)
+                .Include(ch => ch.Bank_currency)
+                .Include(ch => ch.Bank_status_history)
                 .SingleOrDefault(item =>
                             item.Clihis_numb.ToString() == (string)selectedItem[0]);
         }
