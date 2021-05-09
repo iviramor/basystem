@@ -1,4 +1,4 @@
-﻿<Window x:Class="bas.program.Views.DialogViews.BankCurrencyWindow"
+﻿<Window x:Class="bas.program.Views.DialogViews.BankCompanyWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -9,7 +9,7 @@
         Title="{Binding Title}" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="480" Width="400">
+        Height="560" Width="400">
 
 
     <Window.Resources>
@@ -42,17 +42,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>
             <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
+            <RowDefinition Height="170"/>
             <RowDefinition Height="90"/>
             <RowDefinition Height="90"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
 
-        <!--#region Название ресурса -->
+        <!--#region Название -->
 
         <TextBlock Grid.Row="1" Grid.Column="1"
-                       Text="Название ресурса"
+                       Text="Название компании"
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top" />
 
@@ -60,33 +60,35 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                    IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
                      Text="{Binding Name}" />
 
         <!--#endregion-->
 
-        <!--#region В доллар-->
+        <!--#region Описание-->
 
         <TextBlock Grid.Row="2" Grid.Column="1"
-                       Text="В долларах"
+                       Text="Описание"
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top" />
 
         <TextBox Grid.Row="2" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
-                     Margin="10"
-                     Height="40"
-                     IsEnabled="{Binding IsEnabled}"
-                     VerticalAlignment="Bottom"
-                     Text="{Binding Dollar}" />
+                     Margin="10,40,10,0"
+                     TextWrapping="WrapWithOverflow"
+                     Height="120"
+                     IsReadOnly="{Binding IsEnabled}"
+                     AcceptsReturn="True"
+                     VerticalAlignment="Top"
+                     Text="{Binding Description}" />
 
         <!--#endregion-->
 
-        <!--#region В рублях-->
+        <!--#region Тип-->
 
         <TextBlock Grid.Row="3" Grid.Column="1"
-                   Text="В рублях"
+                   Text="Тип компании"
                    Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                    Style="{StaticResource TextBlockStyle}"
                    VerticalAlignment="Top" />
@@ -96,16 +98,16 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                     IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Ruble}" />
+                     Text="{Binding Type}" />
 
         <!--#endregion-->
 
-        <!--#region В евро-->
+        <!--#region Адрес -->
 
         <TextBlock Grid.Row="4" Grid.Column="1"
-                   Text="В евро"
+                   Text="Адрес"
                    Style="{StaticResource TextBlockStyle}"
                    VerticalAlignment="Top" />
 
@@ -113,9 +115,9 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                     IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
-                     Text="{Binding Euro}" />
+                     Text="{Binding Address}" />
 
         <!--#endregion-->
 
@@ -139,9 +141,7 @@
 
         </Button>
 
-
     </Grid>
-
 
 
 </Window>

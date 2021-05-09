@@ -48,7 +48,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                 DataTable.Rows.Add(
                     item.Clcomp_name,
                     item.Clcomp_descr,
-                    item.Clcomp_type
+                    item.Clcomp_type,
+                    item.Clcomp_adr
                     );
         }
 
@@ -117,7 +118,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             SetValuesTable();
             return DataTable;
         }
-
 
         public override bool HasNullObject()
         {

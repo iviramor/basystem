@@ -13,6 +13,12 @@
     <Compile Update="Views\DialogViews\BankClientHistoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogViews\BankCompanyWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DialogViews\BankCurrencyWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DialogViews\BunkClientWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -40,6 +46,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DialogViews\BankClientHistoryWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogViews\BankCompanyWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogViews\BankCurrencyWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DialogViews\BunkClientWindow.xaml">

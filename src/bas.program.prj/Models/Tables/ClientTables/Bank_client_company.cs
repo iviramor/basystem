@@ -19,5 +19,10 @@ namespace bas.website.Models.Data
         [MaxLength(100)]
         [DisplayName("Тип компании")]
         public string Clcomp_type { get; set; }
+
+        [MaxLength(100)]
+        [DisplayName("Адрес компании")]
+        public string Clcomp_adr { get; set; }
+
     }
 }
