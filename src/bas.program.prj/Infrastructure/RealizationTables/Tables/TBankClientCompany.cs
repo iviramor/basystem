@@ -111,7 +111,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnShowCommandExecute(object p)
         {
-            BankCompanyViewModel bankCompanyViewModel = new(Bank_Client_Company, workSpaceWindowViewModel.User.DataBase);
+            BankCompanyViewModel bankCompanyViewModel = new(Bank_Client_Company);
             bankCompanyViewModel.ShowWindow();
         }
 

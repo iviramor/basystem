@@ -64,6 +64,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnRemoveCommandExecute(object p)
         {
             if (HasNullObject()) return;
+
             if (CheckUserPassword())
             {
                 try
@@ -111,7 +112,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnShowCommandExecute(object p)
         {
-            BankCurrencyViewModel bankCompanyViewModel = new(Bank_data, workSpaceWindowViewModel.User.DataBase);
+            BankCurrencyViewModel bankCompanyViewModel = new(Bank_data);
             bankCompanyViewModel.ShowWindow();
         }
 
