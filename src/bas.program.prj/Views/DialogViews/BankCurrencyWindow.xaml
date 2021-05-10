@@ -9,7 +9,7 @@
         Title="{Binding Title}" 
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="480" Width="400">
+        Height="500" Width="400">
 
 
     <Window.Resources>
@@ -60,7 +60,7 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                    IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
                      Text="{Binding Name}" />
 
@@ -77,7 +77,7 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                     IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
                      Text="{Binding Dollar}" />
 
@@ -96,7 +96,7 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                     IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
                      Text="{Binding Ruble}" />
 
@@ -113,7 +113,7 @@
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
                      Height="40"
-                     IsEnabled="{Binding IsEnabled}"
+                     IsReadOnly="{Binding IsEnabled}"
                      VerticalAlignment="Bottom"
                      Text="{Binding Euro}" />
 
@@ -134,7 +134,7 @@
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
-                Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
+                Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}" >
 
         </Button>

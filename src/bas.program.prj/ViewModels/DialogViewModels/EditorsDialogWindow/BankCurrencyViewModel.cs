@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 {
-    public class BankCompanyViewModel : ViewModel
+    public class BankCurrencyViewModel : ViewModel
     {
 
         #region Поля и свойства
@@ -22,7 +22,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Окно View
         /// </summary>
-        private BankCompanyWindow _BankWindow;
+        private BankCurrencyWindow _BankWindow;
 
         /// <summary>
         /// ViewModel главного рабочего окна
@@ -37,7 +37,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Данные для изменения
         /// </summary>
-        private readonly Bank_client_company _Bank_data;
+        private readonly Bank_currency _Bank_data;
 
         #endregion Классы
 
@@ -135,71 +135,48 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        private string _Description;
+        private decimal _Dollar;
         /// <summary>
-        /// Описание
+        /// В долларах
         /// </summary>
-        public string Description
+        public decimal Dollar
         {
-            get => _Description;
+            get => _Dollar;
             set
             {
-                if (Equals(_Description, value)) return;
-                _Description = value;
+                if (Equals(_Dollar, value)) return;
+                _Dollar = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _Type;
+        private decimal _Ruble;
         /// <summary>
         /// Тип компании
         /// </summary>
-        public string Type
+        public decimal Ruble
         {
-            get => _Type;
+            get => _Ruble;
             set
             {
-                if (Equals(_Type, value)) return;
+                if (Equals(_Ruble, value)) return;
 
-                if (value.Length < 2 || value.Any(ch => char.IsWhiteSpace(ch)) 
-                    || value.Length > 150)
-                {
-                    MessageBox.Show("Тип не может быть:\n" +
-                                    "-> Меньше 2 символов\n" +
-                                    "-> Содержать пробелы\n" +
-                                    "Больше 150 символов", "Ошибка ввода", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    return;
-                }
-
-                _Type = value;
+                _Ruble = value;
                 OnPropertyChanged();
             }
         }
 
-        private string _Address;
+        private decimal _Euro;
         /// <summary>
         /// Адрес
         /// </summary>
-        public string Address
+        public decimal Euro
         {
-            get => _Address;
+            get => _Euro;
             set
             {
-                if (Equals(_Address, value)) return;
-
-                if (value.Length < 6 || value.Any(ch => char.IsWhiteSpace(ch)) 
-                    || value.Length > 150)
-                {
-                    MessageBox.Show("Адрес не может быть:\n" +
-                                    "-> Меньше 6 символов\n" +
-                                    "-> Содержать пробелы\n" +
-                                    "Больше 150 символов", "Ошибка ввода", MessageBoxButton.OK,
-                        MessageBoxImage.Information);
-                    return;
-                }
-
-                _Address = value;
+                if (Equals(_Euro, value)) return;
+                _Euro = value;
                 OnPropertyChanged();
             }
         }
@@ -226,15 +203,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
             #region Смена изменений в сессии пользователя
 
-            _Bank_data.Clcomp_name = _Name;
-            _Bank_data.Clcomp_descr = _Description;
-            _Bank_data.Clcomp_type = _Type;
-            _Bank_data.Clcomp_adr = _Address;
+            _Bank_data.Currency_name = _Name;
+            _Bank_data.Currency_dollar = _Dollar;
+            _Bank_data.Currency_rub = _Ruble;
+            _Bank_data.Currency_euro = _Euro;
 
             #endregion Смена изменений в сессии пользователя
 
             /// Изменение данных в базе данных
-            _DataBase.Bank_client_company.Update(_Bank_data);
+            _DataBase.Bank_currency.Update(_Bank_data);
             _DataBase.SaveChanges();
 
             /// Уведомление об успешной операции
@@ -251,28 +228,25 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         private void OnAddDataCommandExecute(object p)
         {
             /// Новые данные
-            Bank_client_company NewData = new();
+            Bank_currency NewData = new();
 
-            #region Смена изменений в сессии пользователя
+            #region Смена изменений 
 
-            if (_Name == null ||
-                _Description == null ||
-                _Type == null ||
-                _Address == null)
+            if (_Name == null)
             {
                 MessageBox.Show("Проверьте данные! Вы могли пропустить поле.", "Ошибка ввода", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
-            NewData.Clcomp_name = _Name;
-            NewData.Clcomp_descr = _Description;
-            NewData.Clcomp_type = _Type;
-            NewData.Clcomp_adr = _Address;
+            NewData.Currency_name = _Name;
+            NewData.Currency_dollar = _Dollar;
+            NewData.Currency_rub = _Ruble;
+            NewData.Currency_euro = _Euro;
 
             #endregion 
 
             /// Добавление в базу данных 
-            _DataBase.Bank_client_company.Add(NewData);
+            _DataBase.Bank_currency.Add(NewData);
             _DataBase.SaveChanges();
 
             /// Обновление таблицы 
@@ -310,25 +284,25 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Конструктор для редактирования
         /// </summary>
-        public BankCompanyViewModel(WorkSpaceWindowViewModel workVM, Bank_client_company bank_Client_Company)
+        public BankCurrencyViewModel(WorkSpaceWindowViewModel workVM, Bank_currency bank_data)
         {
             _workSpaceWindowViewModel = workVM;
 
             /// Заголовок окна с именем
-            _Title = $"Изменить: {bank_Client_Company.Clcomp_name}";
+            _Title = $"Изменить: {bank_data.Currency_name}";
 
             /// Контекст базы данных
             _DataBase = _workSpaceWindowViewModel.User.DataBase;
 
             /// Данные
-            _Bank_data = bank_Client_Company;
+            _Bank_data = bank_data;
 
             #region Значение свойство
 
-            _Name = bank_Client_Company.Clcomp_name;
-            _Description = bank_Client_Company.Clcomp_descr;
-            _Type = bank_Client_Company.Clcomp_type;
-            _Address = bank_Client_Company.Clcomp_adr;
+            _Name = bank_data.Currency_name;
+            _Dollar = bank_data.Currency_dollar;
+            _Ruble = bank_data.Currency_rub;
+            _Euro = bank_data.Currency_euro;
 
             #endregion Значение свойство
 
@@ -340,7 +314,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Конструктор для добавления
         /// </summary>
-        public BankCompanyViewModel(WorkSpaceWindowViewModel workVM, string actionName)
+        public BankCurrencyViewModel(WorkSpaceWindowViewModel workVM, string actionName)
         {
             _NameAction = actionName;
 
@@ -360,21 +334,21 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Конструктор для Просмотра данных
         /// </summary>
-        public BankCompanyViewModel(Bank_client_company bank_Client_Company, BankDbContext dbContext)
+        public BankCurrencyViewModel(Bank_currency bank_data, BankDbContext dbContext)
         {
 
             /// Заголовок окна с именем
-            _Title = $"Просмотр: {bank_Client_Company.Clcomp_name} ";
+            _Title = $"Просмотр: {bank_data.Currency_name} ";
 
             /// Данные
-            _Bank_data = bank_Client_Company;
+            _Bank_data = bank_data;
 
             #region Значение свойство
 
-            _Name = bank_Client_Company.Clcomp_name;
-            _Description = bank_Client_Company.Clcomp_descr;
-            _Type = bank_Client_Company.Clcomp_type;
-            _Address = bank_Client_Company.Clcomp_adr;
+            _Name = bank_data.Currency_name;
+            _Dollar = bank_data.Currency_dollar;
+            _Ruble = bank_data.Currency_rub;
+            _Euro = bank_data.Currency_euro;
 
             #endregion Значение свойство
 
@@ -389,7 +363,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         public void ShowWindow()
         {
-            _BankWindow = new BankCompanyWindow()
+            _BankWindow = new BankCurrencyWindow()
             {
                 DataContext = this
             };

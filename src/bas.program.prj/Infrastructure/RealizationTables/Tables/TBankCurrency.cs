@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
+using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,7 +19,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         #region Свойства
 
-        private Bank_currency Bank_Currency;
+        private Bank_currency Bank_data;
 
         #endregion Свойства
 
@@ -63,8 +64,24 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnRemoveCommandExecute(object p)
         {
             if (HasNullObject()) return;
-            MessageBox.Show($"{Bank_Currency.Currency_name} - Удалено");
-            UpdateDataInTable();
+            if (CheckUserPassword())
+            {
+                try
+                {
+                    BankDbContext.Bank_currency.Remove(Bank_data);
+                    BankDbContext.SaveChanges();
+                    MessageBox.Show($"{Bank_data.Currency_name} - Удалено");
+                }
+                catch
+                {
+                    MessageBox.Show("Данные существуют в другой таблице", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                finally
+                {
+                    UpdateDataInTable();
+                }
+            }
         }
 
         #endregion Удалить
@@ -73,7 +90,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnAddCommandExecute(object p)
         {
-            if (HasNullObject()) return;
+            BankCurrencyViewModel bankCompanyViewModel = new(workSpaceWindowViewModel, "Добавить");
+            bankCompanyViewModel.ShowWindow();
         }
 
         #endregion Добавить
@@ -83,6 +101,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnEditCommandExecute(object p)
         {
             if (HasNullObject()) return;
+            BankCurrencyViewModel bankCompanyViewModel = new(workSpaceWindowViewModel, Bank_data);
+            bankCompanyViewModel.ShowWindow();
         }
 
         #endregion Изменить
@@ -91,7 +111,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnShowCommandExecute(object p)
         {
-            if (HasNullObject()) return;
+            BankCurrencyViewModel bankCompanyViewModel = new(Bank_data, workSpaceWindowViewModel.User.DataBase);
+            bankCompanyViewModel.ShowWindow();
         }
 
         #endregion
@@ -102,11 +123,11 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         {
             if (selectedItem == null)
             {
-                Bank_Currency = null;
+                Bank_data = null;
                 return;
             }
 
-            Bank_Currency = BankDbContext.Bank_currency
+            Bank_data = BankDbContext.Bank_currency
                 .SingleOrDefault(item =>
                             item.Currency_name == (string)selectedItem[0]);
         }
@@ -119,7 +140,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override bool HasNullObject()
         {
-            if (Bank_Currency == null)
+            if (Bank_data == null)
             {
                 ShowNullObjectError();
                 return true;

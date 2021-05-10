@@ -90,7 +90,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnAddCommandExecute(object p)
         {
-            if (HasNullObject()) return;
             BankCompanyViewModel bankCompanyViewModel = new(workSpaceWindowViewModel, "Добавить");
             bankCompanyViewModel.ShowWindow();
         }
