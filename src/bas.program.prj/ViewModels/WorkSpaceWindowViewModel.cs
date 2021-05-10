@@ -282,6 +282,25 @@ namespace bas.program.ViewModels
 
         #endregion Статус бар
 
+        #region Боковые блоки
+
+        private bool _MathVisibility = true;
+        /// <summary>
+        /// Отображение и скрытие нужных элементов, Используется для статуса "Администратор"
+        /// </summary>
+        public bool MathVisibility
+        {
+            get => _MathVisibility;
+            set
+            {
+                if (Equals(_MathVisibility, value)) return;
+                _MathVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #endregion Блоки окна
 
         #region Данные
@@ -464,6 +483,28 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Расчеты
+
+        public ICommand ShowMathsCommand { get; }
+
+        private bool CanShowMathsCommandExecuted(object p) => true;
+
+        private void OnShowMathsCommandExecute(object p)
+        {
+            MathVisibility = true;
+        }
+
+        public ICommand CloseMathsCommand { get; }
+
+        private bool CanCloseMathsCommandExecuted(object p) => true;
+
+        private void OnCloseMathsCommandExecute(object p)
+        {
+            MathVisibility = false;
+        }
+
+        #endregion
+
         #endregion  Работа с таблицей
 
         #endregion Команды
@@ -499,6 +540,8 @@ namespace bas.program.ViewModels
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
             ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
             ShowAdministratorCommand = new ActionCommand(OnShowAdministratorCommandExecute, CanShowAdministratorCommandExecuted);
+            ShowMathsCommand = new ActionCommand(OnShowMathsCommandExecute, CanShowMathsCommandExecuted);
+            CloseMathsCommand = new ActionCommand(OnCloseMathsCommandExecute, CanCloseMathsCommandExecuted);
 
             #endregion
         }

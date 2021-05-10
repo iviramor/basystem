@@ -371,6 +371,7 @@
                     <Button Grid.Row="0" Grid.Column="1"
                             Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding MathsIsEnabled}"
+                            Command="{Binding ShowMathsCommand}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -411,6 +412,53 @@
                 <!--#endregion-->
 
                 <Rectangle Grid.Row="1" Grid.ColumnSpan="4" Height="0.1" Fill="Black" />
+            </Grid>
+
+            <!--Visibility="{Binding MathVisibility,
+                                 Converter={StaticResource BoolToVis}, 
+                                 FallbackValue=Collapsed}"-->
+
+            <Grid DockPanel.Dock="Left"
+                   Width="250"
+                   Background="#FFFAB6"
+                   Visibility="{Binding MathVisibility,
+                                   Converter={StaticResource BoolToVis}, 
+                                   FallbackValue=Collapsed}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="1" Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock  FontFamily="Roboto"
+                                FontWeight="Bold"
+                                FontSize="18"
+                                VerticalAlignment="Center"
+                                Text="Расчеты"/>
+
+                    <Button Grid.Column="1" Background="red"
+                            Command="{Binding CloseMathsCommand}"/>
+
+                </Grid>
+                
+                
             </Grid>
 
             <Grid>
