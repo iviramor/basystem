@@ -358,26 +358,28 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         private void OnUpdateDataCommandExecute(object p)
         {
 
+            var data = _DataBase.Bank_client_history.SingleOrDefault(d => d.Clihis_id == _Bank_client_history.Clihis_id);
+
             #region Смена изменений в сессии пользователя
 
-            _Bank_client_history.Clihis_client = _SelectedBankClient.Client_id;
-            _Bank_client_history.Clihis_percent = _Percent;
-            _Bank_client_history.Clihis_all_sum = _FullSum;
-            _Bank_client_history.Clihis_start_date = _StartDate;
-            _Bank_client_history.Clihis_ddl_date = _CountMonths;
-            _Bank_client_history.Clihis_paid_off = _PaidOff;
-            _Bank_client_history.Clihis_paid = _Paid;
-            _Bank_client_history.Clihis_status = _SelectedBankStatusHistory.Status_id;
-            _Bank_client_history.Clihis_cur = _SelectedBankCurrency.Currency_id;
+            data.Clihis_client = _SelectedBankClient.Client_id;
+            data.Clihis_percent = _Percent;
+            data.Clihis_all_sum = _FullSum;
+            data.Clihis_start_date = _StartDate;
+            data.Clihis_ddl_date = _CountMonths;
+            data.Clihis_paid_off = _PaidOff;
+            data.Clihis_paid = _Paid;
+            data.Clihis_status = _SelectedBankStatusHistory.Status_id;
+            data.Clihis_cur = _SelectedBankCurrency.Currency_id;
 
-            _Bank_client_history.Bank_client = _SelectedBankClient;
-            _Bank_client_history.Bank_currency = _SelectedBankCurrency;
-            _Bank_client_history.Bank_status_history = _SelectedBankStatusHistory;
+            data.Bank_client = _SelectedBankClient;
+            data.Bank_currency = _SelectedBankCurrency;
+            data.Bank_status_history = _SelectedBankStatusHistory;
 
             #endregion Смена изменений в сессии пользователя
 
             /// Изменение данных в базе данных
-            _DataBase.Bank_client_history.Update(_Bank_client_history);
+            _DataBase.Bank_client_history.Update(data);
             _DataBase.SaveChanges();
 
             /// Уведомление об успешной операции

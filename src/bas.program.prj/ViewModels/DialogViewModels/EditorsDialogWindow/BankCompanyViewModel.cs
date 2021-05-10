@@ -224,17 +224,19 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         private void OnUpdateDataCommandExecute(object p)
         {
 
+            var data = _DataBase.Bank_client_company.SingleOrDefault(d => d.Clcomp_id == _Bank_data.Clcomp_id);
+
             #region Смена изменений в сессии пользователя
 
-            _Bank_data.Clcomp_name = _Name;
-            _Bank_data.Clcomp_descr = _Description;
-            _Bank_data.Clcomp_type = _Type;
-            _Bank_data.Clcomp_adr = _Address;
+            data.Clcomp_name = _Name;
+            data.Clcomp_descr = _Description;
+            data.Clcomp_type = _Type;
+            data.Clcomp_adr = _Address;
 
             #endregion Смена изменений в сессии пользователя
 
             /// Изменение данных в базе данных
-            _DataBase.Bank_client_company.Update(_Bank_data);
+            _DataBase.Bank_client_company.Update(data);
             _DataBase.SaveChanges();
 
             /// Уведомление об успешной операции
@@ -360,7 +362,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Конструктор для Просмотра данных
         /// </summary>
-        public BankCompanyViewModel(Bank_client_company bank_Client_Company, BankDbContext dbContext)
+        public BankCompanyViewModel(Bank_client_company bank_Client_Company)
         {
 
             /// Заголовок окна с именем

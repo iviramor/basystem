@@ -201,17 +201,19 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         private void OnUpdateDataCommandExecute(object p)
         {
 
+            var data = _DataBase.Bank_currency.SingleOrDefault(d => d.Currency_id == _Bank_data.Currency_id);
+
             #region Смена изменений в сессии пользователя
 
-            _Bank_data.Currency_name = _Name;
-            _Bank_data.Currency_dollar = _Dollar;
-            _Bank_data.Currency_rub = _Ruble;
-            _Bank_data.Currency_euro = _Euro;
+            data.Currency_name = _Name;
+            data.Currency_dollar = _Dollar;
+            data.Currency_rub = _Ruble;
+            data.Currency_euro = _Euro;
 
             #endregion Смена изменений в сессии пользователя
 
             /// Изменение данных в базе данных
-            _DataBase.Bank_currency.Update(_Bank_data);
+            _DataBase.Bank_currency.Update(data);
             _DataBase.SaveChanges();
 
             /// Уведомление об успешной операции
@@ -334,7 +336,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <summary>
         /// Конструктор для Просмотра данных
         /// </summary>
-        public BankCurrencyViewModel(Bank_currency bank_data, BankDbContext dbContext)
+        public BankCurrencyViewModel(Bank_currency bank_data)
         {
 
             /// Заголовок окна с именем

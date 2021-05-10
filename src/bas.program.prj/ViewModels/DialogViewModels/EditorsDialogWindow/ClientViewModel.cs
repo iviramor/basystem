@@ -310,21 +310,23 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         private void OnUpdateDataCommandExecute(object p)
         {
 
+            var data = _DataBase.Bank_client.SingleOrDefault(d => d.Client_id == _Bank_Client.Client_id);
+
             #region Смена изменений в сессии пользователя
 
-            _Bank_Client.Client_name = _Name;
-            _Bank_Client.Client_surname = _Surname;
-            _Bank_Client.Client_patronymic = _Patronymic;
-            _Bank_Client.Client_login = _Login;
-            _Bank_Client.Client_password = _Password;
-            _Bank_Client.Client_sex = _Sex;
-            _Bank_Client.Client_company = _SelectedBankCompany.Clcomp_id;
-            _Bank_Client.Bank_client_company = _SelectedBankCompany;
+            data.Client_name = _Name;
+            data.Client_surname = _Surname;
+            data.Client_patronymic = _Patronymic;
+            data.Client_login = _Login;
+            data.Client_password = _Password;
+            data.Client_sex = _Sex;
+            data.Client_company = _SelectedBankCompany.Clcomp_id;
+            data.Bank_client_company = _SelectedBankCompany;
 
             #endregion Смена изменений в сессии пользователя
 
             /// Изменение данных в базе данных
-            _DataBase.Bank_client.Update(_Bank_Client);
+            _DataBase.Bank_client.Update(data);
             _DataBase.SaveChanges();
 
             /// Уведомление об успешной операции
@@ -377,7 +379,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
             MessageBox.Show("Добавлен новый Клиент \n" +
                             $"Ф.И.О.: {NewClient.Client_name} {NewClient.Client_patronymic} {NewClient.Client_surname} ");
-            _workSpaceWindowViewModel.SetUpdateTabel();
             _BunkClientWindow.Close();
         }
 
