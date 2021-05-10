@@ -1,5 +1,6 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Tables;
 using bas.program.Infrastructure.RealizationTables.Tables.Active;
+using bas.program.Infrastructure.RealizationTables.Tables.Passive;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using System;
@@ -60,6 +61,12 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                     return;
                 case "Bank_active_authorized_capital":
                     Table = new TBankActiveAuthorizedCapital(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
+                case "Bank_passive_authorized_capital":
+                    Table = new TBankPassiveAuthorizedCapital(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
+                case "Bank_passive_add_capital":
+                    Table = new TBankPassiveAddCapital(bank_User_Access, _workSpaceWindowViewModel);
                     return;
 
             }
