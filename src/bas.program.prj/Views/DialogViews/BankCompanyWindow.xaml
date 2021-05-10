@@ -9,7 +9,7 @@
         Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="560" Width="400">
+        Height="590" Width="400">
 
 
     <Window.Resources>
@@ -45,6 +45,7 @@
             <RowDefinition Height="170"/>
             <RowDefinition Height="90"/>
             <RowDefinition Height="90"/>
+            <RowDefinition Height="10"/>
             <RowDefinition Height="40"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
@@ -121,7 +122,7 @@
 
         <!--#endregion-->
 
-        <Button Grid.Row="5" Grid.Column="1"
+        <Button Grid.Row="6" Grid.Column="1"
                 Width="150"
                 HorizontalAlignment="Left"
                 Style="{StaticResource ButtonStyle}"
@@ -130,13 +131,13 @@
                 Command="{Binding CloseCommand}">
         </Button>
 
-        <Button Grid.Row="5" Grid.Column="1"
+        <Button Grid.Row="6" Grid.Column="1"
                 Width="150"
                 HorizontalAlignment="Right"
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
-                Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
+                Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}" >
 
         </Button>

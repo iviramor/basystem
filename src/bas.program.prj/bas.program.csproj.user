@@ -10,6 +10,15 @@
     <Compile Update="Views\AdministratorWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogViews\B5Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DialogViews\BAC3Window.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DialogViews\BADocsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DialogViews\BankClientHistoryWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -46,6 +55,15 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\AdministratorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogViews\B5Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogViews\BAC3Window.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogViews\BADocsWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DialogViews\BankClientHistoryWindow.xaml">

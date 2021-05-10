@@ -1,6 +1,7 @@
 ﻿using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
+using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -64,8 +65,23 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnRemoveCommandExecute(object p)
         {
             if (HasNullObject()) return;
-            MessageBox.Show($"{Bank_Client_Company.Clcomp_name} - Удалено");
-            UpdateDataInTable();
+
+            if (CheckUserPassword())
+            {
+                if(workSpaceWindowViewModel.User.DataBase.Bank_client.Any(u => 
+                                            u.Client_company == Bank_Client_Company.Clcomp_id))
+                {
+                    MessageBox.Show("Данные существуют в другой таблице", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                BankDbContext.Bank_client_company.Remove(Bank_Client_Company);
+                BankDbContext.SaveChanges();
+                MessageBox.Show($"{Bank_Client_Company.Clcomp_name} - Удалено");
+                UpdateDataInTable();
+                return;
+
+            }
         }
 
         #endregion Удалить
@@ -75,6 +91,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnAddCommandExecute(object p)
         {
             if (HasNullObject()) return;
+            BankCompanyViewModel bankCompanyViewModel = new(workSpaceWindowViewModel, "Добавить");
+            bankCompanyViewModel.ShowWindow();
         }
 
         #endregion Добавить
@@ -84,6 +102,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         public override void OnEditCommandExecute(object p)
         {
             if (HasNullObject()) return;
+            BankCompanyViewModel bankCompanyViewModel = new(workSpaceWindowViewModel, Bank_Client_Company);
+            bankCompanyViewModel.ShowWindow();
         }
 
         #endregion Изменить
@@ -92,7 +112,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public override void OnShowCommandExecute(object p)
         {
-            if (HasNullObject()) return;
+            BankCompanyViewModel bankCompanyViewModel = new(Bank_Client_Company, workSpaceWindowViewModel.User.DataBase);
+            bankCompanyViewModel.ShowWindow();
         }
 
         #endregion
