@@ -186,6 +186,14 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         public abstract bool HasNullObject();
 
+        /// <summary>
+        /// Метод обновляет свойство  BankDbContext(= new())
+        /// </summary>
+        public void UpdateDBContext()
+        {
+            BankDbContext = new();
+        }
+
         #endregion
 
 
