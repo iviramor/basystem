@@ -4,11 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:bas.program.Views.DialogViews"
+        xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
         Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="390" Width="600">
+        Height="410" Width="600">
 
     <Window.Resources>
 
@@ -21,6 +22,7 @@
                 <ResourceDictionary Source="../Styles/CommonDatePickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
+            <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
             <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
@@ -143,9 +145,9 @@
                       Grid.Row="3" Grid.Column="1"
                       Margin="10"
                       Height="40"
-                      IsEnabled="{Binding IsEnabled}"
+                      IsEnabled="{Binding IsEnabled, Converter={StaticResource InverseBooleanConverter}}"
                       ItemsSource="{Binding Currency}"
-                      DisplayMemberPath="Status_name"
+                      DisplayMemberPath="Currency_name"
                       SelectedItem="{Binding SelectCurrency}"
                       VerticalAlignment="Bottom">
             </ComboBox>
@@ -169,7 +171,7 @@
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
-                Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
+                Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}" >
 
         </Button>

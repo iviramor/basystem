@@ -3,6 +3,7 @@ using bas.program.Models.Tables.Active;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
+using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,7 +21,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
 
         #region Свойства
 
-        private Bank_active_authorized_capital Bank_active_authorized_capital;
+        private Bank_active_authorized_capital Bank_data;
 
         #endregion Свойства
 
@@ -67,21 +68,14 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
         public override void OnRemoveCommandExecute(object p)
         {
             if (HasNullObject()) return;
-
-            var res = MessageBox.Show("Вместе с Клиентом удалится Его история Кредитов!", "Предупреждение",
-                MessageBoxButton.OKCancel, MessageBoxImage.Warning);
-
-            //if (res == MessageBoxResult.OK)
-            //{
-            //    BankDbContext.Bank_client.Remove(Bank_Client);
-            //    BankDbContext.SaveChanges();
-            //    MessageBox.Show($"{Bank_Client.Client_name} - Удалено");
-            //    UpdateDataInTable();
-            //    return;
-            //}
-
-            return;
-
+            if (CheckUserPassword())
+            {
+                BankDbContext.Bank_active_authorized_capital.Remove(Bank_data);
+                BankDbContext.SaveChanges();
+                MessageBox.Show($"{Bank_data.Aac_name_transactions} - Удалено");
+                UpdateDataInTable();
+                return;
+            }
         }
 
         #endregion Удалить
@@ -90,8 +84,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
 
         public override void OnAddCommandExecute(object p)
         {
-            ClientViewModel clientViewModel = new(workSpaceWindowViewModel, "Добавить");
-            clientViewModel.ShowBankClientWindow();
+            BankActiveAuthorizedCapitalViewModel clientViewModel = new(workSpaceWindowViewModel, "Добавить");
+            clientViewModel.ShowWindow();
         }
 
         #endregion Добавить
@@ -102,8 +96,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
         {
             if (HasNullObject()) return;
 
-            //ClientViewModel clientViewModel = new(workSpaceWindowViewModel, Bank_Client);
-            //clientViewModel.ShowBankClientWindow();
+            BankActiveAuthorizedCapitalViewModel clientViewModel = new(workSpaceWindowViewModel, Bank_data);
+            clientViewModel.ShowWindow();
         }
 
         #endregion Изменить
@@ -114,8 +108,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
         {
             if (HasNullObject()) return;
 
-            //ClientViewModel clientViewModel = new(Bank_Client, workSpaceWindowViewModel.User.DataBase);
-            //clientViewModel.ShowBankClientWindow();
+            BankActiveAuthorizedCapitalViewModel clientViewModel = new(Bank_data, workSpaceWindowViewModel.User.DataBase);
+            clientViewModel.ShowWindow();
         }
 
         #endregion
@@ -124,7 +118,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
 
         public override bool HasNullObject()
         {
-            if (Bank_active_authorized_capital == null)
+            if (Bank_data == null)
             {
                 ShowNullObjectError();
                 return true;
@@ -136,14 +130,14 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
         {
             if (selectedItem == null)
             {
-                Bank_active_authorized_capital = null;
+                Bank_data = null;
                 return;
             }
 
-            Bank_active_authorized_capital = BankDbContext.Bank_active_authorized_capital
+            Bank_data = BankDbContext.Bank_active_authorized_capital
                 .SingleOrDefault(item =>
                             item.Aac_name_transactions == (string)selectedItem[0] &&
-                            item.Aac_credit.ToString() == (string)selectedItem[1]);
+                            item.Aac_describtion_transactions == (string)selectedItem[1]);
         }
 
         public override DataTable GetFullTable()
