@@ -1,4 +1,4 @@
-﻿<Window x:Class="bas.program.Views.DialogViews.BC3Window"
+﻿<Window x:Class="bas.program.Views.DialogViews.BAC3Window"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -96,30 +96,44 @@
 
             <!--#endregion-->
 
-            <!--#region Дебит -->
+            <!--#region Клиент -->
 
             <TextBlock Grid.Row="0" Grid.Column="1"
-                   Text="Дебит"
+                   Text="{Binding TBankClient}"
                    Style="{StaticResource TextBlockStyle}"
                    VerticalAlignment="Top" />
 
 
-            <TextBox Grid.Row="0" Grid.Column="1"
-                     Style="{DynamicResource CommonTextBoxStyle}"
-                     Margin="10"
-                     Height="40"
-                     IsReadOnly="{Binding IsEnabled}"
-                     VerticalAlignment="Bottom"
-                     Text="{Binding Debit}" />
+            <ComboBox Template="{StaticResource ComboBoxTemplate}"
+                      Grid.Row="0" Grid.Column="1"
+                      Margin="10"
+                      Height="40"
+                      IsEnabled="{Binding IsEnabled}"
+                      SelectedItem="{Binding SelectedBankClient}"
+                      ItemsSource="{Binding BankClient}"
+                      VerticalAlignment="Bottom">
+
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock> 
+                            <Run Text="{Binding Path=Client_surname}"/>
+                            <Run Text="{Binding Path=Client_name}"/>
+                            <Run Text="{Binding Path=Client_patronymic}"/>
+                            <Run Text="{Binding Path=Client_login, StringFormat=({0})}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+
+            </ComboBox>
 
             <!--#endregion-->
 
             <!--#region Кредит -->
 
             <TextBlock Grid.Row="1" Grid.Column="1"
-                   Text="Кредит"
-                   Style="{StaticResource TextBlockStyle}"
-                   VerticalAlignment="Top" />
+                       Text="Количество средства"
+                       Style="{StaticResource TextBlockStyle}"
+                       VerticalAlignment="Top" />
 
 
             <TextBox Grid.Row="1" Grid.Column="1"
