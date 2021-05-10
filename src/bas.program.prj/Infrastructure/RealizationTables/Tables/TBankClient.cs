@@ -40,6 +40,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
+
+            UpdateDBContext();
+
             var data = BankDbContext.Bank_client
                 .Include(ac => ac.Bank_client_company)
                 .ToList();

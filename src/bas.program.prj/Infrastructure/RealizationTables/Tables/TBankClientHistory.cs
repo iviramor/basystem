@@ -35,6 +35,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
+
+            UpdateDBContext();
+
             var data = BankDbContext.Bank_client_history
                 .Include(ch => ch.Bank_client)
                 .ThenInclude(ch => ch.Bank_client_company)

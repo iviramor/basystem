@@ -41,6 +41,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
         /// </summary>
         private void SetValuesTable()
         {
+
+            UpdateDBContext();
+
             var data = BankDbContext.Bank_active_authorized_capital
                 .Include(aac => aac.Bank_currency)
                 .ToList();
