@@ -133,7 +133,6 @@
 
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="ViewModels\DialogViewModels\EditorsDialogWindow\Passive\" />
   </ItemGroup>
 
 </Project>
