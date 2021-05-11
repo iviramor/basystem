@@ -284,9 +284,9 @@ namespace bas.program.ViewModels
 
         #region Боковые блоки
 
-        private bool _MathVisibility = true;
+        private bool _MathVisibility = false;
         /// <summary>
-        /// Отображение и скрытие нужных элементов, Используется для статуса "Администратор"
+        /// Видимость Расчетов 
         /// </summary>
         public bool MathVisibility
         {
@@ -295,6 +295,21 @@ namespace bas.program.ViewModels
             {
                 if (Equals(_MathVisibility, value)) return;
                 _MathVisibility = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _FilterVisibility = false;
+        /// <summary>
+        /// Видимость Фильтра
+        /// </summary>
+        public bool FilterVisibility
+        {
+            get => _FilterVisibility;
+            set
+            {
+                if (Equals(_FilterVisibility, value)) return;
+                _FilterVisibility = value;
                 OnPropertyChanged();
             }
         }
@@ -505,6 +520,28 @@ namespace bas.program.ViewModels
 
         #endregion
 
+        #region Фильтры
+
+        public ICommand ShowFilterCommand { get; }
+
+        private bool CanShowFilterCommandExecuted(object p) => true;
+
+        private void OnShowFilterCommandExecute(object p)
+        {
+            FilterVisibility = true;
+        }
+
+        public ICommand CloseFilterCommand { get; }
+
+        private bool CanCloseFilterCommandExecuted(object p) => true;
+
+        private void OnCloseFilterCommandExecute(object p)
+        {
+            FilterVisibility = false;
+        }
+
+        #endregion
+
         #endregion  Работа с таблицей
 
         #endregion Команды
@@ -540,10 +577,14 @@ namespace bas.program.ViewModels
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
             ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
             ShowAdministratorCommand = new ActionCommand(OnShowAdministratorCommandExecute, CanShowAdministratorCommandExecuted);
+            
             ShowMathsCommand = new ActionCommand(OnShowMathsCommandExecute, CanShowMathsCommandExecuted);
             CloseMathsCommand = new ActionCommand(OnCloseMathsCommandExecute, CanCloseMathsCommandExecuted);
+            ShowFilterCommand = new ActionCommand(OnShowFilterCommandExecute, CanShowFilterCommandExecuted);
+            CloseFilterCommand = new ActionCommand(OnCloseFilterCommandExecute, CanCloseFilterCommandExecuted);
 
             #endregion
+
         }
 
         #endregion

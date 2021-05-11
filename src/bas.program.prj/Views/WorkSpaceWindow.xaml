@@ -40,6 +40,23 @@
             <Style TargetType="TextBlock">
                 <Setter Property="FontFamily" Value="Roboto" />
             </Style>
+
+            <Style x:Key="ButtonX" TargetType="{x:Type Button}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border Width="30" Height="30">
+                                <Viewbox Width="30" Height="30">
+                                    <Canvas Width="24" Height="24" x:Name="Canvas">
+                                        <Path Data="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" Fill="{TemplateBinding Foreground}" />
+                                    </Canvas>
+                                </Viewbox>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
         </ResourceDictionary>
     </Window.Resources>
 
@@ -140,9 +157,9 @@
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <ToggleButton Content="Сообщить об ошибке">
-                    
+
                 </ToggleButton>
-                
+
             </StatusBarItem>
 
         </StatusBar>
@@ -347,6 +364,7 @@
                     <Button Grid.Row="0" Grid.Column="0"
                             Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding FilterIsEnabled}"
+                            Command="{Binding ShowFilterCommand}"
                             Style="{StaticResource Button.ToolsBar}">
 
                         <!--#region Внутри кнопки-->
@@ -416,13 +434,64 @@
 
             <!--Visibility="{Binding MathVisibility,
                                  Converter={StaticResource BoolToVis}, 
-                                 FallbackValue=Collapsed}"-->
+                                 FallbackValue=Collapsed}"               FilterVisibility         -->
+
+            <!--#region Левая палочка -->
 
             <Grid DockPanel.Dock="Left"
-                   Width="250"
+                   Width="270"
+                   Background="#FFFAB6"
+                   Visibility="{Binding FilterVisibility,
+                                   Converter={StaticResource BoolToVis},
+                                   FallbackValue=Collapsed}">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Column="1" Grid.Row="1">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="30"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock  FontFamily="Roboto"
+                                FontWeight="Bold"
+                                FontSize="18"
+                                VerticalAlignment="Center"
+                                Text="Фильтр"/>
+
+                    <Button Grid.Column="1"
+                            Cursor="Hand"
+                            Style="{StaticResource ButtonX}"
+                            Command="{Binding CloseFilterCommand}"/>
+
+                </Grid>
+
+
+            </Grid>
+
+            <!--#endregion -->
+
+            <!--#region Правая палочка -->
+
+            <Grid DockPanel.Dock="Right"
+                   Width="270"
                    Background="#FFFAB6"
                    Visibility="{Binding MathVisibility,
-                                   Converter={StaticResource BoolToVis}, 
+                                   Converter={StaticResource BoolToVis},
                                    FallbackValue=Collapsed}">
 
                 <Grid.ColumnDefinitions>
@@ -453,13 +522,16 @@
                                 VerticalAlignment="Center"
                                 Text="Расчеты"/>
 
-                    <Button Grid.Column="1" Background="red"
-                            Command="{Binding CloseMathsCommand}"/>
+                    <Button Grid.Column="1"
+                            Style="{StaticResource ButtonX}"
+                            Command="{Binding CloseMathsCommand}" Cursor="Hand"/>
 
                 </Grid>
-                
-                
+
+
             </Grid>
+
+            <!--#endregion-->
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -488,8 +560,8 @@
                 </DataGrid>
 
             </Grid>
-            
+
         </DockPanel>
-        
+
     </DockPanel>
 </Window>
