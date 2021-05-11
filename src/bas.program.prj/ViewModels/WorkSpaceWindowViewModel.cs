@@ -698,6 +698,9 @@ namespace bas.program.ViewModels
 
             if (_SelectTableItemComboBox == null) return;
 
+            MathVisibility = false;
+            FilterVisibility = false;
+
             Tables.SetTable(_SelectTableItemComboBox);
 
             RemoveFromTabeleCommand = Tables.GetRemoveCommand();
