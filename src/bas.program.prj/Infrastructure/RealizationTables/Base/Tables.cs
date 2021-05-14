@@ -68,6 +68,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_passive_add_capital":
                     Table = new TBankPassiveAddCapital(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+                case "Bank_active_camp":
+                    Table = new TBankActiveCamp(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
 
             }
         }
