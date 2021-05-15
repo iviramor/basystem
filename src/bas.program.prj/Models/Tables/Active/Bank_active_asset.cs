@@ -15,7 +15,7 @@ namespace bas.program.Models.Tables.Active
         public string Ass_name { get; set; }
 
         [DisplayName("Сумма")]
-        public int Ass_cash { get; set; }
+        public decimal Ass_cash { get; set; }
 
         [DisplayName(null)]
         public int Ass_type { get; set; }
