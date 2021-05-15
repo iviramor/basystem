@@ -86,6 +86,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_active_credits_out":
                     Table = new TBankActiveCreditsOut(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+                case "Bank_passive_corres_accouts":
+                    Table = new TBankPassiveCorresAccouts(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
 
             }
         }

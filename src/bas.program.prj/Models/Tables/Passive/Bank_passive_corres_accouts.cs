@@ -17,6 +17,9 @@ namespace bas.program.Models.Tables.Passive
         [DisplayName("Наименование счета")]
         public string Ca_bank_name { get; set; }
 
+        [DisplayName("Описание")]
+        public string Ca_bank_describ { get; set; }
+
         [DisplayName(null)]
         public int Ca_bank_company { get; set; }
 
