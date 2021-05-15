@@ -27,9 +27,9 @@ namespace bas.program.Models.Tables.Active
         public decimal Docs_cash { get; set; }
 
         [DisplayName(null)]
-        public decimal Docs_type { get; set; }
+        public int Docs_type { get; set; }
 
-        [ForeignKey("Acamp_type")]
+        [ForeignKey("Docs_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
 

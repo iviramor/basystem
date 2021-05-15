@@ -92,6 +92,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_passive_credit_debit":
                     Table = new TBankPassiveCreditDebit(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+                case "Bank_active_docs":
+                    Table = new TBankActiveDocs(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
 
             }
         }
