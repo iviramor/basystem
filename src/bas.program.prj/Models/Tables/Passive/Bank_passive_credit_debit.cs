@@ -20,7 +20,7 @@ namespace bas.program.Models.Tables.Passive
         [DisplayName("Описание")]
         public string Cdebit_describ { get; set; }
 
-        [DisplayName("Заемщик депозита")]
+        [DisplayName(null)]
         public int Cdebit_lender { get; set; }
 
         [DisplayName("Сумма кредита")]
