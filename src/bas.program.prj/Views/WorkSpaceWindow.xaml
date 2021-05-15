@@ -149,10 +149,16 @@
                    FontFamily="Roboto"
                    Padding="10, 0, 10, 0"
                    Height="28">
+            <StatusBarItem Margin="0,0,15,0">
+                <TextBlock>
+                    <Run Text="Текущая таблица: "/>
+                    <Run FontWeight="Bold" Text="{Binding NameCurrentTable}"/>
+                </TextBlock>
+            </StatusBarItem>
             <StatusBarItem>
                 <TextBlock>
                     <Run Text="Количество записей: "/>
-                    <Run Text="{Binding CountRows}"/>
+                    <Run FontWeight="Bold" Text="{Binding CountRows}"/>
                 </TextBlock>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
@@ -364,8 +370,7 @@
                     <Button Grid.Row="0" Grid.Column="0"
                             Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding FilterIsEnabled}"
-                            Command="{Binding ShowFilterCommand}"
-                            Style="{StaticResource Button.ToolsBar}">
+                            Command="{Binding ShowFilterCommand}">
 
                         <!--#region Внутри кнопки-->
 
@@ -383,14 +388,23 @@
                                        Text="Фильтр" />
                         </Grid>
 
+                        <Button.Style >
+                            <Style TargetType="Button" BasedOn="{StaticResource Button.ToolsBar}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding FilterVisibility}" Value="True">
+                                        <Setter Property="Background" Value="#F5E932"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
                         <!--#endregion-->
                     </Button>
 
                     <Button Grid.Row="0" Grid.Column="1"
                             Template="{DynamicResource ButtonTemplateToolBar}"
                             IsEnabled="{Binding MathsIsEnabled}"
-                            Command="{Binding ShowMathsCommand}"
-                            Style="{StaticResource Button.ToolsBar}">
+                            Command="{Binding ShowMathsCommand}">
 
                         <!--#region Внутри кнопки-->
 
@@ -409,6 +423,17 @@
                         </Grid>
 
                         <!--#endregion-->
+                        
+                        <Button.Style >
+                            <Style TargetType="Button" BasedOn="{StaticResource Button.ToolsBar}">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding MathVisibility}" Value="True">
+                                        <Setter Property="Background" Value="#F5E932"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+
                     </Button>
 
                     <TextBlock Text="Действия"

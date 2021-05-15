@@ -280,6 +280,23 @@ namespace bas.program.ViewModels
             }
         }
 
+        private string _NameCurrentTable;
+        /// <summary>
+        /// Название таблицы
+        /// В статус баре
+        /// </summary>
+        public string NameCurrentTable
+        {
+            get => _NameCurrentTable;
+            set
+            {
+                if (Equals(_NameCurrentTable, value)) return;
+                _NameCurrentTable = value;
+
+                OnPropertyChanged();
+            }
+        }
+
         #endregion Статус бар
 
         #region Боковые блоки
@@ -714,6 +731,7 @@ namespace bas.program.ViewModels
 
             MainTable = Tables.GetTable();
             CountRows = MainTable.Rows.Count;
+            NameCurrentTable = _SelectTableItemComboBox.Bank_tables_info.Tables_name;
 
         }
 
@@ -722,6 +740,7 @@ namespace bas.program.ViewModels
             SelectedItemMainTable = null;
             MainTable = Tables.GetTable();
             CountRows = MainTable.Rows.Count;
+            NameCurrentTable = _SelectTableItemComboBox.Bank_tables_info.Tables_name;
         }
 
         #endregion Работа с таблицей
