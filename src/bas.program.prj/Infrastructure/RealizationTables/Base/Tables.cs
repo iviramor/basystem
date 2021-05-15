@@ -71,6 +71,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_active_camp":
                     Table = new TBankActiveCamp(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+                case "Bank_active_deposits":
+                    Table = new TBankActiveDeposits(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
 
             }
         }
