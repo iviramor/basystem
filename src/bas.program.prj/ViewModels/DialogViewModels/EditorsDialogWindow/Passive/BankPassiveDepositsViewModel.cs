@@ -110,12 +110,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             : base(workVM, actionName)
         {
 
-            /// Окно с профилями
-            _workSpaceWindowViewModel = workVM;
-
-            /// Заголовок окна с именем
-            Title = $"Добавить";
-
             Currency = workVM.User.DataBase.Bank_currency.ToList();
 
         }
