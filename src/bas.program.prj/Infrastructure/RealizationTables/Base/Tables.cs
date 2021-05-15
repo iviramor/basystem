@@ -80,6 +80,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_passive_deposits":
                     Table = new TBankPassiveDeposits(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+                case "Bank_passive_camp":
+                    Table = new TBankPassiveCamp(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
 
             }
         }
