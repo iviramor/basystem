@@ -17,6 +17,9 @@ namespace bas.program.Models.Tables.Passive
         [DisplayName("Название операции")]
         public string Cdebit_name { get; set; }
 
+        [DisplayName("Описание")]
+        public string Cdebit_describ { get; set; }
+
         [DisplayName("Заемщик депозита")]
         public int Cdebit_lender { get; set; }
 
