@@ -83,6 +83,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_passive_camp":
                     Table = new TBankPassiveCamp(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+                case "Bank_active_credits_out":
+                    Table = new TBankActiveCreditsOut(bank_User_Access, _workSpaceWindowViewModel);
+                    return;
 
             }
         }

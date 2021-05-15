@@ -1,4 +1,5 @@
-﻿using bas.program.ViewModels.Base;
+﻿using bas.program.Infrastructure.Commands;
+using bas.program.ViewModels.Base;
 using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
 using System;
@@ -220,7 +221,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         /// </summary>
         public Bank_client SelectedBankClient
         {
-            get => SelectedBankClient;
+            get => _SelectedBankClient;
             set
             {
                 if (Equals(_SelectedBankClient, value)) return;
@@ -318,6 +319,59 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
 
         #endregion Команды
 
+        #region Конструкторы
+
+        /// <summary>
+        /// Конструктор для редактирования
+        /// </summary>
+        public ABAC3Window(WorkSpaceWindowViewModel workVM)
+        {
+
+            _workSpaceWindowViewModel = workVM;
+
+            /// Контекст базы данных
+            _DataBase = _workSpaceWindowViewModel.User.DataBase;
+
+            UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
+            CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
+
+        }
+
+        /// <summary>
+        /// Конструктор для добавления
+        /// </summary>
+        public ABAC3Window(WorkSpaceWindowViewModel workVM, string actionName)
+        {
+            _NameAction = actionName;
+
+            /// Окно с профилями
+            _workSpaceWindowViewModel = workVM;
+
+            /// Заголовок окна с именем
+            _Title = $"Добавить";
+
+            /// Контекст базы данных
+            _DataBase = _workSpaceWindowViewModel.User.DataBase;
+
+            UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
+            CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
+        }
+
+        /// <summary>
+        /// Конструктор для Просмотра данных
+        /// </summary>
+        public ABAC3Window(BankDbContext dbContext)
+        {
+
+            IsEnabled = true;
+            IsVisibility = false;
+
+            UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
+            CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
+
+        }
+
+        #endregion Конструкторы
 
         public void ShowWindow()
         {
