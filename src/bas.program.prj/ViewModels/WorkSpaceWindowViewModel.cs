@@ -1,18 +1,15 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.Infrastructure.RealizationTables.Base;
 using bas.program.Models;
-using bas.program.Models.Tables;
+using bas.program.Models.Items;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.ViewModels.DialogViewModels;
-using bas.website.Models.Data;
+using bas.program.Views;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -25,7 +22,7 @@ namespace bas.program.ViewModels
 
         #region Действия с окном
 
-        private bool _Visibility = true;
+        private bool _Visibility = false;
         /// <summary>
         /// Отображение и скрытие нужных элементов, Используется для статуса "Администратор"
         /// </summary>
@@ -331,6 +328,69 @@ namespace bas.program.ViewModels
             }
         }
 
+        #region Элементы в фильтре
+
+        private SearchComboBox _SelecedSearchComboBox = null;
+
+        /// <summary>
+        /// Колонки для поиска
+        /// </summary>
+        public SearchComboBox SelecedSearchComboBox
+        {
+            get
+            {
+                return _SelecedSearchComboBox;
+            }
+            set
+            {
+                if (Equals(_SelecedSearchComboBox, value)) return;
+                if (value == null)
+                {
+                    IsEnableSearch = false;
+                }
+                else
+                {
+                    IsEnableSearch = true;
+                }
+                _SelecedSearchComboBox = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private List<SearchComboBox> _ListSearchComboBox;
+
+        /// <summary>
+        /// Лист с колонками для поиска
+        /// </summary>
+        public List<SearchComboBox> ListSearchComboBox
+        {
+            get => _ListSearchComboBox;
+            set
+            {
+                if (Equals(_ListSearchComboBox, value)) return;
+                _ListSearchComboBox = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private bool _IsEnableSearch = false;
+
+        /// <summary>
+        /// Активный фильтр
+        /// </summary>
+        public bool IsEnableSearch
+        {
+            get => _IsEnableSearch;
+            set
+            {
+                if (Equals(_IsEnableSearch, value)) return;
+                _IsEnableSearch = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
+
         #endregion
 
         #endregion Блоки окна
@@ -374,13 +434,14 @@ namespace bas.program.ViewModels
 
         private void OnShowSignOutCommandExecute(object p)
         {
-            var que = MessageBox.Show("Вы точно хотите выйти из Системы?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            var que = MessageBox.Show("Вы точно хотите выйти из Профиля?", "Уведомление", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (que == MessageBoxResult.Yes)
             {
-                User.Session = false;
-                Application.Current.Shutdown();
+                workSpaceWindow.OnClose = true;
+                workSpaceWindow.Close();
+                helloWindowViewModel.Authorization();
+                return;
             }
-
             return;
         }
 
@@ -566,27 +627,26 @@ namespace bas.program.ViewModels
         #region Конструктор
 
         /// <summary>
+        /// ViewModel окна приветствие
+        /// </summary>
+        private HelloWindowViewModel helloWindowViewModel;
+
+        /// <summary>
+        /// Рабочее окно
+        /// </summary>
+        private WorkSpaceWindow workSpaceWindow;
+
+        /// <summary>
         /// Конструктор Главного окна
         /// </summary>
-        public WorkSpaceWindowViewModel()
+        public WorkSpaceWindowViewModel(HelloWindowViewModel helloWindow)
         {
-            AuthorizeHelloWindow();
 
-            if (!User.Session)
-            {
-                Application.Current.Shutdown();
-                return;
-            }
+            helloWindowViewModel = helloWindow;
 
             Tables = new(this);
 
-            SetItemsTable();
-
-            if (_SelectTableItemComboBox == null)
-            {
-                SetNullAccess();
-            }
-
+            SetNullAccess();
 
             #region Команды 
 
@@ -684,7 +744,7 @@ namespace bas.program.ViewModels
             return bank_User_Accesses;
         }
 
-        private void SetItemsTable()
+        public void SetItemsTable()
         {
             /// Таблица с статусом текущего Пользователя системы
             var Statuses = User.User.Bank_user_status;
@@ -710,15 +770,21 @@ namespace bas.program.ViewModels
 
         #region Работа с таблицей
 
+        /// <summary>
+        /// Заполняет рабочее пространство таблицы
+        /// - Команды действий
+        /// - Видимость фильтров/расчетов
+        /// - Статус бар
+        /// </summary>
         private void SetCurrentTable()
         {
 
-            if (_SelectTableItemComboBox == null) return;
+            if (SelectTableItemComboBox == null) return;
 
             MathVisibility = false;
             FilterVisibility = false;
 
-            Tables.SetTable(_SelectTableItemComboBox);
+            Tables.SetTable(SelectTableItemComboBox);
 
             RemoveFromTabeleCommand = Tables.GetRemoveCommand();
             AddFromTabeleCommand = Tables.GetAddCommand();
@@ -735,6 +801,9 @@ namespace bas.program.ViewModels
 
         }
 
+        /// <summary>
+        /// Заполняет новыми данными текущую таблицу
+        /// </summary>
         public void SetUpdateTabel()
         {
             SelectedItemMainTable = null;
@@ -743,29 +812,30 @@ namespace bas.program.ViewModels
             NameCurrentTable = _SelectTableItemComboBox.Bank_tables_info.Tables_name;
         }
 
+        public void SetWorkTableSpace()
+        {
+            Tables = new(this);
+
+            SetItemsTable();
+        }
+
         #endregion Работа с таблицей
+
+        #region Отображение рабочего окна
+
+        public void ShowMainWindow()
+        {
+            workSpaceWindow = new()
+            {
+                DataContext = this
+                
+            };
+            workSpaceWindow.Show();
+        }
 
         #endregion
 
-        #region Диалоговые окна
-
-        #region Окно авторизации
-
-        /// <summary>
-        /// Создает и отображает Окно авторизации
-        /// </summary>
-        /// <returns> 
-        /// True - если пользователь прошел авторизацию
-        /// False - если не закрыл окно и не прошел регистрацию
-        /// </returns>
-        private void AuthorizeHelloWindow()
-        {
-            new HelloWindowViewModel(this).ShowHelloWindow();
-        }
-
-        #endregion Окно авторизации
-
-        #endregion Диалоговые окна
+        #endregion
 
     }
 }

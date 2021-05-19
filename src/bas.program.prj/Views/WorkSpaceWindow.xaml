@@ -10,13 +10,10 @@
         MinHeight="600" MinWidth="1000"
         Height="610" Width="1172"
         WindowState="Maximized"
-        IsEnabled = "{Binding IsEnabled}" 
+        Closing="Window_Closing"
+        IsEnabled = "{Binding IsEnabled}"
         Icon="/Resources/Image/Icons/folder_main.png"
         WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow">
-
-    <Window.DataContext>
-        <viewModels:WorkSpaceWindowViewModel />
-    </Window.DataContext>
 
     <Window.Resources>
 
@@ -60,21 +57,6 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Window.Style>
-        <Style TargetType="Window">
-            <!--#region Показ/скрыть-->
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding Visibility}" Value="True">
-                    <Setter Property="Visibility" Value="Visible" />
-                </DataTrigger>
-                <DataTrigger Binding="{Binding Visibility}" Value="False">
-                    <Setter Property="Visibility" Value="Hidden" />
-                </DataTrigger>
-            </Style.Triggers>
-            <!--#endregion-->
-        </Style>
-    </Window.Style>
-
     <DockPanel>
 
         <Grid DockPanel.Dock="Top">
@@ -104,7 +86,7 @@
                         </MenuItem.Icon>
                     </MenuItem>
 
-                    <MenuItem Header="Выйти из профиля"
+                    <MenuItem Header="Сменить профиль"
                               Height="40"
                               FontFamily="Roboto Medium"
                               Command="{Binding Path=ShowSignOutCommand}">
@@ -492,8 +474,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <TextBlock  FontFamily="Roboto"
-                                FontWeight="Bold"
+                    <TextBlock  FontWeight="Bold"
                                 FontSize="18"
                                 VerticalAlignment="Center"
                                 Text="Фильтр"/>
@@ -503,9 +484,55 @@
                             Style="{StaticResource ButtonX}"
                             Command="{Binding CloseFilterCommand}"/>
 
+
+                    <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <!--#region Поиск -->
+                        
+                        <TextBlock Text="Поиск" 
+                                   Grid.Row="0"
+                                   Grid.ColumnSpan="2"
+                                   FontSize="15"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBlock Text="В" Grid.Row="1" Grid.Column="0"
+                                   VerticalAlignment="Center"/>
+
+                        <ComboBox Grid.Row="1" Grid.Column="1" 
+                                  ItemsSource="{Binding ListSearchComboBox}"
+                                  VerticalAlignment="Center"
+                                  DisplayMemberPath="NameTable"
+                                  SelectedItem="{Binding SelecedSearchComboBox}"
+                                  />
+
+                        <TextBlock Text="ЧТО" Grid.Row="3" Grid.Column="0"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBox Grid.Row="3" Grid.Column="1"
+                                 IsEnabled="{Binding IsEnableSearch}">
+
+                        </TextBox>
+                        
+                        <!--#endregion-->
+
+                        <Rectangle Height="1" 
+                                   Fill="DimGray"
+                                   Grid.Row="4" Grid.ColumnSpan="2"/>
+
+                    </Grid>
                 </Grid>
-
-
             </Grid>
 
             <!--#endregion -->
@@ -589,4 +616,5 @@
         </DockPanel>
 
     </DockPanel>
+    
 </Window>

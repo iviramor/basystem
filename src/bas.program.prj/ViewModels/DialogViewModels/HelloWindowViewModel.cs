@@ -9,12 +9,13 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class HelloWindowViewModel : ViewModel
     {
+
         #region Классы
 
         /// <summary>
         /// ViewModel главного окна
         /// </summary>
-        private readonly WorkSpaceWindowViewModel _workSpaceWindowViewModel;
+        private WorkSpaceWindowViewModel _workSpaceWindowViewModel;
 
         /// <summary>
         /// Окно HelloWindow
@@ -87,8 +88,8 @@ namespace bas.program.ViewModels.DialogViewModels
             if (user != null)
             {
                 _workSpaceWindowViewModel.UserName = $"{user.User_name} {user.User_patronymic}";
+                _workSpaceWindowViewModel.Visibility = true;
                 _workSpaceWindowViewModel.User.User = user;
-                _workSpaceWindowViewModel.User.Session = true;
 
                 var accessTable = user.Bank_user_status.Bank_user_access
                     .Where(us => us.Access_user_status == user.User_status_to_system)
@@ -118,7 +119,10 @@ namespace bas.program.ViewModels.DialogViewModels
                     }
                 }
 
-                _HelloWindow.Close();
+                HiddenHelloWindow();
+                _workSpaceWindowViewModel.SetItemsTable();
+                _workSpaceWindowViewModel.ShowMainWindow();
+
             }
             else MessageBox.Show("Пользователь не найден", "Ошибка входа", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -133,10 +137,16 @@ namespace bas.program.ViewModels.DialogViewModels
         /// Конструктор ViewModel для HelloWindow
         /// </summary>
         /// <param name="workWindow">ViewModel Главного окна</param>
-        public HelloWindowViewModel(WorkSpaceWindowViewModel workWindow)
+        public HelloWindowViewModel()
         {
-            _workSpaceWindowViewModel = workWindow;
+            _HelloWindow = new HelloWindow
+            {
+                DataContext = this,
+            };
+
             SignInCommand = new ActionCommand(OnSignInCommandExecute, CanSignInCommandExecuted);
+
+            ShowHelloWindow();
         }
 
         #endregion
@@ -144,17 +154,43 @@ namespace bas.program.ViewModels.DialogViewModels
         #region Методы класса
 
         /// <summary>
-        /// Отображает окно HelloWindow
+        /// Авторизация,
+        /// Очистка полей и отображения окна
         /// </summary>
-        public void ShowHelloWindow()
+        public void Authorization()
         {
-            _HelloWindow = new HelloWindow
-            {
-                DataContext = this,
-            };
-            _HelloWindow.ShowDialog();
+            Login = "";
+            Password = "";
+            _workSpaceWindowViewModel = new(this);
+            VisHelloWindow();
         }
 
+        /// <summary>
+        /// Скрывает окно Авторизации
+        /// </summary>
+        public void HiddenHelloWindow()
+        {
+            _HelloWindow.Visibility = Visibility.Hidden;
+        }
+
+        /// <summary>
+        /// Отображает окно Авторизации
+        /// </summary>
+        public void VisHelloWindow()
+        {
+            _HelloWindow.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// Выводит окно HelloWindow
+        /// </summary>
+        private void ShowHelloWindow()
+        {
+            _HelloWindow.Show();
+        }
+       
+
         #endregion
+
     }
 }

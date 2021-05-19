@@ -19,9 +19,37 @@ namespace bas.program.Views
     /// </summary>
     public partial class WorkSpaceWindow : Window
     {
+
+        /// <summary>
+        /// Поле отвечает за закрытые окна в виде:
+        /// true - значит окно закроется без отключения программы
+        /// false - с выключением программы
+        /// </summary>
+        public bool OnClose;
+
         public WorkSpaceWindow()
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// при закрытии окна предупреждение
+        /// </summary>
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (OnClose) return;
+
+            var ans = MessageBox.Show("Вы точно хотите выйти из системы?", "Предупреждение", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (ans == MessageBoxResult.Yes)
+            {
+                Application.Current.Shutdown();
+                return;
+            }
+
+            e.Cancel = true;
+
+        }
+
     }
 }
