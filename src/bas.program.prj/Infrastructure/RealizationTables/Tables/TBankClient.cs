@@ -75,7 +75,10 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             if (CheckUserPassword())
             {
 
-                var res = MessageBox.Show("Вместе с Клиентом удалится Его история Кредитов!", "Предупреждение",
+                var res = MessageBox.Show("Вместе с Клиентом удалится: \n" +
+                                           "Его история Кредитов \n" +
+                                           "Корреспондентские счета коммерческих банков, открытые в банке \n" +
+                                           "Информация об компании клиента \n", "Предупреждение",
                 MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
                 if (res == MessageBoxResult.OK)
