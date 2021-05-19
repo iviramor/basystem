@@ -22,6 +22,11 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         /// </summary>
         private readonly Bank_active_authorized_capital _Bank_data;
 
+        public override bool FindMatch(string name)
+        {
+            return _DataBase.Bank_active_authorized_capital.Any(i => i.Aac_name_transactions == name);
+        }
+
         public override void OnUpdateDataCommandExecute(object p)
         {
 

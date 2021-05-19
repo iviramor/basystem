@@ -23,6 +23,11 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         /// </summary>
         private readonly Bank_passive_authorized_capital _Bank_data;
 
+        public override bool FindMatch(string name)
+        {
+            return _DataBase.Bank_passive_authorized_capital.Any(i => i.Apc_name_transactions == name);
+        }
+
         public override void OnUpdateDataCommandExecute(object p)
         {
 

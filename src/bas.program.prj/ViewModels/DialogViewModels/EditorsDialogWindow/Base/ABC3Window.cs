@@ -141,7 +141,12 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
                         MessageBoxImage.Information);
                     return;
                 }
-
+                if (FindMatch(value))
+                {
+                    MessageBox.Show("Найдено совпадение!", "Ошибка ввода", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
                 _Name = value;
                 OnPropertyChanged();
             }
@@ -333,6 +338,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         #endregion Конструкторы
+
+        public abstract bool FindMatch(string name);
 
         public void ShowWindow()
         {
