@@ -160,6 +160,12 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
                     return;
                 }
 
+                if (FindMatch())
+                {
+                    MessageBox.Show("Найдено совпадение по имени!", "Ошибка ввода", MessageBoxButton.OK,
+                        MessageBoxImage.Information);
+                    return;
+                }
                 _Name = value;
                 OnPropertyChanged();
             }
@@ -322,6 +328,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         #endregion Конструкторы
+
+        public abstract bool FindMatch();
 
         public void ShowWindow()
         {
