@@ -9,7 +9,7 @@
         Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
-        Height="590" Width="400">
+        Height="590" Width="400" Icon="/Resources/Image/Icons/file.png">
 
 
     <Window.Resources>
