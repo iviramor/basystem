@@ -162,7 +162,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
 
                 if (FindMatch())
                 {
-                    MessageBox.Show("Найдено совпадение по имени!", "Ошибка ввода", MessageBoxButton.OK,
+                    MessageBox.Show("Найдено совпадение", "Ошибка ввода", MessageBoxButton.OK,
                         MessageBoxImage.Information);
                     return;
                 }

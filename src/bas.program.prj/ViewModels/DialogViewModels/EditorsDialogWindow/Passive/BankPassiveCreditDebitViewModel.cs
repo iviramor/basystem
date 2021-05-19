@@ -18,6 +18,12 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         /// </summary>
         private readonly Bank_passive_credit_debit _Bank_data;
 
+        public override bool FindMatch(string name)
+        {
+            return _DataBase.Bank_passive_credit_debit.Any(i => i.Cdebit_name == name);
+        }
+
+
         public override void OnUpdateDataCommandExecute(object p)
         {
 

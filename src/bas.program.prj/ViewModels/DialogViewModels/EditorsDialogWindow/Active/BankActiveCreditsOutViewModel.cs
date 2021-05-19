@@ -18,6 +18,11 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         /// </summary>
         private readonly Bank_active_credits_out _Bank_data;
 
+        public override bool FindMatch(string name)
+        {
+            return _DataBase.Bank_active_credits_out.Any(i => i.Co_name == name);
+        }
+
         public override void OnUpdateDataCommandExecute(object p)
         {
 
