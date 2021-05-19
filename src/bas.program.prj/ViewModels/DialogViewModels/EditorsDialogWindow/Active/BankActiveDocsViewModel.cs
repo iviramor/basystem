@@ -18,6 +18,14 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         /// </summary>
         private readonly Bank_active_docs _Bank_data;
 
+        /// <summary>
+        /// Ищет совпадение по имени в базе данных таблицы
+        /// </summary>
+        /// <returns></returns>
+        public override bool FindMatch(string name)
+        {
+            return _DataBase.Bank_active_docs.Any(i => i.Docs_name == name);
+        }
         public override void OnUpdateDataCommandExecute(object p)
         {
 
