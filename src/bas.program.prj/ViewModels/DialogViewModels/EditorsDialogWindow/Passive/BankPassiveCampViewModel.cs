@@ -18,9 +18,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         /// </summary>
         private readonly Bank_passive_camp _Bank_data;
 
-        public override bool FindMatch()
+        public override bool FindMatch(string name)
         {
-            return _DataBase.Bank_passive_camp.Any(i => i.Pcamp_name == Name);
+            return _DataBase.Bank_passive_camp.Any(i => i.Pcamp_name == name);
         }
 
         public override void OnUpdateDataCommandExecute(object p)

@@ -22,9 +22,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         /// </summary>
         private readonly Bank_active_camp _Bank_data;
 
-        public override bool FindMatch()
+        public override bool FindMatch(string name)
         {
-            return _DataBase.Bank_active_camp.Any(i => i.Acamp_name == Name);
+            return _DataBase.Bank_active_camp.Any(i => i.Acamp_name == name);
         }
 
         public override void OnUpdateDataCommandExecute(object p)

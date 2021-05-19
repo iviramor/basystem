@@ -75,9 +75,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             _BankWindow.Close();
         }
 
-        public override bool FindMatch()
+        public override bool FindMatch(string name)
         {
-            return _DataBase.Bank_passive_deposits.Any(i => i.Pas_deposit_name == Name);
+            return _DataBase.Bank_passive_deposits.Any(i => i.Pas_deposit_name == name);
         }
 
         #region Конструкторы
