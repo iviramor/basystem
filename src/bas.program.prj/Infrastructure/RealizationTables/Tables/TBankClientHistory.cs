@@ -12,7 +12,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 {
     public class TBankClientHistory : ATable
     {
-
         #region Свойства
 
         private Bank_client_history Bank_Client_History;
@@ -35,7 +34,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
-
             UpdateDBContext();
 
             var data = BankDbContext.Bank_client_history
@@ -62,7 +60,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                     );
         }
 
-        #endregion
+        #endregion Работа с таблицей
 
         #endregion Методы
 
@@ -84,7 +82,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                 MessageBox.Show($"Успех", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
                 return;
             }
-
         }
 
         #endregion Удалить
@@ -118,9 +115,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             new BankClientHistoryViewModel(Bank_Client_History).ShowBankClientWindow();
         }
 
-        #endregion
+        #endregion Просмотр
 
-        #endregion
+        #endregion Команды
 
         public override void SetSelected(DataRowView selectedItem)
         {
@@ -156,8 +153,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public TBankClientHistory(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
-
         }
-
     }
 }

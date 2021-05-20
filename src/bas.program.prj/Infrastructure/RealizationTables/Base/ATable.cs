@@ -111,6 +111,9 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         #endregion Просмотр
 
+        /// <summary>
+        /// Отображает сообщение об не выбранном элементе
+        /// </summary>
         public static void ShowNullObjectError()
         {
             MessageBox.Show("Выберите элемент в таблице!", "Предупреждение", MessageBoxButton.OK,
@@ -194,6 +197,11 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         #region Дополнительные методы
 
+        /// <summary>
+        /// Проверяет является ли объект нулевым.
+        /// Выкидывает ошибку в MessageBox
+        /// </summary>
+        /// <returns></returns>
         public abstract bool HasNullObject();
 
         /// <summary>

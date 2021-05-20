@@ -9,7 +9,8 @@ using System.Windows.Input;
 namespace bas.program.Infrastructure.RealizationTables.Base
 {
     /// <summary>
-    /// Промежуточный класс между главным окном и таблицами(ATabel)
+    /// Промежуточный класс между главным окном и таблицами(ATable)
+    /// Отвечает за сбор и передачу данных
     /// </summary>
     public class Tables
     {

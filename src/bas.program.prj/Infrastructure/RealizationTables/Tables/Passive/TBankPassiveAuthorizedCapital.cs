@@ -4,19 +4,14 @@ using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables.Passive
 {
     public class TBankPassiveAuthorizedCapital : ATable
     {
-
         #region Свойства
 
         private Bank_passive_authorized_capital Bank_data;
@@ -39,7 +34,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Passive
         /// </summary>
         private void SetValuesTable()
         {
-
             UpdateDBContext();
 
             var data = BankDbContext.Bank_passive_authorized_capital
@@ -58,7 +52,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Passive
                     );
         }
 
-        #endregion
+        #endregion Работа с таблицей
 
         #endregion Методы
 
@@ -80,7 +74,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Passive
             }
 
             return;
-
         }
 
         #endregion Удалить
@@ -117,9 +110,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Passive
             clientViewModel.ShowWindow();
         }
 
-        #endregion
+        #endregion Просмотр
 
-        #endregion
+        #endregion Команды
 
         public override void SetSelected(DataRowView selectedItem)
         {
@@ -153,8 +146,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Passive
 
         public TBankPassiveAuthorizedCapital(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
-
         }
-    
     }
 }

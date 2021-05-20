@@ -4,19 +4,14 @@ using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables.Active
 {
     public class TBankActiveCreditsOut : ATable
     {
-
         #region Свойства
 
         private Bank_active_credits_out Bank_data;
@@ -39,7 +34,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
         /// </summary>
         private void SetValuesTable()
         {
-
             UpdateDBContext();
 
             var data = BankDbContext.Bank_active_credits_out
@@ -59,7 +53,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
                     );
         }
 
-        #endregion
+        #endregion Работа с таблицей
 
         #endregion Методы
 
@@ -114,9 +108,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
             clientViewModel.ShowWindow();
         }
 
-        #endregion
+        #endregion Просмотр
 
-        #endregion
+        #endregion Команды
 
         public override bool HasNullObject()
         {
@@ -139,7 +133,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
             Bank_data = BankDbContext.Bank_active_credits_out
                 .SingleOrDefault(item =>
                             item.Co_name == (string)selectedItem[0] &&
-                            item.Co_describ ==(string)selectedItem[1]);
+                            item.Co_describ == (string)selectedItem[1]);
         }
 
         public override DataTable GetFullTable()
@@ -150,8 +144,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables.Active
 
         public TBankActiveCreditsOut(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
-
         }
-
     }
 }

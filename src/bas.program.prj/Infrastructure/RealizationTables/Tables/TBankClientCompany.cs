@@ -3,21 +3,14 @@ using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
 using bas.website.Models.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables
 {
     public class TBankClientCompany : ATable
     {
-
         #region Свойства
 
         private Bank_client_company Bank_Client_Company;
@@ -40,7 +33,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
-
             UpdateDBContext();
 
             var data = BankDbContext.Bank_client_company
@@ -57,7 +49,7 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                     );
         }
 
-        #endregion
+        #endregion Работа с таблицей
 
         #endregion Методы
 
@@ -71,8 +63,8 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
             if (CheckUserPassword())
             {
-                if(workSpaceWindowViewModel.User.DataBase.Bank_client.Any(u => 
-                                            u.Client_company == Bank_Client_Company.Clcomp_id))
+                if (workSpaceWindowViewModel.User.DataBase.Bank_client.Any(u =>
+                                             u.Client_company == Bank_Client_Company.Clcomp_id))
                 {
                     MessageBox.Show("Данные существуют в другой таблице", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
@@ -83,7 +75,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                 MessageBox.Show($"{Bank_Client_Company.Clcomp_name} - Удалено");
                 UpdateDataInTable();
                 return;
-
             }
         }
 
@@ -118,9 +109,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             bankCompanyViewModel.ShowWindow();
         }
 
-        #endregion
+        #endregion Просмотр
 
-        #endregion
+        #endregion Команды
 
         public override void SetSelected(DataRowView selectedItem)
         {
@@ -154,8 +145,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public TBankClientCompany(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
-
         }
-
     }
 }

@@ -4,20 +4,14 @@ using bas.program.ViewModels;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.Infrastructure.RealizationTables.Tables
 {
     public class TBankClient : ATable
     {
-
         #region Свойства
 
         private Bank_client Bank_Client;
@@ -40,7 +34,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
         /// </summary>
         private void SetValuesTable()
         {
-
             UpdateDBContext();
 
             var data = BankDbContext.Bank_client
@@ -55,12 +48,12 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
                     item.Client_surname,
                     item.Client_patronymic,
                     (item.Client_sex) ? "Мужской" : "Женский",
-                    (item.Bank_client_company == null) ? "Нет компании": item.Bank_client_company.Clcomp_name,
+                    (item.Bank_client_company == null) ? "Нет компании" : item.Bank_client_company.Clcomp_name,
                     item.Client_login
                     );
         }
 
-        #endregion
+        #endregion Работа с таблицей
 
         #endregion Методы
 
@@ -74,7 +67,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
             if (CheckUserPassword())
             {
-
                 var res = MessageBox.Show("Вместе с Клиентом удалится: \n" +
                                            "Его история Кредитов \n" +
                                            "Корреспондентские счета коммерческих банков, открытые в банке \n" +
@@ -92,7 +84,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
                 return;
             }
-
         }
 
         #endregion Удалить
@@ -129,9 +120,9 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
             clientViewModel.ShowBankClientWindow();
         }
 
-        #endregion
+        #endregion Просмотр
 
-        #endregion
+        #endregion Команды
 
         public override bool HasNullObject()
         {
@@ -165,9 +156,6 @@ namespace bas.program.Infrastructure.RealizationTables.Tables
 
         public TBankClient(Bank_user_access bank_User_Access, WorkSpaceWindowViewModel workVM) : base(bank_User_Access, workVM)
         {
-
         }
-
-
     }
 }
