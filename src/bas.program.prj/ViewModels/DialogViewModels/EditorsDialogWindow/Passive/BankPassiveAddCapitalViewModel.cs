@@ -1,28 +1,13 @@
-﻿using bas.program.Infrastructure.Commands;
-using bas.program.Infrastructure.RealizationTables.Base;
-using bas.program.Models.Tables.Passive;
-using bas.program.Models.Tables.UserTables;
-using bas.program.ViewModels;
-using bas.program.ViewModels.Base;
+﻿using bas.program.Models.Tables.Passive;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base;
-using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive;
-using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
 {
-    class BankPassiveAddCapitalViewModel : ABC3Window
+    internal class BankPassiveAddCapitalViewModel : ABC3Window
     {
-
         /// <summary>
         /// Данные для изменения
         /// </summary>
@@ -35,7 +20,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
 
         public override void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_passive_add_capital.SingleOrDefault(d => d.Addc_id == _Bank_data.Addc_id);
 
             #region Смена изменений в сессии пользователя
@@ -79,13 +63,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             NewData.Addc_credit = Credit;
             NewData.Addc_type = SelectCurrency.Currency_id;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_passive_add_capital.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -100,7 +86,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveAddCapitalViewModel(WorkSpaceWindowViewModel workVM, Bank_passive_add_capital bank_data)
             : base(workVM)
         {
-
             /// Заголовок окна с именем
             Title = $"Изменить: {bank_data.Addc_name}";
 
@@ -119,7 +104,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Addc_type);
 
             #endregion Значение свойство
-
         }
 
         /// <summary>
@@ -128,9 +112,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveAddCapitalViewModel(WorkSpaceWindowViewModel workVM, string actionName)
             : base(workVM, actionName)
         {
-
             Currency = workVM.User.DataBase.Bank_currency.ToList();
-
         }
 
         /// <summary>
@@ -139,7 +121,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveAddCapitalViewModel(Bank_passive_add_capital bank_data, BankDbContext dbContext)
             : base(dbContext)
         {
-
             /// Заголовок окна с именем
             Title = $"Просмотр: {bank_data.Addc_name} ";
 
@@ -158,10 +139,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Addc_type);
 
             #endregion Значение свойство
-
         }
 
         #endregion Конструкторы
-
     }
 }

@@ -2,11 +2,7 @@
 using bas.program.ViewModels.Base;
 using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,7 +10,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 {
     public class BankCurrencyViewModel : ViewModel
     {
-
         #region Поля и свойства
 
         #region Классы
@@ -44,6 +39,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Видимость элементов
 
         private string _Title;
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -62,6 +58,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _NameAction = "Изменить";
+
         /// <summary>
         /// Название операции
         /// </summary>
@@ -77,6 +74,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _IsEnabled = false;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -92,6 +90,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _IsVisibility = true;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -111,6 +110,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Свойства элементов
 
         public string _Name;
+
         /// <summary>
         /// Наименование
         /// </summary>
@@ -136,6 +136,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private decimal _Dollar;
+
         /// <summary>
         /// В долларах
         /// </summary>
@@ -151,6 +152,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private decimal _Ruble;
+
         /// <summary>
         /// Тип компании
         /// </summary>
@@ -167,6 +169,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private decimal _Euro;
+
         /// <summary>
         /// Адрес
         /// </summary>
@@ -181,7 +184,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        #endregion Свойства пользователя
+        #endregion Свойства элементов
 
         #endregion Поля и свойства
 
@@ -200,7 +203,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         private void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_currency.SingleOrDefault(d => d.Currency_id == _Bank_data.Currency_id);
 
             #region Смена изменений в сессии пользователя
@@ -232,7 +234,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             /// Новые данные
             Bank_currency NewData = new();
 
-            #region Смена изменений 
+            #region Смена изменений
 
             if (_Name == null)
             {
@@ -245,13 +247,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             NewData.Currency_rub = _Ruble;
             NewData.Currency_euro = _Euro;
 
-            #endregion 
+            #endregion Смена изменений
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_currency.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -277,7 +281,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             _BankWindow.Close();
         }
 
-        #endregion
+        #endregion Закрыть окно
 
         #endregion Команды
 
@@ -310,7 +314,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
             CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
-
         }
 
         /// <summary>
@@ -338,7 +341,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// </summary>
         public BankCurrencyViewModel(Bank_currency bank_data)
         {
-
             /// Заголовок окна с именем
             _Title = $"Просмотр: {bank_data.Currency_name} ";
 
@@ -363,6 +365,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         #endregion Конструкторы
 
+        /// <summary>
+        /// Отображения окна
+        /// </summary>
         public void ShowWindow()
         {
             _BankWindow = new BankCurrencyWindow()
@@ -371,6 +376,5 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             };
             _BankWindow.ShowDialog();
         }
-
     }
 }

@@ -5,7 +5,6 @@ using bas.program.ViewModels.Messages;
 using bas.program.Views;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
@@ -16,7 +15,6 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class AdministratorViewModel : ViewModel
     {
-
         #region Классы
 
         /// <summary>
@@ -34,11 +32,12 @@ namespace bas.program.ViewModels.DialogViewModels
         /// </summary>
         private readonly BankDbContext _DataBase;
 
-        #endregion
+        #endregion Классы
 
         #region Доступ к элементам окна
 
         private bool _AddIsEnabled = true;
+
         /// <summary>
         /// Доступ к добавлению
         /// </summary>
@@ -54,6 +53,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _EditIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -69,6 +69,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _DelIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -84,6 +85,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _AccessTableIsEnabled = true;
+
         /// <summary>
         /// Доступ к Таблицам доступа
         /// </summary>
@@ -98,7 +100,7 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Доступ к элементам окна
 
         #region Свойства
 
@@ -121,6 +123,7 @@ namespace bas.program.ViewModels.DialogViewModels
         #region Свойства элементов
 
         private DataTable _ProfTable = new();
+
         /// <summary>
         /// Таблица с должностями
         /// </summary>
@@ -138,23 +141,27 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Свойства элементов
 
-
-        #endregion
+        #endregion Свойства
 
         #region Команды
 
         #region Выйти из окна Админ
 
+        /// <summary>
+        /// Команда закрывает окно
+        /// </summary>
         public ICommand CloseAdminCommand { get; }
+
         private bool CanCloseAdminCommandExecuted(object p) => true;
+
         private void OnNameCloseAdminCommandExecute(object p)
         {
             _administratorWindow.Close();
         }
 
-        #endregion
+        #endregion Выйти из окна Админ
 
         #region Изменить Должность
 
@@ -176,7 +183,7 @@ namespace bas.program.ViewModels.DialogViewModels
             }
 
             /// Поиск совпадения
-            Bank_user_status user_Status = 
+            Bank_user_status user_Status =
                 _DataBase.Bank_user_status
                    .SingleOrDefault(st => st.Status_name == (string)_SelectedItem[0] &
                                           st.Status_describ == (string)_SelectedItem[1]);
@@ -187,28 +194,32 @@ namespace bas.program.ViewModels.DialogViewModels
             UpdateProfTable();
         }
 
-        #endregion
+        #endregion Изменить Должность
 
         #region Добавить Должность
 
+        /// <summary>
+        /// Команда на открытие окна добавления 
+        /// </summary>
         public ICommand AddProfCommand { get; }
 
         private bool CanAddProfCommandExecuted(object p) => true;
 
         private void OnAddProfCommandExecute(object p)
         {
-
             /// Передача данных Профессии в ProfWindowViewModel
             var profile = new ProfWindowViewModel(ref _workSpaceWindowViewModel);
             profile.ShowProfWindow();
             UpdateProfTable();
-
         }
 
-        #endregion
+        #endregion Добавить Должность
 
         #region Открыть Доступы
 
+        /// <summary>
+        /// Отображение выделенного элемента 
+        /// </summary>
         public ICommand ShowAccessCommand { get; }
 
         private bool CanShowAccessCommandExecuted(object p) => true;
@@ -238,10 +249,9 @@ namespace bas.program.ViewModels.DialogViewModels
 
             new AccessViewModel(user_Status, _workSpaceWindowViewModel).ShowAccessWindow();
             UpdateProfTable();
-
         }
 
-        #endregion
+        #endregion Открыть Доступы
 
         #region Удаление Должность
 
@@ -254,7 +264,6 @@ namespace bas.program.ViewModels.DialogViewModels
 
         private void OnRemoveProfCommandExecute(object p)
         {
-
             /// Проверка выделен ли ряд в таблице
             if (_SelectedItem == null)
             {
@@ -297,7 +306,6 @@ namespace bas.program.ViewModels.DialogViewModels
             /// Сравнивает введенный пароль с паролем пользователя
             else if (password == _workSpaceWindowViewModel.User.User.User_password)
             {
-
                 /// Удаление Должности
                 _DataBase.Bank_user_status.Remove(user_Status);
                 _DataBase.SaveChanges();
@@ -315,7 +323,7 @@ namespace bas.program.ViewModels.DialogViewModels
             return;
         }
 
-        #endregion
+        #endregion Удаление Должность
 
         #region Просмотр Должность
 
@@ -335,18 +343,16 @@ namespace bas.program.ViewModels.DialogViewModels
             /// Передача данных Профессии в ProfWindowViewModel
             var profile = new ProfWindowViewModel(user_Status);
             profile.ShowProfWindow();
-
         }
 
-        #endregion
+        #endregion Просмотр Должность
 
-        #endregion
+        #endregion Команды
 
         #region Конструкторы
 
         public AdministratorViewModel(WorkSpaceWindowViewModel workVM)
         {
-
             _workSpaceWindowViewModel = workVM;
 
             _DataBase = workVM.User.DataBase;
@@ -371,10 +377,10 @@ namespace bas.program.ViewModels.DialogViewModels
 
             /// Поиск Bank_user_status
             var tableAccess = workVM.User.User.Bank_user_status.Bank_user_access
-                    .SingleOrDefault(ua => 
+                    .SingleOrDefault(ua =>
                     /// Сравнение с выданной таблицей доступных таблиц в системе
                     ua.Access_name_table == tableInfos
-                            .SingleOrDefault(ti => 
+                            .SingleOrDefault(ti =>
                                     ti.Tables_key == "Bank_user_status").Tables_id);
 
             if (workVM.User.User.Bank_user_status.Status_full_access) return;
@@ -390,7 +396,7 @@ namespace bas.program.ViewModels.DialogViewModels
                 _DelIsEnabled = false;
             }
 
-            #endregion
+            #endregion Работа с Bank_user_status, блокировка элементов
 
             #region Работа с Bank_user_access, блокировка элементов
 
@@ -404,15 +410,12 @@ namespace bas.program.ViewModels.DialogViewModels
 
             if (tableAccess == null) _AccessTableIsEnabled = false;
 
-            #endregion
+            #endregion Работа с Bank_user_access, блокировка элементов
 
-
-
-            #endregion
-
+            #endregion Доступ к элементам
         }
 
-        #endregion
+        #endregion Конструкторы
 
         #region Методы класса
 
@@ -427,7 +430,6 @@ namespace bas.program.ViewModels.DialogViewModels
             {
                 if (prop.DisplayName != null)
                     _ProfTable.Columns.Add(prop.DisplayName);
-                    
             }
         }
 
@@ -446,12 +448,10 @@ namespace bas.program.ViewModels.DialogViewModels
                 _ProfTable.Rows.Add(
                     item.Status_name,
                     item.Status_describ,
-                    (item.Status_full_access) ? "Полный доступ" : 
+                    (item.Status_full_access) ? "Полный доступ" :
                         (item.Bank_user_access.Count == 0) ? "Нет доступа" : item.Bank_user_access.Count
                     );
-
         }
-
 
         /// <summary>
         /// Показывает окно Администратора
@@ -465,7 +465,6 @@ namespace bas.program.ViewModels.DialogViewModels
             _administratorWindow.ShowDialog();
         }
 
-        #endregion
-    
+        #endregion Методы класса
     }
 }

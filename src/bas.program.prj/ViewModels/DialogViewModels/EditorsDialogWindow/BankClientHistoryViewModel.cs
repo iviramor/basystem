@@ -6,8 +6,6 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,7 +13,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 {
     public class BankClientHistoryViewModel : ViewModel
     {
-
         #region Поля и свойства
 
         #region Классы
@@ -45,6 +42,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Видимость элементов
 
         private string _TitleName;
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -63,6 +61,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _NameAction = "Изменить";
+
         /// <summary>
         /// Название операции
         /// </summary>
@@ -78,6 +77,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _IsEnabled = true;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -99,6 +99,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Лист с клиентами
 
         public string _DisplayBankClient;
+
         /// <summary>
         /// Отображение элемента
         /// </summary>
@@ -145,7 +146,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        #endregion
+        #endregion Лист с клиентами
 
         #region Лист с валютой
 
@@ -181,7 +182,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        #endregion
+        #endregion Лист с валютой
 
         #region Статус кредита
 
@@ -217,13 +218,14 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        #endregion
+        #endregion Статус кредита
 
-        #endregion Лист с Компаниями
+        #endregion Листы окна
 
         #region Свойства элементов
 
         public Guid _Numb;
+
         /// <summary>
         /// Номер кредита
         /// </summary>
@@ -279,6 +281,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private DateTime _StartDate;
+
         /// <summary>
         /// Дата начала
         /// </summary>
@@ -294,6 +297,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private decimal _PaidOff;
+
         /// <summary>
         /// Оплачено
         /// </summary>
@@ -309,6 +313,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private decimal _Paid;
+
         /// <summary>
         /// Долг
         /// </summary>
@@ -324,6 +329,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private int _CountMonths;
+
         /// <summary>
         /// Срок
         /// </summary>
@@ -338,7 +344,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        #endregion Свойства пользователя
+        #endregion Свойства элементов
 
         #endregion Поля и свойства
 
@@ -357,7 +363,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         private void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_client_history.SingleOrDefault(d => d.Clihis_id == _Bank_client_history.Clihis_id);
 
             #region Смена изменений в сессии пользователя
@@ -410,9 +415,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
                 return;
             }
 
-            #endregion
+            #endregion Проверка полей
 
-            #region Заполнение 
+            #region Заполнение
 
             NewHist.Clihis_numb = Guid.NewGuid();
             NewHist.Clihis_client = _SelectedBankClient.Client_id;
@@ -425,9 +430,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             NewHist.Clihis_status = _SelectedBankStatusHistory.Status_id;
             NewHist.Clihis_cur = _SelectedBankCurrency.Currency_id;
 
-            #endregion
+            #endregion Заполнение
 
-            #endregion
+            #endregion Смена изменений в сессии пользователя
 
             /// Добавление в базу данных нового пользователя
             _DataBase.Bank_client_history.Add(NewHist);
@@ -456,7 +461,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             _BankClientHistoryWindow.Close();
         }
 
-        #endregion
+        #endregion Закрыть окно
 
         #endregion Команды
 
@@ -469,7 +474,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <param name="bank_Client_History">Объект Bank_client_history заполненный данными из выбранного(Selected) в таблице</param>
         public BankClientHistoryViewModel(WorkSpaceWindowViewModel workVM, Bank_client_history bank_Client_History)
         {
-
             TitleName = $"Изменить: {bank_Client_History.Clihis_numb}";
             NameAction = "Изменить";
 
@@ -497,7 +501,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             PaidOff = bank_Client_History.Clihis_paid_off;
             CountMonths = bank_Client_History.Clihis_ddl_date;
 
-            #endregion
+            #endregion Заполнение полей
 
             CloseWindowCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
@@ -510,7 +514,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <param name="nameAction">Название операции</param>
         public BankClientHistoryViewModel(WorkSpaceWindowViewModel workVM, string nameAction)
         {
-
             TitleName = nameAction;
             NameAction = nameAction;
 
@@ -527,7 +530,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
             StartDate = DateTime.Now;
 
-            #endregion
+            #endregion Заполнение полей
 
             CloseWindowCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
@@ -539,7 +542,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <param name="bank_Client_History"></param>
         public BankClientHistoryViewModel(Bank_client_history bank_Client_History)
         {
-
             TitleName = $"Просмотр: {bank_Client_History.Clihis_numb}";
 
             #region Заполнение полей
@@ -563,7 +565,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             PaidOff = bank_Client_History.Clihis_paid_off;
             CountMonths = bank_Client_History.Clihis_ddl_date;
 
-            #endregion
+            #endregion Заполнение полей
 
             IsEnabled = false;
 
@@ -571,8 +573,11 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
         }
 
-        #endregion
+        #endregion Конструкторы
 
+        /// <summary>
+        /// Отображения окна
+        /// </summary>
         public void ShowBankClientWindow()
         {
             _BankClientHistoryWindow = new BankClientHistoryWindow()
@@ -581,6 +586,5 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             };
             _BankClientHistoryWindow.ShowDialog();
         }
-
     }
 }

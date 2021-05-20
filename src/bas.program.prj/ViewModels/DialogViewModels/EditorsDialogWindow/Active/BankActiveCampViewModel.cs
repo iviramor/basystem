@@ -1,22 +1,13 @@
-﻿using bas.program.Infrastructure.Commands;
-using bas.program.Models.Tables.Active;
-using bas.program.ViewModels.Base;
+﻿using bas.program.Models.Tables.Active;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base;
-using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
 {
     public class BankActiveCampViewModel : AB5Window
     {
-
         /// <summary>
         /// Данные для изменения
         /// </summary>
@@ -29,7 +20,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
 
         public override void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_active_camp.SingleOrDefault(d => d.Acamp_id == _Bank_data.Acamp_id);
 
             #region Смена изменений в сессии пользователя
@@ -68,13 +58,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             NewData.Acamp_quantity = Summa;
             NewData.Acamp_type = SelectCurrency.Currency_id;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_active_camp.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -110,8 +102,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Acamp_type);
 
             #endregion Значение свойство
-
-
         }
 
         /// <summary>
@@ -120,9 +110,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveCampViewModel(WorkSpaceWindowViewModel workVM, string actionName)
             : base(workVM, actionName)
         {
-
             Currency = workVM.User.DataBase.Bank_currency.ToList();
-
         }
 
         /// <summary>
@@ -131,7 +119,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveCampViewModel(Bank_active_camp bank_data, BankDbContext dbContext)
             : base(dbContext)
         {
-
             /// Заголовок окна с именем
             Title = $"Просмотр: {bank_data.Acamp_name} ";
 
@@ -148,10 +135,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Acamp_type);
 
             #endregion Значение свойство
-
         }
 
         #endregion Конструкторы
-    
     }
 }

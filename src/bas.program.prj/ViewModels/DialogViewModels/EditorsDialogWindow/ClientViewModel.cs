@@ -1,13 +1,10 @@
 ﻿using bas.program.Infrastructure.Commands;
-using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,7 +12,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 {
     public class ClientViewModel : ViewModel
     {
-
         #region Поля и свойства
 
         #region Классы
@@ -45,6 +41,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Видимость элементов
 
         private string _TitleName;
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -63,6 +60,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _NameAction = "Изменить";
+
         /// <summary>
         /// Название операции
         /// </summary>
@@ -78,6 +76,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _IsEnabled = true;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -133,6 +132,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Свойства пользователя
 
         public string _Name;
+
         /// <summary>
         /// Имя клиента
         /// </summary>
@@ -158,6 +158,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Surname;
+
         /// <summary>
         /// Фамилия клиента
         /// </summary>
@@ -183,6 +184,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Patronymic;
+
         /// <summary>
         /// Отчество клиента
         /// </summary>
@@ -208,6 +210,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Login;
+
         /// <summary>
         /// Логин клиента
         /// </summary>
@@ -233,6 +236,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Password;
+
         /// <summary>
         /// Пароль клиента
         /// </summary>
@@ -261,6 +265,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _Sex;
+
         /// <summary>
         /// Пол клиента
         /// </summary>
@@ -276,6 +281,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private DateTime _Register_data;
+
         /// <summary>
         /// Дата регистрации клиента
         /// </summary>
@@ -309,7 +315,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         private void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_client.SingleOrDefault(d => d.Client_id == _Bank_Client.Client_id);
 
             #region Смена изменений в сессии пользователя
@@ -367,8 +372,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             NewClient.Client_sex = _Sex;
             NewClient.Client_register_data = DateTime.Now;
 
+            #endregion Смена изменений в сессии пользователя
 
-            #endregion 
+
 
             /// Добавление в базу данных нового пользователя
             _DataBase.Bank_client.Add(NewClient);
@@ -400,7 +406,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             _BunkClientWindow.Close();
         }
 
-        #endregion 
+        #endregion Закрыть окно
+
+
 
         #endregion Команды
 
@@ -413,7 +421,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// <param name="bank_Client">Объект Bank_Client заполненный данными из выбранного(Selected) в таблице</param>
         public ClientViewModel(WorkSpaceWindowViewModel workVM, Bank_client bank_Client)
         {
-
             _workSpaceWindowViewModel = workVM;
 
             /// Заголовок окна с именем
@@ -480,7 +487,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// </summary>
         public ClientViewModel(Bank_client bank_Client, BankDbContext dbContext)
         {
-
             /// Заголовок окна с именем
             _TitleName = $"Просмотр: {bank_Client.Client_name} {bank_Client.Client_patronymic}";
 
@@ -514,6 +520,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         #endregion Конструкторы
 
+        /// <summary>
+        /// Отображения окна
+        /// </summary>
         public void ShowBankClientWindow()
         {
             _BunkClientWindow = new BunkClientWindow()
@@ -522,6 +531,5 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             };
             _BunkClientWindow.ShowDialog();
         }
-
     }
 }

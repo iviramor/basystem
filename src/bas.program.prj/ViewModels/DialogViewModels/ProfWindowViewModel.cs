@@ -2,12 +2,7 @@
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views;
-using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -15,7 +10,6 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class ProfWindowViewModel : ViewModel
     {
-
         #region Свойства
 
         #region Класс
@@ -32,11 +26,12 @@ namespace bas.program.ViewModels.DialogViewModels
         /// </summary>
         private readonly WorkSpaceWindowViewModel _WorkSpaceWindowViewModel;
 
-        #endregion
+        #endregion Класс
 
         #region Свойства окна
 
         private string _NameAction;
+
         /// <summary>
         /// Название действия окна
         /// </summary>
@@ -55,6 +50,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private string _Title;
+
         /// <summary>
         /// Название действия окна
         /// </summary>
@@ -73,6 +69,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _IsVisibility = true;
+
         /// <summary>
         /// Видимость элементов (Полный доступ)
         /// </summary>
@@ -106,7 +103,7 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Свойства окна
 
         #region Свойства элементов
 
@@ -114,6 +111,7 @@ namespace bas.program.ViewModels.DialogViewModels
         /// Название статуса(Должности)
         /// </summary>
         private string _ProfName;
+
         public string ProfName
         {
             get
@@ -151,6 +149,7 @@ namespace bas.program.ViewModels.DialogViewModels
         /// Описание статуса(Должности)
         /// </summary>
         private string _ProfDescription = "";
+
         public string ProfDescription
         {
             get
@@ -169,6 +168,7 @@ namespace bas.program.ViewModels.DialogViewModels
         /// Полный доступ статуса(Должности)
         /// </summary>
         private bool _ProfFullAccess;
+
         public bool ProfFullAccess
         {
             get
@@ -183,13 +183,14 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Свойства элементов
 
-        #endregion
+        #endregion Свойства
 
         #region Команды
 
         #region Закрыть окно
+
         /// <summary>
         /// Команда закрывает окно
         /// </summary>
@@ -202,13 +203,14 @@ namespace bas.program.ViewModels.DialogViewModels
             _ProfWindow.Close();
         }
 
-        #endregion
+        #endregion Закрыть окно
 
         #region Применить изменения
 
         public ICommand UpdateDataCommand { get; }
 
         #region Изменить данные Должности
+
         private bool CanUpdateDataCommandExecuted(object p) => true;
 
         private void OnUpdateDataCommandExecute(object p)
@@ -225,14 +227,14 @@ namespace bas.program.ViewModels.DialogViewModels
             _ProfWindow.Close();
         }
 
-        #endregion
+        #endregion Изменить данные Должности
 
         #region Добавить должность
+
         private bool CanAddDataCommandExecuted(object p) => true;
 
         private void OnAddDataCommandExecute(object p)
         {
-
             Bank_user_status bank_User_Status = new();
 
             bank_User_Status.Status_name = _ProfName;
@@ -248,11 +250,11 @@ namespace bas.program.ViewModels.DialogViewModels
             _ProfWindow.Close();
         }
 
-        #endregion
+        #endregion Добавить должность
 
-        #endregion
+        #endregion Применить изменения
 
-        #endregion
+        #endregion Команды
 
         #region Конструкторы
 
@@ -262,13 +264,13 @@ namespace bas.program.ViewModels.DialogViewModels
         /// <param name="adminVM">ViewModel окна администратора</param>
         /// <param name="user_Status">Объект с данными о Статусе(Должности)</param>
         /// <param name="workSpace">ViewModel главного окна</param>
-        public ProfWindowViewModel(Bank_user_status user_Status, 
+        public ProfWindowViewModel(Bank_user_status user_Status,
                                    ref WorkSpaceWindowViewModel workSpace)
         {
             /// Запись ряда с данными профессии
             UserStatus = user_Status;
 
-            ///Название действия 
+            ///Название действия
             NameAction = "Изменить";
             /// Название окна
             Title = $"{NameAction}: {UserStatus.Status_name}";
@@ -284,15 +286,12 @@ namespace bas.program.ViewModels.DialogViewModels
                 workSpace.User.User.Bank_user_status.Status_id == UserStatus.Status_id)
                 _IsVisibility = false;
 
-            #endregion
-
+            #endregion Добавления значений в свойства
 
             _WorkSpaceWindowViewModel = workSpace;
 
             CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
-
-
         }
 
         /// <summary>
@@ -302,8 +301,7 @@ namespace bas.program.ViewModels.DialogViewModels
         /// <param name="workSpace">ViewModel Главного окна</param>
         public ProfWindowViewModel(ref WorkSpaceWindowViewModel workSpace)
         {
-
-            ///Название действия 
+            ///Название действия
             NameAction = "Добавить";
             /// Название окна
             Title = $"Добавить нового пользователя";
@@ -314,15 +312,12 @@ namespace bas.program.ViewModels.DialogViewModels
             if (!workSpace.User.User.Bank_user_status.Status_higher)
                 _IsVisibility = false;
 
-            #endregion
-
+            #endregion Добавления значений в свойства
 
             _WorkSpaceWindowViewModel = workSpace;
 
             CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnAddDataCommandExecute, CanAddDataCommandExecuted);
-
-
         }
 
         /// <summary>
@@ -334,7 +329,7 @@ namespace bas.program.ViewModels.DialogViewModels
             /// Запись ряда с данными профессии
             UserStatus = user_Status;
 
-            ///Название действия 
+            ///Название действия
             NameAction = "Просмотр";
             /// Название окна
             Title = $"{NameAction}: {UserStatus.Status_name}";
@@ -348,18 +343,19 @@ namespace bas.program.ViewModels.DialogViewModels
             _IsVisibility = false;
             _IsEnabled = false;
 
-            #endregion
+            #endregion Добавления значений в свойства
 
             CloseProfCommand = new ActionCommand(OnCloseProfCommandExecute, CanCloseProfCommandExecuted);
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
-
-
         }
 
-        #endregion
+        #endregion Конструкторы
 
         #region Методы класса
 
+        /// <summary>
+        /// Отображение окна
+        /// </summary>
         public void ShowProfWindow()
         {
             _ProfWindow = new ProfWindow()
@@ -369,7 +365,6 @@ namespace bas.program.ViewModels.DialogViewModels
             _ProfWindow.ShowDialog();
         }
 
-        #endregion
-
+        #endregion Методы класса
     }
 }

@@ -14,7 +14,6 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class ProfileViewModel : ViewModel
     {
-
         #region Поля и свойства
 
         /// <summary>
@@ -45,6 +44,7 @@ namespace bas.program.ViewModels.DialogViewModels
         #region Видимость элементов
 
         private string _TitleName;
+
         public string TitleName
         {
             get
@@ -60,6 +60,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private string _NameAction = "Изменить";
+
         public string NameAction
         {
             get => _NameAction;
@@ -165,7 +166,6 @@ namespace bas.program.ViewModels.DialogViewModels
                         MessageBox.Show("Вы пытаетесь повысить этого сотрудника до Администратор\n" +
                                         $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
                             MessageBoxImage.Information);
-
                     }
                     ///Повышение уровня до "Без полного доступа"
                     if (!_SelectedStatus.Status_full_access && value.Status_full_access)
@@ -173,7 +173,6 @@ namespace bas.program.ViewModels.DialogViewModels
                         MessageBox.Show("Этот статус имеет \"Полный доступ\" ! \n" +
                                         $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-
                     }
                     ///Понижение уровня "Без полного доступа"
                     if (_SelectedStatus.Status_full_access && !value.Status_full_access)
@@ -182,7 +181,6 @@ namespace bas.program.ViewModels.DialogViewModels
                                         "С полного доступа на НЕ полный доступ\n" +
                                         $"Смена \"{_SelectedStatus.Status_name}\" на \"{value.Status_name}\"", "Предупреждение", MessageBoxButton.OK,
                                 MessageBoxImage.Information);
-
                     }
 
                     MessageBox.Show("Информация о статусах: \n" +
@@ -192,7 +190,7 @@ namespace bas.program.ViewModels.DialogViewModels
                                     $"На \"{value.Status_name}\" имеет: \n" +
                                     $"* - \n");
                 }
-                
+
                 _SelectedStatus = value;
                 OnPropertyChanged();
             }
@@ -402,7 +400,7 @@ namespace bas.program.ViewModels.DialogViewModels
         private void OnUpdateDataCommandExecute(object p)
         {
             /// Смена имени пользователя в главном окне
-            _workSpaceWindowViewModel.UserName =  $"{_Name} {_Surname}";
+            _workSpaceWindowViewModel.UserName = $"{_Name} {_Surname}";
 
             #region Смена изменений в сессии пользователя
 
@@ -430,7 +428,6 @@ namespace bas.program.ViewModels.DialogViewModels
 
         private void OnUpdateProfileExecute(object p)
         {
-
             #region Смена изменений в сессии пользователя
 
             _BankUser.User_name = _Name;
@@ -453,7 +450,7 @@ namespace bas.program.ViewModels.DialogViewModels
                 {
                     var que = MessageBox.Show("Вы изменили свою должность\n" +
                                     "Для применения изменений, необходимо перезагрузить " +
-                                    "и заново авторизоваться в Системе", 
+                                    "и заново авторизоваться в Системе",
                                     "Уведомление",
                                     MessageBoxButton.OKCancel, MessageBoxImage.Question);
 
@@ -486,7 +483,6 @@ namespace bas.program.ViewModels.DialogViewModels
 
             /// Уведомление об успешной операции
             MessageBox.Show("Операция выполнена, \n Данные изменены", "Успешно", MessageBoxButton.OK, MessageBoxImage.Information);
-        
         }
 
         #endregion Изменение данных
@@ -523,8 +519,7 @@ namespace bas.program.ViewModels.DialogViewModels
             NewUser.User_register_data = DateTime.Now;
             NewUser.User_age = _Age;
 
-
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
             /// Добавление в базу данных нового пользователя
             _DataBase.Bank_user.Add(NewUser);
@@ -558,7 +553,7 @@ namespace bas.program.ViewModels.DialogViewModels
             _ProfileWindow.Close();
         }
 
-        #endregion 
+        #endregion Закрыть окно
 
         #endregion Команды
 
@@ -570,7 +565,6 @@ namespace bas.program.ViewModels.DialogViewModels
         /// <param name="workVM">ViewModel Главного окна</param>
         public ProfileViewModel(WorkSpaceWindowViewModel workVM)
         {
-
             /// Главное окно
             _workSpaceWindowViewModel = workVM;
 
@@ -655,7 +649,7 @@ namespace bas.program.ViewModels.DialogViewModels
             /// Разблокировать список статусов
             _StatusEnable = true;
 
-            /// Если Текущий пользователь является Высшим 
+            /// Если Текущий пользователь является Высшим
             /// и его id равен id того профиля который изменяется
             if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher &
                 profilesWM._workSpaceWindowViewModel.User.User.User_id == bankUser.User_id)
@@ -663,7 +657,6 @@ namespace bas.program.ViewModels.DialogViewModels
                 /// Выборка статусов
                 _BankStatuses = _DataBase.Bank_user_status.ToList();
                 _StatusEnable = false;
-
             }
             /// Если текущий пользователь - Админ
             else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher)
@@ -673,7 +666,7 @@ namespace bas.program.ViewModels.DialogViewModels
                     .ToList();
             }
             /// Если изменяемый профиль выше текущего
-            else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher 
+            else if (profilesWM._workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher
                 != bankUser.Bank_user_status.Status_higher)
             {
                 _BankStatuses = _DataBase.Bank_user_status.ToList();
@@ -731,6 +724,9 @@ namespace bas.program.ViewModels.DialogViewModels
 
         #endregion Конструкторы
 
+        /// <summary>
+        /// Отображение окна
+        /// </summary>
         public void ShowProfileWindow()
         {
             _ProfileWindow = new ProfileWindow

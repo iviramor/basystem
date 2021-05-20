@@ -17,12 +17,12 @@ namespace bas.program.ViewModels
 {
     public class WorkSpaceWindowViewModel : ViewModel
     {
-
         #region Блоки окна
 
         #region Действия с окном
 
         private bool _Visibility = false;
+
         /// <summary>
         /// Отображение и скрытие нужных элементов, Используется для статуса "Администратор"
         /// </summary>
@@ -38,6 +38,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _IsEnabled = true;
+
         /// <summary>
         /// Свойство для блокирования элементов в Главном меню
         /// </summary>
@@ -53,6 +54,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _AdminBlock = false;
+
         /// <summary>
         /// Свойство, в котором храниться доступ к разделу админ
         /// пользователь является администратором
@@ -73,6 +75,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _ProfilesBlock = false;
+
         /// <summary>
         /// Свойство, в котором храниться доступ к разделу профилей
         /// пользователь является администратором
@@ -137,11 +140,12 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Combo box с таблицами
 
         #region Главная таблица
 
         private DataRowView _SelectedItemMainTable = null;
+
         /// <summary>
         /// Выделенный ряд в таблице
         /// </summary>
@@ -160,6 +164,7 @@ namespace bas.program.ViewModels
         }
 
         private DataTable _MainTable = new();
+
         /// <summary>
         /// Главная таблица
         /// </summary>
@@ -182,6 +187,7 @@ namespace bas.program.ViewModels
         #region Доступ к элементам окна
 
         private bool _AddIsEnabled = true;
+
         /// <summary>
         /// Доступ к добавлению
         /// </summary>
@@ -197,6 +203,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _EditIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -212,6 +219,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _DelIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -227,6 +235,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _FilterIsEnabled = true;
+
         /// <summary>
         /// Доступ к Фильтру
         /// </summary>
@@ -242,6 +251,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _MathsIsEnabled = true;
+
         /// <summary>
         /// Доступ к Расчету
         /// </summary>
@@ -256,11 +266,12 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Доступ к элементам окна
 
         #region Статус бар
 
         private int _CountRows;
+
         /// <summary>
         /// Кол-во записей в таблице
         /// В статус баре
@@ -278,6 +289,7 @@ namespace bas.program.ViewModels
         }
 
         private string _NameCurrentTable;
+
         /// <summary>
         /// Название таблицы
         /// В статус баре
@@ -299,8 +311,9 @@ namespace bas.program.ViewModels
         #region Боковые блоки
 
         private bool _MathVisibility = false;
+
         /// <summary>
-        /// Видимость Расчетов 
+        /// Видимость Расчетов
         /// </summary>
         public bool MathVisibility
         {
@@ -314,6 +327,7 @@ namespace bas.program.ViewModels
         }
 
         private bool _FilterVisibility = false;
+
         /// <summary>
         /// Видимость Фильтра
         /// </summary>
@@ -389,11 +403,11 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Элементы в фильтре
 
-        #endregion
+        #endregion Боковые блоки
 
-        #endregion Блоки окна
+        #endregion Главная таблица
 
         #region Данные
 
@@ -405,6 +419,7 @@ namespace bas.program.ViewModels
         public UserDataSession User = new();
 
         private string _UserName = null;
+
         /// <summary>
         /// Свойство блока Имя и Фамилия для правого верхнего угла "В системе: "
         /// </summary>
@@ -482,6 +497,7 @@ namespace bas.program.ViewModels
         #endregion Профили
 
         #region Администратор
+
         public ICommand ShowAdministratorCommand { get; }
 
         private bool CanShowAdministratorCommandExecuted(object p) => true;
@@ -492,7 +508,7 @@ namespace bas.program.ViewModels
             adminVM.ShowAdministratorWindow();
         }
 
-        #endregion
+        #endregion Администратор
 
         #region Работа с таблицей
 
@@ -514,7 +530,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Удаление из таблицы
 
         #region Добавление в таблицы
 
@@ -534,7 +550,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Добавление в таблицы
 
         #region Добавление в таблицы
 
@@ -554,7 +570,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Добавление в таблицы
 
         #region Просмотр в таблице
 
@@ -574,7 +590,7 @@ namespace bas.program.ViewModels
             }
         }
 
-        #endregion
+        #endregion Просмотр в таблице
 
         #region Расчеты
 
@@ -596,7 +612,7 @@ namespace bas.program.ViewModels
             MathVisibility = false;
         }
 
-        #endregion
+        #endregion Расчеты
 
         #region Фильтры
 
@@ -618,9 +634,9 @@ namespace bas.program.ViewModels
             FilterVisibility = false;
         }
 
-        #endregion
+        #endregion Фильтры
 
-        #endregion  Работа с таблицей
+        #endregion Работа с таблицей
 
         #endregion Команды
 
@@ -641,30 +657,28 @@ namespace bas.program.ViewModels
         /// </summary>
         public WorkSpaceWindowViewModel(HelloWindowViewModel helloWindow)
         {
-
             helloWindowViewModel = helloWindow;
 
             Tables = new(this);
 
             SetNullAccess();
 
-            #region Команды 
+            #region Команды
 
             ShowSignOutCommand = new ActionCommand(OnShowSignOutCommandExecute, CanShowSignOutCommandExecuted);
             ShowProfileCommand = new ActionCommand(OnShowProfileExecute, CanShowProfileExecuted);
             ShowProfilesCommand = new ActionCommand(OnShowProfilesExecute, CanShowProfilesExecuted);
             ShowAdministratorCommand = new ActionCommand(OnShowAdministratorCommandExecute, CanShowAdministratorCommandExecuted);
-            
+
             ShowMathsCommand = new ActionCommand(OnShowMathsCommandExecute, CanShowMathsCommandExecuted);
             CloseMathsCommand = new ActionCommand(OnCloseMathsCommandExecute, CanCloseMathsCommandExecuted);
             ShowFilterCommand = new ActionCommand(OnShowFilterCommandExecute, CanShowFilterCommandExecuted);
             CloseFilterCommand = new ActionCommand(OnCloseFilterCommandExecute, CanCloseFilterCommandExecuted);
 
-            #endregion
-
+            #endregion Команды
         }
 
-        #endregion
+        #endregion Конструктор
 
         #region Методы
 
@@ -714,7 +728,7 @@ namespace bas.program.ViewModels
             MainTable = null;
         }
 
-        #endregion
+        #endregion Ограничение доступа
 
         #region Установка листа со доступами
 
@@ -763,10 +777,9 @@ namespace bas.program.ViewModels
                     .ToList();
 
             ItemsTableComboBox = AllStatusAccess;
-
         }
 
-        #endregion
+        #endregion Установка листа со доступами
 
         #region Работа с таблицей
 
@@ -778,7 +791,6 @@ namespace bas.program.ViewModels
         /// </summary>
         private void SetCurrentTable()
         {
-
             if (SelectTableItemComboBox == null) return;
 
             MathVisibility = false;
@@ -791,14 +803,12 @@ namespace bas.program.ViewModels
             EditFromTabeleCommand = Tables.GetEditCommand();
             ShowFromTabeleCommand = Tables.GetShowCommand();
 
-
             FilterIsEnabled = Tables.GetBoolFilterTable();
             MathsIsEnabled = Tables.GetBoolMathsTable();
 
             MainTable = Tables.GetTable();
             CountRows = MainTable.Rows.Count;
             NameCurrentTable = _SelectTableItemComboBox.Bank_tables_info.Tables_name;
-
         }
 
         /// <summary>
@@ -828,14 +838,12 @@ namespace bas.program.ViewModels
             workSpaceWindow = new()
             {
                 DataContext = this
-                
             };
             workSpaceWindow.Show();
         }
 
-        #endregion
+        #endregion Отображение рабочего окна
 
-        #endregion
-
+        #endregion Методы
     }
 }

@@ -14,7 +14,6 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class ProfilesViewModel : ViewModel
     {
-
         #region Поля и Свойства
 
         #region Классы
@@ -34,11 +33,12 @@ namespace bas.program.ViewModels.DialogViewModels
         /// </summary>
         private readonly BankDbContext _DataBase;
 
-        #endregion
+        #endregion Классы
 
         #region Доступ к элементам окна
 
         private bool _AddIsEnabled = true;
+
         /// <summary>
         /// Доступ к добавлению
         /// </summary>
@@ -54,6 +54,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _EditIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -69,6 +70,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _DelIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -83,7 +85,7 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Доступ к элементам окна
 
         #region Элементы окна
 
@@ -122,7 +124,7 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Элементы окна
 
         #endregion Поля и Свойства
 
@@ -195,6 +197,9 @@ namespace bas.program.ViewModels.DialogViewModels
 
         #region Закрыть окно
 
+        /// <summary>
+        /// Команда закрывает окно
+        /// </summary>
         public ICommand CloseProfilesCommand { get; }
 
         private bool CanCloseProfilesCommandExecuted(object p) => true;
@@ -208,6 +213,9 @@ namespace bas.program.ViewModels.DialogViewModels
 
         #region Окно редактировать
 
+        /// <summary>
+        /// Команда открывает редактор профиля
+        /// </summary>
         public ICommand EditDataCommand { get; }
 
         private bool CanEditDataCommandExecuted(object p) => true;
@@ -222,7 +230,7 @@ namespace bas.program.ViewModels.DialogViewModels
             }
             ///Если статус выделенного профиля выше чем текущий доступ
             if (_SelectedItem.Bank_user_status.Status_higher &&
-                _workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher 
+                _workSpaceWindowViewModel.User.User.Bank_user_status.Status_higher
                 != _SelectedItem.Bank_user_status.Status_higher)
             {
                 MessageBox.Show("Не позволяет доступ", "Ошибка ввода", MessageBoxButton.OK,
@@ -237,6 +245,9 @@ namespace bas.program.ViewModels.DialogViewModels
 
         #region Окно добавить
 
+        /// <summary>
+        /// Команда открывает редактор добавления профиля
+        /// </summary>
         public ICommand AddDataCommand { get; }
 
         private bool CanAddDataCommandExecuted(object p) => true;
@@ -291,13 +302,16 @@ namespace bas.program.ViewModels.DialogViewModels
                 _DelIsEnabled = false;
             }
 
-            #endregion
-
+            #endregion Доступ к элементам
         }
 
-        #endregion
+        #endregion Конструкторы
 
         #region Методы
+
+        /// <summary>
+        /// обновление таблицы с Профилями
+        /// </summary>
         public void UpdateTable()
         {
             Bank_users = _DataBase.Bank_user
@@ -305,6 +319,9 @@ namespace bas.program.ViewModels.DialogViewModels
                 .ToList();
         }
 
+        /// <summary>
+        /// Отображение окна
+        /// </summary>
         public void ShowProfilesWindow()
         {
             _ProfilesWindow = new ProfilesWindow
@@ -314,7 +331,6 @@ namespace bas.program.ViewModels.DialogViewModels
             _ProfilesWindow.ShowDialog();
         }
 
-        #endregion
-
+        #endregion Методы
     }
 }

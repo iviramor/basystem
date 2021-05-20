@@ -1,18 +1,13 @@
 ﻿using bas.program.Models.Tables.Passive;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
 {
     public class BankPassiveCampViewModel : AB5Window
     {
-
         /// <summary>
         /// Данные для изменения
         /// </summary>
@@ -25,7 +20,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
 
         public override void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_passive_camp.SingleOrDefault(d => d.Pcamp_name == _Bank_data.Pcamp_name);
 
             #region Смена изменений в сессии пользователя
@@ -64,13 +58,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             NewData.Pcamp_quantity = Summa;
             NewData.Pcamp_type = SelectCurrency.Currency_id;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_passive_camp.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -85,7 +81,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveCampViewModel(WorkSpaceWindowViewModel workVM, Bank_passive_camp bank_data)
             : base(workVM)
         {
-
             /// Заголовок окна с именем
             Title = $"Изменить: {bank_data.Pcamp_name}";
 
@@ -102,7 +97,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Pcamp_type);
 
             #endregion Значение свойство
-
         }
 
         /// <summary>
@@ -111,7 +105,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveCampViewModel(WorkSpaceWindowViewModel workVM, string actionName)
             : base(workVM, actionName)
         {
-
             /// Окно с профилями
             _workSpaceWindowViewModel = workVM;
 
@@ -119,7 +112,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             Title = $"Добавить";
 
             Currency = workVM.User.DataBase.Bank_currency.ToList();
-
         }
 
         /// <summary>
@@ -128,7 +120,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveCampViewModel(Bank_passive_camp bank_data, BankDbContext dbContext)
             : base(dbContext)
         {
-
             /// Заголовок окна с именем
             Title = $"Просмотр: {bank_data.Pcamp_name} ";
 
@@ -145,10 +136,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Pcamp_type);
 
             #endregion Значение свойство
-
         }
 
         #endregion Конструкторы
-
     }
 }

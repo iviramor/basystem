@@ -9,7 +9,6 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class HelloWindowViewModel : ViewModel
     {
-
         #region Классы
 
         /// <summary>
@@ -22,11 +21,12 @@ namespace bas.program.ViewModels.DialogViewModels
         /// </summary>
         private HelloWindow _HelloWindow;
 
-        #endregion
+        #endregion Классы
 
         #region Логин
 
         private string _Login = "";
+
         /// <summary>
         /// Свойство поля ввода Логина
         /// </summary>
@@ -46,6 +46,7 @@ namespace bas.program.ViewModels.DialogViewModels
         #region Пароль
 
         public string _Password = "";
+
         /// <summary>
         /// Свойство поля ввода Пароля
         /// </summary>
@@ -67,9 +68,9 @@ namespace bas.program.ViewModels.DialogViewModels
         #region Авторизация
 
         /// <summary>
-        /// Команда для авторизации в системе, если не нашел, 
+        /// Команда для авторизации в системе, если не нашел,
         /// то выводит сообщение
-        /// если найден, то в сессию помещает пользователя 
+        /// если найден, то в сессию помещает пользователя
         /// и открывает Главное окно, в соответствии с ролью
         /// </summary>
         public ICommand SignInCommand { get; }
@@ -83,8 +84,8 @@ namespace bas.program.ViewModels.DialogViewModels
                 .Include(u => u.Bank_user_status.Bank_user_access)
                 .SingleOrDefault(u => u.User_login == Login && u.User_password == Password);
 
-           /// Процесс заполнения данных 
-           /// Открытия элементов доступа
+            /// Процесс заполнения данных
+            /// Открытия элементов доступа
             if (user != null)
             {
                 _workSpaceWindowViewModel.UserName = $"{user.User_name} {user.User_patronymic}";
@@ -122,7 +123,6 @@ namespace bas.program.ViewModels.DialogViewModels
                 HiddenHelloWindow();
                 _workSpaceWindowViewModel.SetItemsTable();
                 _workSpaceWindowViewModel.ShowMainWindow();
-
             }
             else MessageBox.Show("Пользователь не найден", "Ошибка входа", MessageBoxButton.OK, MessageBoxImage.Error);
         }
@@ -149,7 +149,7 @@ namespace bas.program.ViewModels.DialogViewModels
             ShowHelloWindow();
         }
 
-        #endregion
+        #endregion Конструкторы
 
         #region Методы класса
 
@@ -188,9 +188,7 @@ namespace bas.program.ViewModels.DialogViewModels
         {
             _HelloWindow.Show();
         }
-       
 
-        #endregion
-
+        #endregion Методы класса
     }
 }

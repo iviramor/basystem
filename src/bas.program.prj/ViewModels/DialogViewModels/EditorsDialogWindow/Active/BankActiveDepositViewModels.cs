@@ -1,22 +1,13 @@
-﻿using bas.program.Infrastructure.Commands;
-using bas.program.Models.Tables.Active;
-using bas.program.ViewModels.Base;
+﻿using bas.program.Models.Tables.Active;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base;
-using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
 {
     public class BankActiveDepositViewModels : AB5Window
     {
-
         /// <summary>
         /// Данные для изменения
         /// </summary>
@@ -29,7 +20,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
 
         public override void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_active_deposits.SingleOrDefault(d => d.Act_deposit_name == _Bank_data.Act_deposit_name);
 
             #region Смена изменений в сессии пользователя
@@ -68,13 +58,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             NewData.Act_deposit_cash = Summa;
             NewData.Act_deposit_type = SelectCurrency.Currency_id;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_active_deposits.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -89,7 +81,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveDepositViewModels(WorkSpaceWindowViewModel workVM, Bank_active_deposits bank_data)
             : base(workVM)
         {
-
             /// Заголовок окна с именем
             Title = $"Изменить: {bank_data.Act_deposit_name}";
 
@@ -106,7 +97,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Act_deposit_type);
 
             #endregion Значение свойство
-
         }
 
         /// <summary>
@@ -115,9 +105,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveDepositViewModels(WorkSpaceWindowViewModel workVM, string actionName)
             : base(workVM, actionName)
         {
-
             Currency = workVM.User.DataBase.Bank_currency.ToList();
-
         }
 
         /// <summary>
@@ -126,7 +114,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveDepositViewModels(Bank_active_deposits bank_data, BankDbContext dbContext)
             : base(dbContext)
         {
-
             /// Заголовок окна с именем
             Title = $"Просмотр: {bank_data.Act_deposit_name} ";
 
@@ -143,10 +130,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Act_deposit_type);
 
             #endregion Значение свойство
-
         }
 
         #endregion Конструкторы
-
     }
 }

@@ -1,11 +1,6 @@
 ﻿using bas.program.Infrastructure.Commands;
 using bas.program.ViewModels.Base;
 using bas.program.Views.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -13,8 +8,6 @@ namespace bas.program.ViewModels.Messages
 {
     public class ConfirmPasswordViewModel : ViewModel
     {
-
-
         private ConfirmPassword _ConfirmPasswordWindow;
 
         #region Свойства окна
@@ -23,7 +16,6 @@ namespace bas.program.ViewModels.Messages
 
         public string Password
         {
-
             get
             {
                 return _Password;
@@ -31,17 +23,17 @@ namespace bas.program.ViewModels.Messages
             set
             {
                 if (Equals(_Password, value)) return;
-                 _Password = value;
+                _Password = value;
                 OnPropertyChanged();
             }
-
         }
 
-        #endregion
+        #endregion Свойства окна
 
         #region Команды
 
         #region Закрыть окно
+
         public ICommand CloseMessageCommand { get; }
 
         private bool CanCloseMessageCommandExecuted(object p) => true;
@@ -51,10 +43,10 @@ namespace bas.program.ViewModels.Messages
             _Password = null;
             _ConfirmPasswordWindow.Close();
         }
-        #endregion
+
+        #endregion Закрыть окно
 
         #region Подтвердить
-
 
         public ICommand ConfirmMessageCommand { get; }
 
@@ -67,19 +59,16 @@ namespace bas.program.ViewModels.Messages
                 MessageBox.Show("Заполните поле", "Ошибка ввода", MessageBoxButton.OK,
                     MessageBoxImage.Error);
                 return;
-
             }
             _ConfirmPasswordWindow.Close();
         }
 
-        #endregion
+        #endregion Подтвердить
 
-        #endregion
-
+        #endregion Команды
 
         public ConfirmPasswordViewModel()
         {
-
             ConfirmMessageCommand = new ActionCommand(OnConfirmMessageCommandExecute, CanConfirmMessageCommandExecuted);
             CloseMessageCommand = new ActionCommand(OnCloseMessageCommandExecute, CanCloseMessageCommandExecuted);
         }
@@ -95,7 +84,5 @@ namespace bas.program.ViewModels.Messages
 
             return Password;
         }
-
-
     }
 }

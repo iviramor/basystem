@@ -2,11 +2,7 @@
 using bas.program.ViewModels.Base;
 using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,7 +10,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
 {
     public abstract class BADocsWindowVM : ViewModel
     {
-
         #region Поля и свойства
 
         #region Классы
@@ -39,8 +34,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         #region Видимость элементов
 
         private string _TName = "Наименование";
+
         /// <summary>
-        /// Заголовок блока 
+        /// Заголовок блока
         /// </summary>
         public string TName
         {
@@ -57,6 +53,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         private string _Title;
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -75,6 +72,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         private string _NameAction = "Изменить";
+
         /// <summary>
         /// Название операции
         /// </summary>
@@ -90,6 +88,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         private bool _IsEnabled = false;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -105,6 +104,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         private bool _IsVisibility = true;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -124,6 +124,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         #region Свойства элементов
 
         public string _Name;
+
         /// <summary>
         /// Наименование
         /// </summary>
@@ -153,6 +154,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         private string _Description;
+
         /// <summary>
         /// Описание
         /// </summary>
@@ -168,6 +170,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         }
 
         private decimal _Summa;
+
         /// <summary>
         /// Дебит
         /// </summary>
@@ -183,13 +186,12 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
             }
         }
 
-
         #region Средства
 
         private List<Bank_currency> _Currency;
 
         /// <summary>
-        /// Список 
+        /// Список
         /// </summary>
         public List<Bank_currency> Currency
         {
@@ -219,9 +221,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
             }
         }
 
-        #endregion
+        #endregion Средства
 
-        #endregion Свойства пользователя
+        #endregion Свойства элементов
 
         #endregion Поля и свойства
 
@@ -266,7 +268,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
             _BankWindow.Close();
         }
 
-        #endregion
+        #endregion Закрыть окно
 
         #endregion Команды
 
@@ -277,7 +279,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         /// </summary>
         public BADocsWindowVM(WorkSpaceWindowViewModel workVM)
         {
-
             _workSpaceWindowViewModel = workVM;
 
             /// Контекст базы данных
@@ -285,7 +286,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
 
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
             CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
-
         }
 
         /// <summary>
@@ -313,13 +313,11 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         /// </summary>
         public BADocsWindowVM(BankDbContext dbContext)
         {
-
             IsEnabled = true;
             IsVisibility = false;
 
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
             CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
-
         }
 
         #endregion Конструкторы
@@ -330,6 +328,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
         /// <returns></returns>
         public abstract bool FindMatch(string name);
 
+        /// <summary>
+        /// Отображение окна
+        /// </summary>
         public void ShowWindow()
         {
             _BankWindow = new()
@@ -338,6 +339,5 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base
             };
             _BankWindow.ShowDialog();
         }
-
     }
 }

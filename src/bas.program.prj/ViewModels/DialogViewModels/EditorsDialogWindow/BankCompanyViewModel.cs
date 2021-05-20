@@ -2,11 +2,7 @@
 using bas.program.ViewModels.Base;
 using bas.program.Views.DialogViews;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -14,7 +10,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 {
     public class BankCompanyViewModel : ViewModel
     {
-
         #region Поля и свойства
 
         #region Классы
@@ -44,6 +39,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Видимость элементов
 
         private string _Title;
+
         /// <summary>
         /// Заголовок окна
         /// </summary>
@@ -62,6 +58,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _NameAction = "Изменить";
+
         /// <summary>
         /// Название операции
         /// </summary>
@@ -77,6 +74,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _IsEnabled = false;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -92,6 +90,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private bool _IsVisibility = true;
+
         /// <summary>
         /// Блокировка элементов
         /// </summary>
@@ -111,6 +110,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         #region Свойства элементов
 
         public string _Name;
+
         /// <summary>
         /// Наименование
         /// </summary>
@@ -136,6 +136,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Description;
+
         /// <summary>
         /// Описание
         /// </summary>
@@ -151,6 +152,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Type;
+
         /// <summary>
         /// Тип компании
         /// </summary>
@@ -161,7 +163,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             {
                 if (Equals(_Type, value)) return;
 
-                if (value.Length < 2 || value.Any(ch => char.IsWhiteSpace(ch)) 
+                if (value.Length < 2 || value.Any(ch => char.IsWhiteSpace(ch))
                     || value.Length > 150)
                 {
                     MessageBox.Show("Тип не может быть:\n" +
@@ -178,6 +180,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         }
 
         private string _Address;
+
         /// <summary>
         /// Адрес
         /// </summary>
@@ -188,7 +191,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             {
                 if (Equals(_Address, value)) return;
 
-                if (value.Length < 6 || value.Any(ch => char.IsWhiteSpace(ch)) 
+                if (value.Length < 6 || value.Any(ch => char.IsWhiteSpace(ch))
                     || value.Length > 150)
                 {
                     MessageBox.Show("Адрес не может быть:\n" +
@@ -204,7 +207,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             }
         }
 
-        #endregion Свойства пользователя
+        #endregion Свойства элементов
 
         #endregion Поля и свойства
 
@@ -223,7 +226,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         private void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_client_company.SingleOrDefault(d => d.Clcomp_id == _Bank_data.Clcomp_id);
 
             #region Смена изменений в сессии пользователя
@@ -271,13 +273,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             NewData.Clcomp_type = _Type;
             NewData.Clcomp_adr = _Address;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_client_company.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -303,7 +307,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             _BankWindow.Close();
         }
 
-        #endregion
+        #endregion Закрыть окно
 
         #endregion Команды
 
@@ -336,7 +340,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
             UpdateDataCommand = new ActionCommand(OnUpdateDataCommandExecute, CanUpdateDataCommandExecuted);
             CloseCommand = new ActionCommand(OnCloseWindowCommandExecute, CanCloseWindowCommandExecuted);
-
         }
 
         /// <summary>
@@ -364,7 +367,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
         /// </summary>
         public BankCompanyViewModel(Bank_client_company bank_Client_Company)
         {
-
             /// Заголовок окна с именем
             _Title = $"Просмотр: {bank_Client_Company.Clcomp_name} ";
 
@@ -389,6 +391,9 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
 
         #endregion Конструкторы
 
+        /// <summary>
+        /// Отображения окна
+        /// </summary>
         public void ShowWindow()
         {
             _BankWindow = new BankCompanyWindow()
@@ -397,6 +402,5 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow
             };
             _BankWindow.ShowDialog();
         }
-
     }
 }

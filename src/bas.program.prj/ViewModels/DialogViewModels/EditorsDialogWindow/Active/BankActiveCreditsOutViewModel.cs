@@ -1,18 +1,13 @@
 ﻿using bas.program.Models.Tables.Active;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
 {
     public class BankActiveCreditsOutViewModel : ABAC3Window
     {
-
         /// <summary>
         /// Данные для изменения
         /// </summary>
@@ -25,7 +20,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
 
         public override void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_active_credits_out.SingleOrDefault(d => d.Co_id == _Bank_data.Co_id);
 
             #region Смена изменений в сессии пользователя
@@ -34,7 +28,7 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             data.Co_describ = Description;
             data.Co_debtor = SelectedBankClient.Client_id;
             data.Bank_client = SelectedBankClient;
-            data.Co_cash= Credit;
+            data.Co_cash = Credit;
             data.Co_type = SelectCurrency.Currency_id;
             data.Bank_currency = SelectCurrency;
 
@@ -73,13 +67,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             NewData.Co_type = SelectCurrency.Currency_id;
             NewData.Bank_currency = SelectCurrency;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_active_credits_out.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -94,7 +90,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveCreditsOutViewModel(WorkSpaceWindowViewModel workVM, Bank_active_credits_out bank_data)
             : base(workVM)
         {
-
             /// Заголовок окна с именем
             Title = $"Изменить: {bank_data.Co_name}";
 
@@ -117,7 +112,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Co_type);
 
             #endregion Значение свойство
-
         }
 
         /// <summary>
@@ -126,10 +120,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveCreditsOutViewModel(WorkSpaceWindowViewModel workVM, string actionName)
             : base(workVM, actionName)
         {
-
             BankClient = workVM.User.DataBase.Bank_client.ToList();
             Currency = workVM.User.DataBase.Bank_currency.ToList();
-
         }
 
         /// <summary>
@@ -138,7 +130,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
         public BankActiveCreditsOutViewModel(Bank_active_credits_out bank_data, BankDbContext dbContext)
             : base(dbContext)
         {
-
             /// Заголовок окна с именем
             Title = $"Просмотр: {bank_data.Co_name} ";
 
@@ -161,10 +152,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Active
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Co_type);
 
             #endregion Значение свойство
-
         }
 
         #endregion Конструкторы
-
     }
 }

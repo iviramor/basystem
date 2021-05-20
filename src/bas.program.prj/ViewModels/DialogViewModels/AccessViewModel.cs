@@ -5,11 +5,8 @@ using bas.program.Models.Tables;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels.Base;
 using bas.program.Views;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -17,7 +14,6 @@ namespace bas.program.ViewModels.DialogViewModels
 {
     public class AccessViewModel : ViewModel
     {
-
         #region Свойства
 
         private int Access;
@@ -44,11 +40,12 @@ namespace bas.program.ViewModels.DialogViewModels
         /// </summary>
         private UserDataSession _UserDataSession;
 
-        #endregion
+        #endregion Классы
 
         #region Свойства окна
 
         private string _Title;
+
         /// <summary>
         /// Название действия окна
         /// </summary>
@@ -66,11 +63,12 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Свойства окна
 
         #region Свойства элементов Окна
 
         private string _AddOrEditButton = "Добавить";
+
         /// <summary>
         /// Кнопка добавить или удалить Доступ
         /// </summary>
@@ -86,6 +84,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private Bank_user_access _SelectAccessUser;
+
         /// <summary>
         /// Выделенный доступ пользователя в листе
         /// </summary>
@@ -117,6 +116,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private Bank_tables_info _SelectAllAccess;
+
         /// <summary>
         /// Выделенный доступ пользователя в листе
         /// </summary>
@@ -147,7 +147,7 @@ namespace bas.program.ViewModels.DialogViewModels
                     AddOrEditButton = "Изменить";
                 }
 
-                /// блокировка изменения таблицы "Пользовательский доступ", 
+                /// блокировка изменения таблицы "Пользовательский доступ",
                 /// если нет полного доступа
                 if (value.Tables_key == "Bank_user_access" && Access != -1)
                 {
@@ -191,12 +191,11 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        private List<AccessForTable> _ComboBoxAccess = new() 
-        { 
-            new AccessForTable() { NameAccess = "Полный" , KeyAccess = 1},
+        private List<AccessForTable> _ComboBoxAccess = new()
+        {
+            new AccessForTable() { NameAccess = "Полный", KeyAccess = 1 },
             new AccessForTable() { NameAccess = "Только чтение", KeyAccess = 2 },
             new AccessForTable() { NameAccess = "Чтение и редактирование", KeyAccess = 3 }
-
         };
 
         /// <summary>
@@ -213,11 +212,12 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Свойства элементов Окна
 
         #region Доступ к элементам окна
 
         private bool _AccessListIsEnabled = true;
+
         /// <summary>
         /// Доступ к добавлению
         /// </summary>
@@ -233,6 +233,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _EditIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -248,6 +249,7 @@ namespace bas.program.ViewModels.DialogViewModels
         }
 
         private bool _DelIsEnabled = true;
+
         /// <summary>
         /// Доступ к Редактированию
         /// </summary>
@@ -262,13 +264,17 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
-        #endregion
+        #endregion Доступ к элементам окна
 
-        #endregion
+        #endregion Свойства
 
         #region Команды
 
         #region Удалить доступ
+
+        /// <summary>
+        /// Команда удаления
+        /// </summary>
         public ICommand DelAccessCommand { get; }
 
         private bool CanDelAccessCommandExecuted(object p) => true;
@@ -291,17 +297,19 @@ namespace bas.program.ViewModels.DialogViewModels
             CleanAccessCurrentUser();
         }
 
-        #endregion
+        #endregion Удалить доступ
 
         #region Добавить доступ
 
+        /// <summary>
+        /// Команда добавления
+        /// </summary>
         public ICommand AddAccessCommand { get; }
 
         private bool CanAddAccessCommandExecuted(object p) => true;
 
         private void OnAddAccessCommandExecute(object p)
         {
-
             /// Проверка выделены ли элементы
             if (_SelectAllAccess == null)
             {
@@ -327,9 +335,7 @@ namespace bas.program.ViewModels.DialogViewModels
                     Access_user_status = _Bank_User_Status.Status_id,
                     Access_name_table = _SelectAllAccess.Tables_id,
                     Access_modification = _SelectComboBoxAccess.KeyAccess
-
                 };
-
             }
             else
             {
@@ -357,7 +363,7 @@ namespace bas.program.ViewModels.DialogViewModels
             return bua;
         }
 
-        #endregion
+        #endregion Добавить доступ
 
         #region Закрыть окно
 
@@ -373,15 +379,14 @@ namespace bas.program.ViewModels.DialogViewModels
             _AccessWindow.Close();
         }
 
-        #endregion 
+        #endregion Закрыть окно
 
-        #endregion
+        #endregion Команды
 
         #region Конструкторы
 
         public AccessViewModel(Bank_user_status user_Status, WorkSpaceWindowViewModel workVM)
         {
-
             _Bank_User_Status = user_Status;
             _workSpaceWindowViewModel = workVM;
             _UserDataSession = workVM.User;
@@ -405,7 +410,6 @@ namespace bas.program.ViewModels.DialogViewModels
             var tableAccess = _UserDataSession.User.Bank_user_status.Bank_user_access
                 .SingleOrDefault(ua => ua.Access_name_table == tableInfo.Tables_id);
 
-
             if (_UserDataSession.User.Bank_user_status.Status_full_access)
             {
                 Access = -1;
@@ -425,14 +429,16 @@ namespace bas.program.ViewModels.DialogViewModels
                 Access = 3;
             }
 
-            #endregion
-
+            #endregion Доступ к элементам
         }
 
-        #endregion
+        #endregion Конструкторы
 
         #region Методы
 
+        /// <summary>
+        /// Обновляет доступы после изменения
+        /// </summary>
         public void CleanAccessCurrentUser()
         {
             /// Если Должность которую изменяем является
@@ -444,6 +450,9 @@ namespace bas.program.ViewModels.DialogViewModels
             }
         }
 
+        /// <summary>
+        /// Заполняет лист доступов для должности
+        /// </summary>
         private void SetSourceAccessUser()
         {
             ListWithAccessUser = _UserDataSession.DataBase.Bank_user_access
@@ -451,12 +460,18 @@ namespace bas.program.ViewModels.DialogViewModels
                 .ToList();
         }
 
+        /// <summary>
+        /// Заполняет лист всеми доступами в системе
+        /// </summary>
         private void SetSourceAllAccess()
         {
             ListWithAllAccess = _UserDataSession.DataBase.Bank_tables_info
                 .ToList();
         }
 
+        /// <summary>
+        /// Отображает окно Доступов
+        /// </summary>
         public void ShowAccessWindow()
         {
             _AccessWindow = new()
@@ -464,10 +479,8 @@ namespace bas.program.ViewModels.DialogViewModels
                 DataContext = this
             };
             _AccessWindow.ShowDialog();
-            
         }
 
-        #endregion
-
+        #endregion Методы
     }
 }

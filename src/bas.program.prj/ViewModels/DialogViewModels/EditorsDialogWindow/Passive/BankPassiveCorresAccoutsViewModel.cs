@@ -1,18 +1,13 @@
 ﻿using bas.program.Models.Tables.Passive;
 using bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Base;
 using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
 {
     public class BankPassiveCorresAccoutsViewModel : ABAC3Window
     {
-
         /// <summary>
         /// Данные для изменения
         /// </summary>
@@ -20,13 +15,11 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
 
         public override bool FindMatch(string name)
         {
-            return  _DataBase.Bank_passive_corres_accouts.Any(i => i.Ca_bank_name == name);
-
+            return _DataBase.Bank_passive_corres_accouts.Any(i => i.Ca_bank_name == name);
         }
 
         public override void OnUpdateDataCommandExecute(object p)
         {
-
             var data = _DataBase.Bank_passive_corres_accouts.SingleOrDefault(d => d.Ca_bank_id == _Bank_data.Ca_bank_id);
 
             #region Смена изменений в сессии пользователя
@@ -74,13 +67,15 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             NewData.Ca_bank_type = SelectCurrency.Currency_id;
             NewData.Bank_currency = SelectCurrency;
 
-            #endregion 
+            #endregion Смена изменений в сессии пользователя
 
-            /// Добавление в базу данных 
+
+
+            /// Добавление в базу данных
             _DataBase.Bank_passive_corres_accouts.Add(NewData);
             _DataBase.SaveChanges();
 
-            /// Обновление таблицы 
+            /// Обновление таблицы
             _workSpaceWindowViewModel.SetUpdateTabel();
 
             MessageBox.Show("Добавлено", "Уведомление", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -95,7 +90,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveCorresAccoutsViewModel(WorkSpaceWindowViewModel workVM, Bank_passive_corres_accouts bank_data)
             : base(workVM)
         {
-
             /// Заголовок окна с именем
             Title = $"Изменить: {bank_data.Ca_bank_name}";
 
@@ -118,7 +112,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Ca_bank_type);
 
             #endregion Значение свойство
-
         }
 
         /// <summary>
@@ -127,10 +120,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveCorresAccoutsViewModel(WorkSpaceWindowViewModel workVM, string actionName)
             : base(workVM, actionName)
         {
-
             BankClient = workVM.User.DataBase.Bank_client.ToList();
             Currency = workVM.User.DataBase.Bank_currency.ToList();
-
         }
 
         /// <summary>
@@ -139,7 +130,6 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
         public BankPassiveCorresAccoutsViewModel(Bank_passive_corres_accouts bank_data, BankDbContext dbContext)
             : base(dbContext)
         {
-
             /// Заголовок окна с именем
             Title = $"Просмотр: {bank_data.Ca_bank_name} ";
 
@@ -162,10 +152,8 @@ namespace bas.program.ViewModels.DialogViewModels.EditorsDialogWindow.Passive
             SelectCurrency = Currency.SingleOrDefault(c => c.Currency_id == bank_data.Ca_bank_type);
 
             #endregion Значение свойство
-
         }
 
         #endregion Конструкторы
-
     }
 }
