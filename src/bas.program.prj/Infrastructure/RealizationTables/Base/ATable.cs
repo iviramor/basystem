@@ -5,20 +5,20 @@ using bas.program.ViewModels.Messages;
 using bas.website.Models.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
 namespace bas.program.Infrastructure.RealizationTables.Base
 {
+    /// <summary>
+    /// Абстрактный класс описывающий действия таблиц
+    /// (удаление, добавление, обновление и т.д.)
+    /// </summary>
     public abstract class ATable
     {
-
         #region Свойства
 
         /// <summary>
@@ -43,6 +43,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         /// Свойства фильтра, если true, то Фильтр для таблицы применим
         /// </summary>
         public abstract bool Filter { get; }
+
         /// <summary>
         /// Свойства фильтра, если true, то Расчеты для таблицы применимы
         /// </summary>
@@ -84,7 +85,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             return false;
         }
 
-        #endregion
+        #endregion Удаление
 
         #region Добавление
 
@@ -124,26 +125,35 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         {
             return new ActionCommand(OnRemoveCommandExecute, CanRemoveCommandExecuted);
         }
+
         public ICommand GetAddFromTabeleCommand()
         {
             return new ActionCommand(OnAddCommandExecute, CanAddCommandExecuted);
         }
+
         public ICommand GetEditFromTabeleCommand()
         {
             return new ActionCommand(OnEditCommandExecute, CanEditCommandExecuted);
         }
+
         public ICommand GetShowFromTabeleCommand()
         {
             return new ActionCommand(OnShowCommandExecute, CanShowCommandExecuted);
         }
 
-        #endregion
+        #endregion Выдача команд
 
+        /// <summary>
+        /// Ищет выделенный ряд в базе данных и устанавливает в поле
+        /// </summary>
+        /// <param name="selectedItem"></param>
         public abstract void SetSelected(DataRowView selectedItem);
 
+        /// <summary>
+        /// Устанавливает колонки в табличку
+        /// </summary>
         private void SetColumnTable()
         {
-
             /// Тип данной таблицы
             var entityTypeCurrentTable = BankDbContext.Model.GetEntityTypes()
                 .SingleOrDefault(table => table.DisplayName() == _Bank_user_access.Bank_tables_info.Tables_key).ClrType;
@@ -155,9 +165,11 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 if (prop.DisplayName != null)
                     DataTable.Columns.Add(prop.DisplayName);
             }
-
         }
 
+        /// <summary>
+        /// Обновляет данные в таблице
+        /// </summary>
         public void UpdateDataInTable()
         {
             workSpaceWindowViewModel.SetUpdateTabel();
@@ -177,9 +189,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             DataTable = new();
             BankDbContext = new();
 
-
             SetColumnTable();
-
         }
 
         #region Дополнительные методы
@@ -194,9 +204,6 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             BankDbContext = new();
         }
 
-        #endregion
-
-
+        #endregion Дополнительные методы
     }
-
 }

@@ -3,19 +3,16 @@ using bas.program.Infrastructure.RealizationTables.Tables.Active;
 using bas.program.Infrastructure.RealizationTables.Tables.Passive;
 using bas.program.Models.Tables.UserTables;
 using bas.program.ViewModels;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace bas.program.Infrastructure.RealizationTables.Base
 {
+    /// <summary>
+    /// Промежуточный класс между главным окном и таблицами(ATabel)
+    /// </summary>
     public class Tables
     {
-
         #region Свойства
 
         /// <summary>
@@ -50,58 +47,72 @@ namespace bas.program.Infrastructure.RealizationTables.Base
                 case "Bank_client":
                     Table = new TBankClient(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_client_company":
                     Table = new TBankClientCompany(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_client_history":
                     Table = new TBankClientHistory(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_currency":
                     Table = new TBankCurrency(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_active_authorized_capital":
                     Table = new TBankActiveAuthorizedCapital(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_passive_authorized_capital":
                     Table = new TBankPassiveAuthorizedCapital(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_passive_add_capital":
                     Table = new TBankPassiveAddCapital(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_active_camp":
                     Table = new TBankActiveCamp(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_active_deposits":
                     Table = new TBankActiveDeposits(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_active_asset":
                     Table = new TBankActiveAsset(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_passive_deposits":
                     Table = new TBankPassiveDeposits(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_passive_camp":
                     Table = new TBankPassiveCamp(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_active_credits_out":
                     Table = new TBankActiveCreditsOut(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_passive_corres_accouts":
                     Table = new TBankPassiveCorresAccouts(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_passive_credit_debit":
                     Table = new TBankPassiveCreditDebit(bank_User_Access, _workSpaceWindowViewModel);
                     return;
+
                 case "Bank_active_docs":
                     Table = new TBankActiveDocs(bank_User_Access, _workSpaceWindowViewModel);
                     return;
-
             }
         }
 
         #endregion Методы
 
-        #region Реализация 
+        #region Реализация
 
         /// <summary>
         /// Устанавливает таблицу, выделенную в ComboBox
@@ -122,6 +133,10 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             return Table.GetFullTable();
         }
 
+        /// <summary>
+        /// Принимает и отдает выделенный ряд в ATable
+        /// </summary>
+        /// <param name="selectedItem"></param>
         public void SetSelectedItem(DataRowView selectedItem)
         {
             Table.SetSelected(selectedItem);
@@ -177,6 +192,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
         {
             return Table.Filter;
         }
+
         /// <summary>
         /// Функция отдает значения Функции Расчета
         /// </summary>
@@ -188,7 +204,7 @@ namespace bas.program.Infrastructure.RealizationTables.Base
 
         #endregion Элементы главного окна
 
-        #endregion Реализация 
+        #endregion Реализация
 
         #region Конструктор
 
@@ -197,7 +213,6 @@ namespace bas.program.Infrastructure.RealizationTables.Base
             _workSpaceWindowViewModel = workVM;
         }
 
-        #endregion 
-
+        #endregion Конструктор
     }
 }
