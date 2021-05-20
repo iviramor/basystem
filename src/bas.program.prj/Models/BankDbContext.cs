@@ -8,31 +8,61 @@ namespace bas.website.Models.Data
 {
     public class BankDbContext : DbContext
     {
+
+        /// <summary>
+        /// Строка подключения к базе данных
+        /// </summary>
         private readonly string _connectionString = @"Data Source = (localdb)\MSSQLLocalDB; Database = BANK; Persist Security Info = False; MultipleActiveResultSets = True; Trusted_Connection = True;";
 
         #region Данные пользователя
 
+        /// <summary>
+        /// Пользователи системы
+        /// </summary>
         public DbSet<Bank_user> Bank_user { get; set; }
 
+        /// <summary>
+        /// Доступы
+        /// </summary>
         public DbSet<Bank_user_access> Bank_user_access { get; set; }
 
+        /// <summary>
+        /// Статус(Должности)
+        /// </summary>
         public DbSet<Bank_user_status> Bank_user_status { get; set; }
 
         #endregion Данные пользователя
 
         #region Данные пользователя
-
+        /// <summary>
+        /// Клиент банка
+        /// </summary>
         public DbSet<Bank_client> Bank_client { get; set; }
+        /// <summary>
+        /// Информация об компании клиента
+        /// </summary>
         public DbSet<Bank_client_company> Bank_client_company { get; set; }
+        /// <summary>
+        /// Иформация кредитов клиента
+        /// </summary>
         public DbSet<Bank_client_history> Bank_client_history { get; set; }
+        /// <summary>
+        /// Статус истории
+        /// </summary>
         public DbSet<Bank_status_history> Bank_status_history { get; set; }
 
         #endregion Данные пользователя
 
         #region Прочие данные
 
+        /// <summary>
+        /// Курс ресурсов
+        /// </summary>
         public DbSet<Bank_currency> Bank_currency { get; set; }
 
+        /// <summary>
+        /// Информация о таблицах
+        /// </summary>
         public DbSet<Bank_tables_info> Bank_tables_info { get; set; }
 
         #endregion Прочие данные
