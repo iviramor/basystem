@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bas.website.Models.Data
 {
+    /// <summary>
+    /// Модель с описанием "Информация кредитов клиента"
+    /// </summary>
     public class Bank_client_history
     {
         [Key]

@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace bas.website.Models.Data
 {
+    /// <summary>
+    /// Модель с описанием "Курс ресурсов"
+    /// </summary>
     public class Bank_currency
     {
         [Key]

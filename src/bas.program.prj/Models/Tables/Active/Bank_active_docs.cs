@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace bas.program.Models.Tables.Active
 {
+    /// <summary>
+    /// Модель с описанием "Ценные бумаги и финансовые вложения"
+    /// </summary>
     public class Bank_active_docs
     {
 

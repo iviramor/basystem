@@ -2,6 +2,9 @@
 
 namespace bas.website.Models.Data
 {
+    /// <summary>
+    /// Модель с описанием "Статус истории"
+    /// </summary>
     public class Bank_status_history
     {
 

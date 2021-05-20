@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace bas.program.Models.Tables
 {
+    /// <summary>
+    /// Модель с описанием "Информация о таблицах в БД"
+    /// </summary>
     public class Bank_tables_info
     {
         [Key]

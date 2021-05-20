@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bas.program.Models.Tables.Passive
 {
+    /// <summary>
+    /// Модель с описанием "Корреспондентские счета коммерческих банков, открытые в банке"
+    /// </summary>
     public class Bank_passive_corres_accouts
     {
 

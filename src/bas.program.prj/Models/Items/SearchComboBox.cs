@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace bas.program.Models.Items
 {
+    /// <summary>
+    /// Модель с описанием названиями столбцов
+    /// </summary>
     public class SearchComboBox
     {
 

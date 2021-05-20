@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace bas.program.Models.Tables.Passive
 {
+    /// <summary>
+    /// Модель с описанием "Уставной капитал банка"
+    /// </summary>
     public class Bank_passive_authorized_capital
     {
 

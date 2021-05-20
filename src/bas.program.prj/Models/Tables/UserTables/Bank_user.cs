@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bas.program.Models.Tables.UserTables
 {
+    /// <summary>
+    /// Модель с описанием "Пользователи системы"
+    /// </summary>
     public class Bank_user
     {
         [Key]

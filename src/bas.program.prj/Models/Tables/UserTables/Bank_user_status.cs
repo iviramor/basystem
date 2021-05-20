@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace bas.program.Models.Tables.UserTables
 {
+    /// <summary>
+    /// Модель с описанием "Статус(Должность)"
+    /// </summary>
     public class Bank_user_status
     {
 

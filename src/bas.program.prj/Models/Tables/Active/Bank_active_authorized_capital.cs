@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bas.program.Models.Tables.Active
 {
+    /// <summary>
+    /// Модель с описанием "Уставной капитал банка"
+    /// </summary>
     public class Bank_active_authorized_capital
     {
         [Key]

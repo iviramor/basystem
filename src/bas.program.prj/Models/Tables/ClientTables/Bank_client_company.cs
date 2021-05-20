@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace bas.website.Models.Data
 {
+    /// <summary>
+    /// Модель с описанием "Информация об компании клиента"
+    /// </summary>
     public class Bank_client_company
     {
         [Key]

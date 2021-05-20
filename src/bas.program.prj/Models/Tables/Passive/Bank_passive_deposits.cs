@@ -7,6 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace bas.program.Models.Tables.Passive
 {
+    /// <summary>
+    /// Модель с описанием "Депозиты и иные привлеченные средства"
+    /// </summary>
     public class Bank_passive_deposits
     {
 

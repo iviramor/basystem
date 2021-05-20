@@ -6,6 +6,9 @@ using System.Data;
 
 namespace bas.website.Models.Data
 {
+    /// <summary>
+    /// Модель с описанием "Клиент банка"
+    /// </summary>
     public class Bank_client
     {
         [Key]
