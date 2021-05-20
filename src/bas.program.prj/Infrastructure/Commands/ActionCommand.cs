@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using bas.program.Infrastructure.Commands.Base;
+﻿using bas.program.Infrastructure.Commands.Base;
+using System;
 
 namespace bas.program.Infrastructure.Commands
 {
+    /// <summary>
+    /// Команда
+    /// </summary>
     public class ActionCommand : Command
     {
 
         private readonly Action<object> _Execute;
         private readonly Func<object, bool> _CanExecut;
 
+        /// <summary>
+        /// Принимает OnCommand n CanCommand
+        /// </summary>
+        /// <param name="Execute"></param>
+        /// <param name="CanExecut"></param>
         public ActionCommand(Action<object> Execute, Func<object, bool> CanExecut = null)
         {
             _Execute = Execute;

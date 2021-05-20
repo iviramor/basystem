@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using bas.program.Infrastructure.Commands.Base;
 using System.Windows;
-using bas.program.Infrastructure.Commands.Base;
 
 namespace bas.program.Infrastructure.Commands.HelloWindowCommands
 {
