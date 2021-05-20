@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Data;
 
 namespace bas.website.Models.Data
 {
@@ -50,6 +49,5 @@ namespace bas.website.Models.Data
         [ForeignKey("Client_company")]
         [DisplayName(null)]
         public virtual Bank_client_company Bank_client_company { get; set; }
-
     }
 }

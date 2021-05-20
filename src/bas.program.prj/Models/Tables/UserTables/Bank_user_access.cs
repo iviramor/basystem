@@ -12,12 +12,14 @@ namespace bas.program.Models.Tables.UserTables
         [Key]
         [DisplayName(null)]
         public int Access_id { get; set; }
+
         [DisplayName("status")]
         public int Access_user_status { get; set; }
 
         [MaxLength(350)]
         [DisplayName("name_table")]
         public int Access_name_table { get; set; }
+
         [DisplayName("modification")]
         public int Access_modification { get; set; }
 

@@ -7,8 +7,6 @@ namespace bas.website.Models.Data
     /// </summary>
     public class Bank_status_history
     {
-
-
         [Key]
         public int Status_id { get; set; }
 
@@ -16,6 +14,5 @@ namespace bas.website.Models.Data
         public string Status_name { get; set; }
 
         public decimal Status_value { get; set; }
-
     }
 }

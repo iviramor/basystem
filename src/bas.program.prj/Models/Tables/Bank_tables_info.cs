@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace bas.program.Models.Tables
 {
@@ -22,7 +17,5 @@ namespace bas.program.Models.Tables
         public string Tables_key { get; set; }
 
         public bool Tables_isSystem { get; set; }
-
-
     }
 }

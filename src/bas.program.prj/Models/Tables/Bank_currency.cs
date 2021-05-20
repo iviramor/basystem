@@ -15,10 +15,13 @@ namespace bas.website.Models.Data
         [MaxLength(100)]
         [DisplayName("Ресурс")]
         public string Currency_name { get; set; }
+
         [DisplayName("Стоимость в долларах")]
         public decimal Currency_dollar { get; set; }
+
         [DisplayName("Стоимость в евро")]
         public decimal Currency_euro { get; set; }
+
         [DisplayName("Стоимость в рублях")]
         public decimal Currency_rub { get; set; }
     }

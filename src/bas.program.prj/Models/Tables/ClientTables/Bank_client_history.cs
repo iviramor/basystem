@@ -13,6 +13,7 @@ namespace bas.website.Models.Data
         [Key]
         [DisplayName(null)]
         public int Clihis_id { get; set; }
+
         [DisplayName("Код кредита")]
         public Guid Clihis_numb { get; set; }
 
@@ -56,7 +57,5 @@ namespace bas.website.Models.Data
         [ForeignKey("Clihis_status")]
         [DisplayName("Статус")]
         public virtual Bank_status_history Bank_status_history { get; set; }
-
-
     }
 }

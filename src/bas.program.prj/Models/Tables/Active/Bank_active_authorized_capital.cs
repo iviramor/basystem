@@ -1,5 +1,4 @@
 ﻿using bas.website.Models.Data;
-using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,6 +32,5 @@ namespace bas.program.Models.Tables.Active
         [ForeignKey("Aac_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
-
     }
 }

@@ -41,6 +41,5 @@ namespace bas.program.Models.Tables.UserTables
 
         [ForeignKey("User_status_to_system")]
         public virtual Bank_user_status Bank_user_status { get; set; }
-
     }
 }

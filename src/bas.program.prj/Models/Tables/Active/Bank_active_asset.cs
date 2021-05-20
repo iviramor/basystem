@@ -26,7 +26,5 @@ namespace bas.program.Models.Tables.Active
         [ForeignKey("Ass_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
-
-
     }
 }

@@ -9,7 +9,6 @@ namespace bas.program.Models.Tables.UserTables
     /// </summary>
     public class Bank_user_status
     {
-
         [Key]
         [DisplayName(null)]
         public int Status_id { get; set; }
@@ -17,6 +16,7 @@ namespace bas.program.Models.Tables.UserTables
         [MaxLength(300)]
         [DisplayName("Статус в системе")]
         public string Status_name { get; set; }
+
         [DisplayName("Описание")]
         public string Status_describ { get; set; }
 
@@ -28,6 +28,5 @@ namespace bas.program.Models.Tables.UserTables
 
         [DisplayName("Доступы")]
         public List<Bank_user_access> Bank_user_access { get; set; }
-
     }
 }

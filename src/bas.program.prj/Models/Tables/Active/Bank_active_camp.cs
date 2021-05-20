@@ -1,12 +1,7 @@
 ﻿using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace bas.program.Models.Tables.Active
 {
@@ -15,7 +10,6 @@ namespace bas.program.Models.Tables.Active
     /// </summary>
     public class Bank_active_camp
     {
-
         [Key]
         [DisplayName(null)]
         public int Acamp_id { get; set; }
@@ -32,6 +26,5 @@ namespace bas.program.Models.Tables.Active
         [ForeignKey("Acamp_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
-
     }
 }

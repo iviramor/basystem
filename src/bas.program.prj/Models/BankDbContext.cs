@@ -8,7 +8,6 @@ namespace bas.website.Models.Data
 {
     public class BankDbContext : DbContext
     {
-
         /// <summary>
         /// Строка подключения к базе данных
         /// </summary>
@@ -34,18 +33,22 @@ namespace bas.website.Models.Data
         #endregion Данные пользователя
 
         #region Данные пользователя
+
         /// <summary>
         /// Клиент банка
         /// </summary>
         public DbSet<Bank_client> Bank_client { get; set; }
+
         /// <summary>
         /// Информация об компании клиента
         /// </summary>
         public DbSet<Bank_client_company> Bank_client_company { get; set; }
+
         /// <summary>
         /// Иформация кредитов клиента
         /// </summary>
         public DbSet<Bank_client_history> Bank_client_history { get; set; }
+
         /// <summary>
         /// Статус истории
         /// </summary>
@@ -75,7 +78,7 @@ namespace bas.website.Models.Data
         public DbSet<Bank_active_asset> Bank_active_asset { get; set; }
 
         /// <summary>
-        /// Актив - Уставной капитал банка 
+        /// Актив - Уставной капитал банка
         /// </summary>
         public DbSet<Bank_active_authorized_capital> Bank_active_authorized_capital { get; set; }
 
@@ -99,7 +102,7 @@ namespace bas.website.Models.Data
         /// </summary>
         public DbSet<Bank_active_docs> Bank_active_docs { get; set; }
 
-        #endregion
+        #endregion Актив
 
         #region Пассив
 
@@ -109,7 +112,7 @@ namespace bas.website.Models.Data
         public DbSet<Bank_passive_add_capital> Bank_passive_add_capital { get; set; }
 
         /// <summary>
-        /// Пассив - Уставной капитал банка 
+        /// Пассив - Уставной капитал банка
         /// </summary>
         public DbSet<Bank_passive_authorized_capital> Bank_passive_authorized_capital { get; set; }
 
@@ -133,7 +136,7 @@ namespace bas.website.Models.Data
         /// </summary>
         public DbSet<Bank_passive_deposits> Bank_passive_deposits { get; set; }
 
-        #endregion
+        #endregion Пассив
 
         public BankDbContext(DbContextOptions<BankDbContext> options) : base(options)
         {

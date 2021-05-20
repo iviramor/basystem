@@ -1,6 +1,4 @@
 ﻿using bas.website.Models.Data;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,7 +10,6 @@ namespace bas.program.Models.Tables.Passive
     /// </summary>
     public class Bank_passive_credit_debit
     {
-
         [Key]
         [DisplayName(null)]
         public int Cdebit_id { get; set; }
@@ -39,6 +36,5 @@ namespace bas.program.Models.Tables.Passive
         [ForeignKey("Cdebit_type")]
         [DisplayName("Тип средства(гр. Кг. Руб. Дол.)")]
         public virtual Bank_currency Bank_currency { get; set; }
-
     }
 }
