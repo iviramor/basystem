@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:bas.program.Views"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Администрация" 
-        Height="600" Width="940" 
+        Title="Администрация"
+        Height="600" Width="940"
         MinHeight="600" MinWidth="350"
         Icon="/Resources/Image/Action/ProfAction/list.png">
 
@@ -16,88 +16,79 @@
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
-                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
-                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
-                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml" />
+                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml" />
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml" />
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/CommonButton.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml" />
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridRowStyle.xaml" />
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridCellStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
-            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
-
+            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C" />
 
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontFamily" Value="Roboto" />
             </Style>
-
         </ResourceDictionary>
-
-
-
     </Window.Resources>
 
     <DockPanel>
 
         <Menu DockPanel.Dock="Top"
-              Height="40px" 
-              Background="{StaticResource Main.Collour}" 
+              Height="40px"
+              Background="{StaticResource Main.Collour}"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
             <MenuItem Header="Доступ к таблицам"
                       Height="40"
                       Padding="20, 0, 20, 0"
-                      FontFamily="Roboto Medium" 
+                      FontFamily="Roboto Medium"
                       IsEnabled="{Binding AccessTableIsEnabled}"
                       Command="{Binding ShowAccessCommand}">
-
             </MenuItem>
-
-
-
         </Menu>
 
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="30"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="1*" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="30" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="1*"/>
-                <RowDefinition Height="30"/>
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="40" />
+                <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
             <!--#region Сетка с действиями-->
 
             <Grid Grid.Row="1" Grid.Column="3">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="10"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="100" />
+                    <RowDefinition Height="1*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Действия" 
+                <TextBlock Text="Действия"
                        Style="{StaticResource TextBlockToolsBar}"
                        VerticalAlignment="Center"
-                       HorizontalAlignment="Center"/>
+                       HorizontalAlignment="Center" />
 
-                <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                <Button Template="{DynamicResource ButtonTemplateToolBar}"
                         Style="{DynamicResource Button.ToolsBar}"
                         Command="{Binding AddProfCommand}"
                         IsEnabled="{Binding AddIsEnabled}"
@@ -108,26 +99,23 @@
                     <Grid Width="80" Height="90">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="75"/>
-                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="15" />
                         </Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" 
-                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/AddProf.png" >
-
+                        <Image Grid.Row="0"
+                           Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/AddProf.png">
                         </Image>
 
                         <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
-                               Text="Добавить"/>
-
+                               Text="Добавить" />
                     </Grid>
 
                     <!--#endregion-->
-
                 </Button>
 
-                <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                <Button Template="{DynamicResource ButtonTemplateToolBar}"
                         Style="{StaticResource Button.ToolsBar}"
                         Grid.Row="3" Grid.Column="0"
                         IsEnabled="{Binding EditIsEnabled}"
@@ -138,24 +126,22 @@
                     <Grid Width="80" Height="90">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="75"/>
-                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="15" />
                         </Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" 
+                        <Image Grid.Row="0"
                            Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/EditProf.png" />
 
                         <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
-                               Text="Изменить"/>
-
+                               Text="Изменить" />
                     </Grid>
 
                     <!--#endregion-->
-
                 </Button>
 
-                <Button Template="{DynamicResource ButtonTemplateToolBar}" 
+                <Button Template="{DynamicResource ButtonTemplateToolBar}"
                         Style="{StaticResource Button.ToolsBar}"
                         Grid.Row="5" Grid.Column="0"
                         IsEnabled="{Binding DelIsEnabled}"
@@ -166,31 +152,28 @@
                     <Grid Width="80" Height="90">
 
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="75"/>
-                            <RowDefinition Height="15"/>
+                            <RowDefinition Height="75" />
+                            <RowDefinition Height="15" />
                         </Grid.RowDefinitions>
 
-                        <Image Grid.Row="0" 
+                        <Image Grid.Row="0"
                            Style="{StaticResource Icon.InsideTools}" Source="/Resources/Image/Action/ProfAction/RemProf.png" />
 
                         <TextBlock Grid.Row="1"
                                Style="{StaticResource Button.InsideTools}"
-                               Text="Удалить"/>
-
+                               Text="Удалить" />
                     </Grid>
 
                     <!--#endregion-->
-
                 </Button>
-
             </Grid>
 
             <!--#endregion-->
 
             <!--#region Таблица с пользователями-->
 
-            <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}" 
-                      RowStyle="{DynamicResource CommonDataGridRowStyle}" 
+            <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}"
+                      RowStyle="{DynamicResource CommonDataGridRowStyle}"
                       Style="{DynamicResource CommonDataGridTemplate}"
                       ItemsSource="{Binding ProfTable}"
                       ColumnWidth="*"
@@ -205,30 +188,20 @@
 
                 <DataGrid.InputBindings>
                     <MouseBinding Gesture="LeftDoubleClick"
-                                  Command="{Binding ShowProfCommand}"/>
+                                  Command="{Binding ShowProfCommand}" />
                 </DataGrid.InputBindings>
-                
             </DataGrid>
-
 
             <!--#endregion-->
 
-            <Button Grid.Row="3" Grid.Column="1" 
+            <Button Grid.Row="3" Grid.Column="1"
                 Width="150"
                 HorizontalAlignment="Left"
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
-                Content="Назад" 
+                Content="Назад"
                 Command="{Binding CloseAdminCommand}">
-
             </Button>
-
-
-
-
         </Grid>
-
     </DockPanel>
-
-
 </Window>

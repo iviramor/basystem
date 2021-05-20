@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:bas.program.Views"
         xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
-        Title="{Binding Title}" 
+        Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Height="480" Width="400">
-
 
     <Window.Resources>
 
@@ -32,22 +31,21 @@
         </ResourceDictionary>
     </Window.Resources>
 
-
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="170"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="170" />
             <RowDefinition />
-            <RowDefinition Height="20"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <!--#region Название должности-->
@@ -73,7 +71,7 @@
                        Text="Описание"
                        Style="{StaticResource TextBlockStyle}"
                        VerticalAlignment="Top" />
-        
+
         <!--IsEnabled="{Binding IsEnabled}"-->
         <TextBox Grid.Row="2" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -94,16 +92,12 @@
                    Style="{StaticResource TextBlockStyle}"
                    VerticalAlignment="Top" />
 
-
         <CheckBox Grid.Row="3" Grid.Column="1"
                   VerticalAlignment="Bottom"
                   Margin="10"
                   IsEnabled="{Binding IsEnabled}"
                   Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
-                  IsChecked="{Binding ProfFullAccess}"
-                  />
-
-
+                  IsChecked="{Binding ProfFullAccess}" />
 
         <!--#endregion-->
 
@@ -123,11 +117,7 @@
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
                 Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
-                Command="{Binding UpdateDataCommand}" >
-            
+                Command="{Binding UpdateDataCommand}">
         </Button>
-
-
     </Grid>
-
 </Window>

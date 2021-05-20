@@ -11,7 +11,6 @@
         ResizeMode="NoResize"
         Height="580" Width="400" Icon="/Resources/Image/Icons/file.png">
 
-
     <Window.Resources>
 
         <ResourceDictionary>
@@ -36,18 +35,18 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="170"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="170" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <!--#region Название -->
@@ -93,7 +92,6 @@
                    Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
                    Style="{StaticResource TextBlockStyle}"
                    VerticalAlignment="Top" />
-
 
         <TextBox Grid.Row="3" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -141,11 +139,7 @@
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
                 Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
-                Command="{Binding UpdateDataCommand}" >
-
+                Command="{Binding UpdateDataCommand}">
         </Button>
-
     </Grid>
-
-
 </Window>

@@ -7,63 +7,58 @@
         mc:Ignorable="d"
         MinHeight="550" MinWidth="700"
         Height="560" Width="700"
-        Title="{Binding Title}" Icon="/Resources/Image/Icons/folder.png" >
+        Title="{Binding Title}" Icon="/Resources/Image/Icons/folder.png">
 
     <Window.Resources>
 
         <ResourceDictionary>
 
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml"/>
-                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml"/>
-                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml"/>
-                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml"/>
-                <ResourceDictionary Source="Styles/CommonButton.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/Access/DelAccessButtonStyle.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/Access/AddAccessButtonStyle.xaml"/>
+                <ResourceDictionary Source="Styles/MainSpaceButtons.xaml" />
+                <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml" />
+                <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/ButtonToolsBar.xaml" />
+                <ResourceDictionary Source="Styles/CommonTextBoxStyle.xaml" />
+                <ResourceDictionary Source="Styles/CommonButton.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml" />
+                <ResourceDictionary Source="/Views/Styles/Access/DelAccessButtonStyle.xaml" />
+                <ResourceDictionary Source="/Views/Styles/Access/AddAccessButtonStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
-            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C"/>
-
+            <SolidColorBrush x:Key="Main.Collour" Color="#FBF37C" />
 
             <Style TargetType="TextBlock">
-                <Setter Property="FontFamily" Value="Roboto"/>
+                <Setter Property="FontFamily" Value="Roboto" />
             </Style>
-
         </ResourceDictionary>
-
-
-
     </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
             <ColumnDefinition Width="17*" />
-            <ColumnDefinition Width="47*"/>
+            <ColumnDefinition Width="47*" />
             <ColumnDefinition Width="64*" />
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
             <RowDefinition />
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Column="1" Grid.Row="1" 
+        <Grid Grid.Column="1" Grid.Row="1"
               x:Name="ColumnAccessUser"
               Margin="15,15,15,15" Grid.ColumnSpan="2">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="30" />
                 <RowDefinition />
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
@@ -85,72 +80,66 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0" Grid.RowSpan="2" 
+                            <TextBlock Grid.Column="0" Grid.RowSpan="2"
                                        VerticalAlignment="Center"
-                                       Text="{Binding Path=Bank_tables_info.Tables_name}"/>
-                            <TextBlock Grid.Column="1" Grid.RowSpan="2" 
+                                       Text="{Binding Path=Bank_tables_info.Tables_name}" />
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2"
                                        VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Bank_tables_info.Tables_isSystem}" Value="True">
-                                                <Setter Property="Text" Value="Системный"/>
+                                                <Setter Property="Text" Value="Системный" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Bank_tables_info.Tables_isSystem}" Value="False">
-                                                <Setter Property="Text" Value="Данные банка"/>
+                                                <Setter Property="Text" Value="Данные банка" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-
                             </TextBlock>
                             <TextBlock Grid.Column="2" Grid.Row="0" Text="Тип доступа" FontWeight="Bold" />
-                            <TextBlock Grid.Column="2" Grid.Row="1" >
+                            <TextBlock Grid.Column="2" Grid.Row="1">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Access_modification}" Value="1">
-                                                <Setter Property="Text" Value="Полный доступ"/>
+                                                <Setter Property="Text" Value="Полный доступ" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Access_modification}" Value="2">
-                                                <Setter Property="Text" Value="Только чтение"/>
+                                                <Setter Property="Text" Value="Только чтение" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Access_modification}" Value="3">
-                                                <Setter Property="Text" Value="Чтение и редактирование"/>
+                                                <Setter Property="Text" Value="Чтение и редактирование" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-
                         </Grid>
                     </DataTemplate>
-
                 </ListBox.ItemTemplate>
-
             </ListBox>
 
             <Button Style="{DynamicResource DelAccessButtonStyle}" Grid.Row="2"
                     Command="{Binding DelAccessCommand}"
                     IsEnabled="{Binding DelIsEnabled}"
                     Content="Удалить">
-
             </Button>
-
         </Grid>
 
-        <Grid Grid.Column="3" Grid.Row="1" 
+        <Grid Grid.Column="3" Grid.Row="1"
               Margin="15,15,15,15">
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="30" />
                 <RowDefinition />
-                <RowDefinition Height="40"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="40" />
+                <RowDefinition Height="40" />
             </Grid.RowDefinitions>
 
             <TextBlock Grid.Row="0"
@@ -173,46 +162,42 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
 
-                            <TextBlock Grid.Column="0" Grid.RowSpan="2" 
+                            <TextBlock Grid.Column="0" Grid.RowSpan="2"
                                        VerticalAlignment="Center"
-                                       Text="{Binding Path=Tables_name}"/>
+                                       Text="{Binding Path=Tables_name}" />
 
-                            <TextBlock Grid.Column="1" Grid.RowSpan="2" 
+                            <TextBlock Grid.Column="1" Grid.RowSpan="2"
                                        VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Style.Triggers>
                                             <DataTrigger Binding="{Binding Path=Tables_isSystem}" Value="True">
-                                                <Setter Property="Text" Value="Системный"/>
+                                                <Setter Property="Text" Value="Системный" />
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Path=Tables_isSystem}" Value="False">
-                                                <Setter Property="Text" Value="Данные банка"/>
+                                                <Setter Property="Text" Value="Данные банка" />
                                             </DataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>
-
                             </TextBlock>
-
                         </Grid>
                     </DataTemplate>
-
                 </ListBox.ItemTemplate>
-
             </ListBox>
 
             <Grid Grid.Row="2">
-                
+
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="90" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Text="Тип доступа" 
+                <TextBlock Text="Тип доступа"
                            FontWeight="Bold"
                            Margin="10"
                            VerticalAlignment="Center"
-                           FontFamily="Roboto"/>
+                           FontFamily="Roboto" />
 
                 <ComboBox Grid.Column="1"
                           Margin="0, 5"
@@ -224,32 +209,23 @@
                           DisplayMemberPath="NameAccess"
                           ItemsSource="{Binding ComboBoxAccess}"
                           Style="{DynamicResource MainWiwndowComboBoxToolBarStyle}"
-                          ItemContainerStyle="{DynamicResource CommonComboBoxItemStyle}"/>
-
+                          ItemContainerStyle="{DynamicResource CommonComboBoxItemStyle}" />
             </Grid>
 
             <Button Style="{DynamicResource AddAccessButtonStyle}" Grid.Row="3"
                     Command="{Binding AddAccessCommand}"
                     IsEnabled="{Binding EditIsEnabled}"
                     Content="{Binding AddOrEditButton}">
-
             </Button>
-
         </Grid>
 
-        <Button Grid.Row="2" Grid.Column="1" 
+        <Button Grid.Row="2" Grid.Column="1"
                 Width="150"
                 HorizontalAlignment="Left"
                 Style="{StaticResource ButtonStyle}"
                 Template="{StaticResource ButtonTemplate}"
-                Content="Назад" 
+                Content="Назад"
                 Command="{Binding CloseAccessCommand}" Grid.ColumnSpan="2">
-
         </Button>
-
-
     </Grid>
-
-
-
 </Window>

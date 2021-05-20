@@ -196,7 +196,6 @@
 
             <!--#region Статус-->
 
-
             <TextBlock Grid.Row="3" Grid.Column="1"
                        Text="Дата регистрации"
                        Style="{StaticResource TextBlockStyle}"
@@ -211,7 +210,6 @@
                      Text="{Binding Register_data}" />
 
                 <!--#endregion-->
-
         </Grid>
 
         <Button Grid.Row="2" Grid.Column="1"
@@ -232,10 +230,6 @@
                 IsEnabled="{Binding IsEnabled}"
                 Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}">
-                
-            
         </Button>
     </Grid>
-
-
 </Window>

@@ -10,7 +10,6 @@
         x:Name="window" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Image/Icons/Tables/calendar.png">
 
-
     <Window.Resources>
 
         <ResourceDictionary>
@@ -29,9 +28,7 @@
                 <Setter Property="FontFamily" Value="Roboto" />
                 <Setter Property="Margin" Value="10" />
             </Style>
-
         </ResourceDictionary>
-
     </Window.Resources>
 
     <Grid>
@@ -85,16 +82,14 @@
 
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock> 
-                            <Run Text="{Binding Path=Client_surname}"/>
-                            <Run Text="{Binding Path=Client_name}"/>
-                            <Run Text="{Binding Path=Client_patronymic}"/>
-                            <Run Text="{Binding Path=Client_login, StringFormat=({0})}"/>
+                        <TextBlock>
+                            <Run Text="{Binding Path=Client_surname}" />
+                            <Run Text="{Binding Path=Client_name}" />
+                            <Run Text="{Binding Path=Client_patronymic}" />
+                            <Run Text="{Binding Path=Client_login, StringFormat=({0})}" />
                         </TextBlock>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
-
-
             </ComboBox>
 
             <!--#endregion-->
@@ -108,12 +103,12 @@
 
             <Grid Grid.Row="1" Grid.Column="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="40" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBox Grid.Column="0" Grid.RowSpan="2"
@@ -130,7 +125,6 @@
                            FontWeight="Bold"
                            FontSize="20"
                            Text="%" />
-
             </Grid>
 
             <!--#endregion-->
@@ -140,13 +134,13 @@
             <Grid Grid.Row="2" Grid.Column="0">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0"
@@ -177,10 +171,7 @@
                           ItemsSource="{Binding BankCurrency}"
                           VerticalAlignment="Bottom">
                 </ComboBox>
-
-
             </Grid>
-
 
             <!--#endregion-->
 
@@ -188,7 +179,7 @@
 
             <TextBlock Grid.Row="0" Grid.Column="1"
                        Style="{StaticResource TextBlockStyle}"
-                       VerticalAlignment="Top" ><Run Language="ru-ru" Text="Номер кредита"/></TextBlock>
+                       VerticalAlignment="Top" ><Run Language="ru-ru" Text="Номер кредита" /></TextBlock>
 
             <TextBox Grid.Row="0" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
@@ -197,7 +188,6 @@
                      IsEnabled="False"
                      VerticalAlignment="Bottom"
                      Text="{Binding Numb}" />
-
 
             <!--#endregion-->
 
@@ -223,9 +213,7 @@
                             SelectedDateFormat="Short"
                             SelectedDate="{Binding StartDate}">
                 </DatePicker>
-
             </Grid>
-
 
             <!--#endregion-->
 
@@ -260,7 +248,7 @@
                 <TextBox Grid.Row="0" Grid.Column="1"
                          Style="{DynamicResource CommonTextBoxStyle}"
                          Margin="10"
-                         Height="40" 
+                         Height="40"
                          IsEnabled="{Binding IsEnabled}"
                          VerticalAlignment="Bottom"
                          Text="{Binding Paid}" />
@@ -284,13 +272,11 @@
                       SelectedItem="{Binding SelectedBankStatusHistory}"
                       ItemsSource="{Binding BankStatusHistory}"
                       VerticalAlignment="Bottom">
-
             </ComboBox>
 
             <!--#endregion-->
 
             <!--#region Срок в месяцах-->
-
 
             <TextBlock Grid.Row="3" Grid.Column="1"
                        Text="Срок (в месяцах)"
@@ -306,7 +292,6 @@
                      Text="{Binding CountMonths}" />
 
             <!--#endregion-->
-
         </Grid>
 
         <Button Content="Назад"
@@ -327,10 +312,6 @@
                 IsEnabled="{Binding IsEnabled}"
                 Visibility="{Binding IsEnabled, Converter={StaticResource BoolToVis}}"
                 Command="{Binding UpdateDataCommand}">
-
-
         </Button>
-
     </Grid>
-
 </Window>

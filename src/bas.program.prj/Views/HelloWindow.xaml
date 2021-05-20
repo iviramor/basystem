@@ -8,8 +8,8 @@
 
         mc:Ignorable="d"
         Title="Добро пожаловть в систему "
-        Height="480" Width="854" 
-        Visibility="Visible" 
+        Height="480" Width="854"
+        Visibility="Visible"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize" Icon="/bank.ico">

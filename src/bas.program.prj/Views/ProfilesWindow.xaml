@@ -7,8 +7,8 @@
         xmlns:converters="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Профили" 
-        Height="560" Width="840" 
+        Title="Профили"
+        Height="560" Width="840"
         MinHeight="560" MinWidth="350"
         Icon="/Resources/Image/Icons/id-card-mini.png">
 
@@ -149,8 +149,8 @@
 
         <!--#region Таблица с пользователями-->
 
-        <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}" 
-                  RowStyle="{DynamicResource CommonDataGridRowStyle}" 
+        <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}"
+                  RowStyle="{DynamicResource CommonDataGridRowStyle}"
                   Style="{DynamicResource CommonDataGridTemplate}"
                   ItemsSource="{Binding Bank_users}"
                   ColumnWidth="*"

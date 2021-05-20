@@ -10,7 +10,6 @@
         x:Name="window" ResizeMode="NoResize"
         WindowStartupLocation="CenterScreen" Icon="/Resources/Image/Icons/id-card-mini.png">
 
-    
     <Window.Resources>
 
         <ResourceDictionary>
@@ -81,7 +80,7 @@
             <!--#endregion-->
 
             <!--#region Фамилия-->
-            
+
             <TextBlock Grid.Row="1" Grid.Column="0"
                        Text="Фамилия"
                        Style="{StaticResource TextBlockStyle}"

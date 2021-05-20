@@ -6,7 +6,7 @@
         xmlns:viewModels="clr-namespace:bas.program.ViewModels"
         xmlns:local="clr-namespace:bas.program"
         mc:Ignorable="d"
-        Title="Рабочее пространство" 
+        Title="Рабочее пространство"
         MinHeight="600" MinWidth="1000"
         Height="610" Width="1172"
         WindowState="Maximized"
@@ -24,8 +24,8 @@
                 <ResourceDictionary Source="Styles/ComboBoxToolsBarMainWindow.xaml" />
                 <ResourceDictionary Source="Styles/CommonComboBoxStyle.xaml" />
                 <ResourceDictionary Source="Styles/ButtonToolsBar.xaml" />
-                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml"/>
-                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml"/>
+                <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridTemplate.xaml" />
+                <ResourceDictionary Source="/Views/Styles/DataGrid/DataGridHeadStyle.xaml" />
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridRowStyle.xaml" />
                 <ResourceDictionary Source="/Views/Styles/DataGrid/CommonDataGridCellStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -53,7 +53,6 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
         </ResourceDictionary>
     </Window.Resources>
 
@@ -127,29 +126,26 @@
             </Border>
         </Grid>
 
-        <StatusBar DockPanel.Dock="Bottom" 
+        <StatusBar DockPanel.Dock="Bottom"
                    FontFamily="Roboto"
                    Padding="10, 0, 10, 0"
                    Height="28">
             <StatusBarItem Margin="0,0,15,0">
                 <TextBlock>
-                    <Run Text="Текущая таблица: "/>
-                    <Run FontWeight="Bold" Text="{Binding NameCurrentTable}"/>
+                    <Run Text="Текущая таблица: " />
+                    <Run FontWeight="Bold" Text="{Binding NameCurrentTable}" />
                 </TextBlock>
             </StatusBarItem>
             <StatusBarItem>
                 <TextBlock>
-                    <Run Text="Количество записей: "/>
-                    <Run FontWeight="Bold" Text="{Binding CountRows}"/>
+                    <Run Text="Количество записей: " />
+                    <Run FontWeight="Bold" Text="{Binding CountRows}" />
                 </TextBlock>
             </StatusBarItem>
             <StatusBarItem HorizontalAlignment="Right">
                 <ToggleButton Content="Сообщить об ошибке">
-
                 </ToggleButton>
-
             </StatusBarItem>
-
         </StatusBar>
 
         <DockPanel>
@@ -204,7 +200,6 @@
                                   SelectedItem="{Binding SelectTableItemComboBox}"
                                   DisplayMemberPath="Bank_tables_info.Tables_name"
                                   Grid.Row="1" FontFamily="Roboto Medium">
-
                         </ComboBox>
                     </Grid>
 
@@ -370,11 +365,11 @@
                                        Text="Фильтр" />
                         </Grid>
 
-                        <Button.Style >
+                        <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource Button.ToolsBar}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding FilterVisibility}" Value="True">
-                                        <Setter Property="Background" Value="#F5E932"/>
+                                        <Setter Property="Background" Value="#F5E932" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -405,17 +400,16 @@
                         </Grid>
 
                         <!--#endregion-->
-                        
-                        <Button.Style >
+
+                        <Button.Style>
                             <Style TargetType="Button" BasedOn="{StaticResource Button.ToolsBar}">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding MathVisibility}" Value="True">
-                                        <Setter Property="Background" Value="#F5E932"/>
+                                        <Setter Property="Background" Value="#F5E932" />
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
                         </Button.Style>
-
                     </Button>
 
                     <TextBlock Text="Действия"
@@ -440,7 +434,7 @@
             </Grid>
 
             <!--Visibility="{Binding MathVisibility,
-                                 Converter={StaticResource BoolToVis}, 
+                                 Converter={StaticResource BoolToVis},
                                  FallbackValue=Collapsed}"               FilterVisibility         -->
 
             <!--#region Левая палочка -->
@@ -453,84 +447,80 @@
                                    FallbackValue=Collapsed}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="30" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Column="1" Grid.Row="1">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <TextBlock  FontWeight="Bold"
                                 FontSize="18"
                                 VerticalAlignment="Center"
-                                Text="Фильтр"/>
+                                Text="Фильтр" />
 
                     <Button Grid.Column="1"
                             Cursor="Hand"
                             Style="{StaticResource ButtonX}"
-                            Command="{Binding CloseFilterCommand}"/>
-
+                            Command="{Binding CloseFilterCommand}" />
 
                     <Grid Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="50"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="30"/>
-                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="10" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40" />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
 
                         <!--#region Поиск -->
-                        
-                        <TextBlock Text="Поиск" 
+
+                        <TextBlock Text="Поиск"
                                    Grid.Row="0"
                                    Grid.ColumnSpan="2"
                                    FontSize="15"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
 
                         <TextBlock Text="В" Grid.Row="1" Grid.Column="0"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
 
-                        <ComboBox Grid.Row="1" Grid.Column="1" 
+                        <ComboBox Grid.Row="1" Grid.Column="1"
                                   ItemsSource="{Binding ListSearchComboBox}"
                                   VerticalAlignment="Center"
                                   DisplayMemberPath="NameTable"
-                                  SelectedItem="{Binding SelecedSearchComboBox}"
-                                  />
+                                  SelectedItem="{Binding SelecedSearchComboBox}" />
 
                         <TextBlock Text="ЧТО" Grid.Row="3" Grid.Column="0"
-                                   VerticalAlignment="Center"/>
+                                   VerticalAlignment="Center" />
 
                         <TextBox Grid.Row="3" Grid.Column="1"
                                  IsEnabled="{Binding IsEnableSearch}">
-
                         </TextBox>
-                        
+
                         <!--#endregion-->
 
-                        <Rectangle Height="1" 
+                        <Rectangle Height="1"
                                    Fill="DimGray"
-                                   Grid.Row="4" Grid.ColumnSpan="2"/>
-
+                                   Grid.Row="4" Grid.ColumnSpan="2" />
                     </Grid>
                 </Grid>
             </Grid>
@@ -547,40 +537,37 @@
                                    FallbackValue=Collapsed}">
 
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="30"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="30"/>
+                    <ColumnDefinition Width="30" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="30" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="30"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30" />
+                    <RowDefinition />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Column="1" Grid.Row="1">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="30"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="30" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="30"/>
-                        <RowDefinition/>
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
 
                     <TextBlock  FontFamily="Roboto"
                                 FontWeight="Bold"
                                 FontSize="18"
                                 VerticalAlignment="Center"
-                                Text="Расчеты"/>
+                                Text="Расчеты" />
 
                     <Button Grid.Column="1"
                             Style="{StaticResource ButtonX}"
-                            Command="{Binding CloseMathsCommand}" Cursor="Hand"/>
-
+                            Command="{Binding CloseMathsCommand}" Cursor="Hand" />
                 </Grid>
-
-
             </Grid>
 
             <!--#endregion-->
@@ -590,8 +577,8 @@
                     <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
-                <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}" 
-                          RowStyle="{DynamicResource CommonDataGridRowStyle}" 
+                <DataGrid CellStyle="{DynamicResource CommonDataGridCellStyle}"
+                          RowStyle="{DynamicResource CommonDataGridRowStyle}"
                           Style="{DynamicResource CommonDataGridTemplate}"
                           ItemsSource="{Binding MainTable}"
                           SelectedItem="{Binding SelectedItemMainTable}"
@@ -606,15 +593,10 @@
 
                     <DataGrid.InputBindings>
                         <MouseBinding Gesture="LeftDoubleClick"
-                                  Command="{Binding ShowFromTabeleCommand}"/>
+                                  Command="{Binding ShowFromTabeleCommand}" />
                     </DataGrid.InputBindings>
-
                 </DataGrid>
-
             </Grid>
-
         </DockPanel>
-
     </DockPanel>
-    
 </Window>

@@ -1,36 +1,32 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-
-    <SolidColorBrush x:Key="ToolsBar.Collour" Color="#F5F5F5"/>
-    <SolidColorBrush x:Key="ToolsBar.IsMouse.Collour" Color="#F5E932"/>
-    <SolidColorBrush x:Key="ToolsBar.IsEnabled" Color="#A3A1A8"/>
-
+    <SolidColorBrush x:Key="ToolsBar.Collour" Color="#F5F5F5" />
+    <SolidColorBrush x:Key="ToolsBar.IsMouse.Collour" Color="#F5E932" />
+    <SolidColorBrush x:Key="ToolsBar.IsEnabled" Color="#A3A1A8" />
 
     <Style x:Key="TextBlockToolsBar" TargetType="{x:Type TextBlock}">
-        <Setter Property="FontFamily" Value="Roboto"/>
-        <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontFamily" Value="Roboto" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="FontSize" Value="13" />
     </Style>
-
 
     <!--#region Стили кнопки-->
 
-
     <Style x:Key="Button.ToolsBar" TargetType="Button">
-        <Setter Property="Height" Value="100"/>
-        <Setter Property="Width" Value="100"/>
-        <Setter Property="TextElement.FontFamily" 
-                Value="Roboto"/>
-        <Setter Property="Background" Value="{StaticResource ToolsBar.Collour}"/>
-        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Height" Value="100" />
+        <Setter Property="Width" Value="100" />
+        <Setter Property="TextElement.FontFamily"
+                Value="Roboto" />
+        <Setter Property="Background" Value="{StaticResource ToolsBar.Collour}" />
+        <Setter Property="Cursor" Value="Hand" />
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{StaticResource ToolsBar.IsMouse.Collour}"/>
+                <Setter Property="Background" Value="{StaticResource ToolsBar.IsMouse.Collour}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Background" Value="{StaticResource ToolsBar.IsEnabled}" />
-                <Setter Property="ToolTip" Value="Нет доступа к этой функции"/>
+                <Setter Property="ToolTip" Value="Нет доступа к этой функции" />
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -40,33 +36,28 @@
                 Background="{TemplateBinding Background}">
             <ContentPresenter VerticalAlignment="Center"
                               HorizontalAlignment="Center">
-
             </ContentPresenter>
         </Border>
     </ControlTemplate>
-
 
     <!--#endregion-->
 
     <!--#region Внутри кнопки-->
 
     <Style x:Key="Icon.InsideTools" TargetType="Image">
-        <Setter Property="Height" Value="55"/>
-        <Setter Property="Width" Value="55"/>
-        <Setter Property="Margin" Value="0"/>
-
+        <Setter Property="Height" Value="55" />
+        <Setter Property="Width" Value="55" />
+        <Setter Property="Margin" Value="0" />
     </Style>
 
     <Style x:Key="Button.InsideTools" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="FontStyle" Value="Normal"/>
-        <Setter Property="FontFamily" Value="Roboto"/>
-        <Setter Property="FontWeight" Value="Regular"/>
-        <Setter Property="HorizontalAlignment" Value="Center"/>
-        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontSize" Value="11" />
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="FontFamily" Value="Roboto" />
+        <Setter Property="FontWeight" Value="Regular" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
 
     <!--#endregion-->
-
-
 </ResourceDictionary>

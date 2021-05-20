@@ -6,11 +6,10 @@
         xmlns:local="clr-namespace:bas.program.Views.DialogViews"
         xmlns:conv="clr-namespace:bas.program.Infrastructure.Converters"
         mc:Ignorable="d"
-        Title="{Binding Title}" 
+        Title="{Binding Title}"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         Height="500" Width="400" Icon="/Resources/Image/Icons/file.png">
-
 
     <Window.Resources>
 
@@ -35,18 +34,18 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <!--#region Название ресурса -->
@@ -91,7 +90,6 @@
                    Style="{StaticResource TextBlockStyle}"
                    VerticalAlignment="Top" />
 
-
         <TextBox Grid.Row="3" Grid.Column="1"
                      Style="{DynamicResource CommonTextBoxStyle}"
                      Margin="10"
@@ -135,13 +133,7 @@
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
                 Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
-                Command="{Binding UpdateDataCommand}" >
-
+                Command="{Binding UpdateDataCommand}">
         </Button>
-
-
     </Grid>
-
-
-
 </Window>

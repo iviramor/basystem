@@ -1,14 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <SolidColorBrush x:Key="background" Color="Transparent" />
+    <SolidColorBrush x:Key="background-IsSelected" Color="#F5E932" />
+    <SolidColorBrush x:Key="background-head" Color="#F5E932" />
+    <SolidColorBrush x:Key="borderBrush" Color="#F5E932" />
 
-    <SolidColorBrush x:Key="background" Color="Transparent"/>
-    <SolidColorBrush x:Key="background-IsSelected" Color="#F5E932"/>
-    <SolidColorBrush x:Key="background-head" Color="#F5E932"/>
-    <SolidColorBrush x:Key="borderBrush" Color="#F5E932"/>
-
-    <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000"/>
-
-
+    <SolidColorBrush x:Key="{x:Static DataGrid.FocusBorderBrushKey}" Color="#FF000000" />
 </ResourceDictionary>

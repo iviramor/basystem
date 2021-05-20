@@ -21,7 +21,7 @@
                 <ResourceDictionary Source="../Styles/CommonButton.xaml" />
                 <ResourceDictionary Source="../Styles/CommonDatePickerStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            
+
             <conv:InverseBooleanConverter x:Key="InverseBooleanConverter" />
             <BooleanToVisibilityConverter x:Key="BoolToVis" />
 
@@ -35,18 +35,18 @@
     <Grid>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="30"/>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="30"/>
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="30" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="30"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="90"/>
-            <RowDefinition Height="10"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="90" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
         <!--#region Название -->
@@ -120,10 +120,7 @@
                 Template="{StaticResource ButtonTemplate}"
                 Content="{Binding NameAction}"
                 Visibility="{Binding IsVisibility, Converter={StaticResource BoolToVis}}"
-                Command="{Binding UpdateDataCommand}" >
-
+                Command="{Binding UpdateDataCommand}">
         </Button>
-
     </Grid>
-    
 </Window>
